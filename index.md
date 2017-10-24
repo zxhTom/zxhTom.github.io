@@ -1,37 +1,50 @@
-## Welcome to GitHub Pages
+**在Java开发中我们常用的就myeclipse或者intellij idea 了,但是这些软件都是收费软件。那么对于程序员来说破解就成为必须要面对的问题了**
 
-You can use the [editor on GitHub](https://github.com/zxhTom/zxhTom.github.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+myeclipse 激活
+------------
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+ 1. 下载文件解压*MyEclipse2017CI7破解文件(含说明)*文件。文件中有两个文件夹patch和tools。其中patch中是需要拷贝到myeclipse中的jar包。首先我们是打开tools文件夹下的crack.bat.
+ ![这里写图片描述](http://img.blog.csdn.net/20171021101549348?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+ 细心的朋友可用发现这个批处理文件其实就是执行同目录下的cracker2017.jar这个jar包的。
+ ![这里写图片描述](http://img.blog.csdn.net/20171021102313266?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+ 关于批处理介绍，<a href="http://blog.csdn.net/u013132051/article/details/70255298">请点我查看</a>
+ 2. 打开之后我们填写Usercode，这个值可以随意的填写，右侧的下拉框选择BLUE。。然后点击systemid按钮两次才会产生systemid。
+ ![这里写图片描述](http://img.blog.csdn.net/20171021102657466?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+ 3. 然后就是点击Active进行激活
+ ![这里写图片描述](http://img.blog.csdn.net/20171021102930957?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+ 4. 然后是点击Tools工具栏中的1.save properties。这里需要注意的是。千万不要点0.Rebuild key。至于原因我也不知道为什么。这些也是参考网上的教程激活的。既然这样可以激活那就别画蛇添足多点了。
+ 5. 最后一步讲patch文件夹下的所有文件复制到myeclipse安装目录下的plugins问夹下。
 
-### Markdown
+我的安装目录是D:/myeclipse。所以把patch文件下所有内容复制到D:/myeclipse/plugins下。
+  6. 其实这才是最后一步。一个软件激活后最后一步我们总得去查看是否激活成功吧。下面我们打开我们的myeclipse--》help--》Subscription Infomation.我们可以看到我们有效期到2020年。这虽不是永久激活。但是应该够用了
+ ![这里写图片描述](http://img.blog.csdn.net/20171021103912536?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast) 
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+intellij idea
+--
+和myeclipse一样intellij idea也是我们程序眼开发中选择的开发工具之一。两者的区别这里就不详细说明了。根据个人喜好选择工具开发。笔者这里平时开发都是myeclipse，最近也是准备尝试intellij  idea 的开发。以后有机会再把这个intellij idea好好研究一下。
 
-```markdown
-Syntax highlighted code block
+ 1. 将下载文件中的.jar拷贝到intellij idea 安装目录的bin文件夹下。我的资料里放了两个，不带release的据网上说可以激活到2099年。但是我这里失败了。我用的是带release的，亲测激活到2116年。
+ ![这里写图片描述](http://img.blog.csdn.net/20171021104545058?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+ 这里说一下，因为我一开始用的是不带release的jar包，所以我的bin目录中两个jar都有。读者激活时只需要拷贝release一个就行了
+ ![这里写图片描述](http://img.blog.csdn.net/20171021104738559?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+ 2. 然后打开bin目录下的idea.exe.vmoptions和idea64.exe.vmoptions这两个文件。
+在<font color='red'>两个文件</font>的最后一行添加一下代码：
 
-# Header 1
-## Header 2
-### Header 3
+```
+-javaagent:D:\Program Files\JetBrains\IntelliJ IDEA 2017.2.5\bin\JetbrainsCrack-2.6.6-release-enc.jar
+```
+javaagent后面的地址是我们实际的路径。刚才我们的intellij idea安装的路径下的releasejar包地址。读者根据自己情况改
+![这里写图片描述](http://img.blog.csdn.net/20171021105022963?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+  
+  3.  然后打开我们的intellij Help-->register中选择Activation Code将下面的代码贴进去在点击激活。
+  
 
-- Bulleted
-- List
+```
+BIG3CLIK6F-eyJsaWNlbnNlSWQiOiJCSUczQ0xJSzZGIiwibGljZW5zZWVOYW1lIjoibGFuIHl1IiwiYXNzaWduZWVOYW1lIjoiIiwiYXNzaWduZWVFbWFpbCI6IiIsImxpY2Vuc2VSZXN0cmljdGlvbiI6IkZvciBlZHVjYXRpb25hbCB1c2Ugb25seSIsImNoZWNrQ29uY3VycmVudFVzZSI6ZmFsc2UsInByb2R1Y3RzIjpbeyJjb2RlIjoiQUMiLCJwYWlkVXBUbyI6IjIwMTctMTEtMjMifSx7ImNvZGUiOiJETSIsInBhaWRVcFRvIjoiMjAxNy0xMS0yMyJ9LHsiY29kZSI6IklJIiwicGFpZFVwVG8iOiIyMDE3LTExLTIzIn0seyJjb2RlIjoiUlMwIiwicGFpZFVwVG8iOiIyMDE3LTExLTIzIn0seyJjb2RlIjoiV1MiLCJwYWlkVXBUbyI6IjIwMTctMTEtMjMifSx7ImNvZGUiOiJEUE4iLCJwYWlkVXBUbyI6IjIwMTctMTEtMjMifSx7ImNvZGUiOiJSQyIsInBhaWRVcFRvIjoiMjAxNy0xMS0yMyJ9LHsiY29kZSI6IlBTIiwicGFpZFVwVG8iOiIyMDE3LTExLTIzIn0seyJjb2RlIjoiREMiLCJwYWlkVXBUbyI6IjIwMTctMTEtMjMifSx7ImNvZGUiOiJEQiIsInBhaWRVcFRvIjoiMjAxNy0xMS0yMyJ9LHsiY29kZSI6IlJNIiwicGFpZFVwVG8iOiIyMDE3LTExLTIzIn0seyJjb2RlIjoiUEMiLCJwYWlkVXBUbyI6IjIwMTctMTEtMjMifSx7ImNvZGUiOiJDTCIsInBhaWRVcFRvIjoiMjAxNy0xMS0yMyJ9XSwiaGFzaCI6IjQ3NzU1MTcvMCIsImdyYWNlUGVyaW9kRGF5cyI6MCwiYXV0b1Byb2xvbmdhdGVkIjpmYWxzZSwiaXNBdXRvUHJvbG9uZ2F0ZWQiOmZhbHNlfQ==-iygsIMXTVeSyYkUxAqpHmymrgwN5InkOfeRhhPIPa88FO9FRuZosIBTY18tflChACznk3qferT7iMGKm7pumDTR4FbVVlK/3n1ER0eMKu2NcaXb7m10xT6kLW1Xb3LtuZEnuis5pYuEwT1zR7GskeNWdYZ0dAJpNDLFrqPyAPo5s1KLDHKpw+VfVd4uf7RMjOIzuJhAAYAG+amyivQt61I9aYiwpHQvUphvTwi0X0qL/oDJHAQbIv4Qwscyo4aYZJBKutYioZH9rgOP6Yw/sCltpoPWlJtDOcw/iEWYiCVG1pH9AWjCYXZ9AbbEBOWV71IQr5VWrsqFZ7cg7hLEJ3A==-MIIEPjCCAiagAwIBAgIBBTANBgkqhkiG9w0BAQsFADAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBMB4XDTE1MTEwMjA4MjE0OFoXDTE4MTEwMTA4MjE0OFowETEPMA0GA1UEAwwGcHJvZDN5MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxcQkq+zdxlR2mmRYBPzGbUNdMN6OaXiXzxIWtMEkrJMO/5oUfQJbLLuMSMK0QHFmaI37WShyxZcfRCidwXjot4zmNBKnlyHodDij/78TmVqFl8nOeD5+07B8VEaIu7c3E1N+e1doC6wht4I4+IEmtsPAdoaj5WCQVQbrI8KeT8M9VcBIWX7fD0fhexfg3ZRt0xqwMcXGNp3DdJHiO0rCdU+Itv7EmtnSVq9jBG1usMSFvMowR25mju2JcPFp1+I4ZI+FqgR8gyG8oiNDyNEoAbsR3lOpI7grUYSvkB/xVy/VoklPCK2h0f0GJxFjnye8NT1PAywoyl7RmiAVRE/EKwIDAQABo4GZMIGWMAkGA1UdEwQCMAAwHQYDVR0OBBYEFGEpG9oZGcfLMGNBkY7SgHiMGgTcMEgGA1UdIwRBMD+AFKOetkhnQhI2Qb1t4Lm0oFKLl/GzoRykGjAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBggkA0myxg7KDeeEwEwYDVR0lBAwwCgYIKwYBBQUHAwEwCwYDVR0PBAQDAgWgMA0GCSqGSIb3DQEBCwUAA4ICAQC9WZuYgQedSuOc5TOUSrRigMw4/+wuC5EtZBfvdl4HT/8vzMW/oUlIP4YCvA0XKyBaCJ2iX+ZCDKoPfiYXiaSiH+HxAPV6J79vvouxKrWg2XV6ShFtPLP+0gPdGq3x9R3+kJbmAm8w+FOdlWqAfJrLvpzMGNeDU14YGXiZ9bVzmIQbwrBA+c/F4tlK/DV07dsNExihqFoibnqDiVNTGombaU2dDup2gwKdL81ua8EIcGNExHe82kjF4zwfadHk3bQVvbfdAwxcDy4xBjs3L4raPLU3yenSzr/OEur1+jfOxnQSmEcMXKXgrAQ9U55gwjcOFKrgOxEdek/Sk1VfOjvS+nuM4eyEruFMfaZHzoQiuw4IqgGc45ohFH0UUyjYcuFxxDSU9lMCv8qdHKm+wnPRb0l9l5vXsCBDuhAGYD6ss+Ga+aDY6f/qXZuUCEUOH3QUNbbCUlviSz6+GiRnt1kA9N2Qachl+2yBfaqUqr8h7Z2gsx5LcIf5kYNsqJ0GavXTVyWh7PYiKX4bs354ZQLUwwa/cG++2+wNWP+HtBhVxMRNTdVhSm38AknZlD+PTAsWGu9GyLmhti2EnVwGybSD2Dxmhxk3IPCkhKAK+pl0eWYGZWG3tJ9mZ7SowcXLWDFAk0lRJnKGFMTggrWjV8GYpw5bq23VmIqqDLgkNzuoog==
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+  4. 同样的最后一步我们点击help--》about查看激活状态
+![这里写图片描述](http://img.blog.csdn.net/20171021105345527?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/zxhTom/zxhTom.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+  应该是可以看到You hava a personal fallback license for this version Subscription is active until 2116。这就表明我们已经激活到2116年了。 
