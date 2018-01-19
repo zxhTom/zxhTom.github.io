@@ -1,0 +1,301 @@
+<!DOCTYPE HTML><html><head><script>
+	if('' == 'true'){
+		if (prompt('请输入管理员密码') !== '025025'){
+            alert('密码错误！');
+            location.href='https://zxhtom.oschina.io';
+    	}
+	}
+</script><meta charset=UTF-8><meta name=viewport content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><meta http-equiv=X-UA-Compatible content="IE=Edge,chrome=1"><meta http-equiv=Cache-Control content=no-siteapp><meta name=renderer content=webkit|ie-comp|ie-stand><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no,email=no,adress=no"><meta name=browsermode content=application><meta name=screen-orientation content=portrait><link rel=dns-prefetch href=https://zxhtom.oschina.io><meta name=description content=张新华的个人网站><meta name=robots content=all><meta name=google content=all><meta name=googlebot content=all><meta name=verify content=all><title>java 注解的使用 | 烟花散尽13141</title><link rel=alternate href=/atom.xml title=烟花散尽13141 type=application/atom+xml><link rel=icon href=/favicon.ico><link rel=stylesheet href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css?rev=9.12.0"><link rel=stylesheet href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4"><link rel=stylesheet href=//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href="/css/style.css?rev=@@hash"><link rel=stylesheet href="/css/mycss.css?rev=@@hash"><div class=hide><script src="https://s4.cnzz.com/z_stat.php?id=1263868967&web_id=1263868967" language=JavaScript></script></div><script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?709c2dde1f61f5e589ff3ed31ba52411";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script></head><body><header class=main-header style=background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)><div class=main-header-box><a class=header-avatar href="/"><img src=/img/avatar.jpg alt=logo头像></a><div class=branding><h2>学如逆水行舟，不进则退！！！</h2></div></div></header><nav class=main-navigation><div class=container><div class=row><div class=col-sm-12><div class=navbar-header><span class="nav-toggle-button collapsed" data-toggle=collapse data-target=#main-menu id=mnav><span class=sr-only>Toggle navigation</span> <i class="fa fa-bars"></i></span></div><div class="collapse navbar-collapse" id=main-menu><ul class=menu><li role=presentation><a href="/"><i class="fa fa-fw"></i>首页</a></li><li role=presentation><a href="/about/"><i class="fa fa-fw"></i>关于我</a></li><li role=presentation><a href="/tags/"><i class="fa fa-fw"></i>标签</a></li><li role=presentation><a href="/categories/"><i class="fa fa-fw"></i>分类</a></li><li role=presentation><a href="/archives/"><i class="fa fa-fw"></i>归档</a></li><li role=presentation><a href="/schedule/"><i class="fa fa-fw"></i>日程表</a></li><li role=presentation><a href=/sitemap.xml><i class="fa fa-fw"></i>地图导航</a></li><li role=presentation><a href="/404/"><i class="fa fa-fw"></i>公益活动</a></li></ul></div></div></div></div></nav><section class=content-wrap><div class=container><div class=row><main class="col-md-8 main-content m-post"><div id=toc class=toc-article><div class=hamburger><div class=line></div><div class=line></div><div class=line></div></div><strong class=toc-title>文章目录</strong><div class=menu-inner><ol class=toc><li class="toc-item toc-level-2"><a class=toc-link href=#什么是注解><span class=toc-number>1.</span> <span class=toc-text>什么是注解</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#注解的作用><span class=toc-number>2.</span> <span class=toc-text>注解的作用</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#基本注解><span class=toc-number>3.</span> <span class=toc-text>基本注解</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#jdk提供了开发注解的方法><span class=toc-number>4.</span> <span class=toc-text>jdk提供了开发注解的方法</span></a></li></ol><li class="toc-item toc-level-1"><a class=toc-link href=#自定义注解><span class=toc-number></span> <span class=toc-text>自定义注解</span></a><ol class=toc-child><li class="toc-item toc-level-2"><a class=toc-link href=#构造器注解><span class=toc-number>1.</span> <span class=toc-text>构造器注解</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#字段注解><span class=toc-number>2.</span> <span class=toc-text>字段注解</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#局部变量注解><span class=toc-number>3.</span> <span class=toc-text>局部变量注解</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#方法注解><span class=toc-number>4.</span> <span class=toc-text>方法注解</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#包注解><span class=toc-number>5.</span> <span class=toc-text>包注解</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#参数注解><span class=toc-number>6.</span> <span class=toc-text>参数注解</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#类型注解><span class=toc-number>7.</span> <span class=toc-text>类型注解</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#加入测试的实体类><span class=toc-number>8.</span> <span class=toc-text>加入测试的实体类</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#加入测试的接口类><span class=toc-number>9.</span> <span class=toc-text>加入测试的接口类</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#测试注解><span class=toc-number>10.</span> <span class=toc-text>测试注解</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#效果图><span class=toc-number>11.</span> <span class=toc-text>效果图</span></a></li></ol></li></div><svg version=1.1 id=blob xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><path id=blob-path d=M60,500H0V0h60c0,0,20,172,20,250S60,900,60,500z></path></svg></div><p id=process></p><article class=post><div class=post-head><h1 id="java 注解的使用">java 注解的使用</h1><div class=post-meta><span class="categories-meta fa-wrap"><i class="fa fa-folder-open-o"></i> <span>编程</span></span> <span class=fa-wrap><i class="fa fa-tags"></i> <span class=tags-meta>java</span></span> <span class=fa-wrap><i class="fa fa-clock-o"></i> <span class=date-meta>2017/03/02</span></span> <a href=/zxh/20170302.html#comments class=comment-count><i id=changyan_count_unit data-xid=zxh/20170302.html></i>留言, <i id=changyan_parti_unit data-xid=zxh/20170302.html></i>参与</a> <span id=busuanzi_container_page_pv>view : <span id=busuanzi_value_page_pv></span>次</span></div><p class="fa fa-exclamation-triangle warning">本文于<strong>323</strong>天之前发表，文中内容可能已经过时。</p></div><div class="post-body post-content"><p>spring开源框架，里面全是通过注解实现的<br><a id=more></a></p><blockquote><p>spring开源框架，里面全是通过注解实现的，我们使用在使用的时候也尝到不少好处，所以就抽空看看Java给我们提供的注解机制的使用。</p></blockquote><hr><h2 id=什么是注解><a href=#什么是注解 class=headerlink title=什么是注解></a>什么是注解</h2><ul><li>注解就是类似于注释一样，起到对类、方法、字段等的说明作用。Annotation(注解)是在jdk1.5之后才引入的概念。所以你要想实现注解你的jdk必须1.5以上。他可以用于创建文档，跟踪代码的依赖性。甚至也可以执行基本的编译语法检查。注解的格式是以@开头的，@interface形式的类名申请。上面说了，注解你就可以理解为注释，因为注解是不会影响到代码的语义的。注解有三种存在方式，一种是存在源码中，一种是在编译中，一种是在运行期间有效。</li></ul><h2 id=注解的作用><a href=#注解的作用 class=headerlink title=注解的作用></a>注解的作用</h2><ul><li>编写文档：通过代码里标识的元数据生成文档。</li></ul><hr><ul><li>代码分析：通过代码里标识的元数据对代码进行分析。</li></ul><hr><ul><li>编译检查：通过代码里标识的元数据让编译器能实现基本的编译检查</li></ul><hr><h2 id=基本注解><a href=#基本注解 class=headerlink title=基本注解></a>基本注解</h2><ul><li>在Java中我们初学者可能不知道什么是注解，但是我们肯定都是永富哦注解的，下面来看看我们在哪里用过他们吧，</li></ul><font size=5>Override</font><ul><li>java.lang.Override是一个标记类型注解，它被用作标注方法.他说明了该方法是继承了父类的方法，就是重写了父类中同名方法。如果我们在一个方法上面使用的@override，但是实际上父类根本没有这个方法，就是说我们这个方法没有重载父类的方法。这个时候我们在编译时就会报相应的编译错误。</li></ul><font size=5>SuppressWarnings</font><ul><li><p>我对这个注解的理解就是通过它告诉编译器忽视我下面可能出现的警告。实际上里面有很多参数，不同参数设置不同的警告</p><ul><li>deprecation，使用了过时的类或方法时的警告</li><li>unchecked，执行了未检查的转换时的警告</li><li>fallthrough，当 switch 程序块直接通往下一种情况而没有 break 时的警告</li><li>path，在类路径、源文件路径等中有不存在的路径时的警告</li><li>serial，当在可序列化的类上缺少serialVersionUID 定义时的警告</li><li>finally ，任何 finally 子句不能正常完成时的警告</li><li>all，关于以上所有情况的警告</li></ul></li></ul><font size=5>Deprecated</font><ul><li>这个注解我实际没有接触过，这个我在网上搜了一下，人家的解释为</li></ul><blockquote><p>它的作用是对不应该再使用的方法添加注解，当编程人员使用这些方法时，将会在编译时显示提示信息，它与javadoc里的@deprecated标记有相同的功能，准确的说，它还不如javadoc @deprecated，因为它不支持参数，使用@Deprecated的示例代码示例如下：<br><img src="http://img.blog.csdn.net/20170227172148792?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=这里写图片描述></p></blockquote><ul><li>在我们平时编写代码用到jdk中的方法，有的时候回遇到某个方法过时了，但是可以用，那个方法就是通过这个注解实现的，简单说就是提示开发者方法过时，尽量避免使用过时方法。</li></ul><h2 id=jdk提供了开发注解的方法><a href=#jdk提供了开发注解的方法 class=headerlink title=jdk提供了开发注解的方法></a>jdk提供了开发注解的方法</h2><ul><li>有了上面的介绍我们多多少少对注解有了了解，既然Java已经有了注解的概念那么我们如何开发自己的注解呢。在java.lang.annotation这个包里jdk放置了关于注解的注解，就是通过里面的注解类我们可以开发自己的注解。下面先来认识一下注解的注解吧。</li></ul><p><img src="http://img.blog.csdn.net/20170227173034372?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=这里写图片描述></p><ul><li>通过观察源码，其中annotation 、annotationFormatError、annotationTypeMismatchExcetion、IncompleteAnnotationException这四个类有事异常类又是基本类页游格式化的，这些类我们开发注解时我们不会遇到的，都是jdk里逻辑。我们真正使用的是剩下的几个类。</li></ul><font size=5>ElementType</font><ul><li><p>这个类是个枚举，这里枚举的字段就是给Target类中使用的。具体在Target中说明</p><font size=5>RetentionPolicy</font></li><li><p>这个类是个枚举，这里枚举的字段就是给Retention类中使用的。具体在Retention中说明</p><font size=5>Documented</font></li></ul><pre><code>/**
+ * Indicates that annotations with a type are to be documented by javadoc
+ * and similar tools by default.  This type should be used to annotate the
+ * declarations of types whose annotations affect the use of annotated
+ * elements by their clients.  If a type declaration is annotated with
+ * Documented, its annotations become part of the public API
+ * of the annotated elements.
+ *
+ * @author  Joshua Bloch
+ * @since 1.5
+ */
+</code></pre><ul><li>这是官网的jdk上对documented类的描述，这段描述的大致意思是该类的申明是用在<font color=red>生成Java文档上的注解</font>，也就是说这个注解上就可以生成文档说明，并且这个也是默认的实用工具。这种注解应该在客户端上被注入。与此同时他们的方法也成为公共的API.</li></ul><font size=5>Target</font><pre><code>/**
+ * Indicates the kinds of program element to which an annotation type
+ * is applicable.  If a Target meta-annotation is not present on an
+ * annotation type declaration, the declared type may be used on any
+ * program element.  If such a meta-annotation is present, the compiler
+ * will enforce the specified usage restriction.
+ *
+ * For example, this meta-annotation indicates that the declared type is
+ * itself a meta-annotation type.  It can only be used on annotation type
+ * declarations:
+ * &lt;pre&gt;
+ *    &amp;#064;Target(ElementType.ANNOTATION_TYPE)
+ *    public &amp;#064;interface MetaAnnotationType {
+ *        ...
+ *    }
+ * &lt;/pre&gt;
+ * This meta-annotation indicates that the declared type is intended solely
+ * for use as a member type in complex annotation type declarations.  It
+ * cannot be used to annotate anything directly:
+ * &lt;pre&gt;
+ *    &amp;#064;Target({})
+ *    public &amp;#064;interface MemberType {
+ *        ...
+ *    }
+ * &lt;/pre&gt;
+ * It is a compile-time error for a single ElementType constant to
+ * appear more than once in a Target annotation.  For example, the
+ * following meta-annotation is illegal:
+ * &lt;pre&gt;
+ *    &amp;#064;Target({ElementType.FIELD, ElementType.METHOD, ElementType.FIELD})
+ *    public &amp;#064;interface Bogus {
+ *        ...
+ *    }
+ * &lt;/pre&gt;
+ */
+</code></pre><ul><li><p>同样上面仍然是Java JDK官网的说明，首先是说如果target指定的类型元素不存在的话，那么通过target指定的注解将可以用在任何地方，如果target指定元素，则该注解必须只能用在指定的元素上，target指定的元素是通过ElementType这个枚举类指定的，里面的枚举就是target可以指定的值。官网上的列子是Target(ElementType.ANNOTATION_TYPE)表明这个注解只能用在注解本省上面。还有一种属性不在ElementType枚举中，就是<code>target（{}）</code>，就是通过{}的注解是用来在负责注解上的成员变量，他不能用在其他的地方。</p></li><li><p>ElementType.CONSTRUCTOR:用于描述构造器</p></li><li><p>ElementType.FIELD:成员变量、对象、属性（包括enum实例）</p></li><li><p>ElementType.LOCAL_VARIABLE:用于描述局部变量</p></li><li><p>ElementType.METHOD:用于描述方法</p></li><li><p>ElementType.PACKAGE:用于描述包</p></li><li><p>ElementType.PARAMETER:用于描述参数</p></li><li><p>ElementType.TYPE:用于描述类、接口(包括注解类型) 或enum声明</p></li></ul><font size=5>Retention</font><pre><code>/**
+ * Indicates how long annotations with the annotated type are to
+ * be retained.  If no Retention annotation is present on
+ * an annotation type declaration, the retention policy defaults to
+ * {@code RetentionPolicy.CLASS}.
+ *
+ * &lt;p&gt;A Retention meta-annotation has effect only if the
+ * meta-annotated type is used directly for annotation.  It has no
+ * effect if the meta-annotated type is used as a member type in
+ * another annotation type.
+ *
+ * @author  Joshua Bloch
+ * @since 1.5
+ */
+</code></pre><ul><li><p>这个类的属性是通过RetentionPolicy这个枚举类列举属性的，这个主要的作用是指定我们的<font color=red>注解存在的时间或者说是存在的时刻</font>。这个属性只有直接用在原注释类型的注解上才有效。如果用在其他注解的成员变量上就没有效果了。</p><ul><li><p>RetentionPolicy.SOURCE : 在编译阶段丢弃。这些注解在编译结束之后就不再有任何意义，所以它们不会写入字节码。@Override, @SuppressWarnings都属于这类注解。</p></li><li><p>RetentionPolicy.CLASS : 在类加载的时候丢弃。在字节码文件的处理中有用。注解默认使用这种方式</p></li><li><p>RetentionPolicy.RUNTIME : 始终不会丢弃，运行期也保留该注解，因此可以使用反射机制读取该注解的信息。我们自定义的注解通常使用这种方式。</p></li></ul></li></ul><font size=5>Inherited</font><pre><code>/**
+ * Indicates that an annotation type is automatically inherited.  If
+ * an Inherited meta-annotation is present on an annotation type
+ * declaration, and the user queries the annotation type on a class
+ * declaration, and the class declaration has no annotation for this type,
+ * then the class&#39;s superclass will automatically be queried for the
+ * annotation type.  This process will be repeated until an annotation for this
+ * type is found, or the top of the class hierarchy (Object)
+ * is reached.  If no superclass has an annotation for this type, then
+ * the query will indicate that the class in question has no such annotation.
+ *
+ * &lt;p&gt;Note that this meta-annotation type has no effect if the annotated
+ * type is used to annotate anything other than a class.  Note also
+ * that this meta-annotation only causes annotations to be inherited
+ * from superclasses; annotations on implemented interfaces have no
+ * effect.
+ *
+ * @author  Joshua Bloch
+ * @since 1.5
+ */
+</code></pre><ul><li>一句话总结就是<font color=red>是否允许子类继承该注解</font></li></ul><h1 id=自定义注解><a href=#自定义注解 class=headerlink title=自定义注解></a>自定义注解</h1><ul><li>上面说了这么多，那么下面我们开始开发自己的注解吧。</li></ul><h2 id=构造器注解><a href=#构造器注解 class=headerlink title=构造器注解></a>构造器注解</h2><pre><code>/**
+ * 该注解用于doc文档
+ * 该注解用于类的构造函数的注解
+ * 该注解尽在运行期间有效
+ * @author xinhua
+ *
+ */
+@Documented
+@Target(ElementType.CONSTRUCTOR)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface ConstructorAnno
+{
+
+    String decs() default &quot;我是描述构造函数的注解&quot;;
+}
+</code></pre><h2 id=字段注解><a href=#字段注解 class=headerlink title=字段注解></a>字段注解</h2><pre><code>/**
+ * 该注解用于生成doc文档
+ * 该注解用于在类的字段属性上的注解
+ * 该注解尽在运行期间有效
+ * @author xinhua
+ *
+ */
+@Documented
+@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface FieldAnno
+{
+
+    String desc() default &quot;我是描述字段的注解&quot;;
+}
+</code></pre><h2 id=局部变量注解><a href=#局部变量注解 class=headerlink title=局部变量注解></a>局部变量注解</h2><pre><code>/**
+ * 该注解用于生成doc文档
+ * 该注解用于在局部变量上的注解
+ * 该注解尽在运行期间有效
+ * @author xinhua
+ *
+ */
+@Documented
+@Target(ElementType.LOCAL_VARIABLE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface LocalAnno
+{
+    String desc() default &quot;我是描述一个局部变量的注解&quot;;
+}
+</code></pre><h2 id=方法注解><a href=#方法注解 class=headerlink title=方法注解></a>方法注解</h2><pre><code>/**
+ * 这个注解用于生成doc文档
+ * 这个注解用于类的方法上的注解
+ * 这个注解尽在运行期间有效
+ * @author xinhua
+ *
+ */
+@Documented
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface MethodAnno
+{
+    //默认提交时间  2017-2-28
+    String time() default &quot;2017-2-28&quot;;
+
+    //默认  男    true 男  false 女 
+    boolean sex() default true;
+}
+</code></pre><h2 id=包注解><a href=#包注解 class=headerlink title=包注解></a>包注解</h2><pre><code>/**
+ * 该注解用于生成doc文档
+ * 该注解用于在包的注解
+ * 该注解尽在运行期间有效
+ * @author xinhua
+ *
+ */
+@Documented
+@Target(ElementType.PACKAGE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface PackageAnno
+{
+
+    String desc() default &quot;我是描述包的注解&quot;;
+}
+</code></pre><h2 id=参数注解><a href=#参数注解 class=headerlink title=参数注解></a>参数注解</h2><pre><code>/**
+ * 该注解用于doc文档的生成
+ * 该注解用于类的参数中
+ * 该注解尽在运行期间有效
+ * @author xinhua
+ *
+ */
+@Documented
+@Target(ElementType.PARAMETER)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface StuInfo
+{
+    String value() default &quot;&quot;;
+}
+</code></pre><h2 id=类型注解><a href=#类型注解 class=headerlink title=类型注解></a>类型注解</h2><pre><code>/**
+ * 该注解用于生活曾doc文档
+ * 该注解用于在类的注解
+ * 该注解尽在运行期间有效
+ * @author xinhua
+ *
+ */
+@Documented
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface TypeAnno
+{
+
+    String desc() default &quot;我是描述类型的注解&quot;;
+}
+</code></pre><h2 id=加入测试的实体类><a href=#加入测试的实体类 class=headerlink title=加入测试的实体类></a>加入测试的实体类</h2><pre><code>/**
+ * 测试所有类型的注解的作用
+ * @author xinhua
+ *
+ */
+public @TypeAnno(desc=&quot;我是普通类&quot;)class User
+{
+    @FieldAnno
+    private String UID;
+
+    @FieldAnno(desc=&quot;我是UserName的&quot;)
+    private String userName;
+
+    @ConstructorAnno
+    public User(){
+
+    }
+
+    @MethodAnno(time=&quot;2015-12-8&quot; , sex=false)
+    public void doHomeWork(@StuInfo(value=&quot;211311084&quot;) String UID, @StuInfo(value=&quot;张新华&quot;)String UserName){
+         @LocalAnno(desc=&quot;flag的局部变量&quot;)boolean flag;
+
+    }
+}
+</code></pre><h2 id=加入测试的接口类><a href=#加入测试的接口类 class=headerlink title=加入测试的接口类></a>加入测试的接口类</h2><pre><code>public interface UserImp
+{
+
+    public void DoHouseWork(@StuInfo(value=&quot;我是小学生&quot;)String stuType,@StuInfo(value=&quot;我在大扫除&quot;)String things);
+}
+</code></pre><h2 id=测试注解><a href=#测试注解 class=headerlink title=测试注解></a>测试注解</h2><pre><code>/**
+ * 开始通过反射获取注解内容
+ * @author xinhua
+ *
+ */
+public class Junit
+{
+
+    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException
+    {
+        Class&lt;?&gt; userClass = Class.forName(&quot;tom.change.annotation.User&quot;);
+        //实例化
+        Object userObject = userClass.newInstance();
+        //1--获取最外层的就是类的注解  TypeAnno
+        System.out.println(&quot;.......................类注解.......................&quot;);
+        TypeAnno typeAnno= userClass.getAnnotation(TypeAnno.class);
+        System.out.println(typeAnno.desc());
+        //2--获取字段注解 首先获取通过反射获取类中的属性字段
+        System.out.println(&quot;.......................字段注解.......................&quot;);
+        Field[] fields = userClass.getDeclaredFields();
+        for (Field field : fields)
+        {
+            FieldAnno fieldAnno = field.getAnnotation(FieldAnno.class);
+            System.out.println(fieldAnno.desc());
+        }
+        //3-- 方法的注解
+        System.out.println(&quot;.......................方法注解.......................&quot;);
+        Method method = userClass.getMethod(&quot;doHomeWork&quot;, String.class,String.class);
+        MethodAnno methodAnno = method.getAnnotation(MethodAnno.class);
+        System.out.println(methodAnno.time()+&quot;@@@&quot;+methodAnno.sex());
+
+        //4-- 参数的注解  动态代理方式实现参数
+        System.out.println(&quot;.......................参数注解.......................&quot;);
+        UserImp userImp=getMethodParameter(UserImp.class);
+        userImp.DoHouseWork(&quot;张新华&quot;, &quot;--》扫地&quot;);
+
+        //5--局部变量注解 
+        System.out.println(&quot;.......................局部变量注解.......................&quot;);
+        //赞未获得到
+    }
+
+    public static&lt;T&gt; T getMethodParameter(Class&lt;T&gt; target){
+        return (T)Proxy.newProxyInstance(target.getClassLoader(), new Class&lt;?&gt;[]{target}, new InvocationHandler()
+        {
+
+            @Override
+            public Object invoke(Object proxy, Method method, Object[] args)
+                    throws Throwable
+            {
+                Annotation[][] parameterAnnotations = method.getParameterAnnotations();
+                for (int i=0;i&lt;parameterAnnotations.length;i++)
+                {
+                    Annotation[] annotations=parameterAnnotations[i];
+                    StuInfo stuInfo =(StuInfo) annotations[0];
+                    System.out.println(stuInfo.value()+&quot;@@@&quot;+args[i]);
+                }
+
+                return null;
+            }
+        });
+    }
+}
+</code></pre><h2 id=效果图><a href=#效果图 class=headerlink title=效果图></a>效果图</h2><p><img src="http://img.blog.csdn.net/20170228180341320?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=这里写图片描述></p></div><div class=post-footer><div>转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a target=_blank>烟花散尽13141</a></div><div></div></div></article><div class="article-nav prev-next-wrap clearfix"><a href=/zxh/20170310.html class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a> <a href=/zxh/20170227.html class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a></div><div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div><button id=rewardButton disable=enable onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}"><span>赏</span></button><div id=QR style="display: none;"><div id=wechat style="display: inline-block"><a href=/img/wechatpay.jpg class="fancybox fancybox.image" rel=group><img id=wechat_qr src=/img/wechatpay.jpg alt="颜敏 WeChat Pay"></a><p>微信打赏</p></div><div id=alipay style="display: inline-block"><a href=/img/alipay.jpg class="fancybox fancybox.image" rel=group><img id=alipay_qr src=/img/alipay.jpg alt="颜敏 Alipay"></a><p>支付宝打赏</p></div></div></div><div id=comments><div id=SOHUCS sid=/zxh/20170302.html></div><script type=text/javascript> 
+    (function(){ 
+    var appid = 'cyti5JvoU'; 
+    var conf = 'prod_a32310aad07e12c7706c8da1901ed57b'; 
+    var width = window.innerWidth || document.documentElement.clientWidth; 
+    if (width < 960) { 
+    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script></div></main><aside class="col-md-4 sidebar"><div class=widget><h3 class=title>Search</h3><div id=search-form><div id=result-mask class=hide></div><div class=search-area><input id=search-key type=search autocomplete=off placeholder=搜点什么呢?> <button type=button class=search-form-submit id=search-local>站内搜索</button></div><div id=result-wrap class=hide><div id=search-result></div></div><div class=hide><template id=search-tpl><div class=item><a href=/{path} title={title}><div class=title>{title}</div><div class=content>{content}</div></a></div></template></div></div></div><div class="widget notification"><h3 class=title>网站公告</h3><div><p><font color=red>pc、移动端目录区分设计</font></p></div></div><div class=widget><h3 class=title>Social</h3><div class="content social"><a href=//gitee.com/zxhtom rel="external nofollow" title=oschina target=_blank><i class="git fa fa-git"></i></a> <a href=mailto:870775401@qq.com rel="external nofollow" title=邮箱 target=_blank><i class="envelope-o fa fa-envelope-o"></i></a> <a href=870775401 rel="external nofollow" title=联系QQ target=_blank><i class="qq fa fa-qq"></i></a> <a href="/" rel="external nofollow" title=微博 target=_blank><i class="weibo fa fa-weibo"></i></a> <a href=376091466 rel="external nofollow" title=QQ群1 target=_blank><i class="users fa fa-users"></i></a> <a href=/atom.xml rel="external nofollow" title=RSS target=_blank><i class="feed fa fa-feed"></i></a></div></div><div class=widget><h3 class=title>Categories</h3><ul class=category-list><li class=category-list-item><a class=category-list-link href="/categories/开发工具/"><i class=fa aria-hidden=true>开发工具</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/案例/"><i class=fa aria-hidden=true>案例</i></a><span class=category-list-count>2</span></li><li class=category-list-item><a class=category-list-link href="/categories/程序人生/"><i class=fa aria-hidden=true>程序人生</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/编程/"><i class=fa aria-hidden=true>编程</i></a><span class=category-list-count>88</span></li></ul></div><div class=widget><h3 class=title>Archives</h3><ul class=archive-list><li class=archive-list-item><a class=archive-list-link href="/archives/2018/01/"><i class=fa aria-hidden=true>2018年01月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/12/"><i class=fa aria-hidden=true>2017年12月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/11/"><i class=fa aria-hidden=true>2017年11月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/10/"><i class=fa aria-hidden=true>2017年10月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/06/"><i class=fa aria-hidden=true>2017年06月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/04/"><i class=fa aria-hidden=true>2017年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/03/"><i class=fa aria-hidden=true>2017年03月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/02/"><i class=fa aria-hidden=true>2017年02月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/01/"><i class=fa aria-hidden=true>2017年01月</i></a><span class=archive-list-count>9</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/12/"><i class=fa aria-hidden=true>2016年12月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/11/"><i class=fa aria-hidden=true>2016年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/10/"><i class=fa aria-hidden=true>2016年10月</i></a><span class=archive-list-count>8</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/09/"><i class=fa aria-hidden=true>2016年09月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/08/"><i class=fa aria-hidden=true>2016年08月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/07/"><i class=fa aria-hidden=true>2016年07月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/06/"><i class=fa aria-hidden=true>2016年06月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/05/"><i class=fa aria-hidden=true>2016年05月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/04/"><i class=fa aria-hidden=true>2016年04月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/03/"><i class=fa aria-hidden=true>2016年03月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/02/"><i class=fa aria-hidden=true>2016年02月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2015/04/"><i class=fa aria-hidden=true>2015年04月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/11/"><i class=fa aria-hidden=true>2014年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/10/"><i class=fa aria-hidden=true>2014年10月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/04/"><i class=fa aria-hidden=true>2014年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/01/"><i class=fa aria-hidden=true>2014年01月</i></a><span class=archive-list-count>2</span></li></ul></div><div class=widget><h3 class=title>Tag Cloud</h3><div class="content tag-cloud"><a href="/tags/C/" style="font-size: 17.5px;">C++</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/bat语法/" style="font-size: 10px;">bat语法</a> <a href="/tags/formatter/" style="font-size: 10px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/ngrok/" style="font-size: 10px;">ngrok</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/sublime-text3/" style="font-size: 10px;">sublime text3</a> <a href="/tags/前端/" style="font-size: 12.5px;">前端</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/感慨/" style="font-size: 12.5px;">感慨</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a></div></div><div class=widget><h3 class=title>Friends</h3><div class="content friends-link"><a href=http://blog.csdn.net/u013132051 class=fa target=_blank>个人博客</a></div></div></aside></div></div></section><footer class=main-footer><div class=container><div class=row></div></div></footer><a id=back-to-top class=hide><i class="fa fa-chevron-up"></i></a><div class=copyright><div class=container><div class=row><div class=col-sm-12><span>Copyright &copy; 2017</span> | <span>Powered by <a href=//hexo.io class=copyright-links target=_blank rel=nofollow>张新华</a></span> | <span>Theme by <a href=//github.com/shenliyang/hexo-theme-snippet.git class=copyright-links target=_blank rel=nofollow>ZxhTom</a></span></div></div></div></div><script src=https://code.jquery.com/jquery-latest.js></script><script src=https://assets.changyan.sohu.com/upload/plugins/plugins.count.js></script><script src="/assets/highlight.pack.js?rev=@@hash"></script><script>
+     hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script><script src="/js/search.js?rev=@@hash"></script><script src="/js/app.js?rev=@@hash"></script><script src="/assets/prefix.js?rev=@@hash"></script><script src="/assets/my.js?rev=@@hash"></script></body></html>

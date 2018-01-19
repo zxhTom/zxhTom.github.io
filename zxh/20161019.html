@@ -1,0 +1,200 @@
+<!DOCTYPE HTML><html><head><script>
+	if('' == 'true'){
+		if (prompt('请输入管理员密码') !== '025025'){
+            alert('密码错误！');
+            location.href='https://zxhtom.oschina.io';
+    	}
+	}
+</script><meta charset=UTF-8><meta name=viewport content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><meta http-equiv=X-UA-Compatible content="IE=Edge,chrome=1"><meta http-equiv=Cache-Control content=no-siteapp><meta name=renderer content=webkit|ie-comp|ie-stand><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no,email=no,adress=no"><meta name=browsermode content=application><meta name=screen-orientation content=portrait><link rel=dns-prefetch href=https://zxhtom.oschina.io><meta name=description content=张新华的个人网站><meta name=robots content=all><meta name=google content=all><meta name=googlebot content=all><meta name=verify content=all><title>POI通用导出Excel数据(包括样式设计) | 烟花散尽13141</title><link rel=alternate href=/atom.xml title=烟花散尽13141 type=application/atom+xml><link rel=icon href=/favicon.ico><link rel=stylesheet href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css?rev=9.12.0"><link rel=stylesheet href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4"><link rel=stylesheet href=//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href="/css/style.css?rev=@@hash"><link rel=stylesheet href="/css/mycss.css?rev=@@hash"><div class=hide><script src="https://s4.cnzz.com/z_stat.php?id=1263868967&web_id=1263868967" language=JavaScript></script></div><script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?709c2dde1f61f5e589ff3ed31ba52411";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script></head><body><header class=main-header style=background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)><div class=main-header-box><a class=header-avatar href="/"><img src=/img/avatar.jpg alt=logo头像></a><div class=branding><h2>学如逆水行舟，不进则退！！！</h2></div></div></header><nav class=main-navigation><div class=container><div class=row><div class=col-sm-12><div class=navbar-header><span class="nav-toggle-button collapsed" data-toggle=collapse data-target=#main-menu id=mnav><span class=sr-only>Toggle navigation</span> <i class="fa fa-bars"></i></span></div><div class="collapse navbar-collapse" id=main-menu><ul class=menu><li role=presentation><a href="/"><i class="fa fa-fw"></i>首页</a></li><li role=presentation><a href="/about/"><i class="fa fa-fw"></i>关于我</a></li><li role=presentation><a href="/tags/"><i class="fa fa-fw"></i>标签</a></li><li role=presentation><a href="/categories/"><i class="fa fa-fw"></i>分类</a></li><li role=presentation><a href="/archives/"><i class="fa fa-fw"></i>归档</a></li><li role=presentation><a href="/schedule/"><i class="fa fa-fw"></i>日程表</a></li><li role=presentation><a href=/sitemap.xml><i class="fa fa-fw"></i>地图导航</a></li><li role=presentation><a href="/404/"><i class="fa fa-fw"></i>公益活动</a></li></ul></div></div></div></div></nav><section class=content-wrap><div class=container><div class=row><main class="col-md-8 main-content m-post"><div id=toc class=toc-article><div class=hamburger><div class=line></div><div class=line></div><div class=line></div></div><strong class=toc-title>文章目录</strong><div class=menu-inner><ol class=toc><li class="toc-item toc-level-2"><a class=toc-link href=#前言><span class=toc-number>1.</span> <span class=toc-text>前言</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#前期准备><span class=toc-number>2.</span> <span class=toc-text>前期准备</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#代码解析><span class=toc-number>3.</span> <span class=toc-text>代码解析</span></a></li></ol><li class="toc-item toc-level-1"><a class=toc-link href=#通过javabean来实现数据的导出><span class=toc-number></span> <span class=toc-text>通过javabean来实现数据的导出</span></a></li><li class="toc-item toc-level-1"><a class=toc-link href=#通过Map来实现数据的导出><span class=toc-number></span> <span class=toc-text>通过Map来实现数据的导出</span></a><ol class=toc-child><li class="toc-item toc-level-2"><a class=toc-link href=#总结><span class=toc-number>1.</span> <span class=toc-text>总结</span></a></li></ol></li></div><svg version=1.1 id=blob xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><path id=blob-path d=M60,500H0V0h60c0,0,20,172,20,250S60,900,60,500z></path></svg></div><p id=process></p><article class=post><div class=post-head><h1 id=POI通用导出Excel数据(包括样式设计)>POI通用导出Excel数据(包括样式设计)</h1><div class=post-meta><span class="categories-meta fa-wrap"><i class="fa fa-folder-open-o"></i> <span>编程</span></span> <span class=fa-wrap><i class="fa fa-tags"></i> <span class=tags-meta>java</span></span> <span class=fa-wrap><i class="fa fa-clock-o"></i> <span class=date-meta>2016/10/19</span></span> <a href=/zxh/20161019.html#comments class=comment-count><i id=changyan_count_unit data-xid=zxh/20161019.html></i>留言, <i id=changyan_parti_unit data-xid=zxh/20161019.html></i>参与</a> <span id=busuanzi_container_page_pv>view : <span id=busuanzi_value_page_pv></span>次</span></div><p class="fa fa-exclamation-triangle warning">本文于<strong>457</strong>天之前发表，文中内容可能已经过时。</p></div><div class="post-body post-content"><p>前一段时间我写过通用的导入Excel<br><a id=more></a></p><h2 id=前言><a href=#前言 class=headerlink title=前言></a>前言</h2><ul><li>前一段时间我写过通用的导入Excel，前几天也写了导出pdf格式的，还有我之前搞得导出Word，我在之前的博客也都介绍了导出和导入是一个道理，无非是一个获取一个是赋值。昨天有一位同仁看了我的Excel通用导入导出那个源码，说不是太懂。顺道今天整理了一下导出那块的知识，导入我之前已经介绍的很详细了。今天我们就来说说Excel导出的那些事！</li></ul><h2 id=前期准备><a href=#前期准备 class=headerlink title=前期准备></a>前期准备</h2><ul><li>jar包下载，我们使用对Excel，Word操作的都是借助poi来实现的，所以首先我们需要下载jar包。<br><a href=http://download.csdn.net/detail/u013132051/9657641 target=_blank rel=noopener>POI 下载 猛戳我</a></li></ul><h2 id=代码解析><a href=#代码解析 class=headerlink title=代码解析></a>代码解析</h2><h1 id=通过javabean来实现数据的导出><a href=#通过javabean来实现数据的导出 class=headerlink title=通过javabean来实现数据的导出></a>通过javabean来实现数据的导出</h1><ul><li>数据准备：</li></ul><pre><code>```
+String[] headers = { &quot;学号&quot;, &quot;姓名&quot;, &quot;年龄&quot;, &quot;性别&quot;, &quot;出生日期&quot; };
+      List&lt;Student&gt; dataset = new ArrayList&lt;Student&gt;();
+      dataset.add(new Student(10000001, &quot;张三&quot;, 20, true, new Date()));
+      dataset.add(new Student(20000002, &quot;李四&quot;, 24, false, new Date()));
+      dataset.add(new Student(30000003, &quot;王五&quot;, 22, true, new Date()));
+```
+</code></pre><ul><li>然后我用导出的工具类开始导数据</li></ul><pre><code>```
+ExportExcel&lt;Student&gt; ex = new ExportExcel&lt;Student&gt;();
+ex.exportExcel(headers, dataset, out);
+```
+</code></pre><ul><li><p>ExportExcel是我写的一个模板，这个模板下面有两个exportExcel这个方法，一个是穿map数据的，另一个是传javabean的，我们上面穿的是javabean所以会调用javabean的方法。也就是说exportExcel会调用下面这个方法</p><p><img src=http://img.blog.csdn.net/20161019104640617 alt=这里写图片描述><br>最终我们调用的是exportExcelByBean这个方法。</p></li></ul><p>下面我们详细解说exportExcelByBean这个方法内容。</p><ul><li><p>1、首先声明一个Excel工作簿</p><pre><code>HSSFWorkbook workbook = new HSSFWorkbook();
+</code></pre></li><li><p>2、生成一个表格，传的title就是表格sheet也得名字</p><pre><code>HSSFSheet sheet = workbook.createSheet(title);
+</code></pre></li><li><p>3、设置表格默认宽度</p><pre><code>sheet.setDefaultColumnWidth((short) 15);
+</code></pre></li><li><p>4、设置样式</p><pre><code>HSSFCellStyle style = workbook.createCellStyle();
+   // 设置这些样式
+style.setFillForegroundColor(HSSFColor.SKY_BLUE.index);
+style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+style.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+style.setBorderRight(HSSFCellStyle.BORDER_THIN);
+style.setBorderTop(HSSFCellStyle.BORDER_THIN);
+style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+</code></pre><p>需要补充一下，我设置这个样式就是让导出Excel变得美观一点，你可以不要这个。</p></li><li><p>设置导出的字体样式并把这个字体加入到上面那个样式中</p><pre><code>// 生成另一个字体
+   HSSFFont font2 = workbook.createFont();
+   font2.setBoldweight(HSSFFont.BOLDWEIGHT_NORMAL);
+   // 把字体应用到当前的样式
+   style2.setFont(font2);
+</code></pre></li><li><p>其他的一些样式设置</p><p>```<br>// 声明一个画图的顶级管理器</p><pre><code>HSSFPatriarch patriarch = sheet.createDrawingPatriarch();
+// 定义注释的大小和位置,详见文档
+HSSFComment comment = patriarch.createComment(new HSSFClientAnchor(0,
+        0, 0, 0, (short) 4, 2, (short) 6, 5));
+// 设置注释内容
+comment.setString(new HSSFRichTextString(&quot;可以在POI中添加注释！&quot;));
+// 设置注释作者，当鼠标移动到单元格上是可以在状态栏中看到该内容.
+comment.setAuthor(&quot;leno&quot;);
+</code></pre></li></ul><ul><li><p>设置表格的表头</p><pre><code>// 产生表格标题行
+   HSSFRow row = sheet.createRow(0);
+   for (short i = 0; i &lt; headers.length; i++) {
+       HSSFCell cell = row.createCell(i);
+       cell.setCellStyle(style);
+       HSSFRichTextString text = new HSSFRichTextString(headers[i]);
+       cell.setCellValue(text);
+   }
+</code></pre><p>到这里表格的容器样式已经设置完了，下面就是导出数据到我们准备的Excel中了。</p></li><li><p>拿到集合中的所有javabean</p><pre><code>Iterator&lt;T&gt; it = dataset.iterator();
+</code></pre></li><li><p>在遍历数据的时候我们用的既然javabean就需要用到反射机制，这个简单的介绍一下反射这个神奇的东西。</p><pre><code>// 利用反射，根据javabean属性的先后顺序，动态调用getXxx()方法得到属性值
+       Field[] fields = t.getClass().getDeclaredFields();
+</code></pre></li><li><p>然后遍历属性，拿到单一属性后判断该用get还是is方法</p></li></ul><pre><code>    Field field = fields[i];
+                String fieldName = field.getName();
+                String[] split=field.toString().split(&quot; &quot;);
+                String getMethodName=&quot;&quot;;
+                if(&quot;boolean&quot;.equalsIgnoreCase(split[1])||&quot;bool&quot;.equalsIgnoreCase(split[1])){
+                    getMethodName = &quot;is&quot;
+                            + fieldName.substring(0, 1).toUpperCase()
+                            + fieldName.substring(1);
+                }else {
+                    getMethodName = &quot;get&quot;
+                            + fieldName.substring(0, 1).toUpperCase()
+                            + fieldName.substring(1);
+                }
+</code></pre><ul><li><p>然后就是通过反射区调用javabean的方法获取值了</p><pre><code>Class tCls = t.getClass();
+               Method getMethod = tCls.getMethod(getMethodName,new Class[] {});
+               Object value = getMethod.invoke(t, new Object[] {});
+</code></pre></li><li><p>我们获取到了值，现在我们就需要对值进行判断了，如果是日期类型的，我们需要指定格式输出到Excel中，如果是数字我们就输出数字，如果是字符串我们输出字符串，如果是bool那么我们根据需求输出两种值得其中一种。</p></li></ul><pre><code>```
+// 判断值的类型后进行强制类型转换
+                String textValue = null;
+                if (value instanceof Boolean) {
+                    boolean bValue = (Boolean) value;
+                    textValue = &quot;男&quot;;
+                    if (!bValue) {
+                        textValue = &quot;女&quot;;
+                    }
+                } else if (value instanceof Date) {
+                    Date date = (Date) value;
+                    SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+                    textValue = sdf.format(date);
+                } else if (value instanceof byte[]) {
+                    // 有图片时，设置行高为60px;
+                    row.setHeightInPoints(60);
+                    // 设置图片所在列宽度为80px,注意这里单位的一个换算
+                    sheet.setColumnWidth(i, (short) (35.7 * 80));
+                    // sheet.autoSizeColumn(i);
+                    byte[] bsValue = (byte[]) value;
+                    HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0,
+                    1023, 255, (short) 6, index, (short) 6, index);
+                    anchor.setAnchorType(2);
+                    patriarch.createPicture(anchor, workbook.addPicture(
+                    bsValue, HSSFWorkbook.PICTURE_TYPE_JPEG));
+                } else {
+                    // 其它数据类型都当作字符串简单处理
+                    textValue = value.toString();
+                }
+```
+</code></pre><ul><li><p>然后就是将数据写入Excel</p><pre><code>
+               if (textValue != null) {
+                   Pattern p = Pattern.compile(&quot;^\\d+(\\.\\d+)?$&quot;);
+                   Matcher matcher = p.matcher(textValue);
+                   if (matcher.matches()) {
+                       // 是数字当作double处理
+                       cell.setCellValue(Double.parseDouble(textValue));
+                   } else {
+                       HSSFRichTextString richString = new HSSFRichTextString(
+                               textValue);
+                       HSSFFont font3 = workbook.createFont();
+                       font3.setColor(HSSFColor.BLUE.index);
+                       richString.applyFont(font3);
+                       cell.setCellValue(richString);
+                   }
+               }
+</code></pre></li></ul><ul><li>最后写出这个工作簿</li></ul><pre><code>try {
+            workbook.write(out);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+</code></pre><ul><li>调用说明，OutputStream out = new FileOutputStream(“D://zxh//test//a.xls”);</li><li>给一个输出流 工Excel输出，如果是JavaWeb中应用，那就直接将这个工作簿输出到前台让浏览器下载就行了。</li></ul><h1 id=通过Map来实现数据的导出><a href=#通过Map来实现数据的导出 class=headerlink title=通过Map来实现数据的导出></a>通过Map来实现数据的导出</h1><ul><li>通过Map的好处就是我们不用去准备javabean了，也就自然没有反射那块难点了，既方便有易懂，何乐而不为呢。<br><img src=http://img.blog.csdn.net/20161019110621267 alt=这里写图片描述></li></ul><p>也就是说最后我们选择的是</p><pre><code>exportExcelByMap
+</code></pre><p>这个方法</p><ul><li>基于上面javabean介绍的很详细了，我这个map就不在赘述了，我只说一下关键点的地方，通过Map和通过javabean的，我们的表格样式是不变的，所以不一样的地方就是在遍历数据的时候讲数据赋值到Excel中的，最后输出的那个也不便，说白了就是获取数据的方式不一样了，javabean我是通过反射获取的，如果用了map我们直接用get就行了。</li></ul><pre><code>for(int i=0;i&lt;list.size();i++){
+                    Map&lt;String, Object&gt; map = list.get(i);
+                    HSSFCell cell = row.createCell(i);
+                    cell.setCellStyle(style2);
+                    //拿到第一个数据
+                    for(String field : headers){
+                        //遍历字段进行顺序赋值
+                        Object value = map.get(field);
+                        // 判断值的类型后进行强制类型转换
+                        String textValue = null;
+                        if (value instanceof Boolean) {
+                            boolean bValue = (Boolean) value;
+                            textValue = &quot;男&quot;;
+                            if (!bValue) {
+                                textValue = &quot;女&quot;;
+                            }
+                        } else if (value instanceof Date) {
+                            Date date = (Date) value;
+                            SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+                            textValue = sdf.format(date);
+                        } else if (value instanceof byte[]) {
+                            // 有图片时，设置行高为60px;
+                            row.setHeightInPoints(60);
+                            // 设置图片所在列宽度为80px,注意这里单位的一个换算
+                            sheet.setColumnWidth(i, (short) (35.7 * 80));
+                            // sheet.autoSizeColumn(i);
+                            byte[] bsValue = (byte[]) value;
+                            HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0,
+                            1023, 255, (short) 6, index, (short) 6, index);
+                            anchor.setAnchorType(2);
+                            patriarch.createPicture(anchor, workbook.addPicture(
+                            bsValue, HSSFWorkbook.PICTURE_TYPE_JPEG));
+                        } else {
+                            // 其它数据类型都当作字符串简单处理
+                            textValue = value.toString();
+                        }
+                        // 如果不是图片数据，就利用正则表达式判断textValue是否全部由数字组成
+                        if (textValue != null) {
+                            Pattern p = Pattern.compile(&quot;^\\d+(\\.\\d+)?$&quot;);
+                            Matcher matcher = p.matcher(textValue);
+                            if (matcher.matches()) {
+                                // 是数字当作double处理
+                                cell.setCellValue(Double.parseDouble(textValue));
+                            } else {
+                                HSSFRichTextString richString = new HSSFRichTextString(
+                                        textValue);
+                                HSSFFont font3 = workbook.createFont();
+                                font3.setColor(HSSFColor.BLUE.index);
+                                richString.applyFont(font3);
+                                cell.setCellValue(richString);
+                            }
+                        }
+                    }
+                }
+                try {
+                    workbook.write(out);
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+</code></pre><h2 id=总结><a href=#总结 class=headerlink title=总结></a>总结</h2><p>整个博客我一直强调，用Map好，因为现在JavaWeb中框架主流是mybatis等框架，而这些框架封装的数据库数据正好就是通过map格式传输的，所以我们直接获取的就是Map数据，然后直接传到我的方法中就可以导出了，就不用javabean了。</p><p><a href=http://download.csdn.net/detail/u013132051/9657729 target=_blank rel=noopener><font color=red>源码下载 猛戳！！！！</font></a></p></div><div class=post-footer><div>转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a target=_blank>烟花散尽13141</a></div><div></div></div></article><div class="article-nav prev-next-wrap clearfix"><a href=/zxh/20161022.html class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a> <a href=/zxh/20161018.html class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a></div><div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div><button id=rewardButton disable=enable onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}"><span>赏</span></button><div id=QR style="display: none;"><div id=wechat style="display: inline-block"><a href=/img/wechatpay.jpg class="fancybox fancybox.image" rel=group><img id=wechat_qr src=/img/wechatpay.jpg alt="颜敏 WeChat Pay"></a><p>微信打赏</p></div><div id=alipay style="display: inline-block"><a href=/img/alipay.jpg class="fancybox fancybox.image" rel=group><img id=alipay_qr src=/img/alipay.jpg alt="颜敏 Alipay"></a><p>支付宝打赏</p></div></div></div><div id=comments><div id=SOHUCS sid=/zxh/20161019.html></div><script type=text/javascript> 
+    (function(){ 
+    var appid = 'cyti5JvoU'; 
+    var conf = 'prod_a32310aad07e12c7706c8da1901ed57b'; 
+    var width = window.innerWidth || document.documentElement.clientWidth; 
+    if (width < 960) { 
+    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script></div></main><aside class="col-md-4 sidebar"><div class=widget><h3 class=title>Search</h3><div id=search-form><div id=result-mask class=hide></div><div class=search-area><input id=search-key type=search autocomplete=off placeholder=搜点什么呢?> <button type=button class=search-form-submit id=search-local>站内搜索</button></div><div id=result-wrap class=hide><div id=search-result></div></div><div class=hide><template id=search-tpl><div class=item><a href=/{path} title={title}><div class=title>{title}</div><div class=content>{content}</div></a></div></template></div></div></div><div class="widget notification"><h3 class=title>网站公告</h3><div><p><font color=red>pc、移动端目录区分设计</font></p></div></div><div class=widget><h3 class=title>Social</h3><div class="content social"><a href=//gitee.com/zxhtom rel="external nofollow" title=oschina target=_blank><i class="git fa fa-git"></i></a> <a href=mailto:870775401@qq.com rel="external nofollow" title=邮箱 target=_blank><i class="envelope-o fa fa-envelope-o"></i></a> <a href=870775401 rel="external nofollow" title=联系QQ target=_blank><i class="qq fa fa-qq"></i></a> <a href="/" rel="external nofollow" title=微博 target=_blank><i class="weibo fa fa-weibo"></i></a> <a href=376091466 rel="external nofollow" title=QQ群1 target=_blank><i class="users fa fa-users"></i></a> <a href=/atom.xml rel="external nofollow" title=RSS target=_blank><i class="feed fa fa-feed"></i></a></div></div><div class=widget><h3 class=title>Categories</h3><ul class=category-list><li class=category-list-item><a class=category-list-link href="/categories/开发工具/"><i class=fa aria-hidden=true>开发工具</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/案例/"><i class=fa aria-hidden=true>案例</i></a><span class=category-list-count>2</span></li><li class=category-list-item><a class=category-list-link href="/categories/程序人生/"><i class=fa aria-hidden=true>程序人生</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/编程/"><i class=fa aria-hidden=true>编程</i></a><span class=category-list-count>88</span></li></ul></div><div class=widget><h3 class=title>Archives</h3><ul class=archive-list><li class=archive-list-item><a class=archive-list-link href="/archives/2018/01/"><i class=fa aria-hidden=true>2018年01月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/12/"><i class=fa aria-hidden=true>2017年12月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/11/"><i class=fa aria-hidden=true>2017年11月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/10/"><i class=fa aria-hidden=true>2017年10月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/06/"><i class=fa aria-hidden=true>2017年06月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/04/"><i class=fa aria-hidden=true>2017年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/03/"><i class=fa aria-hidden=true>2017年03月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/02/"><i class=fa aria-hidden=true>2017年02月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/01/"><i class=fa aria-hidden=true>2017年01月</i></a><span class=archive-list-count>9</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/12/"><i class=fa aria-hidden=true>2016年12月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/11/"><i class=fa aria-hidden=true>2016年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/10/"><i class=fa aria-hidden=true>2016年10月</i></a><span class=archive-list-count>8</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/09/"><i class=fa aria-hidden=true>2016年09月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/08/"><i class=fa aria-hidden=true>2016年08月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/07/"><i class=fa aria-hidden=true>2016年07月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/06/"><i class=fa aria-hidden=true>2016年06月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/05/"><i class=fa aria-hidden=true>2016年05月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/04/"><i class=fa aria-hidden=true>2016年04月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/03/"><i class=fa aria-hidden=true>2016年03月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/02/"><i class=fa aria-hidden=true>2016年02月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2015/04/"><i class=fa aria-hidden=true>2015年04月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/11/"><i class=fa aria-hidden=true>2014年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/10/"><i class=fa aria-hidden=true>2014年10月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/04/"><i class=fa aria-hidden=true>2014年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/01/"><i class=fa aria-hidden=true>2014年01月</i></a><span class=archive-list-count>2</span></li></ul></div><div class=widget><h3 class=title>Tag Cloud</h3><div class="content tag-cloud"><a href="/tags/C/" style="font-size: 17.5px;">C++</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/bat语法/" style="font-size: 10px;">bat语法</a> <a href="/tags/formatter/" style="font-size: 10px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/ngrok/" style="font-size: 10px;">ngrok</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/sublime-text3/" style="font-size: 10px;">sublime text3</a> <a href="/tags/前端/" style="font-size: 12.5px;">前端</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/感慨/" style="font-size: 12.5px;">感慨</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a></div></div><div class=widget><h3 class=title>Friends</h3><div class="content friends-link"><a href=http://blog.csdn.net/u013132051 class=fa target=_blank>个人博客</a></div></div></aside></div></div></section><footer class=main-footer><div class=container><div class=row></div></div></footer><a id=back-to-top class=hide><i class="fa fa-chevron-up"></i></a><div class=copyright><div class=container><div class=row><div class=col-sm-12><span>Copyright &copy; 2017</span> | <span>Powered by <a href=//hexo.io class=copyright-links target=_blank rel=nofollow>张新华</a></span> | <span>Theme by <a href=//github.com/shenliyang/hexo-theme-snippet.git class=copyright-links target=_blank rel=nofollow>ZxhTom</a></span></div></div></div></div><script src=https://code.jquery.com/jquery-latest.js></script><script src=https://assets.changyan.sohu.com/upload/plugins/plugins.count.js></script><script src="/assets/highlight.pack.js?rev=@@hash"></script><script>
+     hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script><script src="/js/search.js?rev=@@hash"></script><script src="/js/app.js?rev=@@hash"></script><script src="/assets/prefix.js?rev=@@hash"></script><script src="/assets/my.js?rev=@@hash"></script></body></html>

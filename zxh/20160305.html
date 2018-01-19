@@ -1,0 +1,127 @@
+<!DOCTYPE HTML><html><head><script>
+	if('' == 'true'){
+		if (prompt('请输入管理员密码') !== '025025'){
+            alert('密码错误！');
+            location.href='https://zxhtom.oschina.io';
+    	}
+	}
+</script><meta charset=UTF-8><meta name=viewport content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><meta http-equiv=X-UA-Compatible content="IE=Edge,chrome=1"><meta http-equiv=Cache-Control content=no-siteapp><meta name=renderer content=webkit|ie-comp|ie-stand><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no,email=no,adress=no"><meta name=browsermode content=application><meta name=screen-orientation content=portrait><link rel=dns-prefetch href=https://zxhtom.oschina.io><meta name=description content=张新华的个人网站><meta name=robots content=all><meta name=google content=all><meta name=googlebot content=all><meta name=verify content=all><title>Servlet生成验证码并进行账号密码和验证码的验证登陆！ | 烟花散尽13141</title><link rel=alternate href=/atom.xml title=烟花散尽13141 type=application/atom+xml><link rel=icon href=/favicon.ico><link rel=stylesheet href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css?rev=9.12.0"><link rel=stylesheet href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4"><link rel=stylesheet href=//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href="/css/style.css?rev=@@hash"><link rel=stylesheet href="/css/mycss.css?rev=@@hash"><div class=hide><script src="https://s4.cnzz.com/z_stat.php?id=1263868967&web_id=1263868967" language=JavaScript></script></div><script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?709c2dde1f61f5e589ff3ed31ba52411";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script></head><body><header class=main-header style=background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)><div class=main-header-box><a class=header-avatar href="/"><img src=/img/avatar.jpg alt=logo头像></a><div class=branding><h2>学如逆水行舟，不进则退！！！</h2></div></div></header><nav class=main-navigation><div class=container><div class=row><div class=col-sm-12><div class=navbar-header><span class="nav-toggle-button collapsed" data-toggle=collapse data-target=#main-menu id=mnav><span class=sr-only>Toggle navigation</span> <i class="fa fa-bars"></i></span></div><div class="collapse navbar-collapse" id=main-menu><ul class=menu><li role=presentation><a href="/"><i class="fa fa-fw"></i>首页</a></li><li role=presentation><a href="/about/"><i class="fa fa-fw"></i>关于我</a></li><li role=presentation><a href="/tags/"><i class="fa fa-fw"></i>标签</a></li><li role=presentation><a href="/categories/"><i class="fa fa-fw"></i>分类</a></li><li role=presentation><a href="/archives/"><i class="fa fa-fw"></i>归档</a></li><li role=presentation><a href="/schedule/"><i class="fa fa-fw"></i>日程表</a></li><li role=presentation><a href=/sitemap.xml><i class="fa fa-fw"></i>地图导航</a></li><li role=presentation><a href="/404/"><i class="fa fa-fw"></i>公益活动</a></li></ul></div></div></div></div></nav><section class=content-wrap><div class=container><div class=row><main class="col-md-8 main-content m-post"><div id=toc class=toc-article><div class=hamburger><div class=line></div><div class=line></div><div class=line></div></div><strong class=toc-title>文章目录</strong><div class=menu-inner></div><svg version=1.1 id=blob xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><path id=blob-path d=M60,500H0V0h60c0,0,20,172,20,250S60,900,60,500z></path></svg></div><p id=process></p><article class=post><div class=post-head><h1 id=Servlet生成验证码并进行账号密码和验证码的验证登陆！>Servlet生成验证码并进行账号密码和验证码的验证登陆！</h1><div class=post-meta><span class="categories-meta fa-wrap"><i class="fa fa-folder-open-o"></i> <span>编程</span></span> <span class=fa-wrap><i class="fa fa-tags"></i> <span class=tags-meta>Java</span></span> <span class=fa-wrap><i class="fa fa-clock-o"></i> <span class=date-meta>2016/03/05</span></span> <a href=/zxh/20160305.html#comments class=comment-count><i id=changyan_count_unit data-xid=zxh/20160305.html></i>留言, <i id=changyan_parti_unit data-xid=zxh/20160305.html></i>参与</a> <span id=busuanzi_container_page_pv>view : <span id=busuanzi_value_page_pv></span>次</span></div><p class="fa fa-exclamation-triangle warning">本文于<strong>685</strong>天之前发表，文中内容可能已经过时。</p></div><div class="post-body post-content"><p>人不是生来就懂事的，在编程的世界也是一样，<br><a id=more></a></p><p><strong>前言：</strong> 人不是生来就懂事的，在编程的世界也是一样，想想在大一的时候我还是那个连输出Hello World！都不会的小孩子是，现在我已经可以编出属于我自己的小程序了。编程其实并不可怕，可怕的是你不去编。现在已经大三了，正在实训时间很紧，我争取每周发表一篇微博。今天我想来谈谈验证码登陆这个问题。我看了网上的相关知识，感觉网上大多只有如何生成验证码的，并没有系统的将相关的认证，今天我就整理了一下。</p><ul><li><p>验证码的生成</p><ul><li>我们需要用到Servlet来生成验证码，验证码其实就是一张图片，那么我们首先定义一下图片的背景<ul><li>BufferedImage img=new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);</li></ul></li><li>然后我们需要一支画笔<ul><li><code>Graphics2D g=(Graphics2D) img.getGraphics();</code></li></ul></li><li>得到画笔后我们就开始绘画了<ul><li>`g.fillRect(120, 120, width, height);</li><li>g.drawRect(120, 120, width-1, height-1);`</li></ul></li><li><p>基本的框架画好了就开始填数字了</p><ul><li><code>for(int i=0;i&lt;4;i++)
+{
+ int r=RandNum(9);
+ AuthCode+=r+&quot;&quot;;
+ g.setColor(new Color(RandNum(255), RandNum(255), RandNum(255)));
+ g.setFont(new Font(&quot;黑体&quot;, Font.BOLD, 20));
+ g.drawString(r+&quot;&quot;, 5+i*30, 22);
+}</code></li></ul></li><li><p>大家应该都见过验证码长什么样子，验证码给人一种模糊的感觉，那么下面我们还要做的事将这个框架填充点线，形成模糊的感觉</p><ul><li><code>for (int i=0;i&lt;255;i++) {
+ int x = random.nextInt(width);
+ int y = random.nextInt(height);
+ int xl = random.nextInt(12);
+ int yl = random.nextInt(12);
+ g.drawLine(x,y,x,y);</code></li></ul></li><li>到这里我们已经完成了验证码的绘制了，下面我将他发布到浏览器上<ul><li><code>ImageIO.write(img, &quot;jpg&quot;, response.getOutputStream());</code></li></ul></li><li><p>这里还有一点值得注意，我们随机生成的四位数验证码我们自己也要存储起来，用来我们登陆时进行验证</p><ul><li>`public String GetAuthCode()<br>{<br>String authcode=””;<br>for(int i = 0; i &lt; 4; i++)<br>{<br>authcode += (new Random()).nextInt(10);<br>}<br>return authcode;</li></ul><p>}`</p></li><li>这里我们得到的验证码我将用HttpSession来存储。<ul><li><code>request.getSession().setAttribute(&quot;AuthCode&quot;, AuthCode);//保存到session中以便验证</code></li></ul></li></ul></li><li><p>验证码生成的工作到这里已经结束了，网上的也就到这里结束，下面我还要进行登陆验证，因为是演示我无法将数据库带过来，所以在程序中自己模拟了一个数据库用来账号的验证。</p><ul><li><p>模拟的数据我用map来存储键值对，这样方便我们搜索</p><ul><li><code>UserInfor u1=new UserInfor(&quot;张新华&quot;, &quot;123&quot;);
+UserInfor u2=new UserInfor(&quot;奥巴马&quot;, &quot;456&quot;);
+UserInfor u3=new UserInfor(&quot;习近平&quot;, &quot;789&quot;);
+UserInfor u4=new UserInfor(&quot;安倍&quot;,  &quot;1234&quot;);
+UserInfor u5=new UserInfor();
+map.put(u1.getUserName(), u1);
+map.put(u2.getUserName(), u2);
+map.put(u3.getUserName(), u3);
+map.put(u4.getUserName(), u4);
+map.put(u5.getUserName(), u5);</code></li></ul></li><li><p>在这个数据库中我提供了一个验证方法，用来验证账户和密码是否枕正确</p><ul><li><code>if(map.containsKey(name)&amp;&amp;map.get(name).getPwd().equals(pwd))
+{
+ return map.get(name);
+}</code></li></ul></li><li>在上面的数据库中我们不难发现里面有一个用户数据类，所以下面我们还要构造这个数据类，在这里我给用户提供了姓名和密码</li><li><p>private String userName;<br>private String pwd;</p></li><li><p>关于这个类的有参’无参‘和访问器我就不写了，你们自动生成就行了</p></li></ul></li><li>下面才是我们的主菜，在这里我们需要构造一个Servlet来承接我们之前的验证码，用html更好（其实我就是在Servlet里面写Html的）我将他起名为IndexServlet<ul><li>在DoGet方法中我们要告诉浏览器不要缓存<ul><li><code>response.setHeader(&quot;Pragma&quot;, &quot;no-cache&quot;);  
+response.setHeader(&quot;Cache-Control&quot;, &quot;no-cache&quot;);  
+response.setDateHeader(&quot;Expires&quot;, -1);</code></li><li>首页我们就要来判断用户是登陆了回来的还是第一次来<ul><li><code>String err=(String) session.getAttribute(&quot;errmsg&quot;);
+err=err==null ? &quot;&quot; : err;
+String errv=(String) session.getAttribute(&quot;errvalid&quot;);
+errv=errv==null ? &quot;&quot; : errv;
+String name=request.getParameter(&quot;username&quot;);
+name= name==null ?&quot;&quot; : name;
+out.write(&quot;&lt;font color=&#39;Red&#39;&gt;&quot;+err+&quot;&lt;/font&gt;&lt;/br&gt;&quot;);
+out.write(&quot;&lt;font color=&#39;Red&#39;&gt;&quot;+errv+&quot;&lt;/font&gt;&quot;);
+session.removeAttribute(&quot;errmsg&quot;);
+session.removeAttribute(&quot;errvalid&quot;);
+out.append(&quot;&lt;script type=\&quot;text/javascript\&quot;&gt;&quot;);
+//脚本
+out.append(&quot;function imgclick(img)&quot;);
+out.append(&quot;{&quot;);
+out.append(&quot;img.src=\&quot;/ValidLoad2/Valimg?time=\&quot;+new Date().getTime()&quot;);
+out.append(&quot;}&quot;);
+out.println(&quot;&lt;/script&gt;&quot;);
+out.append(&quot;&lt;form action=&#39;&quot;+request.getContextPath()+&quot;/LoginServlet&#39; method=&#39;post&#39;&gt;&quot;);
+out.append(&quot;&lt;table&gt;&quot;);
+//第一行
+out.append(&quot;&lt;tr&gt;&quot;);
+out.append(&quot;&lt;td&gt;&quot;);
+out.append(&quot;用户名：&quot;);
+out.append(&quot;&lt;/td&gt;&quot;);
+out.append(&quot;&lt;td&gt;&quot;);
+out.append(&quot;&lt;input type=text name=&#39;username&#39; id=&#39;zxh&#39; value=&#39;&quot;+name+&quot;&#39; style=&#39;width:152px;height:30px;&#39;/&gt;&quot;);
+out.append(&quot;&lt;/td&gt;&quot;);
+out.append(&quot;&lt;/tr&gt;&quot;);
+//第二行
+out.append(&quot;&lt;tr&gt;&quot;);
+out.append(&quot;&lt;td&gt;&quot;);
+out.append(&quot;密码：&quot;);
+out.append(&quot;&lt;/td&gt;&quot;);
+out.append(&quot;&lt;td&gt;&quot;);
+out.append(&quot;&lt;input type=password name=&#39;pwd&#39; style=&#39;width:152px;height:30px;&#39;/&gt;&quot;);
+out.append(&quot;&lt;/td&gt;&quot;);
+out.append(&quot;&lt;/tr&gt;&quot;);
+//第三行
+out.append(&quot;&lt;tr&gt;&quot;);
+out.append(&quot;&lt;td&gt;&quot;);
+out.append(&quot;验证码：&quot;);
+out.append(&quot;&lt;/td&gt;&quot;);
+out.append(&quot;&lt;td&gt;&quot;);
+out.append(&quot;&lt;input type=text name=&#39;code&#39; style=&#39;width:152px;height:30px;&#39;/&gt;&quot;);
+out.append(&quot;&lt;/td&gt;&quot;);
+out.append(&quot;&lt;td&gt;&quot;);
+out.append(&quot;&lt;img src=&#39;/ValidLoad2/Valimg&#39; onclick=&#39;imgclick(this)&#39;/&gt;&quot;);
+out.append(&quot;&lt;/td&gt;&quot;);
+out.append(&quot;&lt;/tr&gt;&quot;);
+//第四行
+out.append(&quot;&lt;tr&gt;&quot;);
+out.append(&quot;&lt;td colspan=2&gt;&quot;);
+out.append(&quot;&lt;input type=submit value=&#39;登录&#39; style=&#39;width:222px;height:30px;&#39;/&gt;&quot;);
+out.append(&quot;&lt;/td&gt;&quot;);
+out.append(&quot;&lt;/tr&gt;&quot;);
+out.append(&quot;&lt;/table&gt;&quot;);
+//            out.append(&quot;用户名：&lt;input type=text name=&#39;username&#39; id=&#39;zxh&#39; value=&#39;&quot;+name+&quot;&#39;/&gt;&lt;/br&gt;&lt;/br&gt;&quot;);
+//            out.append(&quot; 密码  ：&lt;input type=password name=&#39;pwd&#39;/&gt;&lt;/br&gt;&quot;);
+//            out.append(&quot;验证码：&lt;input type=text name=&#39;code&#39; /&gt;&quot;);
+//            out.append(&quot;&lt;img src=&#39;/ValidLoad2/Valimg&#39; onclick=&#39;imgclick(this)&#39;/&gt;&quot;);
+//            out.append(&quot;&lt;a href=&#39;LoginServlet&#39;&gt;看不清&lt;/a&gt;&lt;/br&gt;&quot;);
+//            out.append(&quot;&lt;input type=submit value=&#39;登录&#39;/&gt;&quot;);
+out.append(&quot;&lt;/form&gt;&quot;);</code></li></ul></li></ul></li><li>如果登陆成功，则跳转到我们的欢迎界面<ul><li><code>out.write(&quot;欢迎&quot;);
+ out.write(&quot;&lt;b&gt;&quot;);
+ out.write(userInfor.getUserName());
+ out.write(&quot;&lt;/b&gt;&quot;);
+ out.write(&quot;回来&quot;+&quot;&lt;/br&gt;&quot;+&quot;&lt;a href=&#39;&quot;+request.getContextPath()+&quot;/LoginOutServlet&#39;&gt;注销&lt;/ a&gt;&quot;);</code></li></ul></li><li>在上面IndexServlet中我提到了登陆成功界面，在这里我起名为LoginOutServlet. 在这个Servlet中特别简单就是为了实现用户推出功能的，所以我们只需要将session中的数据删除就行了，那么问题来了如果直接删除会导致我们网页一旦受到攻击服务器将会不堪重负，所以我加了限制条件<ul><li><code>HttpSession session=request.getSession(false);
+if(session!=null)
+ session.invalidate();
+response.sendRedirect(request.getContextPath()+&quot;/IndexServlet&quot;);</code></li></ul></li><li>最后就是我们的验证界面了，我们的账号和密码匹配在我们模拟数据库中就已经写好了，那为什么还要进行验证呢，难道你忘了我们还有验证码呢，再说了，我的数据库只是验证账号和密码是否匹配，并不做任何事情，所以我们还需要一个servlet来实现验证的执行<ul><li>`String name=request.getParameter(“username”);<br>// name= name==null ?”” : name;<br>String pwd=request.getParameter(“pwd”);<br>String code=request.getParameter(“code”);<br>UserInfor userInfor=UserDao.CheckInfor(name, pwd);<br>HttpSession session=request.getSession();<br>String AuthCode=(String) session.getAttribute(“AuthCode”);<br>// System.out.println(AuthCode+”——-“+code);<br>if(AuthCode.equals(code))<br>{<br>if(userInfor==null)<br>{<pre><code> //失败
+ session.setAttribute(&quot;errmsg&quot;, &quot;用户名或密码错误！&quot;);
+ response.sendRedirect(request.getContextPath()+&quot;/IndexServlet?username=&quot;+name);
+</code></pre>// System.out.println(“1”);<br>}<br>else<br>{<pre><code> //成功
+ response.setContentType(&quot;text/html;charset=utf-8&quot;);
+ session.setAttribute(&quot;userInfor&quot;, userInfor);
+ response.setHeader(&quot;Refresh&quot;, &quot;3;url=&quot;+request.getContextPath()+&quot;/IndexServlet&quot;);
+ response.getWriter().write(&quot;恭喜您！登录成功！&quot;);
+</code></pre>// System.out.println(“2”);<br>}<br>}<br>else<br>{<br>// System.out.println(“3”);<br>//验证码出错<br>session.setAttribute(“errvalid”, “验证码错误！”);<br>response.sendRedirect(request.getContextPath()+”/IndexServlet?username=”+name+”&amp;pwd=”+pwd);<br>}`</li></ul></li></ul></li><li>到这里我们的验证登陆功能就已经实现了，我们是从IndexServlet这个页面开始进入的，不要进错了，我写这个 博客主要是为了帮助和我一样志同道合的人一起学习一起探讨。下面是我的运行流程<ul><li><img src=http://img.blog.csdn.net/20160305164643610 alt=这里写图片描述></li><li>下面我填写正确的数据看看效果</li><li><img src=http://img.blog.csdn.net/20160305164922809 alt=这里写图片描述></li><li><img src=http://img.blog.csdn.net/20160305165113905 alt=这里写图片描述></li><li><img src=http://img.blog.csdn.net/20160305165200018 alt=这里写图片描述><ul><li>验证码错误的情况<ul><li><img src=http://img.blog.csdn.net/20160305165414691 alt=这里写图片描述></li><li><img src=http://img.blog.csdn.net/20160305165517863 alt=这里写图片描述></li></ul></li><li>密码错误</li><li><img src=http://img.blog.csdn.net/20160305165635286 alt=这里写图片描述></li><li><img src=http://img.blog.csdn.net/20160305165715536 alt=这里写图片描述></li></ul></li></ul></li></ul></div><div class=post-footer><div>转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a target=_blank>烟花散尽13141</a></div><div></div></div></article><div class="article-nav prev-next-wrap clearfix"><a href=/zxh/20160401.html class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a> <a href=/zxh/20160227.html class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a></div><div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div><button id=rewardButton disable=enable onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}"><span>赏</span></button><div id=QR style="display: none;"><div id=wechat style="display: inline-block"><a href=/img/wechatpay.jpg class="fancybox fancybox.image" rel=group><img id=wechat_qr src=/img/wechatpay.jpg alt="颜敏 WeChat Pay"></a><p>微信打赏</p></div><div id=alipay style="display: inline-block"><a href=/img/alipay.jpg class="fancybox fancybox.image" rel=group><img id=alipay_qr src=/img/alipay.jpg alt="颜敏 Alipay"></a><p>支付宝打赏</p></div></div></div><div id=comments><div id=SOHUCS sid=/zxh/20160305.html></div><script type=text/javascript> 
+    (function(){ 
+    var appid = 'cyti5JvoU'; 
+    var conf = 'prod_a32310aad07e12c7706c8da1901ed57b'; 
+    var width = window.innerWidth || document.documentElement.clientWidth; 
+    if (width < 960) { 
+    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script></div></main><aside class="col-md-4 sidebar"><div class=widget><h3 class=title>Search</h3><div id=search-form><div id=result-mask class=hide></div><div class=search-area><input id=search-key type=search autocomplete=off placeholder=搜点什么呢?> <button type=button class=search-form-submit id=search-local>站内搜索</button></div><div id=result-wrap class=hide><div id=search-result></div></div><div class=hide><template id=search-tpl><div class=item><a href=/{path} title={title}><div class=title>{title}</div><div class=content>{content}</div></a></div></template></div></div></div><div class="widget notification"><h3 class=title>网站公告</h3><div><p><font color=red>pc、移动端目录区分设计</font></p></div></div><div class=widget><h3 class=title>Social</h3><div class="content social"><a href=//gitee.com/zxhtom rel="external nofollow" title=oschina target=_blank><i class="git fa fa-git"></i></a> <a href=mailto:870775401@qq.com rel="external nofollow" title=邮箱 target=_blank><i class="envelope-o fa fa-envelope-o"></i></a> <a href=870775401 rel="external nofollow" title=联系QQ target=_blank><i class="qq fa fa-qq"></i></a> <a href="/" rel="external nofollow" title=微博 target=_blank><i class="weibo fa fa-weibo"></i></a> <a href=376091466 rel="external nofollow" title=QQ群1 target=_blank><i class="users fa fa-users"></i></a> <a href=/atom.xml rel="external nofollow" title=RSS target=_blank><i class="feed fa fa-feed"></i></a></div></div><div class=widget><h3 class=title>Categories</h3><ul class=category-list><li class=category-list-item><a class=category-list-link href="/categories/开发工具/"><i class=fa aria-hidden=true>开发工具</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/案例/"><i class=fa aria-hidden=true>案例</i></a><span class=category-list-count>2</span></li><li class=category-list-item><a class=category-list-link href="/categories/程序人生/"><i class=fa aria-hidden=true>程序人生</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/编程/"><i class=fa aria-hidden=true>编程</i></a><span class=category-list-count>88</span></li></ul></div><div class=widget><h3 class=title>Archives</h3><ul class=archive-list><li class=archive-list-item><a class=archive-list-link href="/archives/2018/01/"><i class=fa aria-hidden=true>2018年01月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/12/"><i class=fa aria-hidden=true>2017年12月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/11/"><i class=fa aria-hidden=true>2017年11月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/10/"><i class=fa aria-hidden=true>2017年10月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/06/"><i class=fa aria-hidden=true>2017年06月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/04/"><i class=fa aria-hidden=true>2017年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/03/"><i class=fa aria-hidden=true>2017年03月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/02/"><i class=fa aria-hidden=true>2017年02月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/01/"><i class=fa aria-hidden=true>2017年01月</i></a><span class=archive-list-count>9</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/12/"><i class=fa aria-hidden=true>2016年12月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/11/"><i class=fa aria-hidden=true>2016年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/10/"><i class=fa aria-hidden=true>2016年10月</i></a><span class=archive-list-count>8</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/09/"><i class=fa aria-hidden=true>2016年09月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/08/"><i class=fa aria-hidden=true>2016年08月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/07/"><i class=fa aria-hidden=true>2016年07月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/06/"><i class=fa aria-hidden=true>2016年06月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/05/"><i class=fa aria-hidden=true>2016年05月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/04/"><i class=fa aria-hidden=true>2016年04月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/03/"><i class=fa aria-hidden=true>2016年03月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/02/"><i class=fa aria-hidden=true>2016年02月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2015/04/"><i class=fa aria-hidden=true>2015年04月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/11/"><i class=fa aria-hidden=true>2014年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/10/"><i class=fa aria-hidden=true>2014年10月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/04/"><i class=fa aria-hidden=true>2014年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/01/"><i class=fa aria-hidden=true>2014年01月</i></a><span class=archive-list-count>2</span></li></ul></div><div class=widget><h3 class=title>Tag Cloud</h3><div class="content tag-cloud"><a href="/tags/C/" style="font-size: 17.5px;">C++</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/bat语法/" style="font-size: 10px;">bat语法</a> <a href="/tags/formatter/" style="font-size: 10px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/ngrok/" style="font-size: 10px;">ngrok</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/sublime-text3/" style="font-size: 10px;">sublime text3</a> <a href="/tags/前端/" style="font-size: 12.5px;">前端</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/感慨/" style="font-size: 12.5px;">感慨</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a></div></div><div class=widget><h3 class=title>Friends</h3><div class="content friends-link"><a href=http://blog.csdn.net/u013132051 class=fa target=_blank>个人博客</a></div></div></aside></div></div></section><footer class=main-footer><div class=container><div class=row></div></div></footer><a id=back-to-top class=hide><i class="fa fa-chevron-up"></i></a><div class=copyright><div class=container><div class=row><div class=col-sm-12><span>Copyright &copy; 2017</span> | <span>Powered by <a href=//hexo.io class=copyright-links target=_blank rel=nofollow>张新华</a></span> | <span>Theme by <a href=//github.com/shenliyang/hexo-theme-snippet.git class=copyright-links target=_blank rel=nofollow>ZxhTom</a></span></div></div></div></div><script src=https://code.jquery.com/jquery-latest.js></script><script src=https://assets.changyan.sohu.com/upload/plugins/plugins.count.js></script><script src="/assets/highlight.pack.js?rev=@@hash"></script><script>
+     hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script><script src="/js/search.js?rev=@@hash"></script><script src="/js/app.js?rev=@@hash"></script><script src="/assets/prefix.js?rev=@@hash"></script><script src="/assets/my.js?rev=@@hash"></script></body></html>

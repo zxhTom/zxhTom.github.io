@@ -1,0 +1,123 @@
+<!DOCTYPE HTML><html><head><script>
+	if('' == 'true'){
+		if (prompt('请输入管理员密码') !== '025025'){
+            alert('密码错误！');
+            location.href='https://zxhtom.oschina.io';
+    	}
+	}
+</script><meta charset=UTF-8><meta name=viewport content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><meta http-equiv=X-UA-Compatible content="IE=Edge,chrome=1"><meta http-equiv=Cache-Control content=no-siteapp><meta name=renderer content=webkit|ie-comp|ie-stand><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no,email=no,adress=no"><meta name=browsermode content=application><meta name=screen-orientation content=portrait><link rel=dns-prefetch href=https://zxhtom.oschina.io><meta name=description content=张新华的个人网站><meta name=robots content=all><meta name=google content=all><meta name=googlebot content=all><meta name=verify content=all><title>算法之路——递归 | 烟花散尽13141</title><link rel=alternate href=/atom.xml title=烟花散尽13141 type=application/atom+xml><link rel=icon href=/favicon.ico><link rel=stylesheet href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css?rev=9.12.0"><link rel=stylesheet href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4"><link rel=stylesheet href=//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href="/css/style.css?rev=@@hash"><link rel=stylesheet href="/css/mycss.css?rev=@@hash"><div class=hide><script src="https://s4.cnzz.com/z_stat.php?id=1263868967&web_id=1263868967" language=JavaScript></script></div><script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?709c2dde1f61f5e589ff3ed31ba52411";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script></head><body><header class=main-header style=background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)><div class=main-header-box><a class=header-avatar href="/"><img src=/img/avatar.jpg alt=logo头像></a><div class=branding><h2>学如逆水行舟，不进则退！！！</h2></div></div></header><nav class=main-navigation><div class=container><div class=row><div class=col-sm-12><div class=navbar-header><span class="nav-toggle-button collapsed" data-toggle=collapse data-target=#main-menu id=mnav><span class=sr-only>Toggle navigation</span> <i class="fa fa-bars"></i></span></div><div class="collapse navbar-collapse" id=main-menu><ul class=menu><li role=presentation><a href="/"><i class="fa fa-fw"></i>首页</a></li><li role=presentation><a href="/about/"><i class="fa fa-fw"></i>关于我</a></li><li role=presentation><a href="/tags/"><i class="fa fa-fw"></i>标签</a></li><li role=presentation><a href="/categories/"><i class="fa fa-fw"></i>分类</a></li><li role=presentation><a href="/archives/"><i class="fa fa-fw"></i>归档</a></li><li role=presentation><a href="/schedule/"><i class="fa fa-fw"></i>日程表</a></li><li role=presentation><a href=/sitemap.xml><i class="fa fa-fw"></i>地图导航</a></li><li role=presentation><a href="/404/"><i class="fa fa-fw"></i>公益活动</a></li></ul></div></div></div></div></nav><section class=content-wrap><div class=container><div class=row><main class="col-md-8 main-content m-post"><div id=toc class=toc-article><div class=hamburger><div class=line></div><div class=line></div><div class=line></div></div><strong class=toc-title>文章目录</strong><div class=menu-inner></div><svg version=1.1 id=blob xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><path id=blob-path d=M60,500H0V0h60c0,0,20,172,20,250S60,900,60,500z></path></svg></div><p id=process></p><article class=post><div class=post-head><h1 id=算法之路——递归>算法之路——递归</h1><div class=post-meta><span class="categories-meta fa-wrap"><i class="fa fa-folder-open-o"></i> <span>编程</span></span> <span class=fa-wrap><i class="fa fa-tags"></i> <span class=tags-meta>java</span></span> <span class=fa-wrap><i class="fa fa-clock-o"></i> <span class=date-meta>2016/08/24</span></span> <a href=/zxh/20160824.html#comments class=comment-count><i id=changyan_count_unit data-xid=zxh/20160824.html></i>留言, <i id=changyan_parti_unit data-xid=zxh/20160824.html></i>参与</a> <span id=busuanzi_container_page_pv>view : <span id=busuanzi_value_page_pv></span>次</span></div><p class="fa fa-exclamation-triangle warning">本文于<strong>513</strong>天之前发表，文中内容可能已经过时。</p></div><div class="post-body post-content"><p>递归大家都懂是什么意思，在现实生活中我们也很容易去操作<br><a id=more></a></p><ul><li><p><strong><a href="http://baike.baidu.com/link?url=rRzLPYC8BdMRyP4B0ny4IrH6vIaN0fwAXE53Sy4SP6ANL8oVlDClC8W6BcGRGYWQvSLAOz6Z8Ws_1AWEV0d3ba" target=_blank rel=noopener>递归</a></strong>（recursion）：程序调用自身的编程技巧。</p><ul><li><p>递归满足2个条件：</p><p>1）有反复执行的过程（调用自身）</p><p>2）有跳出反复执行过程的条件（递归出口）</p></li></ul></li></ul><hr><ul><li>递归大家都懂是什么意思，在现实生活中我们也很容易去操作，但是在程序员的世界递归确实是很多人都头疼的一大难题。我总结了递归特色的一句话：<strong>简约而不简单</strong></li></ul><hr><ul><li><p>本博主打算通过四个案列来详细的剖析递归里面的思想</p><ul><li><p>阶乘算法</p></li><li><p>全排列算法</p></li><li><p>汉诺塔问题</p></li><li><p>斐波那契数列</p></li></ul></li></ul><hr><ul><li><p>阶乘</p><p>阶乘应该是递归里面比较简单的问题了，所以我放在第一个将，在这里并不是越往后的越难，我个人觉得斐波那契数列和阶乘是同级别的，都很简单，阶乘主要就是拿一个数不停的去和比自己小一的数据相乘，一直称到1为止。最后返回数字就是阶乘的数据。这个可以用循环也可以用递归，既然我们本章主题是递归，那我们就用递归来实现吧。</p></li></ul><pre><code>//阶乘
+int recursive(int i)
+{
+    int sum = 0;
+    if (0 == i)
+        return (1);
+    else
+        sum = i * recursive(i-1);
+    return sum;
+}
+</code></pre><ul><li><p>全排列问题：</p><p>解法一、在数组里进行两两不重复交换，每次交换得到的新数组组成的数据就是全排列的一种情况。 这个有点类似我们排序中的冒泡排序。<br><img src=http://img.blog.csdn.net/20160823152415308 alt=这里写图片描述><br>这个逻辑进行下去就是不断的交换，每次交换完成就会产生一组数据，我们只要输出就行了</p><pre><code>//全排列
+inline void Swap(int &amp;a,int &amp;b)
+{
+int temp=a;
+a=b;
+b=temp;
+}
+void Perm(int list[],int k,int m)
+{
+if (k == m-1) 
+{
+    for(int i=0;i&lt;m;i++)
+    {
+        printf(&quot;%d&quot;,list[i]);
+    }
+    printf(&quot;n&quot;);
+}
+else
+{
+    for(int i=k;i&lt;m;i++)
+    {
+        Swap(list[k],list[i]); 
+        Perm(list,k+1,m);
+        Swap(list[k],list[i]); 
+    }
+}
+}
+</code></pre><p>解法二、对新数据进行遍历，遍历会拿到每一条数据，拿到数据我们在判断这个数据是否已经被使用了，是则抛弃，否则选择。在递归进入结束条件时，我们输出我们的新数据，最后跳出本条递归。跳出之后我们就该将最近选择的数据状态置为未使用状态，方便下一次遍历使用。这样就会形成全排列。</p></li></ul><pre><code>public static void Circle(Object[] arry,Object[] visit,Integer index){
+        if(index==arry.length){
+        //自己写的输出list集合的方法。读者自己写
+            outArry(resultArry);
+            return ;//递归结束；开始想外层跳出
+        }else{
+            for(int i=0;i&lt;arry.length;i++){
+                if((Integer)visit[i]==0){
+                    resultArry[index]=arry[i];
+                    //将该数字置为选中状态，下次再配到该数字则弃用该数字
+                    visit[i]=1;
+                    index++;
+                    Circle(arry, visit, index);
+                    index--;
+                    //跳出循环，应该讲最近使用的数字状态恢复为0
+                    visit[i]=0;
+                }
+            }
+        }
+    }
+</code></pre><p>解法二不足之处：在解法二中我将数组写死了，不能根据用户的变化而将记录数组进行改变，后来我进行改进，具体代码如下：</p><pre><code>private static List&lt;Object&gt; resultArry=new ArrayList&lt;Object&gt;();
+    private static List&lt;Integer&gt; state=new ArrayList&lt;Integer&gt;();
+    public static void Circle(Object[] arry,Integer index){
+        if(index==arry.length){
+            outList(resultArry);
+            return ;//递归结束；开始想外层跳出
+        }else{
+            for(int i=0;i&lt;arry.length;i++){
+                if(state.get(i)==0){
+                    resultArry.add(arry[i]);
+                    state.set(i, 1);
+                    index++;
+                    Circle(arry, index);//递归的体现
+                    resultArry.remove(arry[i]);
+                    index--;
+                    state.set(i, 0);
+                }
+            }
+        }
+    }
+</code></pre><p>效果对1、2、3进行全排列：<br><img src=http://img.blog.csdn.net/20160823154036018 alt=这里写图片描述><br>效果对1、2、3、4进行全排列：<br><img src=http://img.blog.csdn.net/20160823160452643 alt=这里写图片描述></p><ul><li><p>汉诺塔问题</p><p><img src=http://img.blog.csdn.net/20160823160529616 alt=这里写图片描述></p><p><img src=http://img.blog.csdn.net/20160823160544394 alt=这里写图片描述></p></li></ul><ul><li><p>思路梳理：</p><p>上图中想实现a–&gt;b，我们必须先将a中上面两个盘子拿到借助柱子B上。那么下面我们要考虑的是如何将A中两个盘子保持顺序的拿到B上呢，这时我们就需要借助C柱来完成，这就需要用递归了。因为我们最终问题是将A上三个盘子借助B按顺序拿到C上，我将问题转换成了将A上的两个盘子借助C拿到B上。ABC在方法里我用1、2、3代替。如果我将方法设为<code>public static void hanoi(int n,int p1,int p2,int p3)</code><br>也就是说一开始我们调用的是<code>hanoi(3,1,2,3)</code><br>到我们里面进行分析后变为<code>hanoi(2,1,3,2)</code>（这里转化理解醉关键）<br>下面我们就一层一层向内部挖掘，那么，我们该什么时候结束这个循环递归呢？答案当然是在A柱上就剩一个盘子的时候我们就结束了，也即是方法<code>hanoi(1,1,2,3)</code> 这个时候我们只用将A柱上的一个盘子直接拿到C盘上</p><p>还有一点就是在我们都执行过了，现在我们回到我第一次剖析的地方，这个时候我们已经成功的将A柱上两个盘子拿到了B柱上了。这个时候我们就可以将A柱上最后一个盘子拿到C盘上，拿完之后我们该做什么呢，拿完之后我们可以将问题看成将B柱上的两个盘子借助A柱按顺序拿到C柱上。用方法表示为<code>hanoi(2,2,1,3)</code>,这部我们继续走上面的思想就会完成。</p><p>代码：</p></li></ul><pre><code>public static void hanoi(int n,int p1,int p2,int p3)
+    {
+        if(1==n){
+            System.out.println(&quot;盘子从&quot;+p1+&quot;移动到&quot;+p3);
+        }
+        else
+        {
+            hanoi(n-1,p1,p3,p2);
+            System.out.println(&quot;盘子从&quot;+p1+&quot;移动到&quot;+p3);
+            hanoi(n-1,p2,p1,p3);
+        }
+    }
+</code></pre><p>效果：</p><p><img src=http://img.blog.csdn.net/20160823162938240 alt=这里写图片描述></p><hr><ul><li><p>斐波拉契数列</p><p>斐波纳契数列，又称黄金分割数列，指的是这样一个数列：1、1、2、3、5、8、13、21、……</p><p>这个数列从第三项开始，每一项都等于前两项之和。</p><p>有趣的兔子问题：</p></li></ul><p>一般而言，兔子在出生两个月后，就有繁殖能力，一对兔子每个月能生出一对小兔子来。如果所有兔子都不死，那么一年以后可以繁殖多少对兔子？</p><p>分析如下：</p><p>第一个月小兔子没有繁殖能力，所以还是一对；</p><p>两个月后，生下一对小兔子，总数共有两对；</p><p>三个月以后，老兔子又生下一对，因为小兔子还没有繁殖能力，总数共是三对；</p><p>……</p><p>依次类推可以列出下表：</p><table><thead><tr><th style=text-align:left>经过月数</th><th style=text-align:left>幼崽对数</th><th style=text-align:left>成兔对数</th><th style=text-align:left>总体对数</th></tr></thead><tbody><tr><td style=text-align:left>0</td><td style=text-align:left>1</td><td style=text-align:left>0</td><td style=text-align:left>1</td></tr><tr><td style=text-align:left>1</td><td style=text-align:left>0</td><td style=text-align:left>1</td><td style=text-align:left>1</td></tr><tr><td style=text-align:left>2</td><td style=text-align:left>1</td><td style=text-align:left>1</td><td style=text-align:left>2</td></tr><tr><td style=text-align:left>3</td><td style=text-align:left>1</td><td style=text-align:left>2</td><td style=text-align:left>3</td></tr><tr><td style=text-align:left>4</td><td style=text-align:left>2</td><td style=text-align:left>3</td><td style=text-align:left>5</td></tr><tr><td style=text-align:left>5</td><td style=text-align:left>3</td><td style=text-align:left>5</td><td style=text-align:left>8</td></tr><tr><td style=text-align:left>6</td><td style=text-align:left>5</td><td style=text-align:left>8</td><td style=text-align:left>13</td></tr><tr><td style=text-align:left>7</td><td style=text-align:left>8</td><td style=text-align:left>13</td><td style=text-align:left>21</td></tr><tr><td style=text-align:left>8</td><td style=text-align:left>13</td><td style=text-align:left>21</td><td style=text-align:left>34</td></tr><tr><td style=text-align:left>9</td><td style=text-align:left>21</td><td style=text-align:left>34</td><td style=text-align:left>55</td></tr><tr><td style=text-align:left>10</td><td style=text-align:left>34</td><td style=text-align:left>55</td><td style=text-align:left>89</td></tr><tr><td style=text-align:left>11</td><td style=text-align:left>55</td><td style=text-align:left>89</td><td style=text-align:left>144</td></tr><tr><td style=text-align:left>12</td><td style=text-align:left>89</td><td style=text-align:left>144</td><td style=text-align:left>233</td></tr></tbody></table><pre><code>//斐波那契
+long Fib(int n)
+{
+ if (n == 0)
+  return 0;
+ if (n == 1)
+  return 1;
+ if (n &gt; 1)
+  return Fib(n-1) + Fib(n-2);
+}
+</code></pre><hr><p>近期本博主将主要更新算法一类的博文，可能更新进度会慢点！</p><hr><hr><hr><blockquote><p>做最好的自己，每天进步一点点</p></blockquote></div><div class=post-footer><div>转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a target=_blank>烟花散尽13141</a></div><div></div></div></article><div class="article-nav prev-next-wrap clearfix"><a href=/zxh/20160830.html class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a> <a href=/zxh/20160822.html class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a></div><div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div><button id=rewardButton disable=enable onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}"><span>赏</span></button><div id=QR style="display: none;"><div id=wechat style="display: inline-block"><a href=/img/wechatpay.jpg class="fancybox fancybox.image" rel=group><img id=wechat_qr src=/img/wechatpay.jpg alt="颜敏 WeChat Pay"></a><p>微信打赏</p></div><div id=alipay style="display: inline-block"><a href=/img/alipay.jpg class="fancybox fancybox.image" rel=group><img id=alipay_qr src=/img/alipay.jpg alt="颜敏 Alipay"></a><p>支付宝打赏</p></div></div></div><div id=comments><div id=SOHUCS sid=/zxh/20160824.html></div><script type=text/javascript> 
+    (function(){ 
+    var appid = 'cyti5JvoU'; 
+    var conf = 'prod_a32310aad07e12c7706c8da1901ed57b'; 
+    var width = window.innerWidth || document.documentElement.clientWidth; 
+    if (width < 960) { 
+    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script></div></main><aside class="col-md-4 sidebar"><div class=widget><h3 class=title>Search</h3><div id=search-form><div id=result-mask class=hide></div><div class=search-area><input id=search-key type=search autocomplete=off placeholder=搜点什么呢?> <button type=button class=search-form-submit id=search-local>站内搜索</button></div><div id=result-wrap class=hide><div id=search-result></div></div><div class=hide><template id=search-tpl><div class=item><a href=/{path} title={title}><div class=title>{title}</div><div class=content>{content}</div></a></div></template></div></div></div><div class="widget notification"><h3 class=title>网站公告</h3><div><p><font color=red>pc、移动端目录区分设计</font></p></div></div><div class=widget><h3 class=title>Social</h3><div class="content social"><a href=//gitee.com/zxhtom rel="external nofollow" title=oschina target=_blank><i class="git fa fa-git"></i></a> <a href=mailto:870775401@qq.com rel="external nofollow" title=邮箱 target=_blank><i class="envelope-o fa fa-envelope-o"></i></a> <a href=870775401 rel="external nofollow" title=联系QQ target=_blank><i class="qq fa fa-qq"></i></a> <a href="/" rel="external nofollow" title=微博 target=_blank><i class="weibo fa fa-weibo"></i></a> <a href=376091466 rel="external nofollow" title=QQ群1 target=_blank><i class="users fa fa-users"></i></a> <a href=/atom.xml rel="external nofollow" title=RSS target=_blank><i class="feed fa fa-feed"></i></a></div></div><div class=widget><h3 class=title>Categories</h3><ul class=category-list><li class=category-list-item><a class=category-list-link href="/categories/开发工具/"><i class=fa aria-hidden=true>开发工具</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/案例/"><i class=fa aria-hidden=true>案例</i></a><span class=category-list-count>2</span></li><li class=category-list-item><a class=category-list-link href="/categories/程序人生/"><i class=fa aria-hidden=true>程序人生</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/编程/"><i class=fa aria-hidden=true>编程</i></a><span class=category-list-count>88</span></li></ul></div><div class=widget><h3 class=title>Archives</h3><ul class=archive-list><li class=archive-list-item><a class=archive-list-link href="/archives/2018/01/"><i class=fa aria-hidden=true>2018年01月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/12/"><i class=fa aria-hidden=true>2017年12月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/11/"><i class=fa aria-hidden=true>2017年11月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/10/"><i class=fa aria-hidden=true>2017年10月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/06/"><i class=fa aria-hidden=true>2017年06月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/04/"><i class=fa aria-hidden=true>2017年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/03/"><i class=fa aria-hidden=true>2017年03月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/02/"><i class=fa aria-hidden=true>2017年02月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/01/"><i class=fa aria-hidden=true>2017年01月</i></a><span class=archive-list-count>9</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/12/"><i class=fa aria-hidden=true>2016年12月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/11/"><i class=fa aria-hidden=true>2016年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/10/"><i class=fa aria-hidden=true>2016年10月</i></a><span class=archive-list-count>8</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/09/"><i class=fa aria-hidden=true>2016年09月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/08/"><i class=fa aria-hidden=true>2016年08月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/07/"><i class=fa aria-hidden=true>2016年07月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/06/"><i class=fa aria-hidden=true>2016年06月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/05/"><i class=fa aria-hidden=true>2016年05月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/04/"><i class=fa aria-hidden=true>2016年04月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/03/"><i class=fa aria-hidden=true>2016年03月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/02/"><i class=fa aria-hidden=true>2016年02月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2015/04/"><i class=fa aria-hidden=true>2015年04月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/11/"><i class=fa aria-hidden=true>2014年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/10/"><i class=fa aria-hidden=true>2014年10月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/04/"><i class=fa aria-hidden=true>2014年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/01/"><i class=fa aria-hidden=true>2014年01月</i></a><span class=archive-list-count>2</span></li></ul></div><div class=widget><h3 class=title>Tag Cloud</h3><div class="content tag-cloud"><a href="/tags/C/" style="font-size: 17.5px;">C++</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/bat语法/" style="font-size: 10px;">bat语法</a> <a href="/tags/formatter/" style="font-size: 10px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/ngrok/" style="font-size: 10px;">ngrok</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/sublime-text3/" style="font-size: 10px;">sublime text3</a> <a href="/tags/前端/" style="font-size: 12.5px;">前端</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/感慨/" style="font-size: 12.5px;">感慨</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a></div></div><div class=widget><h3 class=title>Friends</h3><div class="content friends-link"><a href=http://blog.csdn.net/u013132051 class=fa target=_blank>个人博客</a></div></div></aside></div></div></section><footer class=main-footer><div class=container><div class=row></div></div></footer><a id=back-to-top class=hide><i class="fa fa-chevron-up"></i></a><div class=copyright><div class=container><div class=row><div class=col-sm-12><span>Copyright &copy; 2017</span> | <span>Powered by <a href=//hexo.io class=copyright-links target=_blank rel=nofollow>张新华</a></span> | <span>Theme by <a href=//github.com/shenliyang/hexo-theme-snippet.git class=copyright-links target=_blank rel=nofollow>ZxhTom</a></span></div></div></div></div><script src=https://code.jquery.com/jquery-latest.js></script><script src=https://assets.changyan.sohu.com/upload/plugins/plugins.count.js></script><script src="/assets/highlight.pack.js?rev=@@hash"></script><script>
+     hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script><script src="/js/search.js?rev=@@hash"></script><script src="/js/app.js?rev=@@hash"></script><script src="/assets/prefix.js?rev=@@hash"></script><script src="/assets/my.js?rev=@@hash"></script></body></html>

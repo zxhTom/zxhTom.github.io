@@ -1,0 +1,130 @@
+<!DOCTYPE HTML><html><head><script>
+	if('' == 'true'){
+		if (prompt('请输入管理员密码') !== '025025'){
+            alert('密码错误！');
+            location.href='https://zxhtom.oschina.io';
+    	}
+	}
+</script><meta charset=UTF-8><meta name=viewport content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><meta http-equiv=X-UA-Compatible content="IE=Edge,chrome=1"><meta http-equiv=Cache-Control content=no-siteapp><meta name=renderer content=webkit|ie-comp|ie-stand><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no,email=no,adress=no"><meta name=browsermode content=application><meta name=screen-orientation content=portrait><link rel=dns-prefetch href=https://zxhtom.oschina.io><meta name=description content=张新华的个人网站><meta name=robots content=all><meta name=google content=all><meta name=googlebot content=all><meta name=verify content=all><title>带你剖析WebGis的世界奥秘----瓦片式加载地图 | 烟花散尽13141</title><link rel=alternate href=/atom.xml title=烟花散尽13141 type=application/atom+xml><link rel=icon href=/favicon.ico><link rel=stylesheet href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css?rev=9.12.0"><link rel=stylesheet href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4"><link rel=stylesheet href=//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href="/css/style.css?rev=@@hash"><link rel=stylesheet href="/css/mycss.css?rev=@@hash"><div class=hide><script src="https://s4.cnzz.com/z_stat.php?id=1263868967&web_id=1263868967" language=JavaScript></script></div><script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?709c2dde1f61f5e589ff3ed31ba52411";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script></head><body><header class=main-header style=background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)><div class=main-header-box><a class=header-avatar href="/"><img src=/img/avatar.jpg alt=logo头像></a><div class=branding><h2>学如逆水行舟，不进则退！！！</h2></div></div></header><nav class=main-navigation><div class=container><div class=row><div class=col-sm-12><div class=navbar-header><span class="nav-toggle-button collapsed" data-toggle=collapse data-target=#main-menu id=mnav><span class=sr-only>Toggle navigation</span> <i class="fa fa-bars"></i></span></div><div class="collapse navbar-collapse" id=main-menu><ul class=menu><li role=presentation><a href="/"><i class="fa fa-fw"></i>首页</a></li><li role=presentation><a href="/about/"><i class="fa fa-fw"></i>关于我</a></li><li role=presentation><a href="/tags/"><i class="fa fa-fw"></i>标签</a></li><li role=presentation><a href="/categories/"><i class="fa fa-fw"></i>分类</a></li><li role=presentation><a href="/archives/"><i class="fa fa-fw"></i>归档</a></li><li role=presentation><a href="/schedule/"><i class="fa fa-fw"></i>日程表</a></li><li role=presentation><a href=/sitemap.xml><i class="fa fa-fw"></i>地图导航</a></li><li role=presentation><a href="/404/"><i class="fa fa-fw"></i>公益活动</a></li></ul></div></div></div></div></nav><section class=content-wrap><div class=container><div class=row><main class="col-md-8 main-content m-post"><div id=toc class=toc-article><div class=hamburger><div class=line></div><div class=line></div><div class=line></div></div><strong class=toc-title>文章目录</strong><div class=menu-inner></div><svg version=1.1 id=blob xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><path id=blob-path d=M60,500H0V0h60c0,0,20,172,20,250S60,900,60,500z></path></svg></div><p id=process></p><article class=post><div class=post-head><h1 id=带你剖析WebGis的世界奥秘----瓦片式加载地图>带你剖析WebGis的世界奥秘----瓦片式加载地图</h1><div class=post-meta><span class="categories-meta fa-wrap"><i class="fa fa-folder-open-o"></i> <span>编程</span></span> <span class=fa-wrap><i class="fa fa-tags"></i> <span class=tags-meta>java</span></span> <span class=fa-wrap><i class="fa fa-clock-o"></i> <span class=date-meta>2016/08/05</span></span> <a href=/zxh/20160805.html#comments class=comment-count><i id=changyan_count_unit data-xid=zxh/20160805.html></i>留言, <i id=changyan_parti_unit data-xid=zxh/20160805.html></i>参与</a> <span id=busuanzi_container_page_pv>view : <span id=busuanzi_value_page_pv></span>次</span></div><p class="fa fa-exclamation-triangle warning">本文于<strong>532</strong>天之前发表，文中内容可能已经过时。</p></div><div class="post-body post-content"><p>WebGIS应用程序的页面能够通过HTML、JSP、ASP或任何任何类型的Web页文件构成<br><a id=more></a></p><ul><li>WebGIS应用程序的页面能够通过HTML、JSP、ASP或任何任何类型的Web页文件构成，其特殊之处在于，它的请求提交的方法并不是通过常用的 “超链接”形式，而是使用鼠标与Web浏览器上地图进行的，因此，我们开发WebGIS应用程序的过程，就是考虑如何向一台Web服务器发送地图请求或其 它类型请求，并将响应进行解释显示的过程</li><li>加载瓦片最后我们是呈现出地图的形式，所以我们需要一个div带装在这个map，这个在前端很容易实现</li></ul><pre><code>&lt;div id=&quot;rcp2_map&quot; class=&quot;smallmap&quot; style=&quot;width: 100%; height: 100%;&quot;&gt;&lt;/div&gt;
+</code></pre><ul><li>有了这个我们的地图就有了安身之所，下面我们就开始我们的加载步骤，具体步骤我放在脚本里面，在定义map的时候我们我们需要两个参数，第一个是div的名称，第二个是map的一些设置</li></ul><pre><code>var options = {
+        projection : &quot;EPSG:4326&quot;,
+        center : new OpenLayers.LonLat(105.5, 39.5)
+    };
+var map = new OpenLayers.Map(&#39;rcp2_map&#39;, options);
+</code></pre><ul><li>有了map我们继续向map里面加入我们的瓦片也就是所谓的layer(层)关键是我们的层去哪里拿，我先贴个我服务上的数据地图代码</li></ul><pre><code>var wms = new OpenLayers.Layer.WMS(&quot;OpenLayers WMS&quot;,
+    // geoserver所在服务器地址
+            // &quot;http://192.168.1.120:8080/geoserver/wms&quot;,
+            &quot;http://192.168.1.15:8088/geoserver/china-rail/wms&quot;, {
+                layers : &quot;china-rail:大公鸡&quot;
+            });
+</code></pre><ul><li>如果你没有在GeoService上发布过，你也不用着急，人家官网给你提供了数据，你可以从官网拿层来用</li></ul><pre><code>var wms= new OpenLayers.Layer.OSM();
+</code></pre><ul><li>两种方式随便你选择，拿到图层我们只要进入map就行了</li></ul><pre><code>// 添加wms图层
+    map.addLayer(wms);
+</code></pre><p>到此我们的地图就显示了，我们来看看想过吧，我拿的是我服务的地图，可以不怎么好看，我们只要效果<br><img src=http://img.blog.csdn.net/20160805140221670 alt=这里写图片描述></p><ul><li><p>滚动鼠标滚动键放大地图显示<br><img src=http://img.blog.csdn.net/20160805141050941 alt=这里写图片描述></p></li><li><p>在地图显示方面我们可以设置的，比如说以什么地方中心显示呢，以多打的比例显示呢，设置中心点在上面的代码已经提到了，下面我贴个比例显示的代码</p></li></ul><pre><code>map.zoomTo(5); // 以第5级方式显示地图
+</code></pre><ul><li>有没有看到我上面地图左右下角的一些功能，相信你们现在是没有的，这些都是控制功能，需要我们手动加入</li></ul><pre><code>// 添加control空间
+    map.addControl(new OpenLayers.Control.LayerSwitcher());
+    map.addControl(new OpenLayers.Control.MousePosition());
+    map.addControl(new OpenLayers.Control.ScaleLine());
+    map.addControl(new OpenLayers.Control.Scale);
+</code></pre><ul><li><p>下面我们在看看点击Map事件和定位功能吧。</p><ul><li>定位说白了就是以某个点中心显示，然后在把这个点给高亮标注出来我们先标注这个点在这支中心点</li></ul></li></ul><pre><code>- 点击很容易只要我们注册一下事件就好了，我选择在Map控件上面注册这个点击事件，你们根据自己的需要选择控件注  
+</code></pre><pre><code>//拿到坐标
+    var jd = Number(document.getElementById(&#39;jd&#39;).value);
+    var wd = Number(document.getElementById(&#39;wd&#39;).value);
+    if(document.getElementById(&#39;jd&#39;).value==&quot;&quot;){
+        jd=116.3;
+    }
+    if(document.getElementById(&#39;wd&#39;).value==&quot;&quot;){
+        wd=39.9;
+    }
+    //定义一个box层
+    var boxes = new OpenLayers.Layer.Boxes(&quot;Boxes&quot;);
+    if (this.box != null) {
+        this.box.display(false); //清除上一次的区域标记
+    }
+    //定义一个Bounds
+    bounds = new OpenLayers.Bounds();
+    //有参数生成两个经纬度
+    var lonlat1 = new OpenLayers.LonLat(jd, wd);
+    var lonlat2 = new OpenLayers.LonLat(jd, wd);
+    bounds.extend(lonlat1);
+    bounds.extend(lonlat2);//生成一个经纬度范围的bounds
+    box = new OpenLayers.Marker.Box(bounds);
+    box.events.register(&quot;click&quot;, box, function(e) {
+        this.setBorder(&quot;blue&quot;);
+    });//注册box的点击事件
+    boxes.addMarker(box);
+    map.addLayer(boxes);
+    map.centerLayerContainer(lonlat1,6);
+    map.panTo(lonlat1); //平移到范围的中心点
+</code></pre><pre><code>map.events.register(&quot;click&quot;, map, function(e) {
+        var t=e;
+        //获取经纬度
+        var lonlat = map.getLonLatFromPixel(e.xy);
+
+    });
+</code></pre><ul><li>研究了这个Openlayers好几天感觉这个显示的地图不好，不好确定具体信息，下面介绍一个升级版本OpenLayers3的技术</li><li>前面步骤一样，在注册map的时候有了不同</li></ul><pre><code>var raster = new ol.layer.Tile({
+          source: new ol.source.OSM()
+      });
+
+      var vector = new ol.layer.Vector({
+        source: new ol.source.Vector({
+          url: &#39;./source/china.json&#39;,
+          format: new ol.format.GeoJSON()
+        })
+      });
+
+      var view = new ol.View({
+          // the view&#39;s initial state
+          center: search,
+          zoom: 5
+        });
+
+var map = new ol.Map({
+        layers: [raster, vector],
+        target: &#39;map&#39;,
+        view: view
+      });
+</code></pre><ul><li><p>看看效果<br><img src=http://img.blog.csdn.net/20160805141636130 alt=这里写图片描述></p></li><li><p>双击放大地图显示<br><img src=http://img.blog.csdn.net/20160805141707568 alt=这里写图片描述></p></li><li><p>这里的定位和点击就草草说说了</p></li></ul><pre><code>点击
+map.on(&#39;singleclick&#39;,mapClick);
+
+      function mapClick(e){
+          var pixel = map.getEventPixel(e.originalEvent);
+          var featureInfo = map.forEachFeatureAtPixel(pixel,
+                  function (feature, layer) {
+                      return {feature:feature,layer:layer};
+                  });
+          var coordinate = e.coordinate;
+          var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(
+                  coordinate, &#39;EPSG:3857&#39;, &#39;EPSG:4326&#39;));
+          if (featureInfo!==undefined&amp;&amp;featureInfo!==null
+          &amp;&amp;featureInfo.layer!==null)
+          {
+              alert(hdms+&quot;\n这里属于&quot;+featureInfo.feature.get(&quot;name&quot;)+&quot;省&quot;);//显示点击区域的
+              console.log(&#39;打印选择要素&#39;);
+              console.log(featureInfo .feature);
+              console.log(&#39;打印选择要素所属Layer&#39;);
+              console.log(featureInfo .layer);
+          }else{
+              alert(hdms+&quot;\n这里不属于中国或者这里是大海&quot;);//显示点击区域的
+          }
+      }
+
+      定位
+view.setCenter(ol.proj.fromLonLat([Number(document.getElementById(&#39;jd&#39;).value), Number(document.getElementById(&#39;wd&#39;).value)]));
+</code></pre><p>里面用到的china.json数据下载地址：<a href=http://download.csdn.net/detail/u013132051/9595986 target=_blank rel=noopener>http://download.csdn.net/detail/u013132051/9595986</a></p><p>下面本人继续更新WebGis的后续精准操作</p></div><div class=post-footer><div>转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a target=_blank>烟花散尽13141</a></div><div></div></div></article><div class="article-nav prev-next-wrap clearfix"><a href=/zxh/20160813.html class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a> <a href=/zxh/20160723.html class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a></div><div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div><button id=rewardButton disable=enable onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}"><span>赏</span></button><div id=QR style="display: none;"><div id=wechat style="display: inline-block"><a href=/img/wechatpay.jpg class="fancybox fancybox.image" rel=group><img id=wechat_qr src=/img/wechatpay.jpg alt="颜敏 WeChat Pay"></a><p>微信打赏</p></div><div id=alipay style="display: inline-block"><a href=/img/alipay.jpg class="fancybox fancybox.image" rel=group><img id=alipay_qr src=/img/alipay.jpg alt="颜敏 Alipay"></a><p>支付宝打赏</p></div></div></div><div id=comments><div id=SOHUCS sid=/zxh/20160805.html></div><script type=text/javascript> 
+    (function(){ 
+    var appid = 'cyti5JvoU'; 
+    var conf = 'prod_a32310aad07e12c7706c8da1901ed57b'; 
+    var width = window.innerWidth || document.documentElement.clientWidth; 
+    if (width < 960) { 
+    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script></div></main><aside class="col-md-4 sidebar"><div class=widget><h3 class=title>Search</h3><div id=search-form><div id=result-mask class=hide></div><div class=search-area><input id=search-key type=search autocomplete=off placeholder=搜点什么呢?> <button type=button class=search-form-submit id=search-local>站内搜索</button></div><div id=result-wrap class=hide><div id=search-result></div></div><div class=hide><template id=search-tpl><div class=item><a href=/{path} title={title}><div class=title>{title}</div><div class=content>{content}</div></a></div></template></div></div></div><div class="widget notification"><h3 class=title>网站公告</h3><div><p><font color=red>pc、移动端目录区分设计</font></p></div></div><div class=widget><h3 class=title>Social</h3><div class="content social"><a href=//gitee.com/zxhtom rel="external nofollow" title=oschina target=_blank><i class="git fa fa-git"></i></a> <a href=mailto:870775401@qq.com rel="external nofollow" title=邮箱 target=_blank><i class="envelope-o fa fa-envelope-o"></i></a> <a href=870775401 rel="external nofollow" title=联系QQ target=_blank><i class="qq fa fa-qq"></i></a> <a href="/" rel="external nofollow" title=微博 target=_blank><i class="weibo fa fa-weibo"></i></a> <a href=376091466 rel="external nofollow" title=QQ群1 target=_blank><i class="users fa fa-users"></i></a> <a href=/atom.xml rel="external nofollow" title=RSS target=_blank><i class="feed fa fa-feed"></i></a></div></div><div class=widget><h3 class=title>Categories</h3><ul class=category-list><li class=category-list-item><a class=category-list-link href="/categories/开发工具/"><i class=fa aria-hidden=true>开发工具</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/案例/"><i class=fa aria-hidden=true>案例</i></a><span class=category-list-count>2</span></li><li class=category-list-item><a class=category-list-link href="/categories/程序人生/"><i class=fa aria-hidden=true>程序人生</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/编程/"><i class=fa aria-hidden=true>编程</i></a><span class=category-list-count>88</span></li></ul></div><div class=widget><h3 class=title>Archives</h3><ul class=archive-list><li class=archive-list-item><a class=archive-list-link href="/archives/2018/01/"><i class=fa aria-hidden=true>2018年01月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/12/"><i class=fa aria-hidden=true>2017年12月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/11/"><i class=fa aria-hidden=true>2017年11月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/10/"><i class=fa aria-hidden=true>2017年10月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/06/"><i class=fa aria-hidden=true>2017年06月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/04/"><i class=fa aria-hidden=true>2017年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/03/"><i class=fa aria-hidden=true>2017年03月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/02/"><i class=fa aria-hidden=true>2017年02月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/01/"><i class=fa aria-hidden=true>2017年01月</i></a><span class=archive-list-count>9</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/12/"><i class=fa aria-hidden=true>2016年12月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/11/"><i class=fa aria-hidden=true>2016年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/10/"><i class=fa aria-hidden=true>2016年10月</i></a><span class=archive-list-count>8</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/09/"><i class=fa aria-hidden=true>2016年09月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/08/"><i class=fa aria-hidden=true>2016年08月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/07/"><i class=fa aria-hidden=true>2016年07月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/06/"><i class=fa aria-hidden=true>2016年06月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/05/"><i class=fa aria-hidden=true>2016年05月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/04/"><i class=fa aria-hidden=true>2016年04月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/03/"><i class=fa aria-hidden=true>2016年03月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/02/"><i class=fa aria-hidden=true>2016年02月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2015/04/"><i class=fa aria-hidden=true>2015年04月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/11/"><i class=fa aria-hidden=true>2014年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/10/"><i class=fa aria-hidden=true>2014年10月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/04/"><i class=fa aria-hidden=true>2014年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/01/"><i class=fa aria-hidden=true>2014年01月</i></a><span class=archive-list-count>2</span></li></ul></div><div class=widget><h3 class=title>Tag Cloud</h3><div class="content tag-cloud"><a href="/tags/C/" style="font-size: 17.5px;">C++</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/bat语法/" style="font-size: 10px;">bat语法</a> <a href="/tags/formatter/" style="font-size: 10px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/ngrok/" style="font-size: 10px;">ngrok</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/sublime-text3/" style="font-size: 10px;">sublime text3</a> <a href="/tags/前端/" style="font-size: 12.5px;">前端</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/感慨/" style="font-size: 12.5px;">感慨</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a></div></div><div class=widget><h3 class=title>Friends</h3><div class="content friends-link"><a href=http://blog.csdn.net/u013132051 class=fa target=_blank>个人博客</a></div></div></aside></div></div></section><footer class=main-footer><div class=container><div class=row></div></div></footer><a id=back-to-top class=hide><i class="fa fa-chevron-up"></i></a><div class=copyright><div class=container><div class=row><div class=col-sm-12><span>Copyright &copy; 2017</span> | <span>Powered by <a href=//hexo.io class=copyright-links target=_blank rel=nofollow>张新华</a></span> | <span>Theme by <a href=//github.com/shenliyang/hexo-theme-snippet.git class=copyright-links target=_blank rel=nofollow>ZxhTom</a></span></div></div></div></div><script src=https://code.jquery.com/jquery-latest.js></script><script src=https://assets.changyan.sohu.com/upload/plugins/plugins.count.js></script><script src="/assets/highlight.pack.js?rev=@@hash"></script><script>
+     hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script><script src="/js/search.js?rev=@@hash"></script><script src="/js/app.js?rev=@@hash"></script><script src="/assets/prefix.js?rev=@@hash"></script><script src="/assets/my.js?rev=@@hash"></script></body></html>

@@ -1,0 +1,282 @@
+<!DOCTYPE HTML><html><head><script>
+	if('' == 'true'){
+		if (prompt('请输入管理员密码') !== '025025'){
+            alert('密码错误！');
+            location.href='https://zxhtom.oschina.io';
+    	}
+	}
+</script><meta charset=UTF-8><meta name=viewport content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><meta http-equiv=X-UA-Compatible content="IE=Edge,chrome=1"><meta http-equiv=Cache-Control content=no-siteapp><meta name=renderer content=webkit|ie-comp|ie-stand><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no,email=no,adress=no"><meta name=browsermode content=application><meta name=screen-orientation content=portrait><link rel=dns-prefetch href=https://zxhtom.oschina.io><meta name=description content=张新华的个人网站><meta name=robots content=all><meta name=google content=all><meta name=googlebot content=all><meta name=verify content=all><title>Excel批量导入(导出同理) | 烟花散尽13141</title><link rel=alternate href=/atom.xml title=烟花散尽13141 type=application/atom+xml><link rel=icon href=/favicon.ico><link rel=stylesheet href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css?rev=9.12.0"><link rel=stylesheet href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4"><link rel=stylesheet href=//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href="/css/style.css?rev=@@hash"><link rel=stylesheet href="/css/mycss.css?rev=@@hash"><div class=hide><script src="https://s4.cnzz.com/z_stat.php?id=1263868967&web_id=1263868967" language=JavaScript></script></div><script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?709c2dde1f61f5e589ff3ed31ba52411";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script></head><body><header class=main-header style=background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)><div class=main-header-box><a class=header-avatar href="/"><img src=/img/avatar.jpg alt=logo头像></a><div class=branding><h2>学如逆水行舟，不进则退！！！</h2></div></div></header><nav class=main-navigation><div class=container><div class=row><div class=col-sm-12><div class=navbar-header><span class="nav-toggle-button collapsed" data-toggle=collapse data-target=#main-menu id=mnav><span class=sr-only>Toggle navigation</span> <i class="fa fa-bars"></i></span></div><div class="collapse navbar-collapse" id=main-menu><ul class=menu><li role=presentation><a href="/"><i class="fa fa-fw"></i>首页</a></li><li role=presentation><a href="/about/"><i class="fa fa-fw"></i>关于我</a></li><li role=presentation><a href="/tags/"><i class="fa fa-fw"></i>标签</a></li><li role=presentation><a href="/categories/"><i class="fa fa-fw"></i>分类</a></li><li role=presentation><a href="/archives/"><i class="fa fa-fw"></i>归档</a></li><li role=presentation><a href="/schedule/"><i class="fa fa-fw"></i>日程表</a></li><li role=presentation><a href=/sitemap.xml><i class="fa fa-fw"></i>地图导航</a></li><li role=presentation><a href="/404/"><i class="fa fa-fw"></i>公益活动</a></li></ul></div></div></div></div></nav><section class=content-wrap><div class=container><div class=row><main class="col-md-8 main-content m-post"><div id=toc class=toc-article><div class=hamburger><div class=line></div><div class=line></div><div class=line></div></div><strong class=toc-title>文章目录</strong><div class=menu-inner></div><svg version=1.1 id=blob xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><path id=blob-path d=M60,500H0V0h60c0,0,20,172,20,250S60,900,60,500z></path></svg></div><p id=process></p><article class=post><div class=post-head><h1 id=Excel批量导入(导出同理)>Excel批量导入(导出同理)</h1><div class=post-meta><span class="categories-meta fa-wrap"><i class="fa fa-folder-open-o"></i> <span>编程</span></span> <span class=fa-wrap><i class="fa fa-tags"></i> <span class=tags-meta>java</span></span> <span class=fa-wrap><i class="fa fa-clock-o"></i> <span class=date-meta>2016/06/28</span></span> <a href=/zxh/20160628.html#comments class=comment-count><i id=changyan_count_unit data-xid=zxh/20160628.html></i>留言, <i id=changyan_parti_unit data-xid=zxh/20160628.html></i>参与</a> <span id=busuanzi_container_page_pv>view : <span id=busuanzi_value_page_pv></span>次</span></div><p class="fa fa-exclamation-triangle warning">本文于<strong>570</strong>天之前发表，文中内容可能已经过时。</p></div><div class="post-body post-content"><p>在做JavaWeb中添加数据使我们在所难免会遇到的，<br><a id=more></a></p><ul><li>在大数据的环境下批量添加和批量删除是必须的，而批量删除只需要获取到我们需要删除的ID就可以了，在批量添加中我们就会遇到问题，问题是得到批量的数据，这就涉及到了poi技术中的Excel导入导出</li><li>在前端中我们使用的Dropzone上传技术，在BootStrap中使用模态框显示Dropzone界面</li><li><p>`<div class=ibox-content></div></p><pre><code>                                 &lt;form id=&quot;my-awesome-dropzone&quot; class=&quot;dropzone&quot;
+                                     action=&quot;${pageContext.request.contextPath}/change/assistantUpload.action&quot;&gt;
+                                     &lt;div class=&quot;dropzone-previews&quot;&gt;&lt;/div&gt;
+                                     &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary pull-right&quot;&gt;提交&lt;/button&gt;
+                                 &lt;/form&gt;
+                             &lt;/div&gt;`
+</code></pre></li><li><p>Dropzone技术特点就是可以将温江拖拽到画面里面，然后开始js工作在form表单提交之后开始到后台收取数据</p></li><li>在后台的函数上面加上如下标记 就可以保证范文到制定的函数了</li><li><img src=http://img.blog.csdn.net/20160627155733599 alt=这里写图片描述></li><li>然后我们需要制定上传的编码格式为UTF-8<img src=http://img.blog.csdn.net/20160627155842759 alt=这里写图片描述></li><li><p>下面就是后台数据处理的部分</p><p>`try {</p><pre><code>     // 上传得请求对象
+     MultipartHttpServletRequest req = (MultipartHttpServletRequest) request;
+     // 获取上传的文件
+     CommonsMultipartFile multipartFile = (CommonsMultipartFile) req
+             .getFile(&quot;upload&quot;);
+     // 获取文件的名称 xxx.jpg xxx_1000101897.jp
+     String fileName = multipartFile.getOriginalFilename();
+     String suffix = fileName.substring(fileName.lastIndexOf(&quot;.&quot;));
+     // 声明excel文件对象
+     Workbook wb = null;
+     // 获取文件上传输入流对象
+     InputStream is = multipartFile.getInputStream();
+     // 判断文件的后缀名称
+     if (&quot;.xls&quot;.equalsIgnoreCase(suffix)) {
+         wb = new HSSFWorkbook(is);
+     } else if (&quot;.xlsx&quot;.equalsIgnoreCase(suffix)) {
+         wb = new XSSFWorkbook(is);
+     }
+
+     // 存储的班级名称
+     List&lt;String&gt; clazzNames = new ArrayList&lt;String&gt;();
+     // 存储的学号
+     List&lt;String&gt; studnos = new ArrayList&lt;String&gt;();
+     // 判断是否为null
+     if (wb != null) {
+         // 读取内容
+         Sheet sheet = wb.getSheetAt(0);
+         List&lt;StudentCustom&gt; students = new ArrayList&lt;StudentCustom&gt;();
+         // 读取行数
+         int rowNumber = sheet.getPhysicalNumberOfRows();
+         // 遍历行数
+         for (int row = 1; row &lt; rowNumber; row++) {
+             StudentCustom student = new StudentCustom();
+             // 获取一行记录对象
+             HSSFRow entity = (HSSFRow) sheet.getRow(row);
+             // 获取列数
+             int colNumber = entity.getPhysicalNumberOfCells();
+             // 遍历列数
+             for (int col = 0; col &lt; colNumber; col++) {
+                 // 获取指定列
+                 HSSFCell cell = entity.getCell(col);
+                 // 声明当前列的值
+                 String value = &quot;&quot;;
+                 Date date = null;
+                 // 判断是否为null
+                 if (cell != null) {
+                     // 判断单元格类型
+                     switch (cell.getCellType()) {
+                     // 数字类型
+                     case Cell.CELL_TYPE_NUMERIC:
+                         // 判断是否是日期类型
+                         if (HSSFDateUtil.isCellDateFormatted(cell)) { // 日期类型
+                             SimpleDateFormat sdf = new SimpleDateFormat(
+                                     &quot;yyyy-MM-dd&quot;);
+                             date = HSSFDateUtil.getJavaDate(cell
+                                     .getNumericCellValue());
+
+                         } else {
+                             // 获取数字
+                             Integer data = (int) cell
+                                     .getNumericCellValue();
+                             if (col == 1) {
+                                 HSSFCellStyle cellStyle = cell
+                                         .getCellStyle();
+                                 String format = cellStyle
+                                         .getDataFormatString();
+                                 DecimalFormat f = new DecimalFormat(
+                                         format);
+                                 value = f.format(data);
+                             } else {
+                                 value = data.toString();
+                             }
+                         }
+                         break;
+                     // 判断是否是字符型
+                     case Cell.CELL_TYPE_STRING:
+                         value = cell.getStringCellValue();
+                         break;
+                     // 判断是否是boolean型
+                     case Cell.CELL_TYPE_BOOLEAN:
+                         Boolean data = cell.getBooleanCellValue();
+                         value = data.toString();
+                         break;
+                     // 错误类型
+                     case Cell.CELL_TYPE_ERROR:
+                         // System.out.println(&quot;单元格内容出现错误&quot;);
+                         value = &quot;error&quot;;
+                         break;
+                     // 判断是否是公式类型
+                     case Cell.CELL_TYPE_FORMULA:
+                         value = String.valueOf(cell
+                                 .getNumericCellValue());
+                         if (value.equals(&quot;NaN&quot;)) {// 如果获取的数据值非法,就将其装换为对应的字符串
+                             value = cell.getStringCellValue()
+                                     .toString();
+                         }
+                         break;
+                     case Cell.CELL_TYPE_BLANK:
+                         // System.out.println(&quot;单元格内容 为空值 &quot;);
+                         value = null;
+                         break;
+                     default:
+                         value = cell.getStringCellValue().toString();
+                         break;
+                     }
+
+                     //System.out.println(value);
+
+                     if (col == 1) {
+                         studnos.add(value);
+                         student.setStudno(value);
+                         // 默认密码
+                         student.setPass(value);
+                     } else if (col == 2) {
+                         student.setName(value);
+                     } else if (col == 3) {
+                         student.setSex(value);
+                     } else if (col == 4) {
+                         student.setEnrol(date);
+                     } else if (col == 5) {
+                         student.setEmail(value);
+                     } else if (col == 6) {
+                         if (!clazzNames.contains(value)) {
+                             clazzNames.add(value);
+                         }
+                         // 查询设置班级的id值
+                         Clazz clazz = new Clazz();
+                         clazz.setName(value);
+                         student.setClazz(clazz);
+                     }
+                 }
+
+             }
+             // 行结束
+             students.add(student);
+         }
+
+         // 第一步检测班级是否存在
+         // 查询出该用户管理的班级
+         List&lt;Clazz&gt; clazzs = clazzService.selectByAssistanUserId(user
+                 .getId());
+         // 班级的名称集合
+         List&lt;String&gt; names = new ArrayList&lt;String&gt;();
+         // 遍历班级
+         for (Clazz clz : clazzs) {
+             // 把班级名称加入到集合中
+             names.add(clz.getName());
+         }
+         // 遍历excel中存在的班级
+         for (String clazzName : clazzNames) {
+             //System.out.println(clazzName);
+             // 判断excel中的班级是否 存在班级集合中
+             if (!names.contains(clazzName)) {
+                 throw new ClazzExitException(&quot;该用户不负责班级,或者班级不存在&quot;);
+             }
+         }
+
+         // 第二步检测学号是否存在
+         QueryVo vo = new QueryVo();
+         int count = studentService.selectAdminStudentsCount(vo);
+         vo.setStartSize(0);
+         vo.setPageSize(count);
+         // 查询出所有学生信息
+         List&lt;StudentCustom&gt; stus = studentService.selectAdminStudents(vo);
+
+         List&lt;String&gt; nos = new ArrayList&lt;String&gt;();
+         // 遍历studnos学号，
+         for (StudentCustom stu : stus) {
+             // 把班级名称加入到集合中
+             nos.add(stu.getStudno());
+         }
+         // 1.1如果excel中有重复的学号，也不可以插入 扩展
+         for(int i =0;i&lt;studnos.size();i++){
+             for(int j=i+1;j&lt;studnos.size();j++){
+                 if(studnos.get(i)==studnos.get(j)){
+                     throw new ExcelStuNoExitException(studnos.get(i)+&quot;该学号在Excel存在重复&quot;);
+                 }
+             }
+         }
+         // 检测查询的学号中是否含有该班级，如果含有 就跑出异常
+         for (String no : nos) {
+             System.out.println(no);
+             // 判断excel中的班级是否 存在班级集合中
+             if (studnos.contains(no)) {
+                 System.out.println(no);
+                 throw new StuNoExitException(no+&quot;学号已存在&quot;);
+             }
+         }
+
+         // excel解析结束
+         // 按班级分好类
+         Map&lt;Clazz, List&lt;StudentCustom&gt;&gt; map = new HashMap&lt;Clazz, List&lt;StudentCustom&gt;&gt;();
+         // 批量保存学生信息
+
+         for (String clazzName : clazzNames) {
+             List&lt;StudentCustom&gt; s = new ArrayList&lt;StudentCustom&gt;();
+             Clazz clazz = clazzService.selectClazzName(clazzName);
+             for(int i=0;i&lt;students.size();i++){
+                 if(students.get(i).getClazz().getName()==clazzName)
+                 {
+                     students.get(i).setClazzId(clazz.getId());
+                     s.add(students.get(i));
+                 }
+             }
+             map.put(clazz, s);
+         }
+         transactionService.insertStudentsCustomFromExcel(map);
+         // 同步更新班级的人数
+
+     }
+
+     out.print(&quot;{\&quot;msg\&quot;:\&quot;success\&quot;}&quot;);
+ } catch (ClazzExitException ce) {
+     out.print(&quot;{\&quot;msg\&quot;:\&quot;&quot;+ce+&quot;\&quot;}&quot;);
+ } catch (ExcelStuNoExitException ce) {
+     out.print(&quot;{\&quot;msg\&quot;:\&quot;&quot;+ce+&quot;\&quot;}&quot;);
+ } catch (StuNoExitException ce) {
+     out.print(&quot;{\&quot;msg\&quot;:\&quot;&quot;+ce+&quot;\&quot;}&quot;);
+ } catch (Exception ex) {
+     out.print(&quot;{\&quot;msg\&quot;:\&quot;&quot;+ex+&quot;\&quot;}&quot;);
+ } finally {
+     out.flush();
+     out.close();
+</code></pre></li><li>另外值得一提的是在前端我们的需要因要到一段js来设置传送的接口</li><li><p>`function initUploadOptions(){</p><pre><code> Dropzone.options.myAwesomeDropzone = {
+         method : &#39;post&#39;,
+         paramName : &#39;upload&#39;,
+         autoProcessQueue : false,
+         uploadMultiple : false,
+         maxFiles : 1,
+         init : function() {
+             var myDropzone = this;
+             this.element.querySelector(&quot;button[type=submit]&quot;)
+                     .addEventListener(&quot;click&quot;, function(e) {
+                         e.preventDefault();
+                         e.stopPropagation();
+                         myDropzone.processQueue()
+                     });
+             this.on(&quot;sending&quot;, function() {
+                 alert(&quot;发送过程中&quot;);
+             });
+             this.on(&quot;success&quot;, function(file, response) {
+                 alert(file + &quot;成功&quot; + response);
+                 var obj=eval(&quot;(&quot;+response+&quot;)&quot;);
+                 file.previewTemplate.appendChild(document
+                         .createTextNode(obj.msg));
+                 window.location.reload(true);
+             });
+             this.on(&quot;error&quot;, function(file, response) {
+                 alert(file + &quot;失败&quot; + response);
+             })
+         }
+     }
+</code></pre><p>};`</p></li><li>在这里我们需要制定参数的名称为upload 这样我们在controller中渠道upload这个上传的对象 整个过程就可以将Excel中的数据拿到了，至于怎么存取就看个人了，你可以用list去接收这些数据</li><li>上面这些就是为了实现功能，读者可以自行在此基础上进行分装方法放在自己的项目上就可以使用了</li><li>在此之前我还有一种方法是封装在Util工具类中的 至于这点我就不多说了我放在下载里 有需要的朋友自己下载吧</li><li><a href=http://download.csdn.net/detail/u013132051/9561129 target=_blank rel=noopener>http://download.csdn.net/detail/u013132051/9561129</a></li></ul></div><div class=post-footer><div>转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a target=_blank>烟花散尽13141</a></div><div></div></div></article><div class="article-nav prev-next-wrap clearfix"><a href=/zxh/20160628.html class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a> <a href=/zxh/20160624.html class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a></div><div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div><button id=rewardButton disable=enable onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}"><span>赏</span></button><div id=QR style="display: none;"><div id=wechat style="display: inline-block"><a href=/img/wechatpay.jpg class="fancybox fancybox.image" rel=group><img id=wechat_qr src=/img/wechatpay.jpg alt="颜敏 WeChat Pay"></a><p>微信打赏</p></div><div id=alipay style="display: inline-block"><a href=/img/alipay.jpg class="fancybox fancybox.image" rel=group><img id=alipay_qr src=/img/alipay.jpg alt="颜敏 Alipay"></a><p>支付宝打赏</p></div></div></div><div id=comments><div id=SOHUCS sid=/zxh/20160628.html></div><script type=text/javascript> 
+    (function(){ 
+    var appid = 'cyti5JvoU'; 
+    var conf = 'prod_a32310aad07e12c7706c8da1901ed57b'; 
+    var width = window.innerWidth || document.documentElement.clientWidth; 
+    if (width < 960) { 
+    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script></div></main><aside class="col-md-4 sidebar"><div class=widget><h3 class=title>Search</h3><div id=search-form><div id=result-mask class=hide></div><div class=search-area><input id=search-key type=search autocomplete=off placeholder=搜点什么呢?> <button type=button class=search-form-submit id=search-local>站内搜索</button></div><div id=result-wrap class=hide><div id=search-result></div></div><div class=hide><template id=search-tpl><div class=item><a href=/{path} title={title}><div class=title>{title}</div><div class=content>{content}</div></a></div></template></div></div></div><div class="widget notification"><h3 class=title>网站公告</h3><div><p><font color=red>pc、移动端目录区分设计</font></p></div></div><div class=widget><h3 class=title>Social</h3><div class="content social"><a href=//gitee.com/zxhtom rel="external nofollow" title=oschina target=_blank><i class="git fa fa-git"></i></a> <a href=mailto:870775401@qq.com rel="external nofollow" title=邮箱 target=_blank><i class="envelope-o fa fa-envelope-o"></i></a> <a href=870775401 rel="external nofollow" title=联系QQ target=_blank><i class="qq fa fa-qq"></i></a> <a href="/" rel="external nofollow" title=微博 target=_blank><i class="weibo fa fa-weibo"></i></a> <a href=376091466 rel="external nofollow" title=QQ群1 target=_blank><i class="users fa fa-users"></i></a> <a href=/atom.xml rel="external nofollow" title=RSS target=_blank><i class="feed fa fa-feed"></i></a></div></div><div class=widget><h3 class=title>Categories</h3><ul class=category-list><li class=category-list-item><a class=category-list-link href="/categories/开发工具/"><i class=fa aria-hidden=true>开发工具</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/案例/"><i class=fa aria-hidden=true>案例</i></a><span class=category-list-count>2</span></li><li class=category-list-item><a class=category-list-link href="/categories/程序人生/"><i class=fa aria-hidden=true>程序人生</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/编程/"><i class=fa aria-hidden=true>编程</i></a><span class=category-list-count>88</span></li></ul></div><div class=widget><h3 class=title>Archives</h3><ul class=archive-list><li class=archive-list-item><a class=archive-list-link href="/archives/2018/01/"><i class=fa aria-hidden=true>2018年01月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/12/"><i class=fa aria-hidden=true>2017年12月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/11/"><i class=fa aria-hidden=true>2017年11月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/10/"><i class=fa aria-hidden=true>2017年10月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/06/"><i class=fa aria-hidden=true>2017年06月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/04/"><i class=fa aria-hidden=true>2017年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/03/"><i class=fa aria-hidden=true>2017年03月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/02/"><i class=fa aria-hidden=true>2017年02月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/01/"><i class=fa aria-hidden=true>2017年01月</i></a><span class=archive-list-count>9</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/12/"><i class=fa aria-hidden=true>2016年12月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/11/"><i class=fa aria-hidden=true>2016年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/10/"><i class=fa aria-hidden=true>2016年10月</i></a><span class=archive-list-count>8</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/09/"><i class=fa aria-hidden=true>2016年09月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/08/"><i class=fa aria-hidden=true>2016年08月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/07/"><i class=fa aria-hidden=true>2016年07月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/06/"><i class=fa aria-hidden=true>2016年06月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/05/"><i class=fa aria-hidden=true>2016年05月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/04/"><i class=fa aria-hidden=true>2016年04月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/03/"><i class=fa aria-hidden=true>2016年03月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/02/"><i class=fa aria-hidden=true>2016年02月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2015/04/"><i class=fa aria-hidden=true>2015年04月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/11/"><i class=fa aria-hidden=true>2014年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/10/"><i class=fa aria-hidden=true>2014年10月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/04/"><i class=fa aria-hidden=true>2014年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/01/"><i class=fa aria-hidden=true>2014年01月</i></a><span class=archive-list-count>2</span></li></ul></div><div class=widget><h3 class=title>Tag Cloud</h3><div class="content tag-cloud"><a href="/tags/C/" style="font-size: 17.5px;">C++</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/bat语法/" style="font-size: 10px;">bat语法</a> <a href="/tags/formatter/" style="font-size: 10px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/ngrok/" style="font-size: 10px;">ngrok</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/sublime-text3/" style="font-size: 10px;">sublime text3</a> <a href="/tags/前端/" style="font-size: 12.5px;">前端</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/感慨/" style="font-size: 12.5px;">感慨</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a></div></div><div class=widget><h3 class=title>Friends</h3><div class="content friends-link"><a href=http://blog.csdn.net/u013132051 class=fa target=_blank>个人博客</a></div></div></aside></div></div></section><footer class=main-footer><div class=container><div class=row></div></div></footer><a id=back-to-top class=hide><i class="fa fa-chevron-up"></i></a><div class=copyright><div class=container><div class=row><div class=col-sm-12><span>Copyright &copy; 2017</span> | <span>Powered by <a href=//hexo.io class=copyright-links target=_blank rel=nofollow>张新华</a></span> | <span>Theme by <a href=//github.com/shenliyang/hexo-theme-snippet.git class=copyright-links target=_blank rel=nofollow>ZxhTom</a></span></div></div></div></div><script src=https://code.jquery.com/jquery-latest.js></script><script src=https://assets.changyan.sohu.com/upload/plugins/plugins.count.js></script><script src="/assets/highlight.pack.js?rev=@@hash"></script><script>
+     hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script><script src="/js/search.js?rev=@@hash"></script><script src="/js/app.js?rev=@@hash"></script><script src="/assets/prefix.js?rev=@@hash"></script><script src="/assets/my.js?rev=@@hash"></script></body></html>

@@ -1,0 +1,202 @@
+<!DOCTYPE HTML><html><head><script>
+	if('' == 'true'){
+		if (prompt('请输入管理员密码') !== '025025'){
+            alert('密码错误！');
+            location.href='https://zxhtom.oschina.io';
+    	}
+	}
+</script><meta charset=UTF-8><meta name=viewport content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><meta http-equiv=X-UA-Compatible content="IE=Edge,chrome=1"><meta http-equiv=Cache-Control content=no-siteapp><meta name=renderer content=webkit|ie-comp|ie-stand><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no,email=no,adress=no"><meta name=browsermode content=application><meta name=screen-orientation content=portrait><link rel=dns-prefetch href=https://zxhtom.oschina.io><meta name=description content=张新华的个人网站><meta name=robots content=all><meta name=google content=all><meta name=googlebot content=all><meta name=verify content=all><title>带你剖析WebGis的世界奥秘----Geojson数据加载(高级) | 烟花散尽13141</title><link rel=alternate href=/atom.xml title=烟花散尽13141 type=application/atom+xml><link rel=icon href=/favicon.ico><link rel=stylesheet href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css?rev=9.12.0"><link rel=stylesheet href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4"><link rel=stylesheet href=//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href="/css/style.css?rev=@@hash"><link rel=stylesheet href="/css/mycss.css?rev=@@hash"><div class=hide><script src="https://s4.cnzz.com/z_stat.php?id=1263868967&web_id=1263868967" language=JavaScript></script></div><script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?709c2dde1f61f5e589ff3ed31ba52411";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script></head><body><header class=main-header style=background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)><div class=main-header-box><a class=header-avatar href="/"><img src=/img/avatar.jpg alt=logo头像></a><div class=branding><h2>学如逆水行舟，不进则退！！！</h2></div></div></header><nav class=main-navigation><div class=container><div class=row><div class=col-sm-12><div class=navbar-header><span class="nav-toggle-button collapsed" data-toggle=collapse data-target=#main-menu id=mnav><span class=sr-only>Toggle navigation</span> <i class="fa fa-bars"></i></span></div><div class="collapse navbar-collapse" id=main-menu><ul class=menu><li role=presentation><a href="/"><i class="fa fa-fw"></i>首页</a></li><li role=presentation><a href="/about/"><i class="fa fa-fw"></i>关于我</a></li><li role=presentation><a href="/tags/"><i class="fa fa-fw"></i>标签</a></li><li role=presentation><a href="/categories/"><i class="fa fa-fw"></i>分类</a></li><li role=presentation><a href="/archives/"><i class="fa fa-fw"></i>归档</a></li><li role=presentation><a href="/schedule/"><i class="fa fa-fw"></i>日程表</a></li><li role=presentation><a href=/sitemap.xml><i class="fa fa-fw"></i>地图导航</a></li><li role=presentation><a href="/404/"><i class="fa fa-fw"></i>公益活动</a></li></ul></div></div></div></div></nav><section class=content-wrap><div class=container><div class=row><main class="col-md-8 main-content m-post"><div id=toc class=toc-article><div class=hamburger><div class=line></div><div class=line></div><div class=line></div></div><strong class=toc-title>文章目录</strong><div class=menu-inner></div><svg version=1.1 id=blob xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><path id=blob-path d=M60,500H0V0h60c0,0,20,172,20,250S60,900,60,500z></path></svg></div><p id=process></p><article class=post><div class=post-head><h1 id=带你剖析WebGis的世界奥秘----Geojson数据加载(高级)>带你剖析WebGis的世界奥秘----Geojson数据加载(高级)</h1><div class=post-meta><span class="categories-meta fa-wrap"><i class="fa fa-folder-open-o"></i> <span>编程</span></span> <span class=fa-wrap><i class="fa fa-tags"></i> <span class=tags-meta>java</span></span> <span class=fa-wrap><i class="fa fa-clock-o"></i> <span class=date-meta>2016/08/19</span></span> <a href=/zxh/20160819.html#comments class=comment-count><i id=changyan_count_unit data-xid=zxh/20160819.html></i>留言, <i id=changyan_parti_unit data-xid=zxh/20160819.html></i>参与</a> <span id=busuanzi_container_page_pv>view : <span id=busuanzi_value_page_pv></span>次</span></div><p class="fa fa-exclamation-triangle warning">本文于<strong>518</strong>天之前发表，文中内容可能已经过时。</p></div><div class="post-body post-content"><p>GeoJSON是一种对各种地理数据结构进行编码的格式。<br><a id=more></a></p><p><em>前言：前两周我带你们分析了WebGis中关键步骤<a href=http://blog.csdn.net/u013132051/article/details/52129011 target=_blank rel=noopener>瓦片加载</a>+<a href=http://blog.csdn.net/u013132051/article/details/52197798 target=_blank rel=noopener>点击事件</a>（具体的看前两篇文章），下面呢，我带大家来看看Geojson的加载及其点击事件</em></p><ul><li><p><strong>Geojson数据解析</strong></p><p>GeoJSON是一种对各种地理数据结构进行编码的格式。GeoJSON对象可以表示几何、特征或者特征集合。GeoJSON支持下面几何类型：点、线、面、多点、多线、多面和几何集合。GeoJSON里的特征包含一个几何对象和其他属性，特征集合表示一系列特征。</p><p>一个完整的GeoJSON数据结构总是一个（JSON术语里的）对象。在GeoJSON里，对象由名/值对–也称作成员的集合组成。对每个成员来说，名字总是字符串。成员的值要么是字符串、数字、对象、数组，要么是下面文本常量中的一个：”true”,”false”和”null”。数组是由值是上面所说的元素组成。</p><p>GeoJSON集合特征：</p></li></ul><pre><code>{&quot;type&quot;:&quot;FeatureCollection&quot;,
+    &quot;features&quot;:[
+        {&quot;type&quot;:&quot;Feature&quot;,
+         &quot;id&quot;:&quot;001&quot;,
+         &quot;properties&quot;:{&quot;name&quot;:&quot;新华001&quot;},
+         &quot;geometry&quot;:{&quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;:[121.9850,42.6737]}},
+        {&quot;type&quot;:&quot;Feature&quot;,
+         &quot;id&quot;:&quot;002&quot;,
+         &quot;properties&quot;:{&quot;name&quot;:&quot;新华002&quot;},
+         &quot;geometry&quot;:{&quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;:[121.8345,42.4898]}},
+        {&quot;type&quot;:&quot;Feature&quot;,
+         &quot;id&quot;:&quot;003&quot;,
+         &quot;properties&quot;:{&quot;name&quot;:&quot;峰山1&quot;},
+         &quot;geometry&quot;:{&quot;type&quot;: &quot;LineString&quot;, &quot;coordinates&quot;:[[121.9850,42.6737],[121.8345,42.4898]]}},
+        {&quot;type&quot;:&quot;Feature&quot;,
+         &quot;id&quot;:&quot;004&quot;,
+         &quot;properties&quot;:{&quot;name&quot;:&quot;新华1001&quot;},
+         &quot;geometry&quot;:{&quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;:[128.9850,42.6737]}},
+        {&quot;type&quot;:&quot;Feature&quot;,
+         &quot;id&quot;:&quot;005&quot;,
+         &quot;properties&quot;:{&quot;name&quot;:&quot;新华1002&quot;},
+         &quot;geometry&quot;:{&quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;:[125.8345,42.4898]}},
+        {&quot;type&quot;:&quot;Feature&quot;,
+         &quot;id&quot;:&quot;006&quot;,
+         &quot;properties&quot;:{&quot;name&quot;:&quot;峰山2&quot;},
+         &quot;geometry&quot;:{&quot;type&quot;: &quot;LineString&quot;, &quot;coordinates&quot;:[[121.9850,42.6737],[125.8345,42.4898]]}}]}
+</code></pre><hr><ul><li><p>openlayers3代码加载</p><p>至于如何加载地图在第一篇的<a href=http://blog.csdn.net/u013132051/article/details/52129011 target=_blank rel=noopener>加载瓦片式地图</a>已经提过了，看完第一篇的你应该知道我是将地图map交接给页面的div中，而map中包含了很多遮罩层，我现在加载GeoJSON就是在最上面的层上在加载url数据。</p></li></ul><pre><code>var vector = new ol.layer.Vector( {
+    source : new ol.source.Vector( {
+        // url:
+        // &#39;http://openlayers.org/en/v3.17.1/examples/data/geojson/countries.geojson&#39;,
+        url : &#39;./source/china.json&#39;,
+        format : new ol.format.GeoJSON()
+    }),
+    style : selectStyleFunction
+});
+</code></pre><p>我这是引用本地准备好的数据（可以从服务器上获得，从服务器上只需要将url地址改写成服务地址），加载url完成后并不会在map中显示出来，我们还需要指定数据的显示样式，这里和之前瓦片是加载不同，样式很重要我调节了好久才调通的，这里我将封装在方法里。</p><p>方法的具体实现：</p><pre><code>    var style;
+    if(feature.getGeometry().getType()==&quot;Point&quot;){
+        style = [new ol.style.Style({
+            image : new ol.style.Circle( {
+                fill : new ol.style.Fill( {
+                    color : &#39;rgba(255,255,0,0.4)&#39;
+                }),
+                radius : 2,
+                stroke : new ol.style.Stroke( {
+                    color : &#39;black&#39;,
+                    width : 1
+                })
+             }),
+             text : new ol.style.Text( {
+                    fill : textFill,
+                    stroke : textStroke,
+                    text : view.getZoom()&gt;5?(feature.getId()&gt;2?feature.get(&quot;name&quot;):&quot;&quot;):&quot;&quot;
+                })
+            })];
+    }else if(feature.getGeometry().getType()==&quot;LineString&quot;){
+        if(view.getZoom()&lt;3){
+            return ;
+        }
+        style = [new ol.style.Style( {
+            stroke : new ol.style.Stroke( {
+                color : &#39;#CD950C&#39;,
+                width : 2
+            }),
+             text : new ol.style.Text( {
+                    fill : textFill,
+                    stroke : textStroke,
+                    text : view.getZoom()&gt;6?feature.get(&quot;name&quot;):&quot;&quot;
+                })
+        })];
+    }else if(feature.getGeometry().getType()==&quot;Polygon&quot;){
+        style = [new ol.style.Style( {
+            stroke : new ol.style.Stroke( {
+                color : &#39;#FFE4B5&#39;,
+                width : 3
+            }),
+             text : new ol.style.Text( {
+                    fill : textFill,
+                    stroke : textStroke,
+                    text : feature.get(&quot;name&quot;)
+                })
+        })];
+    }else if(feature.getGeometry().getType()==&quot;MultiLineString&quot;){
+        style = [new ol.style.Style( {
+            stroke : new ol.style.Stroke( {
+                color : &#39;black&#39;,
+                width : 3
+            })
+        })];
+    }
+    return style;
+</code></pre><p><em><red>申明 里面有些参数没有进行申明，因为定义了全局变量，因为在之前的js中改的，所以并没贴出所有代码。这里需要完整代码的请CSDN上私信我或者在留言板上留言</red></em></p><hr><ul><li><p>效果欣赏</p><p>1、地图加载完毕 这里你看到的地图不是上次的了，这次这个地图就是GeoJSON里的数据，只不过将数据以图形化的形式展现在我们的面前，看到地图右上方的两个点和一条线了吗，那都是通过数据动态加载出来的，换句话来说就是，我只需要将GeoJSON里的数据进行修改一下，这个地图就不一样了，这很方便我们在后台修改地图。还有这个中国的框架也是数据里的，总之一句话你看到的这个地图里所有元素都是数据里设置的（除了样式）</p><p><img src=http://img.blog.csdn.net/20160817172244815 alt=这里写图片描述></p><p>2、放大缩小地图和之前效果一样，值得注意的是我在js中设置了显示级别，就是放大缩小的不同级别显示的数据也是不同的，比如说那条线吧，我设置在6级以上的才能看到，下面我缩小地图线就不见了，下面是消失了的并不是太小看不见的</p><p><img src=http://img.blog.csdn.net/20160817172919508 alt=这里写图片描述></p><p>3、在放大到一定级别我设置了点的周围显示点的名称！看效果</p><p><img src=http://img.blog.csdn.net/20160817173122256 alt=这里写图片描述></p><p>这里就是加载的效果，下面我们继续探讨。下面就是点击事件了，点击事件在上篇文章我是着重讲了原理及实现，而在新技术中我们的点击事件就很Easy了</p></li></ul><hr><ul><li><p>点击事件</p><p>我们要在map中绑定事件，也就是注册事件</p></li></ul><pre><code>map.on(&#39;singleclick&#39;, mapClick);
+</code></pre><pre><code>function mapClick(e) {
+    var pixel = map.getEventPixel(e.originalEvent);
+    var featureInfo = map.forEachFeatureAtPixel(pixel,
+            function(feature, layer) {
+                return {
+                    feature : feature,
+                    layer : layer
+                };
+            });
+    var coordinate = e.coordinate;
+    var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(coordinate,
+            &#39;EPSG:3857&#39;, &#39;EPSG:4326&#39;));
+    if (featureInfo !== undefined &amp;&amp; featureInfo !== null
+            &amp;&amp; featureInfo.layer !== null) {
+        if (featureInfo.feature.get(&quot;geometry&quot;).B.length == 2) {
+//            alert(view.getZoom());
+            alert(hdms + &quot;\n这里属于&quot; + featureInfo.feature.get(&quot;name&quot;) + &quot;点&quot;);
+        } else if (featureInfo.feature.get(&quot;geometry&quot;).B.length == 4) {
+            alert(hdms + &quot;\n这里属于&quot; + featureInfo.feature.get(&quot;name&quot;) + &quot;线&quot;);
+            alert(&quot;两端信息&quot; + featureInfo.feature.get(&quot;geometry&quot;).B);
+        } else {
+            // alert(hdms+&quot;\n这里属于&quot;+featureInfo.feature.get(&quot;name&quot;)+&quot;省&quot;);//显示点击区域的
+        }
+        console.log(&#39;打印选择要素&#39;);
+        console.log(featureInfo.feature);
+        console.log(&#39;打印选择要素所属Layer&#39;);
+        console.log(featureInfo.layer);
+    } else {
+        alert(hdms + &quot;\n这里不属于中国或者这里是大海&quot;);// 显示点击区域的
+    }
+}
+</code></pre><p>在这里我需要讲解一下：</p><p>这里的featureInfo是我们在方法里拼接的（feature+layer）组成的，在if条件判断里我们featureInfo.feature.get(“geometry”).B.length == 2是判断feature里数字点的个数，大家想一想如果是点是不是有两个数字点，如果是线就是两个点也就是四个数字点，如果是区域的话那就是至少是超过4的偶数了，这样我们就可以区别出点线和区域了，这也就是说我们在这里就实现了之前很难解决的点线问题了，区域问题我们就不多加讨论了。</p><pre><code>var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(coordinate,&#39;EPSG:3857&#39;, &#39;EPSG:4326&#39;));
+</code></pre><p>这个是将坐标进行转换的，这个不多说</p><hr><ul><li><p>定位</p><p>在之前我们的定位就是以某个点中心显示并加上图标那就是所谓的定位，那么在我们的新技术中定位是不是有所改变呢？让我们来一探究竟。</p><p>如果你认为既然是新技术了就一定要有突破，那么我的回答可能会让你很失望，新技术里仍然是用上述的思想来实现定位的，但多多少少还是有不同的。</p><p>| 新旧对比 | openlayers2 | openlayers3 |<br>|:————– |:————-|:—–|<br>| 点击 | 获取经纬度查询 | 点线类别区分 |<br>| 定位 | map中心显示 | view中心显示 |</p></li></ul><p>由上图的表格我们可以看出我们的定位还是有所区别的，在新技术中我么能采用的是view中心显示法，什么叫view中心显示法呢，就是通过view来调用设置中心的方法。</p><pre><code>view.setCenter(ol.proj.fromLonLat( [
+
+Number(document.getElementById(&#39;jd&#39;).value),
+
+Number(document.getElementById(&#39;wd&#39;).value) ]));
+</code></pre><hr><ul><li>其他常用的事件介绍</li></ul><blockquote><p>事件句柄</p></blockquote><p>HTML 4.0 的新特性之一是有能力使 HTML 事件触发浏览器中的动作（action），比如当用户点击某个 HTML 元素时启动一段 JavaScript。下面是一个属性列表，这些属性可插入 HTML 标签来定义事件动作。</p><blockquote><p>具体事件</p></blockquote><table><thead><tr><th style=text-align:left>属性</th><th style=text-align:left>当以下情况发生时，出现此事件</th><th style=text-align:left>FF</th><th style=text-align:left>N</th><th style=text-align:left>IE</th></tr></thead><tbody><tr><td style=text-align:left>onabort</td><td style=text-align:left>图像加载被中断</td><td style=text-align:left>1</td><td style=text-align:left>3</td><td style=text-align:left>4</td></tr><tr><td style=text-align:left>onblur</td><td style=text-align:left>元素失去焦点</td><td style=text-align:left>1</td><td style=text-align:left>2</td><td style=text-align:left>3</td></tr><tr><td style=text-align:left>onchange</td><td style=text-align:left>用户改变域的内容</td><td style=text-align:left>1</td><td style=text-align:left>2</td><td style=text-align:left>3</td></tr><tr><td style=text-align:left>onclick</td><td style=text-align:left>鼠标点击某个对象</td><td style=text-align:left>1</td><td style=text-align:left>2</td><td style=text-align:left>3</td></tr><tr><td style=text-align:left>ondblclick</td><td style=text-align:left>鼠标双击某个对象</td><td style=text-align:left>1</td><td style=text-align:left>4</td><td style=text-align:left>4</td></tr><tr><td style=text-align:left>onerror</td><td style=text-align:left>当加载文档或图像时发生某个错误</td><td style=text-align:left>1</td><td style=text-align:left>3</td><td style=text-align:left>4</td></tr><tr><td style=text-align:left>onfocus</td><td style=text-align:left>元素获得焦点</td><td style=text-align:left>1</td><td style=text-align:left>2</td><td style=text-align:left>3</td></tr><tr><td style=text-align:left>onkeydown</td><td style=text-align:left>某个键盘的键被按下</td><td style=text-align:left>1</td><td style=text-align:left>4</td><td style=text-align:left>3</td></tr><tr><td style=text-align:left>onkeypress</td><td style=text-align:left>某个键盘的键被按下或按住</td><td style=text-align:left>1</td><td style=text-align:left>4</td><td style=text-align:left>3</td></tr></tbody></table><p><a href=http://www.w3school.com.cn/jsref/jsref_events.asp target=_blank rel=noopener>此处参考的w3School</a></p><p>在我的地图中我就随便加了几个试试效果的。</p><pre><code>var select = null; // ref to currently selected interaction
+// select interaction working on &quot;singleclick&quot;
+var selectSingleClick = new ol.interaction.Select();
+
+// select interaction working on &quot;click&quot;
+var selectClick = new ol.interaction.Select( {
+    condition : ol.events.condition.click
+});
+
+// select interaction working on &quot;pointermove&quot;
+var selectPointerMove = new ol.interaction.Select( {
+    condition : ol.events.condition.pointerMove
+});
+
+var selectAltClick = new ol.interaction.Select( {
+    condition : function(mapBrowserEvent) {
+        return ol.events.condition.click(mapBrowserEvent)
+                &amp;&amp; ol.events.condition.altKeyOnly(mapBrowserEvent);
+    }
+});
+
+var selectElement = document.getElementById(&#39;type&#39;);
+
+var changeInteraction = function() {
+    if (select !== null) {
+        map.removeInteraction(select);
+    }
+    var value = selectElement.value;
+    if (value == &#39;singleclick&#39;) {
+        select = selectSingleClick;
+    } else if (value == &#39;click&#39;) {
+        select = selectClick;
+    } else if (value == &#39;pointermove&#39;) {
+        select = selectPointerMove;
+    } else if (value == &#39;altclick&#39;) {
+        select = selectAltClick;
+    } else {
+        select = null;
+    }
+    if (select !== null) {
+        map.addInteraction(select);
+        select.on(&#39;select&#39;, function(e) {
+            document.getElementById(&#39;status&#39;).innerHTML = &#39;&amp;nbsp;&#39;
+                    + e.target.getFeatures().getLength()
+                    + &#39; selected features (last operation selected &#39;
+                    + e.selected.length + &#39; and deselected &#39;
+                    + e.deselected.length + &#39; features)&#39;;
+        });
+    }
+};
+</code></pre><hr><blockquote><p>到这里整个GeoJSON加载地图已经讲解完毕了，上述只是为了帮助各位梳理思路，并不是项目的完整代码，如果新入门的没有看明白，可以在博客下方留言，我会将源码发送给你。</p></blockquote></div><div class=post-footer><div>转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a target=_blank>烟花散尽13141</a></div><div></div></div></article><div class="article-nav prev-next-wrap clearfix"><a href=/zxh/20160822.html class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a> <a href=/zxh/20160813.html class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a></div><div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div><button id=rewardButton disable=enable onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}"><span>赏</span></button><div id=QR style="display: none;"><div id=wechat style="display: inline-block"><a href=/img/wechatpay.jpg class="fancybox fancybox.image" rel=group><img id=wechat_qr src=/img/wechatpay.jpg alt="颜敏 WeChat Pay"></a><p>微信打赏</p></div><div id=alipay style="display: inline-block"><a href=/img/alipay.jpg class="fancybox fancybox.image" rel=group><img id=alipay_qr src=/img/alipay.jpg alt="颜敏 Alipay"></a><p>支付宝打赏</p></div></div></div><div id=comments><div id=SOHUCS sid=/zxh/20160819.html></div><script type=text/javascript> 
+    (function(){ 
+    var appid = 'cyti5JvoU'; 
+    var conf = 'prod_a32310aad07e12c7706c8da1901ed57b'; 
+    var width = window.innerWidth || document.documentElement.clientWidth; 
+    if (width < 960) { 
+    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script></div></main><aside class="col-md-4 sidebar"><div class=widget><h3 class=title>Search</h3><div id=search-form><div id=result-mask class=hide></div><div class=search-area><input id=search-key type=search autocomplete=off placeholder=搜点什么呢?> <button type=button class=search-form-submit id=search-local>站内搜索</button></div><div id=result-wrap class=hide><div id=search-result></div></div><div class=hide><template id=search-tpl><div class=item><a href=/{path} title={title}><div class=title>{title}</div><div class=content>{content}</div></a></div></template></div></div></div><div class="widget notification"><h3 class=title>网站公告</h3><div><p><font color=red>pc、移动端目录区分设计</font></p></div></div><div class=widget><h3 class=title>Social</h3><div class="content social"><a href=//gitee.com/zxhtom rel="external nofollow" title=oschina target=_blank><i class="git fa fa-git"></i></a> <a href=mailto:870775401@qq.com rel="external nofollow" title=邮箱 target=_blank><i class="envelope-o fa fa-envelope-o"></i></a> <a href=870775401 rel="external nofollow" title=联系QQ target=_blank><i class="qq fa fa-qq"></i></a> <a href="/" rel="external nofollow" title=微博 target=_blank><i class="weibo fa fa-weibo"></i></a> <a href=376091466 rel="external nofollow" title=QQ群1 target=_blank><i class="users fa fa-users"></i></a> <a href=/atom.xml rel="external nofollow" title=RSS target=_blank><i class="feed fa fa-feed"></i></a></div></div><div class=widget><h3 class=title>Categories</h3><ul class=category-list><li class=category-list-item><a class=category-list-link href="/categories/开发工具/"><i class=fa aria-hidden=true>开发工具</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/案例/"><i class=fa aria-hidden=true>案例</i></a><span class=category-list-count>2</span></li><li class=category-list-item><a class=category-list-link href="/categories/程序人生/"><i class=fa aria-hidden=true>程序人生</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/编程/"><i class=fa aria-hidden=true>编程</i></a><span class=category-list-count>88</span></li></ul></div><div class=widget><h3 class=title>Archives</h3><ul class=archive-list><li class=archive-list-item><a class=archive-list-link href="/archives/2018/01/"><i class=fa aria-hidden=true>2018年01月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/12/"><i class=fa aria-hidden=true>2017年12月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/11/"><i class=fa aria-hidden=true>2017年11月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/10/"><i class=fa aria-hidden=true>2017年10月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/06/"><i class=fa aria-hidden=true>2017年06月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/04/"><i class=fa aria-hidden=true>2017年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/03/"><i class=fa aria-hidden=true>2017年03月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/02/"><i class=fa aria-hidden=true>2017年02月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/01/"><i class=fa aria-hidden=true>2017年01月</i></a><span class=archive-list-count>9</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/12/"><i class=fa aria-hidden=true>2016年12月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/11/"><i class=fa aria-hidden=true>2016年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/10/"><i class=fa aria-hidden=true>2016年10月</i></a><span class=archive-list-count>8</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/09/"><i class=fa aria-hidden=true>2016年09月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/08/"><i class=fa aria-hidden=true>2016年08月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/07/"><i class=fa aria-hidden=true>2016年07月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/06/"><i class=fa aria-hidden=true>2016年06月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/05/"><i class=fa aria-hidden=true>2016年05月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/04/"><i class=fa aria-hidden=true>2016年04月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/03/"><i class=fa aria-hidden=true>2016年03月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/02/"><i class=fa aria-hidden=true>2016年02月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2015/04/"><i class=fa aria-hidden=true>2015年04月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/11/"><i class=fa aria-hidden=true>2014年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/10/"><i class=fa aria-hidden=true>2014年10月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/04/"><i class=fa aria-hidden=true>2014年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/01/"><i class=fa aria-hidden=true>2014年01月</i></a><span class=archive-list-count>2</span></li></ul></div><div class=widget><h3 class=title>Tag Cloud</h3><div class="content tag-cloud"><a href="/tags/C/" style="font-size: 17.5px;">C++</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/bat语法/" style="font-size: 10px;">bat语法</a> <a href="/tags/formatter/" style="font-size: 10px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/ngrok/" style="font-size: 10px;">ngrok</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/sublime-text3/" style="font-size: 10px;">sublime text3</a> <a href="/tags/前端/" style="font-size: 12.5px;">前端</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/感慨/" style="font-size: 12.5px;">感慨</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a></div></div><div class=widget><h3 class=title>Friends</h3><div class="content friends-link"><a href=http://blog.csdn.net/u013132051 class=fa target=_blank>个人博客</a></div></div></aside></div></div></section><footer class=main-footer><div class=container><div class=row></div></div></footer><a id=back-to-top class=hide><i class="fa fa-chevron-up"></i></a><div class=copyright><div class=container><div class=row><div class=col-sm-12><span>Copyright &copy; 2017</span> | <span>Powered by <a href=//hexo.io class=copyright-links target=_blank rel=nofollow>张新华</a></span> | <span>Theme by <a href=//github.com/shenliyang/hexo-theme-snippet.git class=copyright-links target=_blank rel=nofollow>ZxhTom</a></span></div></div></div></div><script src=https://code.jquery.com/jquery-latest.js></script><script src=https://assets.changyan.sohu.com/upload/plugins/plugins.count.js></script><script src="/assets/highlight.pack.js?rev=@@hash"></script><script>
+     hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script><script src="/js/search.js?rev=@@hash"></script><script src="/js/app.js?rev=@@hash"></script><script src="/assets/prefix.js?rev=@@hash"></script><script src="/assets/my.js?rev=@@hash"></script></body></html>

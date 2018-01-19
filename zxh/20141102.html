@@ -1,0 +1,329 @@
+<!DOCTYPE HTML><html><head><script>
+	if('' == 'true'){
+		if (prompt('请输入管理员密码') !== '025025'){
+            alert('密码错误！');
+            location.href='https://zxhtom.oschina.io';
+    	}
+	}
+</script><meta charset=UTF-8><meta name=viewport content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><meta http-equiv=X-UA-Compatible content="IE=Edge,chrome=1"><meta http-equiv=Cache-Control content=no-siteapp><meta name=renderer content=webkit|ie-comp|ie-stand><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no,email=no,adress=no"><meta name=browsermode content=application><meta name=screen-orientation content=portrait><link rel=dns-prefetch href=https://zxhtom.oschina.io><meta name=description content=张新华的个人网站><meta name=robots content=all><meta name=google content=all><meta name=googlebot content=all><meta name=verify content=all><title>二叉树的算法与讲法 | 烟花散尽13141</title><link rel=alternate href=/atom.xml title=烟花散尽13141 type=application/atom+xml><link rel=icon href=/favicon.ico><link rel=stylesheet href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css?rev=9.12.0"><link rel=stylesheet href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4"><link rel=stylesheet href=//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href="/css/style.css?rev=@@hash"><link rel=stylesheet href="/css/mycss.css?rev=@@hash"><div class=hide><script src="https://s4.cnzz.com/z_stat.php?id=1263868967&web_id=1263868967" language=JavaScript></script></div><script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?709c2dde1f61f5e589ff3ed31ba52411";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script></head><body><header class=main-header style=background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)><div class=main-header-box><a class=header-avatar href="/"><img src=/img/avatar.jpg alt=logo头像></a><div class=branding><h2>学如逆水行舟，不进则退！！！</h2></div></div></header><nav class=main-navigation><div class=container><div class=row><div class=col-sm-12><div class=navbar-header><span class="nav-toggle-button collapsed" data-toggle=collapse data-target=#main-menu id=mnav><span class=sr-only>Toggle navigation</span> <i class="fa fa-bars"></i></span></div><div class="collapse navbar-collapse" id=main-menu><ul class=menu><li role=presentation><a href="/"><i class="fa fa-fw"></i>首页</a></li><li role=presentation><a href="/about/"><i class="fa fa-fw"></i>关于我</a></li><li role=presentation><a href="/tags/"><i class="fa fa-fw"></i>标签</a></li><li role=presentation><a href="/categories/"><i class="fa fa-fw"></i>分类</a></li><li role=presentation><a href="/archives/"><i class="fa fa-fw"></i>归档</a></li><li role=presentation><a href="/schedule/"><i class="fa fa-fw"></i>日程表</a></li><li role=presentation><a href=/sitemap.xml><i class="fa fa-fw"></i>地图导航</a></li><li role=presentation><a href="/404/"><i class="fa fa-fw"></i>公益活动</a></li></ul></div></div></div></div></nav><section class=content-wrap><div class=container><div class=row><main class="col-md-8 main-content m-post"><div id=toc class=toc-article><div class=hamburger><div class=line></div><div class=line></div><div class=line></div></div><strong class=toc-title>文章目录</strong><div class=menu-inner></div><svg version=1.1 id=blob xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><path id=blob-path d=M60,500H0V0h60c0,0,20,172,20,250S60,900,60,500z></path></svg></div><p id=process></p><article class=post><div class=post-head><h1 id=二叉树的算法与讲法>二叉树的算法与讲法</h1><div class=post-meta><span class="categories-meta fa-wrap"><i class="fa fa-folder-open-o"></i> <span>编程</span></span> <span class=fa-wrap><i class="fa fa-tags"></i> <span class=tags-meta>C++</span></span> <span class=fa-wrap><i class="fa fa-clock-o"></i> <span class=date-meta>2014/11/02</span></span> <a href=/zxh/20141102.html#comments class=comment-count><i id=changyan_count_unit data-xid=zxh/20141102.html></i>留言, <i id=changyan_parti_unit data-xid=zxh/20141102.html></i>参与</a> <span id=busuanzi_container_page_pv>view : <span id=busuanzi_value_page_pv></span>次</span></div><p class="fa fa-exclamation-triangle warning">本文于<strong>1174</strong>天之前发表，文中内容可能已经过时。</p></div><div class="post-body post-content"><p>二叉树属于数据结构中层次性的数据关系，<br><a id=more></a></p><p>他又祖先——后代，上级——下属，整体——部分以及其他类似的关系，树结构在计算机领域中有着广泛的应用，例如在编译程序中庸语法树来表示元程序的语言结构，在数据挖掘中庸决策树来进行数据分类等等。在我的前一个博客中也有提到就是二叉树的相关知识重点。不清楚的同行可以参考我的文章。其中若有不妥之处，还请大家指点。<br>下面是我在学习二叉树的时候编写的二叉树的几个常见的功能的函数，以及他的一些构造函数等等。</p><pre><code>#ifndef BITREE_H
+#define BITREE_H
+#include&lt;iostream&gt;
+#include&lt;iomanip&gt;
+using namespace std;
+template &lt;typename T&gt;
+struct BiNode
+{
+ T data;
+ BiNode&lt;T&gt; *lchild, *rchild;          //利用递归的方法进行结点的构造
+};
+template&lt;typename T&gt;
+class BiTree
+{
+ template&lt;typename T&gt;
+ friend ostream &amp; operator&lt;&lt;(ostream &amp;os, BiTree&lt;T&gt; &amp;bt);
+public:
+ BiTree(T none);                     //构造一个空的二叉树
+ BiTree(T ary[], int num, T none);   //构造一个num个结点的二叉树
+ ~BiTree();                          //析构函数
+ void Parent(T x);                //与pretected中的ParentIn对应
+ void print(ostream &amp;os);            //遍历操作
+ void Count();                       //与protected中的CountIn对应
+ void PreOrderPrint();               //与protected中的PreOrderPrintIn对应
+ void Depth();                       //与protected中的DepthIn对应
+ void PostOrderN();                  //与protected中的PostOrderN对应
+ void Delete(T x);                   //与pretected中的DeleteIn对应
+protected:
+ void CountIn(BiNode&lt;T&gt; *root);
+ void Creat(BiNode&lt;T&gt; * &amp;root, T none);
+ BiNode&lt;T&gt; *Build(T ary[], int num, T none, int idx);
+ BiNode&lt;T&gt; *ParentIn(BiNode&lt;T&gt; * root, T x);               //查询某结点的双
+亲
+ void Release(BiNode&lt;T&gt;* &amp;root);
+ void printIn(ostream &amp;os, BiNode&lt;T&gt; *root, int depth);  //和上述的四个函数
+具有对应的功能
+ void PreOrderPrintIn(BiNode&lt;T&gt; *root);                  //求二叉树的叶子节
+点输出
+ int DepthIn(BiNode&lt;T&gt; *root);                          //求二叉树的深度
+ void PostOrderNIn(BiNode&lt;T&gt; *root);                      //求二叉树的逆后
+序输出遍历的算法
+ void DeleteIn(BiNode&lt;T&gt; * root, T x);                     //求二叉树的删除
+的算法
+private: 
+ BiNode&lt;T&gt; *p = NULL;
+ BiNode&lt;T&gt; *rootPtr;                //申请一个跟指针
+ int count = 0;                     //全局变量在Count函数中用
+ int highl = 0,highr=0;                      //全局变量在Depth函数中用
+};
+template&lt;typename T&gt;
+void BiTree&lt;T&gt;::CountIn(BiNode&lt;T&gt; *root)
+{
+ if (root != NULL)
+ {
+  CountIn(root-&gt;lchild);
+  count++;
+  CountIn(root-&gt;rchild);
+  /*在左右之间count++是在左子数递归结束之时才加
+  在最后一个左子数结束的时候就是+*/
+ }
+}
+template&lt;typename T&gt;
+void BiTree&lt;T&gt;::Creat(BiNode&lt;T&gt; * &amp;root, T none)            //子数的创建
+{
+ T x;
+ cout &lt;&lt; &quot;请输入（&quot; &lt;&lt; none &lt;&lt; &quot;表示空）:&quot;; cin &gt;&gt; x;
+ if (x == none)
+  root == NULL;                 //如果输入的是空的话，那么这个二叉树
+就是空二叉树
+ else                              //下面准备实现元素的插入
+ {
+  root = new BiNode&lt;T&gt;;         //首先让根指针变为根结点
+  root-&gt;data = x;               //对结点进行赋值
+  Creat(root-&gt;lchild, none);    //创建根结点的左子数，此时左子数为空
+  Creat(root-&gt;rchild, none);    //创建根结点的右子数，此时右子数为空
+ }                                 //当前结点赋值成功，且其子数创建也成功
+}                                     //次函数不是循环创建，只是在根结点进行赋值与
+子数的创建，下面的操作靠其他
+template&lt;typename T&gt;
+BiNode&lt;T&gt; *BiTree&lt;T&gt;::Build(T ary[], int num, T none, int idx)
+{
+ /*ary就表示数组，num表示数组长度，none表示空，idx表示结点的序号
+ 在进行第一次操作的时候理所应当的赋值为1*/
+ BiNode&lt;T&gt; *p;                     //申请指针p
+ int left, right;                  //定义左右
+ if (idx - 1 &lt; num&amp;&amp;ary[idx - 1] != none)//为什么此处是idx-1呢？？？？
+ {
+  /*因为数组从0开始，又为了idx能够按倍数增长，所以idx从一开始
+  则在判断的时候自然就要减去一了，方便后面的赋值*/
+  p = new BiNode&lt;T&gt;;            //将指针p结点划
+  p-&gt;data = ary[idx - 1];       //将该结点的数值部分赋值为数组中对应
+的元素
+  left = 2 * idx;
+  right = 2 * idx + 1;          //确保了左右子数的左右性
+  p-&gt;lchild = Build(ary, num, none, left);
+  p-&gt;rchild = Build(ary, num, none, right);//开始进行赋值
+  return p;
+ }
+ else
+  return NULL;          //else表示数组已经赋值完了，没有值在来扩建了
+所以就返回空
+}
+template&lt;typename T&gt;
+void BiTree&lt;T&gt;::Release(BiNode&lt;T&gt; * &amp; root)//有释放的意思
+{
+ if (root != NULL)                      //首先从根结点开始
+ {
+  Release(root-&gt;lchild);
+  Release(root-&gt;rchild);
+  delete root;                      //后续遍历性的释放
+ }
+}
+template&lt;typename T&gt;
+void BiTree&lt;T&gt;::Count()
+{
+ CountIn(rootPtr);
+ cout &lt;&lt; &quot;|&quot; &lt;&lt; setw(5)  &lt;&lt; &quot;该树结点数为:&quot; &lt;&lt; count &lt;&lt;setw(5)&lt;&lt; &quot;|&quot; &lt;&lt;
+endl;
+}
+template&lt;typename T&gt;
+BiTree&lt;T&gt;::BiTree(T none)
+{
+ Creat(rootPtr, none);
+}
+template &lt;typename T&gt;
+BiTree&lt;T&gt;::BiTree(T ary[], int num, T none)
+{
+ rootPtr = Build(ary, num, none, 1);   //none用来传递空
+}
+template &lt;typename T&gt;
+BiTree&lt;T&gt;::~BiTree()
+{
+ Release(rootPtr);
+}
+template &lt;typename T&gt;
+void BiTree&lt;T&gt;::printIn(ostream &amp;os, BiNode&lt;T&gt; *root, int depth)
+{
+ if (root != NULL)
+ {
+  printIn(os, root-&gt;rchild, depth + 1);
+  for (int i = 0; i &lt; 4 * (depth - 1); i++)
+   os &lt;&lt; &quot; &quot;;
+  os &lt;&lt; &quot;*--&quot; &lt;&lt; root-&gt;data &lt;&lt; endl;   //这句是函数共同所有
+  printIn(os, root-&gt;lchild, depth+1);
+ }
+}
+template&lt;typename T&gt;
+void BiTree&lt;T&gt;::PreOrderPrintIn(BiNode&lt;T&gt; *root)
+{
+ if (root != NULL)
+ {
+  if (root-&gt;lchild==NULL&amp;&amp;root-&gt;rchild==NULL)
+   cout &lt;&lt;setw(3)&lt;&lt; root-&gt;data;               //先输出根结点
+数据
+  PreOrderPrintIn(root-&gt;lchild);        //然后在开始进行左结点输出
+  PreOrderPrintIn(root-&gt;rchild);        //然后右结点输出
+ }
+}
+template&lt;typename T&gt;
+void BiTree&lt;T&gt;::PreOrderPrint()
+{
+ PreOrderPrintIn(rootPtr);
+}
+template&lt;typename T&gt;
+int BiTree&lt;T&gt;::DepthIn(BiNode&lt;T&gt; *root)
+{
+ if (root == NULL)return 0;       //标志访问结束
+ else                             //标志继续向下访问
+ {
+  highl = DepthIn(root-&gt;lchild);//为何在这一步就可以进行 赋值？
+  highr = DepthIn(root-&gt;rchild);
+  if (highl &gt; highr)
+   return highl + 1;
+  else
+   return highr + 1;
+ }
+}
+template&lt;typename T&gt;
+void BiTree&lt;T&gt;::Depth()
+{
+ cout&lt;&lt;DepthIn(rootPtr);
+}
+template&lt;typename T&gt;
+void BiTree&lt;T&gt;::PostOrderNIn(BiNode&lt;T&gt; * root)
+{
+ if (root != NULL)
+ {
+  cout &lt;&lt; setw(3) &lt;&lt; root-&gt;data;
+  PostOrderNIn(root-&gt;rchild);
+  PostOrderNIn(root-&gt;lchild);
+ }
+}
+template&lt;typename T&gt;
+void BiTree&lt;T&gt;::PostOrderN()
+{
+ PostOrderNIn(rootPtr);
+}
+template&lt;typename T&gt;
+BiNode&lt;T&gt; *BiTree&lt;T&gt;::ParentIn(BiNode&lt;T&gt; *root, T x)
+{
+ if (root != NULL)
+ {
+  if (root-&gt;data == x)cout&lt;&lt;p-&gt;data;
+  else
+  {
+   p = root;
+   ParentIn(root-&gt;lchild, x);
+   ParentIn(root-&gt;rchild, x);
+  }
+ }
+ return 0;
+}
+template&lt;typename T&gt;
+void BiTree&lt;T&gt;::Parent(T x)
+{
+ ParentIn(rootPtr, x);
+}
+template&lt;typename T&gt;
+void BiTree&lt;T&gt;::DeleteIn(BiNode&lt;T&gt; * root, T x)
+{
+ if (root != NULL)
+ {
+  if (root-&gt;data == x)
+  {
+   if (p == NULL)
+    root = NULL;
+   else
+   if (p-&gt;lchild == root)
+    p-&gt;lchild = NULL;
+   else
+    p-&gt;rchild = NULL;
+  }
+  else
+  {
+   p = root;
+   DeleteIn(root-&gt;lchild, x);
+   DeleteIn(root-&gt;rchild, x);
+  }
+ }
+}
+template&lt;typename T&gt;
+void BiTree&lt;T&gt;::Delete(T x)
+{
+ DeleteIn(rootPtr, x);
+}
+template&lt;typename T&gt;
+void BiTree&lt;T&gt;::print(ostream &amp; os)
+{
+ printIn(os, rootPtr, 1);
+}
+template&lt;typename T&gt;
+ostream &amp; operator&lt;&lt;(ostream &amp; os, BiTree&lt;T&gt; &amp;bt)
+{
+ bt.print(os);
+ return os;
+}
+#endif
+************************************************************************
+#include&quot;BiTree.h&quot;
+#include&lt;iostream&gt;
+using namespace std;
+void main()
+{
+ char ary[] = { &#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;#&#39;,
+                            &#39;E&#39;, &#39;F&#39;, &#39;#&#39;, &#39;G&#39;, &#39;#&#39;, 
+          &#39;#&#39;, &#39;H&#39;, &#39;I&#39;,
+&#39;J&#39;, &#39;K&#39;, 
+          &#39;#&#39;, &#39;#&#39;, &#39;L&#39; };
+ char zxh,gmy;
+ BiTree&lt;char&gt; myBTree(ary, 18, &#39;#&#39;);
+ cout &lt;&lt; myBTree &lt;&lt; endl;
+ cout &lt;&lt; &quot;--------------------------------------------------&quot; &lt;&lt; endl;
+ //cout &lt;&lt; &quot;++++++++++++++++++++++++++++++++++++++++++++++++++&quot; &lt;&lt; endl;
+ cout &lt;&lt; &quot;求二叉树结点个数(第一题算法)&quot; &lt;&lt; endl;
+ myBTree.Count();
+ //cout &lt;&lt; &quot;++++++++++++++++++++++++++++++++++++++++++++++++++&quot; &lt;&lt; endl;
+ cout &lt;&lt; &quot;--------------------------------------------------&quot; &lt;&lt; endl;
+ //cout &lt;&lt; &quot;++++++++++++++++++++++++++++++++++++++++++++++++++&quot; &lt;&lt; endl;
+ cout &lt;&lt; &quot;求二叉树叶子节点次序(第二题算法)&quot;&lt;&lt;endl;
+ cout &lt;&lt; &quot;该树的叶子结点按前序次序de方式排列输出为:&quot;;
+ myBTree.PreOrderPrint();
+ cout &lt;&lt; endl;
+ //cout &lt;&lt; &quot;++++++++++++++++++++++++++++++++++++++++++++++++++&quot; &lt;&lt; endl;
+ cout &lt;&lt; &quot;--------------------------------------------------&quot; &lt;&lt; endl;
+ cout &lt;&lt; &quot;求二叉树深度(第三题揭发):&quot; &lt;&lt; endl;
+ cout &lt;&lt; &quot;这个二叉树的深度为:&quot;&lt;&lt;endl;
+ myBTree.Depth();
+ cout &lt;&lt; &quot;--------------------------------------------------&quot; &lt;&lt; endl;
+ cout &lt;&lt; &quot;求二叉树后序逆遍历(第四道题解法):&quot; &lt;&lt; endl;
+ cout &lt;&lt; &quot;该二叉树的逆向后序遍历为:&quot; &lt;&lt; endl;
+ myBTree.PostOrderN();
+ cout &lt;&lt; &quot;--------------------------------------------------&quot; &lt;&lt; endl;
+ cout &lt;&lt; &quot;求二叉树某结点双亲(第五道题解法):&quot; &lt;&lt; endl;
+ cout &lt;&lt; &quot;请输入您想查询的结点(！注：区分大小写):&quot;;
+ cin &gt;&gt; zxh;
+ cout &lt;&lt; &quot;您查询的结点为:&quot; &lt;&lt; zxh &lt;&lt; &quot;他的双亲为:&quot; &lt;&lt; endl;
+ myBTree.Parent(zxh);
+ cout &lt;&lt; endl;
+ cout &lt;&lt; &quot;--------------------------------------------------&quot; &lt;&lt; endl;
+ cout &lt;&lt; &quot;请输入您想删除的字符:&quot;;
+ cin &gt;&gt; gmy;
+ myBTree.Delete(gmy);
+ cout &lt;&lt; &quot;删除后的二叉树为:&quot; &lt;&lt; endl;
+ cout &lt;&lt; myBTree;
+}
+</code></pre><hr><p>个人小结：<br>第一次接触到二叉树这个东西，我明显的感觉到了与前面学的顺序表单链表有所不同了，最大<br>的特点就是二叉树中函数都是成对的，因为原始的二叉树函数在主函数中是无法调用的，所以<br>他就需要在类的构造中在定义一个与之对应的函数，以此方便在主函数中调用了。但说白了二<br>叉树呢，也没什么难得，只要我们明白其中的原理，在多多的练习就很容易解决了。</p></div><div class=post-footer><div>转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a target=_blank>烟花散尽13141</a></div><div></div></div></article><div class="article-nav prev-next-wrap clearfix"><a href=/zxh/20141109.html class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a> <a href=/zxh/20141101.html class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a></div><div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div><button id=rewardButton disable=enable onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}"><span>赏</span></button><div id=QR style="display: none;"><div id=wechat style="display: inline-block"><a href=/img/wechatpay.jpg class="fancybox fancybox.image" rel=group><img id=wechat_qr src=/img/wechatpay.jpg alt="颜敏 WeChat Pay"></a><p>微信打赏</p></div><div id=alipay style="display: inline-block"><a href=/img/alipay.jpg class="fancybox fancybox.image" rel=group><img id=alipay_qr src=/img/alipay.jpg alt="颜敏 Alipay"></a><p>支付宝打赏</p></div></div></div><div id=comments><div id=SOHUCS sid=/zxh/20141102.html></div><script type=text/javascript> 
+    (function(){ 
+    var appid = 'cyti5JvoU'; 
+    var conf = 'prod_a32310aad07e12c7706c8da1901ed57b'; 
+    var width = window.innerWidth || document.documentElement.clientWidth; 
+    if (width < 960) { 
+    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script></div></main><aside class="col-md-4 sidebar"><div class=widget><h3 class=title>Search</h3><div id=search-form><div id=result-mask class=hide></div><div class=search-area><input id=search-key type=search autocomplete=off placeholder=搜点什么呢?> <button type=button class=search-form-submit id=search-local>站内搜索</button></div><div id=result-wrap class=hide><div id=search-result></div></div><div class=hide><template id=search-tpl><div class=item><a href=/{path} title={title}><div class=title>{title}</div><div class=content>{content}</div></a></div></template></div></div></div><div class="widget notification"><h3 class=title>网站公告</h3><div><p><font color=red>pc、移动端目录区分设计</font></p></div></div><div class=widget><h3 class=title>Social</h3><div class="content social"><a href=//gitee.com/zxhtom rel="external nofollow" title=oschina target=_blank><i class="git fa fa-git"></i></a> <a href=mailto:870775401@qq.com rel="external nofollow" title=邮箱 target=_blank><i class="envelope-o fa fa-envelope-o"></i></a> <a href=870775401 rel="external nofollow" title=联系QQ target=_blank><i class="qq fa fa-qq"></i></a> <a href="/" rel="external nofollow" title=微博 target=_blank><i class="weibo fa fa-weibo"></i></a> <a href=376091466 rel="external nofollow" title=QQ群1 target=_blank><i class="users fa fa-users"></i></a> <a href=/atom.xml rel="external nofollow" title=RSS target=_blank><i class="feed fa fa-feed"></i></a></div></div><div class=widget><h3 class=title>Categories</h3><ul class=category-list><li class=category-list-item><a class=category-list-link href="/categories/开发工具/"><i class=fa aria-hidden=true>开发工具</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/案例/"><i class=fa aria-hidden=true>案例</i></a><span class=category-list-count>2</span></li><li class=category-list-item><a class=category-list-link href="/categories/程序人生/"><i class=fa aria-hidden=true>程序人生</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/编程/"><i class=fa aria-hidden=true>编程</i></a><span class=category-list-count>88</span></li></ul></div><div class=widget><h3 class=title>Archives</h3><ul class=archive-list><li class=archive-list-item><a class=archive-list-link href="/archives/2018/01/"><i class=fa aria-hidden=true>2018年01月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/12/"><i class=fa aria-hidden=true>2017年12月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/11/"><i class=fa aria-hidden=true>2017年11月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/10/"><i class=fa aria-hidden=true>2017年10月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/06/"><i class=fa aria-hidden=true>2017年06月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/04/"><i class=fa aria-hidden=true>2017年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/03/"><i class=fa aria-hidden=true>2017年03月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/02/"><i class=fa aria-hidden=true>2017年02月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/01/"><i class=fa aria-hidden=true>2017年01月</i></a><span class=archive-list-count>9</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/12/"><i class=fa aria-hidden=true>2016年12月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/11/"><i class=fa aria-hidden=true>2016年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/10/"><i class=fa aria-hidden=true>2016年10月</i></a><span class=archive-list-count>8</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/09/"><i class=fa aria-hidden=true>2016年09月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/08/"><i class=fa aria-hidden=true>2016年08月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/07/"><i class=fa aria-hidden=true>2016年07月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/06/"><i class=fa aria-hidden=true>2016年06月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/05/"><i class=fa aria-hidden=true>2016年05月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/04/"><i class=fa aria-hidden=true>2016年04月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/03/"><i class=fa aria-hidden=true>2016年03月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/02/"><i class=fa aria-hidden=true>2016年02月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2015/04/"><i class=fa aria-hidden=true>2015年04月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/11/"><i class=fa aria-hidden=true>2014年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/10/"><i class=fa aria-hidden=true>2014年10月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/04/"><i class=fa aria-hidden=true>2014年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/01/"><i class=fa aria-hidden=true>2014年01月</i></a><span class=archive-list-count>2</span></li></ul></div><div class=widget><h3 class=title>Tag Cloud</h3><div class="content tag-cloud"><a href="/tags/C/" style="font-size: 17.5px;">C++</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/bat语法/" style="font-size: 10px;">bat语法</a> <a href="/tags/formatter/" style="font-size: 10px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/ngrok/" style="font-size: 10px;">ngrok</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/sublime-text3/" style="font-size: 10px;">sublime text3</a> <a href="/tags/前端/" style="font-size: 12.5px;">前端</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/感慨/" style="font-size: 12.5px;">感慨</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a></div></div><div class=widget><h3 class=title>Friends</h3><div class="content friends-link"><a href=http://blog.csdn.net/u013132051 class=fa target=_blank>个人博客</a></div></div></aside></div></div></section><footer class=main-footer><div class=container><div class=row></div></div></footer><a id=back-to-top class=hide><i class="fa fa-chevron-up"></i></a><div class=copyright><div class=container><div class=row><div class=col-sm-12><span>Copyright &copy; 2017</span> | <span>Powered by <a href=//hexo.io class=copyright-links target=_blank rel=nofollow>张新华</a></span> | <span>Theme by <a href=//github.com/shenliyang/hexo-theme-snippet.git class=copyright-links target=_blank rel=nofollow>ZxhTom</a></span></div></div></div></div><script src=https://code.jquery.com/jquery-latest.js></script><script src=https://assets.changyan.sohu.com/upload/plugins/plugins.count.js></script><script src="/assets/highlight.pack.js?rev=@@hash"></script><script>
+     hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script><script src="/js/search.js?rev=@@hash"></script><script src="/js/app.js?rev=@@hash"></script><script src="/assets/prefix.js?rev=@@hash"></script><script src="/assets/my.js?rev=@@hash"></script></body></html>

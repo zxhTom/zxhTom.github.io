@@ -1,0 +1,194 @@
+<!DOCTYPE HTML><html><head><script>
+	if('' == 'true'){
+		if (prompt('请输入管理员密码') !== '025025'){
+            alert('密码错误！');
+            location.href='https://zxhtom.oschina.io';
+    	}
+	}
+</script><meta charset=UTF-8><meta name=viewport content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><meta http-equiv=X-UA-Compatible content="IE=Edge,chrome=1"><meta http-equiv=Cache-Control content=no-siteapp><meta name=renderer content=webkit|ie-comp|ie-stand><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no,email=no,adress=no"><meta name=browsermode content=application><meta name=screen-orientation content=portrait><link rel=dns-prefetch href=https://zxhtom.oschina.io><meta name=description content=张新华的个人网站><meta name=robots content=all><meta name=google content=all><meta name=googlebot content=all><meta name=verify content=all><title>简单认识Nginx---负载均衡 | 烟花散尽13141</title><link rel=alternate href=/atom.xml title=烟花散尽13141 type=application/atom+xml><link rel=icon href=/favicon.ico><link rel=stylesheet href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css?rev=9.12.0"><link rel=stylesheet href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4"><link rel=stylesheet href=//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href="/css/style.css?rev=@@hash"><link rel=stylesheet href="/css/mycss.css?rev=@@hash"><div class=hide><script src="https://s4.cnzz.com/z_stat.php?id=1263868967&web_id=1263868967" language=JavaScript></script></div><script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?709c2dde1f61f5e589ff3ed31ba52411";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script></head><body><header class=main-header style=background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)><div class=main-header-box><a class=header-avatar href="/"><img src=/img/avatar.jpg alt=logo头像></a><div class=branding><h2>学如逆水行舟，不进则退！！！</h2></div></div></header><nav class=main-navigation><div class=container><div class=row><div class=col-sm-12><div class=navbar-header><span class="nav-toggle-button collapsed" data-toggle=collapse data-target=#main-menu id=mnav><span class=sr-only>Toggle navigation</span> <i class="fa fa-bars"></i></span></div><div class="collapse navbar-collapse" id=main-menu><ul class=menu><li role=presentation><a href="/"><i class="fa fa-fw"></i>首页</a></li><li role=presentation><a href="/about/"><i class="fa fa-fw"></i>关于我</a></li><li role=presentation><a href="/tags/"><i class="fa fa-fw"></i>标签</a></li><li role=presentation><a href="/categories/"><i class="fa fa-fw"></i>分类</a></li><li role=presentation><a href="/archives/"><i class="fa fa-fw"></i>归档</a></li><li role=presentation><a href="/schedule/"><i class="fa fa-fw"></i>日程表</a></li><li role=presentation><a href=/sitemap.xml><i class="fa fa-fw"></i>地图导航</a></li><li role=presentation><a href="/404/"><i class="fa fa-fw"></i>公益活动</a></li></ul></div></div></div></div></nav><section class=content-wrap><div class=container><div class=row><main class="col-md-8 main-content m-post"><div id=toc class=toc-article><div class=hamburger><div class=line></div><div class=line></div><div class=line></div></div><strong class=toc-title>文章目录</strong><div class=menu-inner><ol class=toc><li class="toc-item toc-level-1"><a class=toc-link href=#Nginx的安装><span class=toc-number>1.</span> <span class=toc-text>Nginx的安装</span></a></li><li class="toc-item toc-level-1"><a class=toc-link href=#Nginx与Tomcat实现负载均衡><span class=toc-number>2.</span> <span class=toc-text>Nginx与Tomcat实现负载均衡</span></a><ol class=toc-child><li class="toc-item toc-level-2"><a class=toc-link href=#准备两个Tomcat><span class=toc-number>2.1.</span> <span class=toc-text>准备两个Tomcat</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#nginx-conf><span class=toc-number>2.2.</span> <span class=toc-text>nginx.conf</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#负载均衡的几个策略><span class=toc-number>2.3.</span> <span class=toc-text>负载均衡的几个策略</span></a></li></ol></li><li class="toc-item toc-level-1"><a class=toc-link href=#nginx地址映射><span class=toc-number>3.</span> <span class=toc-text>nginx地址映射</span></a></li></ol></div><svg version=1.1 id=blob xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><path id=blob-path d=M60,500H0V0h60c0,0,20,172,20,250S60,900,60,500z></path></svg></div><p id=process></p><article class=post><div class=post-head><h1 id=简单认识Nginx---负载均衡>简单认识Nginx---负载均衡</h1><div class=post-meta><span class="categories-meta fa-wrap"><i class="fa fa-folder-open-o"></i> <span>编程</span></span> <span class=fa-wrap><i class="fa fa-tags"></i> <span class=tags-meta>java</span></span> <span class=fa-wrap><i class="fa fa-clock-o"></i> <span class=date-meta>2017/04/28</span></span> <a href=/zxh/20170428.html#comments class=comment-count><i id=changyan_count_unit data-xid=zxh/20170428.html></i>留言, <i id=changyan_parti_unit data-xid=zxh/20170428.html></i>参与</a> <span id=busuanzi_container_page_pv>view : <span id=busuanzi_value_page_pv></span>次</span></div></div><div class="post-body post-content"><p>中大型项目都会考虑到分布式<br><a id=more></a></p><p><strong>中大型项目都会考虑到分布式，前面几篇文章着重介绍了数据处理的技术集群。今天来研究一下关于服务器的负载均衡–Nginx。他除了静态资源的处理外还有可以决定将请求置于那台服务上。</strong></p><h1 id=Nginx的安装><a href=#Nginx的安装 class=headerlink title=Nginx的安装></a>Nginx的安装</h1><p><a href="http://nginx.org/" target=_blank rel=noopener><font color=red>点我下载</font></a></p><ul><li>下载好之后我们可以直接点击进行服务开启</li></ul><font color=blue>友情提醒：nginx的路径不能有汉字</font><br><img src="http://img.blog.csdn.net/20170414095443454?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=这里写图片描述><br><br>- 或者我们通过cmd命令来开启服务。首先到D:\Chirs\Downloads\nginx-1.11.11\nginx-1.11.11目录下执行命令<br><br><code>nginx</code><br><br>- 顺便说一下关闭命令：<br><br><code>nginx -s  stop</code><br><br>- 就这么简单nginx开启了。查看是否开启成功只需要打开浏览器输入127.0.0.1或者localhost<br><br><img src="http://img.blog.csdn.net/20170414095732987?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=这里写图片描述><br><br>Nginx的基本命令<br>–<br><br>- 上面已经提到了启动命令： nginx.exe<br><br>重启： nginx.exe -s reload<br>关闭：nginx.exe -s stop<br>检测配置合法性：nginx.exe -t<br><br><font color=blue>友情提醒：尽量在重启的时候用重启命令。有的人喜欢先关闭服务在开启服务。这样做如果修改后的配置是错误的，就会影响到nginx的使用。而如果用重启命令，就算修改后的配置错误了，仅仅影响新修改的功能，之前的服务仍然可以执行。</font><h1 id=Nginx与Tomcat实现负载均衡><a href=#Nginx与Tomcat实现负载均衡 class=headerlink title=Nginx与Tomcat实现负载均衡></a>Nginx与Tomcat实现负载均衡</h1><ul><li>在现在数万访问量的大数据时代，分布式是我们所必须要考虑的一个因素。那么nginx就可以帮助我们缓解大数据的压力。我们可以通过Nginx的反向代理将请求发送到不同的tomat，这样就大大的缓解了我们服务器的压力了。</li></ul><h2 id=准备两个Tomcat><a href=#准备两个Tomcat class=headerlink title=准备两个Tomcat></a>准备两个Tomcat</h2><ul><li>想要实现负载均衡我们就得有多个服务器，这样nginx才能够将请求平均分配在不同的服务上。所以这里为了掩饰效果我们只准备两个服务 器(Tomcat)。配置不同的访问端口就可以了。</li></ul><h2 id=nginx-conf><a href=#nginx-conf class=headerlink title=nginx.conf></a>nginx.conf</h2><p>首先贴出一段官网的windows的配置文件。下面逐条解释。</p><pre><code>
+#user  nobody;
+worker_processes  1;
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;
+    #                  &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;
+    #                  &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;
+
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    server {
+        listen       80;
+        server_name  localhost;
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+
+        location / {
+            root   html;
+            index  index.html index.htm;
+        }
+
+        #error_page  404              /404.html;
+
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+
+        # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+        #
+        #location ~ \.php$ {
+        #    proxy_pass   http://127.0.0.1;
+        #}
+
+        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        #
+        #location ~ \.php$ {
+        #    root           html;
+        #    fastcgi_pass   127.0.0.1:9000;
+        #    fastcgi_index  index.php;
+        #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+        #    include        fastcgi_params;
+        #}
+
+        # deny access to .htaccess files, if Apache&#39;s document root
+        # concurs with nginx&#39;s one
+        #
+        #location ~ /\.ht {
+        #    deny  all;
+        #}
+    }
+
+
+    # another virtual host using mix of IP-, name-, and port-based configuration
+    #
+    #server {
+    #    listen       8000;
+    #    listen       somename:8080;
+    #    server_name  somename  alias  another.alias;
+
+    #    location / {
+    #        root   html;
+    #        index  index.html index.htm;
+    #    }
+    #}
+
+
+    # HTTPS server
+    #
+    #server {
+    #    listen       443 ssl;
+    #    server_name  localhost;
+
+    #    ssl_certificate      cert.pem;
+    #    ssl_certificate_key  cert.key;
+
+    #    ssl_session_cache    shared:SSL:1m;
+    #    ssl_session_timeout  5m;
+
+    #    ssl_ciphers  HIGH:!aNULL:!MD5;
+    #    ssl_prefer_server_ciphers  on;
+
+    #    location / {
+    #        root   html;
+    #        index  index.html index.htm;
+    #    }
+    #}
+
+}
+</code></pre><ul><li><p><code>#user  nobody;</code> ： user属性在windows中不用设置，人家注释写的很清楚 nobody,但是在Linux系统中我们建议写 user nginx(用户) nginx(组) 。</p></li><li><p><code>worker_processes  1;</code> ： 工作进程 正常是CPU*2</p></li><li><p><code>error_log</code> : nginx 的错误日志记录的文件地址</p></li><li><p><code>pid</code> ： 在windows中每个进程在后台都是有一个pid的。</p></li></ul><p><img src="http://img.blog.csdn.net/20170428161940355?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=这里写图片描述></p><ul><li><code>events</code> : 里面设置一些属性比如连接数 worker_connections</li></ul><ul><li><p><code>http</code> ： http就是nginx通过设置的http实现负载均衡的</p><ul><li><p><code>include mime.types;</code> ： 设定mime类型,类型由mime.type文件定义</p></li><li><p><code>default_type application/octet-stream;</code> ： 设置默认的请求类型</p></li><li><p><code>log_format</code> ： 日志的输出格式。</p></li><li><p>日志格式参数解释：</p></li><li><p><code>$remote_addr</code>与<code>$http_x_forwarded_for</code>用以记录客户端的ip地址；</p></li><li><p>$remote_user：用来记录客户端用户名称；</p></li><li><p>$time_local： 用来记录访问时间与时区；</p></li><li><p>$request： 用来记录请求的url与http协议；</p></li><li><p>$status： 用来记录请求状态；成功是200，</p></li><li><p>$body_bytes_sent ：记录发送给客户端文件主体内容大小；</p></li><li><p>$http_referer：用来记录从那个页面链接访问过来的；</p></li><li><p>$http_user_agent：记录客户浏览器的相关信息；</p></li><li><p><code>sendfile on;</code> : sendfile指令指定 nginx 是否调用sendfile 函数（zero copy 方式）来输出文件，对于普通应用，必须设为on。如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络IO处理速度，降低系统uptime。</p></li></ul></li></ul><pre><code>-  `tcp_nopush on;`: 此选项允许或禁止使用socke的TCP_CORK的选项，此选项仅在使用sendfile的时候使用 　　
+</code></pre><font color=blue><a href=http://blog.csdn.net/tjcyjd/article/details/50695922 target=_blank rel=noopener>详细</a></font><br><br><br>nginx.conf修改<br>–<br><br>- 上面我们已经详细的介绍了nginx的各个参数的设置了。在配置之前我们先看看nginx初始配置http的location<br><br><img src="http://img.blog.csdn.net/20170428165415512?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=这里写图片描述><br><br>- 通过上面的我们可以看出，当我们访问localhost(server_name):80(listen)的时候，nginx就会自动跳转到html文件夹中的index.html或者是index.htm的页面上了。<br><img src="http://img.blog.csdn.net/20170428165621997?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=这里写图片描述><br><br>- 我们现在要做的就是在访问nginx是随机的跳转到我们指定的Tomcat上。相信大家都知道了，就是修改location的映射路径就行了。但是我们的映射路径是个选择器，所以我们首先构造一个选择器出来<br><br><code>upstream mynginxserver {
+        server 192.168.1.183:8888 weight=2;
+        server 192.168.1.183:8080 weight=1;
+  }</code><br><br>- 其中weight是权重，就是nginx在随机选择的时候回根据这个权重去选择服务。<br><br>- 然后我们将location的映射路径映射到mynginserver上就行了。<br><br><code>location / {
+            proxy_pass http://mynginxserver;
+        }</code><br><br><font color=red>注意： proxy_pass 后必须以<a href=http://开头。 target=_blank rel=noopener>http://开头。</a></font><ul><li>一切配置好之后我们重启nginx（nginx.exe -s reload）。这个时候我们先分别看看两个Tomcat访问的效果<br><font color=red>注意看路径的端口是不同的</font><br>Tomcat1：<br><img src="http://img.blog.csdn.net/20170428170239709?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=这里写图片描述></li></ul><p>Tomcat2：<br><img src="http://img.blog.csdn.net/20170428170252157?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=这里写图片描述></p><p>然后我们这个时候在访问nginx的端口：<code>http://192.168.1.183:802/springtests/</code></p><p><img src="http://img.blog.csdn.net/20170428170535775?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=这里写图片描述><br><img src="http://img.blog.csdn.net/20170428170552369?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=这里写图片描述></p><ul><li>上面的效果就是同一个请求但是请求的页面是两个页面，实际上是请求的两个Tomcat。我们实际运行中会在两个Tomcat上放置完全相同的项目。这样用户体验就是使用的同一个项目，但是我们已经实现了负载均衡了。</li></ul><h2 id=负载均衡的几个策略><a href=#负载均衡的几个策略 class=headerlink title=负载均衡的几个策略></a>负载均衡的几个策略</h2><ul><li><p>上面我们已经实现了负载均衡。nginx给我提供了关于负载均衡的策略。</p></li><li><p>默认策略–轮询：</p></li></ul><pre><code>upstream mynginxserver {
+        server 192.168.1.183:8888;
+        server 192.168.1.183:8080;
+    }
+</code></pre><p>通过请求的时间顺序请求不同的Tomcat。如果某一个宕机了，则自动忽略。</p><ul><li>最少链接 : 顾名思义就是在选择的时候谁的连接数最少，就选择谁</li></ul><pre><code>upstream mynginxserver {
+    least_conn;
+        server 192.168.1.183:8888;
+        server 192.168.1.183:8080;
+    }
+</code></pre><ul><li>weight权重： 这种方式也是我上面实现负载均衡采用的方式。默认值是1 。就是在选择具体发送到哪一个Tomcat的时候是根据Tomcat的权重判断的。</li></ul><pre><code>upstream mynginxserver {
+        server 192.168.1.183:8888 weight=2;
+        server 192.168.1.183:8080 weight=1;
+    }
+</code></pre><ul><li>ip_hash : 这个就是根据当前请求的ip，根据ip算出对应的hash值，然后在根据hash值选择对应的Tomcat。这种效果就是一台客户端至始至终访问的都是同一台Tomcat。这里的session就是一样的。</li></ul><pre><code>upstream mynginxserver {
+    ip_hash;
+        server 192.168.1.183:8888 ;
+        server 192.168.1.183:8080 ;
+    }
+</code></pre><ul><li>url_hash: 和ip_hash是一个效果</li></ul><pre><code>upstream mynginxserver {
+    hash $request_url;
+        server 192.168.1.183:8888;
+        server 192.168.1.183:8080;
+    }
+</code></pre><ul><li>fair：根据响应时间来定的。谁的响应时间短，就连谁。</li></ul><pre><code>upstream mynginxserver {
+        server 192.168.1.183:8888 ;
+        server 192.168.1.183:8080 ;
+        fair;
+    }
+</code></pre><h1 id=nginx地址映射><a href=#nginx地址映射 class=headerlink title=nginx地址映射></a>nginx地址映射</h1><ul><li><p>nginx除了作为服务器的负载均衡外，还有一个亮点就是地址映射。作为资源服务器来使用。在我们的web开发中经常需要上传资源到服务上。我们总不能将资源放在Tomcat上。这样会大大增加Tomcat的压力的。而且这样数据很容易丢失的。nginx就可以解决这个问题。</p></li><li><p>其实在上面实现负载均衡的时候就已经实现了地址映射。location就是地址映射的桥梁。</p></li></ul><pre><code>location ~ ^/images/(.*) 
+
+         # location ~ ^/images/(.*\.jpg) 
+
+         #“.”表示任何字符，“*”表示任意数量，
+
+         #“\.jpg”表示jpg后缀名的文件
+
+      {
+
+         expires 1s;
+
+         alias D:/zxh/test/$1;   #“$1”表是location后面（）的内容
+
+         index  index.html index.htm;
+
+         break;
+
+      }
+</code></pre><p>上面的location表示在通过server+port+^images^.^的形式就会映射到D:/zxh/test这个文件夹下。<br>比如我在浏览器中访问：<code>http://192.168.1.183:802/images/test.jpg</code></p><p>这个时候nginx就会去访问D:/zxh/test下时候有test.jpg的图片。<br><img src="http://img.blog.csdn.net/20170428173650052?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=这里写图片描述></p><p><img src="http://img.blog.csdn.net/20170428173702894?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=这里写图片描述></p><p>以上是在网上参考别人写的整理。不喜勿喷！@</p></div><div class=post-footer><div>转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a target=_blank>烟花散尽13141</a></div><div></div></div></article><div class="article-nav prev-next-wrap clearfix"><a href=/zxh/20170611.html class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a> <a href=/zxh/20170422.html class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a></div><div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div><button id=rewardButton disable=enable onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}"><span>赏</span></button><div id=QR style="display: none;"><div id=wechat style="display: inline-block"><a href=/img/wechatpay.jpg class="fancybox fancybox.image" rel=group><img id=wechat_qr src=/img/wechatpay.jpg alt="颜敏 WeChat Pay"></a><p>微信打赏</p></div><div id=alipay style="display: inline-block"><a href=/img/alipay.jpg class="fancybox fancybox.image" rel=group><img id=alipay_qr src=/img/alipay.jpg alt="颜敏 Alipay"></a><p>支付宝打赏</p></div></div></div><div id=comments><div id=SOHUCS sid=/zxh/20170428.html></div><script type=text/javascript> 
+    (function(){ 
+    var appid = 'cyti5JvoU'; 
+    var conf = 'prod_a32310aad07e12c7706c8da1901ed57b'; 
+    var width = window.innerWidth || document.documentElement.clientWidth; 
+    if (width < 960) { 
+    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script></div></main><aside class="col-md-4 sidebar"><div class=widget><h3 class=title>Search</h3><div id=search-form><div id=result-mask class=hide></div><div class=search-area><input id=search-key type=search autocomplete=off placeholder=搜点什么呢?> <button type=button class=search-form-submit id=search-local>站内搜索</button></div><div id=result-wrap class=hide><div id=search-result></div></div><div class=hide><template id=search-tpl><div class=item><a href=/{path} title={title}><div class=title>{title}</div><div class=content>{content}</div></a></div></template></div></div></div><div class="widget notification"><h3 class=title>网站公告</h3><div><p><font color=red>pc、移动端目录区分设计</font></p></div></div><div class=widget><h3 class=title>Social</h3><div class="content social"><a href=//gitee.com/zxhtom rel="external nofollow" title=oschina target=_blank><i class="git fa fa-git"></i></a> <a href=mailto:870775401@qq.com rel="external nofollow" title=邮箱 target=_blank><i class="envelope-o fa fa-envelope-o"></i></a> <a href=870775401 rel="external nofollow" title=联系QQ target=_blank><i class="qq fa fa-qq"></i></a> <a href="/" rel="external nofollow" title=微博 target=_blank><i class="weibo fa fa-weibo"></i></a> <a href=376091466 rel="external nofollow" title=QQ群1 target=_blank><i class="users fa fa-users"></i></a> <a href=/atom.xml rel="external nofollow" title=RSS target=_blank><i class="feed fa fa-feed"></i></a></div></div><div class=widget><h3 class=title>Categories</h3><ul class=category-list><li class=category-list-item><a class=category-list-link href="/categories/开发工具/"><i class=fa aria-hidden=true>开发工具</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/案例/"><i class=fa aria-hidden=true>案例</i></a><span class=category-list-count>2</span></li><li class=category-list-item><a class=category-list-link href="/categories/程序人生/"><i class=fa aria-hidden=true>程序人生</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/编程/"><i class=fa aria-hidden=true>编程</i></a><span class=category-list-count>88</span></li></ul></div><div class=widget><h3 class=title>Archives</h3><ul class=archive-list><li class=archive-list-item><a class=archive-list-link href="/archives/2018/01/"><i class=fa aria-hidden=true>2018年01月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/12/"><i class=fa aria-hidden=true>2017年12月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/11/"><i class=fa aria-hidden=true>2017年11月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/10/"><i class=fa aria-hidden=true>2017年10月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/06/"><i class=fa aria-hidden=true>2017年06月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/04/"><i class=fa aria-hidden=true>2017年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/03/"><i class=fa aria-hidden=true>2017年03月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/02/"><i class=fa aria-hidden=true>2017年02月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/01/"><i class=fa aria-hidden=true>2017年01月</i></a><span class=archive-list-count>9</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/12/"><i class=fa aria-hidden=true>2016年12月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/11/"><i class=fa aria-hidden=true>2016年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/10/"><i class=fa aria-hidden=true>2016年10月</i></a><span class=archive-list-count>8</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/09/"><i class=fa aria-hidden=true>2016年09月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/08/"><i class=fa aria-hidden=true>2016年08月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/07/"><i class=fa aria-hidden=true>2016年07月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/06/"><i class=fa aria-hidden=true>2016年06月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/05/"><i class=fa aria-hidden=true>2016年05月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/04/"><i class=fa aria-hidden=true>2016年04月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/03/"><i class=fa aria-hidden=true>2016年03月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/02/"><i class=fa aria-hidden=true>2016年02月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2015/04/"><i class=fa aria-hidden=true>2015年04月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/11/"><i class=fa aria-hidden=true>2014年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/10/"><i class=fa aria-hidden=true>2014年10月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/04/"><i class=fa aria-hidden=true>2014年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/01/"><i class=fa aria-hidden=true>2014年01月</i></a><span class=archive-list-count>2</span></li></ul></div><div class=widget><h3 class=title>Tag Cloud</h3><div class="content tag-cloud"><a href="/tags/C/" style="font-size: 17.5px;">C++</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/bat语法/" style="font-size: 10px;">bat语法</a> <a href="/tags/formatter/" style="font-size: 10px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/ngrok/" style="font-size: 10px;">ngrok</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/sublime-text3/" style="font-size: 10px;">sublime text3</a> <a href="/tags/前端/" style="font-size: 12.5px;">前端</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/感慨/" style="font-size: 12.5px;">感慨</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a></div></div><div class=widget><h3 class=title>Friends</h3><div class="content friends-link"><a href=http://blog.csdn.net/u013132051 class=fa target=_blank>个人博客</a></div></div></aside></div></div></section><footer class=main-footer><div class=container><div class=row></div></div></footer><a id=back-to-top class=hide><i class="fa fa-chevron-up"></i></a><div class=copyright><div class=container><div class=row><div class=col-sm-12><span>Copyright &copy; 2017</span> | <span>Powered by <a href=//hexo.io class=copyright-links target=_blank rel=nofollow>张新华</a></span> | <span>Theme by <a href=//github.com/shenliyang/hexo-theme-snippet.git class=copyright-links target=_blank rel=nofollow>ZxhTom</a></span></div></div></div></div><script src=https://code.jquery.com/jquery-latest.js></script><script src=https://assets.changyan.sohu.com/upload/plugins/plugins.count.js></script><script src="/assets/highlight.pack.js?rev=@@hash"></script><script>
+     hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script><script src="/js/search.js?rev=@@hash"></script><script src="/js/app.js?rev=@@hash"></script><script src="/assets/prefix.js?rev=@@hash"></script><script src="/assets/my.js?rev=@@hash"></script></body></html>

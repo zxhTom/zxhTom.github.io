@@ -1,0 +1,562 @@
+<!DOCTYPE HTML><html><head><script>
+	if('' == 'true'){
+		if (prompt('请输入管理员密码') !== '025025'){
+            alert('密码错误！');
+            location.href='https://zxhtom.oschina.io';
+    	}
+	}
+</script><meta charset=UTF-8><meta name=viewport content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><meta http-equiv=X-UA-Compatible content="IE=Edge,chrome=1"><meta http-equiv=Cache-Control content=no-siteapp><meta name=renderer content=webkit|ie-comp|ie-stand><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no,email=no,adress=no"><meta name=browsermode content=application><meta name=screen-orientation content=portrait><link rel=dns-prefetch href=https://zxhtom.oschina.io><meta name=description content=张新华的个人网站><meta name=robots content=all><meta name=google content=all><meta name=googlebot content=all><meta name=verify content=all><title>Javaweb表格加载---DataTable | 烟花散尽13141</title><link rel=alternate href=/atom.xml title=烟花散尽13141 type=application/atom+xml><link rel=icon href=/favicon.ico><link rel=stylesheet href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css?rev=9.12.0"><link rel=stylesheet href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4"><link rel=stylesheet href=//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href="/css/style.css?rev=@@hash"><link rel=stylesheet href="/css/mycss.css?rev=@@hash"><div class=hide><script src="https://s4.cnzz.com/z_stat.php?id=1263868967&web_id=1263868967" language=JavaScript></script></div><script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?709c2dde1f61f5e589ff3ed31ba52411";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script></head><body><header class=main-header style=background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)><div class=main-header-box><a class=header-avatar href="/"><img src=/img/avatar.jpg alt=logo头像></a><div class=branding><h2>学如逆水行舟，不进则退！！！</h2></div></div></header><nav class=main-navigation><div class=container><div class=row><div class=col-sm-12><div class=navbar-header><span class="nav-toggle-button collapsed" data-toggle=collapse data-target=#main-menu id=mnav><span class=sr-only>Toggle navigation</span> <i class="fa fa-bars"></i></span></div><div class="collapse navbar-collapse" id=main-menu><ul class=menu><li role=presentation><a href="/"><i class="fa fa-fw"></i>首页</a></li><li role=presentation><a href="/about/"><i class="fa fa-fw"></i>关于我</a></li><li role=presentation><a href="/tags/"><i class="fa fa-fw"></i>标签</a></li><li role=presentation><a href="/categories/"><i class="fa fa-fw"></i>分类</a></li><li role=presentation><a href="/archives/"><i class="fa fa-fw"></i>归档</a></li><li role=presentation><a href="/schedule/"><i class="fa fa-fw"></i>日程表</a></li><li role=presentation><a href=/sitemap.xml><i class="fa fa-fw"></i>地图导航</a></li><li role=presentation><a href="/404/"><i class="fa fa-fw"></i>公益活动</a></li></ul></div></div></div></div></nav><section class=content-wrap><div class=container><div class=row><main class="col-md-8 main-content m-post"><div id=toc class=toc-article><div class=hamburger><div class=line></div><div class=line></div><div class=line></div></div><strong class=toc-title>文章目录</strong><div class=menu-inner><ol class=toc><li class="toc-item toc-level-2"><a class=toc-link href=#datatable引入><span class=toc-number>1.</span> <span class=toc-text>datatable引入</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#表格的创建><span class=toc-number>2.</span> <span class=toc-text>表格的创建</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#参数说明><span class=toc-number>3.</span> <span class=toc-text>参数说明</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#数据匹配显示><span class=toc-number>4.</span> <span class=toc-text>数据匹配显示</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#列数据二次加工><span class=toc-number>5.</span> <span class=toc-text>列数据二次加工</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#后台参数接收><span class=toc-number>6.</span> <span class=toc-text>后台参数接收</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#表格刷新><span class=toc-number>7.</span> <span class=toc-text>表格刷新</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#使用dataTable常见问题汇总><span class=toc-number>8.</span> <span class=toc-text>使用dataTable常见问题汇总</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#完整DataTable加载样本><span class=toc-number>9.</span> <span class=toc-text>完整DataTable加载样本</span></a></li></ol></div><svg version=1.1 id=blob xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><path id=blob-path d=M60,500H0V0h60c0,0,20,172,20,250S60,900,60,500z></path></svg></div><p id=process></p><article class=post><div class=post-head><h1 id=Javaweb表格加载---DataTable>Javaweb表格加载---DataTable</h1><div class=post-meta><span class="categories-meta fa-wrap"><i class="fa fa-folder-open-o"></i> <span>编程</span></span> <span class=fa-wrap><i class="fa fa-tags"></i> <span class=tags-meta>java</span></span> <span class=fa-wrap><i class="fa fa-clock-o"></i> <span class=date-meta>2017/02/27</span></span> <a href=/zxh/20170227.html#comments class=comment-count><i id=changyan_count_unit data-xid=zxh/20170227.html></i>留言, <i id=changyan_parti_unit data-xid=zxh/20170227.html></i>参与</a> <span id=busuanzi_container_page_pv>view : <span id=busuanzi_value_page_pv></span>次</span></div><p class="fa fa-exclamation-triangle warning">本文于<strong>326</strong>天之前发表，文中内容可能已经过时。</p></div><div class="post-body post-content"><p>Datatables是一款jquery表格插件<br><a id=more></a></p><blockquote><p>Datatables是一款jquery表格插件。它是一个高度灵活的工具，可以将任何HTML表格添加高级的交互功能。 使用 jQuery Datatable 构造数据列表，并且增加或者隐藏相应的列，已达到数据显示要求。同时， jQuery Datatable 强大的功能支持：排序，分页，搜索等。</p></blockquote><h2 id=datatable引入><a href=#datatable引入 class=headerlink title=datatable引入></a>datatable引入</h2><ul><li>css : //cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css</li><li><p>js : //cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js</p></li><li><p>这里申明一下，引入这上面js前提是引入jquery，因为这是基于jquery开发的</p></li></ul><h2 id=表格的创建><a href=#表格的创建 class=headerlink title=表格的创建></a>表格的创建</h2><ul><li>环境准备好之后，我们需要提供一个table的样板。就是给一个table 并命名一个ID，下面是我项目中class样式，你可以不引入只需要一个id</li></ul><pre><code>&lt;table class=&quot;table table-striped table-hover table-bordered&quot; id=&quot;adminTable&quot;&gt;
+&lt;/table&gt;
+</code></pre><h2 id=参数说明><a href=#参数说明 class=headerlink title=参数说明></a>参数说明</h2><pre><code>var  adminTable = $(&#39;#adminTable&#39;).DataTable({});
+</code></pre><ul><li><p>最后我们只需要在js中向上面那样就行了。只不过想要实现我们想象中的table我们需要对adminTable指定相应的参数。首先需要的就是请求地址的指定</p></li><li><p>sAjaxSource： 指定我们的请求路径</p></li><li><p>lengthMenu： 表格中每页的大小，就是下面的效果<br><img src="http://img.blog.csdn.net/20170227113010073?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=这里写图片描述></p></li><li><p>pageLength：当前默认每页显示的数量</p></li><li><p>oLanguage：这里是一些语言的设置，提示语言的设置，默认是英文的，。</p></li></ul><pre><code>&quot;sProcessing&quot; : &quot;正在加载数据...&quot;,
+                    &quot;sSearch&quot; : &quot;搜索:&quot;,
+                    &quot;sLengthMenu&quot; : &quot;_MENU_条记录&quot;,
+                    &quot;sZeroRecords&quot; : &quot;没有查到记录&quot;,
+                    &quot;sInfo&quot; : &quot;第  _START_ 条到第  _END_ 条记录,一共  _TOTAL_ 条记录&quot;,
+                    &quot;sInfoEmpty&quot; : &quot;0条记录&quot;,
+                    &quot;oPaginate&quot; : 
+                    {
+                        &quot;sPrevious&quot; : &quot;上一页 &quot;,
+                        &quot;sNext&quot; : &quot; 下一页&quot;,
+                    }
+</code></pre><ul><li>还有一些额外的设置，`”bSort” : true,<pre><code>       &quot;bProcessing&quot; : true,
+       &quot;bServerSide&quot; : true,
+       &quot;async&quot; : false,`
+</code></pre></li></ul><ul><li>最后数据显示才是重点。这个放在下面讲解</li></ul><h2 id=数据匹配显示><a href=#数据匹配显示 class=headerlink title=数据匹配显示></a>数据匹配显示</h2><ul><li>上面我们已经将表格的请求通过sAjaxSource这个属性指定好了，那么至于数据是如何显示在正确的位置的呢，主要是通过<code>aoColumns</code>这个属性匹配的。首先我们看看我们后台发回来的数据长啥样子</li></ul><p><img src="http://img.blog.csdn.net/20170227113618613?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=这里写图片描述></p><ul><li>aaDataa是我们的数据，一看就知道是个list，aaData下表就是所在索引，每个索引里面又有1-7的索引，1-7就是相当于我们表格的7列，所以我们前台table就是遍历aaData将1-7附在对应的列上，datatable也很简单，就是按照顺序赋值的的，所以我们按顺序写列名就行了</li></ul><pre><code>[
+                        {
+                            &quot;sTitle&quot; : &quot;id&quot;,
+                            &quot;bSortable&quot; : false
+                        },
+                        {
+                            &quot;sTitle&quot; : &#39;&lt;label class=&quot;mt-checkbox mt-checkbox-single mt-checkbox-outline&quot;&gt;&lt;input type=&quot;checkbox&quot; id=&quot;checkAll&quot; onclick=&quot;adminChooseOrNoChoose(this)&quot; /&gt;&lt;span&gt;&lt;/span&gt;&lt;/label&gt;&#39;,
+                            &quot;bSortable&quot; : false,
+                            &quot;sClass&quot; : &quot;text-center&quot;,
+                            &quot;fnCreatedCell&quot; : function(nTd, sData, oData,iRow, iCol) 
+                            {
+                                var value = oData[0];
+                                var content = &#39;&lt;label class=&quot;mt-checkbox mt-checkbox-single mt-checkbox-outline&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;testCheckbox&quot; onclick=&quot;recordMainId(this)&quot; value=&quot;&#39;+value+&#39;&quot; /&gt;&lt;span&gt;&lt;/span&gt;&lt;/label&gt;&#39;;
+                                $(nTd).html(content);
+                            }
+                        }, {
+                            &quot;sTitle&quot; : &quot;用户名&quot;,
+                            &quot;bSortable&quot; : true,
+                            &quot;sClass&quot; : &quot;text-center&quot;
+                        }, {
+                            &quot;sTitle&quot; : &quot;姓名&quot;,
+                            &quot;bSortable&quot; : true,
+                            &quot;bAutoWidth&quot; : true,
+                            &quot;sClass&quot; : &quot;text-center&quot;
+                        }, {
+                            &quot;sTitle&quot; : &quot;授权人&quot;,
+                            &quot;bSortable&quot; : false,
+                            &quot;sClass&quot; : &quot;text-center&quot;
+                        }, {
+                            &quot;sTitle&quot; : &quot;已分配角色&quot;,
+                            &quot;bSortable&quot; : true,
+                            &quot;sClass&quot; : &quot;text-center&quot;
+                        }, {
+                            &quot;sTitle&quot; : &quot;管辖站点&quot;,
+                            &quot;bSortable&quot; : true,
+                            &quot;sClass&quot; : &quot;text-center&quot;
+                        }, {
+                            &quot;sTitle&quot; : &quot;创建时间&quot;,
+                            &quot;bSortable&quot; : true,
+                            &quot;sClass&quot; : &quot;text-center&quot;
+                        }, {
+                            &quot;sTitle&quot; : &quot;操作&quot;,
+                            &quot;bSortable&quot; : true,
+                            &quot;sClass&quot; : &quot;text-center&quot;
+                        } ]
+</code></pre><ul><li>至于每列的设置，大家看名称应该知道是啥意思。但是我们的列并不是仅仅显示数据的。比如有的是要加超链接。有的并不是仅仅显示原始数据，需要进行加工处理的。这里我们需要一个加工函数，上面也提到了。</li></ul><h2 id=列数据二次加工><a href=#列数据二次加工 class=headerlink title=列数据二次加工></a>列数据二次加工</h2><pre><code>fnCreatedCell
+</code></pre><ul><li>方法就是多数据进行二次加工。</li></ul><pre><code>&quot;fnCreatedCell&quot; : function(nTd, sData, oData,iRow, iCol) 
+                            {
+                                var value = oData[0];
+                                var content = &#39;&lt;label class=&quot;mt-checkbox mt-checkbox-single mt-checkbox-outline&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;testCheckbox&quot; onclick=&quot;recordMainId(this)&quot; value=&quot;&#39;+value+&#39;&quot; /&gt;&lt;span&gt;&lt;/span&gt;&lt;/label&gt;&#39;;
+                                $(nTd).html(content);
+                            }
+</code></pre><ul><li>其中值得一说的里面参数就是oData，oData就是所在行的所有列数据的集合数组。很有用的。比如你想去改行的第一列数据，直接oData[0]就取到了。在做修改删除很有用。</li></ul><ul><li>但是dataTable还通过另外一种方式对数据进行二次处理。就是通过<code>aoColumnDefs</code>这个属性来指定具体列的数据加工。</li></ul><pre><code>[
+                        {
+                            &quot;bSearchable&quot; : true,
+                            &quot;bVisible&quot; : false,
+                            &quot;aTargets&quot; : [ 0 ]
+                        },
+                        {
+                            &quot;aTargets&quot; : [ 3 ],
+                            &quot;mRender&quot; : function(data,type, full) 
+                            {
+                                var value=full[0];
+                                return &quot;&lt;a href=&#39;&#39; onclick=&#39;showUserInfo(\&quot;&quot;+value+&quot;\&quot;)&#39; data-toggle=&#39;modal&#39; data-target=&#39;#viewModal&#39;&gt;&quot;+ data+ &quot;&lt;/a&gt;&quot;;
+                            }
+                        },
+                        {
+                            &quot;aTargets&quot; : [ 4 ],
+                            &quot;mRender&quot; : function(data,type, full) 
+                            {
+                                if(data==null)
+                                {
+                                    data=&quot;@@@&quot;
+                                }
+                                var arr = data.split(&quot;@@@&quot;);
+                                return &quot;&lt;a href=&#39;&#39; data-toggle=&#39;modal&#39; data-target=&#39;#viewModal&#39; onclick=&#39;showUserInfo(\&quot;&quot;+ arr[0]+ &quot;\&quot;)&#39; &gt;&quot;+ arr[1]+ &quot;&lt;/a&gt;&quot;;
+                            }
+                        },
+                        {
+                            &quot;aTargets&quot; : [ 8 ],
+                            &quot;mRender&quot; : function(data,type, full) {
+                                return &quot;&lt;a href=&#39;javascript;;&#39; onclick=&#39; return adminUpdate(this)&#39; site=&#39;&quot;+ full[6]+ &quot;&#39; id=&#39;&quot;+ full[0]+ &quot;&#39; name=&#39;&quot;+ full[2]+ &quot;&#39; data-toggle=&#39;modal&#39; data-target=&#39;#myModalUpdate&#39;&gt;修改&lt;/a&gt;     &lt;a href=&#39;&#39; data-toggle=&#39;modal&#39; data-target=&#39;#deleteModal&#39; onclick=&#39;return adminDelete(this)&#39; id=&#39;&quot;+full[0]+&quot;&#39; role=&#39;&quot;+ full[5]+ &quot;&#39;&gt;删除&lt;/a&gt;&quot;;
+                            }
+                        } ]
+</code></pre><ul><li><p>这种方法缺陷就是需要我们指定列号，但是实际开发中我们的列号可能是会因为项目需求而改变的，所以这个方法不是很好，但是也能实现同样的效果。然后通过<code>mRender</code>指定函数时间，里面的full和oData是一个数据效果。</p></li><li><p>到这里数据显示及一些CURD操作基本就实现了。但是有的时候我们需要将表格加载数据是携带参数查询，这个时候我们除了在指定的请求上加，还有一种方法是在数据回调是处理的。通过<code>fnServerData</code>属性，我们可以加条件参数传入后台。</p></li></ul><pre><code>// 服务器端，数据回调处理  
+                &quot;fnServerData&quot; : function retrieveData(sSource, aoData, fnCallback) 
+                {
+                    aoData.push({
+                        &quot;name&quot; : &quot;user_name&quot;,
+                        &quot;value&quot; : $(&#39;#user_name&#39;).val()
+                    });
+                    aoData.push({
+                        &quot;name&quot; : &quot;real_name&quot;,
+                        &quot;value&quot; : $(&#39;#real_name&#39;).val()
+                    });
+                    aoData.push({
+                        &quot;name&quot; : &quot;create_user_name&quot;,
+                        &quot;value&quot; : $(
+                                &#39;#create_user_name&#39;).val()
+                    });
+                    aoData.push({
+                        &quot;name&quot; : &quot;site_id&quot;,
+                        &quot;value&quot; : $(&#39;#site_id&#39;).val()
+                    });
+                    aoData.push({
+                        &quot;name&quot; : &quot;fromTime&quot;,
+                        &quot;value&quot; : $(&#39;#fromTime&#39;).val()
+                    });
+                    aoData.push({
+                        &quot;name&quot; : &quot;toTime&quot;,
+                        &quot;value&quot; : $(&#39;#toTime&#39;).val()
+                    });
+                    $.ajax({
+                        &quot;type&quot; : &quot;POST&quot;,
+                        &quot;url&quot; : sSource,
+                        &quot;dataType&quot; : &quot;json&quot;,
+                        &quot;contentType&quot; : &quot;application/json&quot;,
+                        &quot;data&quot; : JSON.stringify(aoData),
+                        &quot;success&quot; : function(data) 
+                        {
+                            fnCallback(data);
+                        }
+                    });
+                }
+</code></pre><ul><li>条件参数通过aoData.push方法加入。到这里前台table已经显示完了。我们在看看后台数据处理逻辑。</li></ul><h2 id=后台参数接收><a href=#后台参数接收 class=headerlink title=后台参数接收></a>后台参数接收</h2><ul><li>前台我们指定的请求我们在后台对应的请求中加入如下参数。</li></ul><p><img src="http://img.blog.csdn.net/20170227114922949?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=这里写图片描述></p><ul><li>前台中的aoData.push进来的参数及datatable自身关于分页等等的信息数据全是放在dataTableParams这个变量中。我们只需要将他转换成map就可以传入数据库操作了。</li></ul><p>转map代码：</p><pre><code>HashMap&lt;String, String&gt; paramsMap = new HashMap&lt;&gt;();
+        for (DataTableParam dataTableParam : dataTableParams) 
+        {
+            paramsMap.put(dataTableParam.getName(), dataTableParam.getValue());
+        }
+</code></pre><ul><li>下面的操作我就不在细致说了，下面就是传入数据sql的操作了。</li></ul><h2 id=表格刷新><a href=#表格刷新 class=headerlink title=表格刷新></a>表格刷新</h2><ul><li>在实际中我们都需要不刷新页面只刷新页面中某个空间。datatable基于此需求专门提供了刷新表格的方法。在实际开发中我们改变了表中数据最后我们调用刷新的方法就行了</li></ul><pre><code>adminTable.draw();
+</code></pre><h2 id=使用dataTable常见问题汇总><a href=#使用dataTable常见问题汇总 class=headerlink title=使用dataTable常见问题汇总></a>使用dataTable常见问题汇总</h2><p><img src="http://img.blog.csdn.net/20170227115556405?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=这里写图片描述></p><ul><li>这个问题基本上就是数据不匹配，这是因为我在前台<code>aoColumns</code>中指定了7列，但是我们后台只穿回来6列的原因，只要少于7列都是这种错误。修改方法：去后台添加完整数据。<font color=red>就算某列时空也要加入，加入空字符串代替，因为前台是按顺序的加载数据的，所以没数据也要用空字符串占替位置。</font></li></ul><font color=blue>dataTable发展的版本很多，不同的版本里面的参数名可能不太一样，需要注意一下，有的版本加载table的请求地址是通过ajax属性来实现的。有的就是sAjaxSource属性实现的，只是名称不一样了而已。</font><h2 id=完整DataTable加载样本><a href=#完整DataTable加载样本 class=headerlink title=完整DataTable加载样本></a>完整DataTable加载样本</h2><pre><code>var adminTable= $(&#39;#adminTable&#39;).DataTable(
+            {
+                &quot;bSort&quot; : true,
+                &quot;bProcessing&quot; : true,
+                &quot;bServerSide&quot; : true,
+                &quot;async&quot; : false,
+                //&quot;retrieve&quot; : true,//保证只有一个table实例  
+                &quot;bStateSave&quot; : false,
+                &quot;sAjaxSource&quot; : jQuery.getBasePath()
+                        + &quot;/adminManage/tableDisplay.bsh&quot;,
+                &quot;sDom&quot; : &#39;&lt;&quot;top&quot;l&lt;&quot;clear&quot;&gt;&gt;rt&lt;&quot;bottom&quot;ip&lt;&quot;clear&quot;&gt;&gt;&#39;,
+                &quot;lengthMenu&quot; : [ 10, 25, 75, 100 ],
+                &quot;pageLength&quot; : 10,
+                &quot;oLanguage&quot; : 
+                {
+                    &quot;sProcessing&quot; : &quot;正在加载数据...&quot;,
+                    &quot;sSearch&quot; : &quot;搜索:&quot;,
+                    &quot;sLengthMenu&quot; : &quot;_MENU_条记录&quot;,
+                    &quot;sZeroRecords&quot; : &quot;没有查到记录&quot;,
+                    &quot;sInfo&quot; : &quot;第  _START_ 条到第  _END_ 条记录,一共  _TOTAL_ 条记录&quot;,
+                    &quot;sInfoEmpty&quot; : &quot;0条记录&quot;,
+                    &quot;oPaginate&quot; : 
+                    {
+                        &quot;sPrevious&quot; : &quot;上一页 &quot;,
+                        &quot;sNext&quot; : &quot; 下一页&quot;,
+                    }
+                },
+                &quot;aoColumnDefs&quot; : [
+                        {
+                            &quot;bSearchable&quot; : true,
+                            &quot;bVisible&quot; : false,
+                            &quot;aTargets&quot; : [ 0 ]
+                        },
+                        {
+                            &quot;aTargets&quot; : [ 3 ],
+                            &quot;mRender&quot; : function(data,type, full) 
+                            {
+                                var value=full[0];
+                                return &quot;&lt;a href=&#39;&#39; onclick=&#39;showUserInfo(\&quot;&quot;+value+&quot;\&quot;)&#39; data-toggle=&#39;modal&#39; data-target=&#39;#viewModal&#39;&gt;&quot;+ data+ &quot;&lt;/a&gt;&quot;;
+                            }
+                        },
+                        {
+                            &quot;aTargets&quot; : [ 4 ],
+                            &quot;mRender&quot; : function(data,type, full) 
+                            {
+                                if(data==null)
+                                {
+                                    data=&quot;@@@&quot;
+                                }
+                                var arr = data.split(&quot;@@@&quot;);
+                                return &quot;&lt;a href=&#39;&#39; data-toggle=&#39;modal&#39; data-target=&#39;#viewModal&#39; onclick=&#39;showUserInfo(\&quot;&quot;+ arr[0]+ &quot;\&quot;)&#39; &gt;&quot;+ arr[1]+ &quot;&lt;/a&gt;&quot;;
+                            }
+                        },
+                        {
+                            &quot;aTargets&quot; : [ 8 ],
+                            &quot;mRender&quot; : function(data,type, full) {
+                                return &quot;&lt;a href=&#39;javascript;;&#39; onclick=&#39; return adminUpdate(this)&#39; site=&#39;&quot;+ full[6]+ &quot;&#39; id=&#39;&quot;+ full[0]+ &quot;&#39; name=&#39;&quot;+ full[2]+ &quot;&#39; data-toggle=&#39;modal&#39; data-target=&#39;#myModalUpdate&#39;&gt;修改&lt;/a&gt;     &lt;a href=&#39;&#39; data-toggle=&#39;modal&#39; data-target=&#39;#deleteModal&#39; onclick=&#39;return adminDelete(this)&#39; id=&#39;&quot;+full[0]+&quot;&#39; role=&#39;&quot;+ full[5]+ &quot;&#39;&gt;删除&lt;/a&gt;&quot;;
+                            }
+                        } ],
+                &quot;aoColumns&quot; : [
+                        {
+                            &quot;sTitle&quot; : &quot;id&quot;,
+                            &quot;bSortable&quot; : false
+                        },
+                        {
+                            &quot;sTitle&quot; : &#39;&lt;label class=&quot;mt-checkbox mt-checkbox-single mt-checkbox-outline&quot;&gt;&lt;input type=&quot;checkbox&quot; id=&quot;checkAll&quot; onclick=&quot;adminChooseOrNoChoose(this)&quot; /&gt;&lt;span&gt;&lt;/span&gt;&lt;/label&gt;&#39;,
+                            &quot;bSortable&quot; : false,
+                            &quot;sClass&quot; : &quot;text-center&quot;,
+                            &quot;fnCreatedCell&quot; : function(nTd, sData, oData,iRow, iCol) 
+                            {
+                                var value = oData[0];
+                                var content = &#39;&lt;label class=&quot;mt-checkbox mt-checkbox-single mt-checkbox-outline&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;testCheckbox&quot; onclick=&quot;recordMainId(this)&quot; value=&quot;&#39;+value+&#39;&quot; /&gt;&lt;span&gt;&lt;/span&gt;&lt;/label&gt;&#39;;
+                                $(nTd).html(content);
+                            }
+                        }, {
+                            &quot;sTitle&quot; : &quot;用户名&quot;,
+                            &quot;bSortable&quot; : true,
+                            &quot;sClass&quot; : &quot;text-center&quot;
+                        }, {
+                            &quot;sTitle&quot; : &quot;姓名&quot;,
+                            &quot;bSortable&quot; : true,
+                            &quot;bAutoWidth&quot; : true,
+                            &quot;sClass&quot; : &quot;text-center&quot;
+                        }, {
+                            &quot;sTitle&quot; : &quot;授权人&quot;,
+                            &quot;bSortable&quot; : false,
+                            &quot;sClass&quot; : &quot;text-center&quot;
+                        }, {
+                            &quot;sTitle&quot; : &quot;已分配角色&quot;,
+                            &quot;bSortable&quot; : true,
+                            &quot;sClass&quot; : &quot;text-center&quot;
+                        }, {
+                            &quot;sTitle&quot; : &quot;管辖站点&quot;,
+                            &quot;bSortable&quot; : true,
+                            &quot;sClass&quot; : &quot;text-center&quot;
+                        }, {
+                            &quot;sTitle&quot; : &quot;创建时间&quot;,
+                            &quot;bSortable&quot; : true,
+                            &quot;sClass&quot; : &quot;text-center&quot;
+                        }, {
+                            &quot;sTitle&quot; : &quot;操作&quot;,
+                            &quot;bSortable&quot; : true,
+                            &quot;sClass&quot; : &quot;text-center&quot;
+                        } ],
+                // 服务器端，数据回调处理  
+                &quot;fnServerData&quot; : function retrieveData(sSource, aoData, fnCallback) 
+                {
+                    aoData.push({
+                        &quot;name&quot; : &quot;user_name&quot;,
+                        &quot;value&quot; : $(&#39;#user_name&#39;).val()
+                    });
+                    aoData.push({
+                        &quot;name&quot; : &quot;real_name&quot;,
+                        &quot;value&quot; : $(&#39;#real_name&#39;).val()
+                    });
+                    aoData.push({
+                        &quot;name&quot; : &quot;create_user_name&quot;,
+                        &quot;value&quot; : $(
+                                &#39;#create_user_name&#39;).val()
+                    });
+                    aoData.push({
+                        &quot;name&quot; : &quot;site_id&quot;,
+                        &quot;value&quot; : $(&#39;#site_id&#39;).val()
+                    });
+                    aoData.push({
+                        &quot;name&quot; : &quot;fromTime&quot;,
+                        &quot;value&quot; : $(&#39;#fromTime&#39;).val()
+                    });
+                    aoData.push({
+                        &quot;name&quot; : &quot;toTime&quot;,
+                        &quot;value&quot; : $(&#39;#toTime&#39;).val()
+                    });
+                    $.ajax({
+                        &quot;type&quot; : &quot;POST&quot;,
+                        &quot;url&quot; : sSource,
+                        &quot;dataType&quot; : &quot;json&quot;,
+                        &quot;contentType&quot; : &quot;application/json&quot;,
+                        &quot;data&quot; : JSON.stringify(aoData),
+                        &quot;success&quot; : function(data) 
+                        {
+                            fnCallback(data);
+                        }
+                    });
+                }
+            });
+}
+
+function initSelectTable() 
+{
+    UserDataTable = $(&#39;#selectUserTable&#39;).DataTable(
+    {
+        &quot;bSort&quot; : true,
+        &quot;bProcessing&quot; : true,
+        &quot;bServerSide&quot; : true,
+        &quot;bStateSave&quot; : false,
+        /* &quot;sScrollX&quot;: &quot;100%&quot;,
+        &quot;sScrollXInner&quot;: &quot;100%&quot;,
+        &quot;bScrollCollapse&quot;: true, */
+        &quot;bAutoWidth&quot; : false,
+        &quot;sAjaxSource&quot; : jQuery.getBasePath()+ &quot;/userManage/getUserTable.bsh&quot;,
+        &quot;sDom&quot; : &#39;&lt;&quot;top&quot;l&lt;&quot;clear&quot;&gt;&gt;rt&lt;&quot;bottom&quot;ip&lt;&quot;clear&quot;&gt;&gt;&#39;,
+        &quot;lengthMenu&quot; : [ 3, 20, 30 ],
+        &quot;pageLength&quot; : 3,
+        &quot;oLanguage&quot; : {
+        &quot;sProcessing&quot; : &quot;正在加载数据...&quot;,
+        &quot;sSearch&quot; : &quot;搜索:&quot;,
+        &quot;sLengthMenu&quot; : &quot;_MENU_条记录&quot;,
+        &quot;sZeroRecords&quot; : &quot;没有查到记录&quot;,
+        &quot;sInfo&quot; : &quot;第  _START_ 条到第  _END_ 条记录,一共  _TOTAL_ 条记录&quot;,
+        &quot;sInfoEmpty&quot; : &quot;0条记录&quot;,
+        &quot;oPaginate&quot; : 
+        {
+            &quot;sPrevious&quot; : &quot;上一页 &quot;,
+            &quot;sNext&quot; : &quot; 下一页&quot;,
+        }
+    },
+    &quot;aoColumnDefs&quot; : [
+        {
+            &quot;bSearchable&quot; : true,
+            &quot;bVisible&quot; : false,
+            &quot;aTargets&quot; : [ 0 ]
+        },
+        {
+            &quot;aTargets&quot; : [ 1 ],
+            &quot;mRender&quot; : function(data,type, full) 
+            {
+                return &quot;&lt;a href=&#39;&#39; onclick=&#39;viewUser(&quot;+ full[0]+ &quot;)&#39; data-toggle=&#39;modal&#39; data-target=&#39;#viewModal&#39;&gt;&quot;+ data + &quot;&lt;/a&gt;&quot;;
+            }
+        },
+        {
+            &quot;aTargets&quot;:[2],
+            &quot;mRender&quot;:function(data,type,full)
+            {
+              return &quot;&lt;a href=&#39;&#39; onclick=&#39;showUserInfo(\&quot;&quot;+full[0]+&quot;\&quot;)&#39; data-toggle=&#39;modal&#39; data-target=&#39;#viewModal&#39;&gt;&quot;+data+&quot;&lt;/a&gt;&quot;;
+            } 
+        },
+        {
+            &quot;aTargets&quot; : [ 3 ],
+            &quot;mRender&quot; : function(data,type, full) 
+            {
+                if(data==&quot;1&quot;)
+                {
+                    return &quot;已认证&quot;;
+                }
+                else if(data==&quot;2&quot;)
+                {
+                       return &quot;未认证&quot;;
+                }
+                else if(data==&quot;3&quot;)
+                {
+                       return &quot;待认证&quot;;
+                }
+                else if(data==&quot;4&quot;)
+                {
+                       return &quot;已驳回&quot;;
+                }
+            }
+        },
+        {
+            &quot;aTargets&quot; : [ 4 ],
+            &quot;mRender&quot; : function(data,type, full) 
+            {
+                if (data &gt; 0) 
+                {
+                    return &quot;关闭&quot;;
+                } 
+                else 
+                {
+                    return &quot;启用&quot;;
+                }
+            }
+        } ],
+    &quot;aoColumns&quot; : [
+        {
+            &quot;sTitle&quot; : &quot;id&quot;,
+            &quot;bSortable&quot; : false
+        },
+        {
+            &quot;sTitle&quot; : &#39;&lt;label class=&quot;mt-checkbox mt-checkbox-single mt-checkbox-outline&quot;&gt;&lt;input type=&quot;checkbox&quot; id=&quot;checkAll&quot; onclick=&quot;chooseOrNoChoose(this)&quot; /&gt;&lt;span&gt;&lt;/span&gt;&lt;/label&gt;&#39;,
+            &quot;bSortable&quot; : false,
+            &quot;sClass&quot; : &quot;text-center&quot;,
+            &quot;fnCreatedCell&quot; : function(nTd, sData, oData,iRow, iCol) 
+                            {
+                                var value = oData[0]+&quot;@@@&quot;+oData[2];
+                                var content = &#39;&lt;label class=&quot;mt-checkbox mt-checkbox-single mt-checkbox-outline&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;userCheckbox&quot; onchange=&quot;recordUserId(this)&quot; name=&quot;&#39;+ oData[2]+ &#39;&quot; value=&quot;&#39;+ value+ &#39;&quot; /&gt;&lt;span&gt;&lt;/span&gt;&lt;/label&gt;&#39;;
+                                $(nTd).html(content);
+                            }
+        }, 
+        {
+            &quot;sTitle&quot; : &quot;用户名&quot;,
+            &quot;bSortable&quot; : true,
+            &quot;sWidth&quot; : &quot;120px&quot;,
+            &quot;sClass&quot; : &quot;text-center&quot;
+        }, 
+        {
+            &quot;sTitle&quot; : &quot;实名认证&quot;,
+            &quot;sWidth&quot; : &quot;90px&quot;,
+            &quot;bSortable&quot; : true,
+            &quot;sClass&quot; : &quot;text-center&quot;
+        }, 
+        {
+            &quot;sTitle&quot; : &quot;状态&quot;,
+            &quot;sWidth&quot; : &quot;90px&quot;,
+            &quot;bSortable&quot; : false,
+            &quot;sClass&quot; : &quot;text-center&quot;
+        }, 
+        {
+            &quot;sTitle&quot; : &quot;所属站点&quot;,
+            &quot;bSortable&quot; : false,
+            &quot;sWidth&quot; : &quot;180px&quot;,
+            &quot;bAutoWidth&quot; : true,
+            &quot;sClass&quot; : &quot;text-center&quot;
+        } ],
+    // 服务器端，数据回调处理  
+    &quot;fnServerData&quot; : function retrieveData(sSource, aoData, fnCallback) 
+    {
+        aoData.push({&quot;name&quot; : &quot;userName&quot;,&quot;value&quot; : $(&quot;#selectUserName&quot;).val()});
+        aoData.push({&quot;name&quot;:&quot;site&quot;,&quot;value&quot;:$(&quot;#site&quot;).val()});
+        /*aoData.push({&quot;name&quot;:&quot;end&quot;,&quot;value&quot;:$(&quot;#end&quot;).val()});
+        aoData.push({&quot;name&quot;:&quot;realName&quot;,&quot;value&quot;:$(&quot;#realName&quot;).val()});
+        aoData.push({&quot;name&quot;:&quot;status&quot;,&quot;value&quot;:$(&quot;#status&quot;).val()});
+        aoData.push({&quot;name&quot;:&quot;site&quot;,&quot;value&quot;:$(&quot;#site&quot;).val()}) */
+        $.ajax({
+            &quot;type&quot; : &quot;POST&quot;,
+            &quot;url&quot; : sSource,
+            &quot;dataType&quot; : &quot;json&quot;,
+            &quot;contentType&quot; : &quot;application/json&quot;,
+            &quot;data&quot; : JSON.stringify(aoData),
+            &quot;success&quot; : function(data) 
+            {
+                fnCallback(data);
+            }
+        });
+    }
+    });            
+}
+
+function initRoleTable() 
+{
+    RoleDataTable = $(&#39;#selectRoleTable&#39;).DataTable(
+    {
+        &quot;bSort&quot; : true,
+        &quot;bProcessing&quot; : true,
+        &quot;bServerSide&quot; : true,
+        &quot;bStateSave&quot; : false,
+        /* &quot;sScrollX&quot;: &quot;100%&quot;,
+        &quot;sScrollXInner&quot;: &quot;100%&quot;,
+        &quot;bScrollCollapse&quot;: true, */
+        &quot;bAutoWidth&quot; : false,
+        &quot;sAjaxSource&quot; : jQuery.getBasePath()+ &quot;/adminManage/roleList.bsh&quot;,
+        &quot;sDom&quot; : &#39;&lt;&quot;top&quot;l&lt;&quot;clear&quot;&gt;&gt;rt&lt;&quot;bottom&quot;ip&lt;&quot;clear&quot;&gt;&gt;&#39;,
+        &quot;lengthMenu&quot; : [ 3, 20, 30 ],
+        &quot;pageLength&quot; : 3,
+        &quot;oLanguage&quot; : {
+        &quot;sProcessing&quot; : &quot;正在加载数据...&quot;,
+        &quot;sSearch&quot; : &quot;搜索:&quot;,
+        &quot;sLengthMenu&quot; : &quot;_MENU_条记录&quot;,
+        &quot;sZeroRecords&quot; : &quot;没有查到记录&quot;,
+        &quot;sInfo&quot; : &quot;第  _START_ 条到第  _END_ 条记录,一共  _TOTAL_ 条记录&quot;,
+        &quot;sInfoEmpty&quot; : &quot;0条记录&quot;,
+        &quot;oPaginate&quot; : 
+        {
+            &quot;sPrevious&quot; : &quot;上一页 &quot;,
+            &quot;sNext&quot; : &quot; 下一页&quot;,
+        }
+    },
+    &quot;aoColumnDefs&quot; : [
+    {
+        &quot;bSearchable&quot; : true,
+        &quot;bVisible&quot; : false,
+        &quot;aTargets&quot; : [ 0 ]
+    },
+    {
+        &quot;aTargets&quot; : [ 1 ],
+        &quot;mRender&quot; : function(data,type, full) 
+        {
+            return &quot;&lt;a href=&#39;&#39; onclick=&#39;viewUser(&quot;+ full[0]+ &quot;)&#39; data-toggle=&#39;modal&#39; data-target=&#39;#viewModal&#39;&gt;&quot;+ data + &quot;&lt;/a&gt;&quot;;
+        }
+    } ],
+    &quot;aoColumns&quot; : [
+    {
+        &quot;sTitle&quot; : &quot;id&quot;,
+        &quot;bSortable&quot; : false
+    },
+    {
+        &quot;sTitle&quot; : &#39;&lt;label class=&quot;mt-checkbox mt-checkbox-single mt-checkbox-outline&quot;&gt;&lt;input type=&quot;checkbox&quot; id=&quot;checkAll&quot; onclick=&quot;roleChooseOrNoChoose(this)&quot; /&gt;&lt;span&gt;&lt;/span&gt;&lt;/label&gt;&#39;,
+        &quot;bSortable&quot; : false,
+        &quot;sWidth&quot; : &quot;70px&quot;,
+        &quot;sClass&quot; : &quot;text-center&quot;,
+        &quot;fnCreatedCell&quot; : function(nTd, sData, oData,iRow, iCol) 
+        {
+            var value = oData[0]+&quot;@@@&quot;+oData[2];
+            var content = &#39;&lt;label class=&quot;mt-checkbox mt-checkbox-single mt-checkbox-outline&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;roleCheckbox&quot; onchange=&quot;recordRoleId(this)&quot; name=&quot;&#39;+ oData[2]+ &#39;&quot; value=&quot;&#39;+ value+ &#39;&quot; /&gt;&lt;span&gt;&lt;/span&gt;&lt;/label&gt;&#39;;
+            $(nTd).html(content);
+        }
+    }, 
+    {
+        &quot;sTitle&quot; : &quot;用户名&quot;,
+        &quot;bSortable&quot; : true,
+        &quot;sWidth&quot; : &quot;120px&quot;,
+        &quot;sClass&quot; : &quot;text-center&quot;
+    }, 
+    {
+        &quot;sTitle&quot; : &quot;创建时间&quot;,
+        &quot;bSortable&quot; : false,
+        &quot;sWidth&quot; : &quot;180px&quot;,
+        &quot;bAutoWidth&quot; : true,
+        &quot;sClass&quot; : &quot;text-center&quot;
+    } ],
+    // 服务器端，数据回调处理  
+    &quot;fnServerData&quot; : function retrieveData(sSource, aoData, fnCallback) 
+    {
+        aoData.push({&quot;name&quot; : &quot;sname&quot;,&quot;value&quot; : $(&#39;#selectRoleName&#39;).val()});
+        /*aoData.push({&quot;name&quot;:&quot;start&quot;,&quot;value&quot;:$(&quot;#start&quot;).val()});
+        aoData.push({&quot;name&quot;:&quot;end&quot;,&quot;value&quot;:$(&quot;#end&quot;).val()});
+        aoData.push({&quot;name&quot;:&quot;realName&quot;,&quot;value&quot;:$(&quot;#realName&quot;).val()});
+        aoData.push({&quot;name&quot;:&quot;status&quot;,&quot;value&quot;:$(&quot;#status&quot;).val()});
+        aoData.push({&quot;name&quot;:&quot;site&quot;,&quot;value&quot;:$(&quot;#site&quot;).val()}) */
+        $.ajax({
+            &quot;type&quot; : &quot;POST&quot;,
+            &quot;url&quot; : sSource,
+            &quot;dataType&quot; : &quot;json&quot;,
+            &quot;contentType&quot; : &quot;application/json&quot;,
+            &quot;data&quot; : JSON.stringify(aoData),
+            &quot;success&quot; : function(data) 
+            {
+                fnCallback(data);
+            }
+        });
+    }
+    });
+</code></pre></div><div class=post-footer><div>转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a target=_blank>烟花散尽13141</a></div><div></div></div></article><div class="article-nav prev-next-wrap clearfix"><a href=/zxh/20170302.html class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a> <a href=/zxh/20170215.html class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a></div><div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div><button id=rewardButton disable=enable onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}"><span>赏</span></button><div id=QR style="display: none;"><div id=wechat style="display: inline-block"><a href=/img/wechatpay.jpg class="fancybox fancybox.image" rel=group><img id=wechat_qr src=/img/wechatpay.jpg alt="颜敏 WeChat Pay"></a><p>微信打赏</p></div><div id=alipay style="display: inline-block"><a href=/img/alipay.jpg class="fancybox fancybox.image" rel=group><img id=alipay_qr src=/img/alipay.jpg alt="颜敏 Alipay"></a><p>支付宝打赏</p></div></div></div><div id=comments><div id=SOHUCS sid=/zxh/20170227.html></div><script type=text/javascript> 
+    (function(){ 
+    var appid = 'cyti5JvoU'; 
+    var conf = 'prod_a32310aad07e12c7706c8da1901ed57b'; 
+    var width = window.innerWidth || document.documentElement.clientWidth; 
+    if (width < 960) { 
+    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script></div></main><aside class="col-md-4 sidebar"><div class=widget><h3 class=title>Search</h3><div id=search-form><div id=result-mask class=hide></div><div class=search-area><input id=search-key type=search autocomplete=off placeholder=搜点什么呢?> <button type=button class=search-form-submit id=search-local>站内搜索</button></div><div id=result-wrap class=hide><div id=search-result></div></div><div class=hide><template id=search-tpl><div class=item><a href=/{path} title={title}><div class=title>{title}</div><div class=content>{content}</div></a></div></template></div></div></div><div class="widget notification"><h3 class=title>网站公告</h3><div><p><font color=red>pc、移动端目录区分设计</font></p></div></div><div class=widget><h3 class=title>Social</h3><div class="content social"><a href=//gitee.com/zxhtom rel="external nofollow" title=oschina target=_blank><i class="git fa fa-git"></i></a> <a href=mailto:870775401@qq.com rel="external nofollow" title=邮箱 target=_blank><i class="envelope-o fa fa-envelope-o"></i></a> <a href=870775401 rel="external nofollow" title=联系QQ target=_blank><i class="qq fa fa-qq"></i></a> <a href="/" rel="external nofollow" title=微博 target=_blank><i class="weibo fa fa-weibo"></i></a> <a href=376091466 rel="external nofollow" title=QQ群1 target=_blank><i class="users fa fa-users"></i></a> <a href=/atom.xml rel="external nofollow" title=RSS target=_blank><i class="feed fa fa-feed"></i></a></div></div><div class=widget><h3 class=title>Categories</h3><ul class=category-list><li class=category-list-item><a class=category-list-link href="/categories/开发工具/"><i class=fa aria-hidden=true>开发工具</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/案例/"><i class=fa aria-hidden=true>案例</i></a><span class=category-list-count>2</span></li><li class=category-list-item><a class=category-list-link href="/categories/程序人生/"><i class=fa aria-hidden=true>程序人生</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/编程/"><i class=fa aria-hidden=true>编程</i></a><span class=category-list-count>88</span></li></ul></div><div class=widget><h3 class=title>Archives</h3><ul class=archive-list><li class=archive-list-item><a class=archive-list-link href="/archives/2018/01/"><i class=fa aria-hidden=true>2018年01月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/12/"><i class=fa aria-hidden=true>2017年12月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/11/"><i class=fa aria-hidden=true>2017年11月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/10/"><i class=fa aria-hidden=true>2017年10月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/06/"><i class=fa aria-hidden=true>2017年06月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/04/"><i class=fa aria-hidden=true>2017年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/03/"><i class=fa aria-hidden=true>2017年03月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/02/"><i class=fa aria-hidden=true>2017年02月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/01/"><i class=fa aria-hidden=true>2017年01月</i></a><span class=archive-list-count>9</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/12/"><i class=fa aria-hidden=true>2016年12月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/11/"><i class=fa aria-hidden=true>2016年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/10/"><i class=fa aria-hidden=true>2016年10月</i></a><span class=archive-list-count>8</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/09/"><i class=fa aria-hidden=true>2016年09月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/08/"><i class=fa aria-hidden=true>2016年08月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/07/"><i class=fa aria-hidden=true>2016年07月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/06/"><i class=fa aria-hidden=true>2016年06月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/05/"><i class=fa aria-hidden=true>2016年05月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/04/"><i class=fa aria-hidden=true>2016年04月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/03/"><i class=fa aria-hidden=true>2016年03月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/02/"><i class=fa aria-hidden=true>2016年02月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2015/04/"><i class=fa aria-hidden=true>2015年04月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/11/"><i class=fa aria-hidden=true>2014年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/10/"><i class=fa aria-hidden=true>2014年10月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/04/"><i class=fa aria-hidden=true>2014年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/01/"><i class=fa aria-hidden=true>2014年01月</i></a><span class=archive-list-count>2</span></li></ul></div><div class=widget><h3 class=title>Tag Cloud</h3><div class="content tag-cloud"><a href="/tags/C/" style="font-size: 17.5px;">C++</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/bat语法/" style="font-size: 10px;">bat语法</a> <a href="/tags/formatter/" style="font-size: 10px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/ngrok/" style="font-size: 10px;">ngrok</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/sublime-text3/" style="font-size: 10px;">sublime text3</a> <a href="/tags/前端/" style="font-size: 12.5px;">前端</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/感慨/" style="font-size: 12.5px;">感慨</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a></div></div><div class=widget><h3 class=title>Friends</h3><div class="content friends-link"><a href=http://blog.csdn.net/u013132051 class=fa target=_blank>个人博客</a></div></div></aside></div></div></section><footer class=main-footer><div class=container><div class=row></div></div></footer><a id=back-to-top class=hide><i class="fa fa-chevron-up"></i></a><div class=copyright><div class=container><div class=row><div class=col-sm-12><span>Copyright &copy; 2017</span> | <span>Powered by <a href=//hexo.io class=copyright-links target=_blank rel=nofollow>张新华</a></span> | <span>Theme by <a href=//github.com/shenliyang/hexo-theme-snippet.git class=copyright-links target=_blank rel=nofollow>ZxhTom</a></span></div></div></div></div><script src=https://code.jquery.com/jquery-latest.js></script><script src=https://assets.changyan.sohu.com/upload/plugins/plugins.count.js></script><script src="/assets/highlight.pack.js?rev=@@hash"></script><script>
+     hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script><script src="/js/search.js?rev=@@hash"></script><script src="/js/app.js?rev=@@hash"></script><script src="/assets/prefix.js?rev=@@hash"></script><script src="/assets/my.js?rev=@@hash"></script></body></html>

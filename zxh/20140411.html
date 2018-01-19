@@ -1,0 +1,197 @@
+<!DOCTYPE HTML><html><head><script>
+	if('' == 'true'){
+		if (prompt('请输入管理员密码') !== '025025'){
+            alert('密码错误！');
+            location.href='https://zxhtom.oschina.io';
+    	}
+	}
+</script><meta charset=UTF-8><meta name=viewport content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><meta http-equiv=X-UA-Compatible content="IE=Edge,chrome=1"><meta http-equiv=Cache-Control content=no-siteapp><meta name=renderer content=webkit|ie-comp|ie-stand><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no,email=no,adress=no"><meta name=browsermode content=application><meta name=screen-orientation content=portrait><link rel=dns-prefetch href=https://zxhtom.oschina.io><meta name=description content=张新华的个人网站><meta name=robots content=all><meta name=google content=all><meta name=googlebot content=all><meta name=verify content=all><title>学生管理系统 | 烟花散尽13141</title><link rel=alternate href=/atom.xml title=烟花散尽13141 type=application/atom+xml><link rel=icon href=/favicon.ico><link rel=stylesheet href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css?rev=9.12.0"><link rel=stylesheet href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4"><link rel=stylesheet href=//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href="/css/style.css?rev=@@hash"><link rel=stylesheet href="/css/mycss.css?rev=@@hash"><div class=hide><script src="https://s4.cnzz.com/z_stat.php?id=1263868967&web_id=1263868967" language=JavaScript></script></div><script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?709c2dde1f61f5e589ff3ed31ba52411";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script></head><body><header class=main-header style=background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)><div class=main-header-box><a class=header-avatar href="/"><img src=/img/avatar.jpg alt=logo头像></a><div class=branding><h2>学如逆水行舟，不进则退！！！</h2></div></div></header><nav class=main-navigation><div class=container><div class=row><div class=col-sm-12><div class=navbar-header><span class="nav-toggle-button collapsed" data-toggle=collapse data-target=#main-menu id=mnav><span class=sr-only>Toggle navigation</span> <i class="fa fa-bars"></i></span></div><div class="collapse navbar-collapse" id=main-menu><ul class=menu><li role=presentation><a href="/"><i class="fa fa-fw"></i>首页</a></li><li role=presentation><a href="/about/"><i class="fa fa-fw"></i>关于我</a></li><li role=presentation><a href="/tags/"><i class="fa fa-fw"></i>标签</a></li><li role=presentation><a href="/categories/"><i class="fa fa-fw"></i>分类</a></li><li role=presentation><a href="/archives/"><i class="fa fa-fw"></i>归档</a></li><li role=presentation><a href="/schedule/"><i class="fa fa-fw"></i>日程表</a></li><li role=presentation><a href=/sitemap.xml><i class="fa fa-fw"></i>地图导航</a></li><li role=presentation><a href="/404/"><i class="fa fa-fw"></i>公益活动</a></li></ul></div></div></div></div></nav><section class=content-wrap><div class=container><div class=row><main class="col-md-8 main-content m-post"><div id=toc class=toc-article><div class=hamburger><div class=line></div><div class=line></div><div class=line></div></div><strong class=toc-title>文章目录</strong><div class=menu-inner></div><svg version=1.1 id=blob xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><path id=blob-path d=M60,500H0V0h60c0,0,20,172,20,250S60,900,60,500z></path></svg></div><p id=process></p><article class=post><div class=post-head><h1 id=学生管理系统>学生管理系统</h1><div class=post-meta><span class="categories-meta fa-wrap"><i class="fa fa-folder-open-o"></i> <span>编程</span></span> <span class=fa-wrap><i class="fa fa-tags"></i> <span class=tags-meta>C++</span></span> <span class=fa-wrap><i class="fa fa-clock-o"></i> <span class=date-meta>2014/04/11</span></span> <a href=/zxh/20140411.html#comments class=comment-count><i id=changyan_count_unit data-xid=zxh/20140411.html></i>留言, <i id=changyan_parti_unit data-xid=zxh/20140411.html></i>参与</a> <span id=busuanzi_container_page_pv>view : <span id=busuanzi_value_page_pv></span>次</span></div><p class="fa fa-exclamation-triangle warning">本文于<strong>1379</strong>天之前发表，文中内容可能已经过时。</p></div><div class="post-body post-content"><p>我现在是大一新生！这个系统我写了一个月。<br><a id=more></a></p><p>但是还是不是很好。但是我想着是我的第一个系统。我在写的时候发现我的删除功能不是很好的。还有就是在这个过程中我学会了再这里我学到了如何使用类中的函数的多个成员的方法。下面是我的源代码。</p><pre><code>#include&lt;iostream&gt;
+#include&lt;iomanip&gt;
+#include&lt;string&gt;
+#include&lt;fstream&gt;
+using namespace std;
+class score
+{
+ friend class student;
+private:
+string no;
+string kcnum;    //课程编号
+string kcname;   //课程名称
+float kcxf;      //课程学分
+float ydxf;      //应得学分
+float pscj;      //平时成绩
+float sycj;      //实验成绩
+float jmcj;      //卷面成绩
+float zhcj;      //综合成绩
+public:
+friend void readfilescore(score s[],int &amp;num);
+friend void saveinforscore(score s[],int &amp;num);
+};
+void readfilescore(score s[],int &amp;num)
+{
+ ifstream f1;
+ f1.open(&quot;d:\\学生管理系统.txt&quot;);
+ int i=0;
+ while(!f1.eof())
+ {
+f1&gt;&gt;s[i].no&gt;&gt;s[i].kcnum&gt;&gt;s[i].kcname&gt;&gt;s[i].kcxf&gt;&gt;s[i].ydxf
+&gt;&gt;s[i].pscj&gt;&gt;s[i].sycj&gt;&gt;s[i].jmcj&gt;&gt;s[i].zhcj;
+if(s[i].sycj==-1)
+s[i].zhcj=s[i].pscj*0.3+s[i].jmcj*0.7;
+else 
+s[i].zhcj=s[i].pscj*0.15+s[i].sycj*0.15+s[i].jmcj*0.7;
+if(s[i].zhcj&gt;=60)
+s[i].ydxf=s[i].kcxf;
+else
+s[i].ydxf=0;
+i++;
+ }
+ num=i;
+ f1.close();
+}
+void saveinforscore(score s[],int &amp;num)
+{
+ ofstream f2;
+ f2.open(&quot;d:\\学生管理系统2.txt&quot;);
+ for(int i=0;i&lt;num;i++)
+f2&lt;&lt;s[i].no&lt;&lt;s[i].kcnum&lt;&lt;s[i].kcname&lt;&lt;s[i].kcxf&lt;&lt;s[i].ydxf
+&lt;&lt;s[i].pscj&lt;&lt;s[i].sycj&lt;&lt;s[i].jmcj&lt;&lt;s[i].zhcj;
+ f2.close();
+}
+class student
+{
+ string sno;     //学生学号
+ string name;    //学生姓名
+ string sex;     //学生性别
+ string department;//宿舍
+ string phone;     //联系方式
+ float score1;
+public:
+    bool operator&lt;(student &amp;t);
+friend void readfile(student s2[],int &amp;num);
+friend void saveinfor(student s2[],int &amp;num);
+friend void delete1(student s1[],score s2[],int &amp;num1,int &amp;num2);
+friend void searchno(student s[],int &amp;num);
+friend void searchname(student s[],int &amp;num);
+friend void search(student s2[],int &amp;num);
+friend void sort(student s2[],int &amp;num);
+};
+bool student::operator&lt;(student &amp;t)
+{
+ if(score1&lt;t.score1)
+return true;
+else
+return false;
+}
+void readfile(student s2[],int &amp;num)
+{
+ ifstream f2;
+ f2.open(&quot;d:\\学生管理系统.txt&quot;);
+ int i=0;
+ while(!f2.eof())
+ {
+f2&gt;&gt;s2[i].sno&gt;&gt;s2[i].name&gt;&gt;s2[i].sex&gt;&gt;s2[i].department&gt;&gt;s2[i].phone;
+ i++;
+ }
+ num=i;
+ f2.close();
+}
+void saveinfor(student s2[],int &amp;num)
+{
+ ofstream f3;
+ f3.open(&quot;d:\\学生管理系统2.txt&quot;);
+ for(int i=0;i&lt;num;i++)
+f3&lt;&lt;s2[i].sno&lt;&lt;s2[i].name&lt;&lt;s2[i].sex&lt;&lt;s2[i].department&lt;&lt;s2[i].phone;
+ f3.close();
+}
+void delete1(student s1[],score s2[],int &amp;num1,int &amp;num2)
+{
+int x,y;
+string z;
+ cout&lt;&lt;&quot;请输入您要删除的学生的学号:&quot;;
+ cin&gt;&gt;z;
+ for(int i=0;i&lt;num1;i++)
+if(z==s1[i].sno)
+{
+x=i;//break;
+for(i=x;i&lt;num1-1;i++)
+{s1[i]=s1[i+1];
+    s2[i]=s2[i+1];
+}
+}
+
+}
+void searchno(student s[],int &amp;num)
+{
+ string z;
+ int x;
+ cout&lt;&lt;&quot;请输入您要查询的学生的学号:&quot;&lt;&lt;endl;
+ cin&gt;&gt;z;
+ for(int i=0;i&lt;num;i++)
+if(z==s[i].sno)
+{ x=i;break;}
+cout&lt;&lt;s[x].sno&lt;&lt;s[x].name&lt;&lt;s[x].sex&lt;&lt;s[x].department&lt;&lt;s[x].phone;
+}
+void searchname(student s[],int &amp;num)
+{
+ string t;
+ int x;
+ cout&lt;&lt;&quot;请输入您要查询的学生的姓名:&quot;&lt;&lt;endl;
+ cin&gt;&gt;t;
+ for(int i=0;i&lt;num;i++)
+if(t==s[i].name)
+{x=i;break;}
+ cout&lt;&lt;s[x].sno&lt;&lt;s[x].name&lt;&lt;s[x].sex&lt;&lt;s[x].department&lt;&lt;s[x].phone;
+}
+void search(student s2[],int &amp;num)
+{
+int a;
+ string x,y,z;
+ cout&lt;&lt;&quot;请选择您是选通过哪种方式查询信息:&quot;&lt;&lt;endl;
+ cout&lt;&lt;&quot;1-通过学号查询，2-通过姓名查询:&quot;&lt;&lt;endl;
+ cin&gt;&gt;a;
+ switch(a)
+ {
+ case 1:searchno(s2,num);break;
+ case 2:searchname(s2,num);break;
+ }
+}
+void main ()
+{
+ score s[10];
+ score s1;
+ int num1=0;
+ student ss[10];
+ student ss1;
+ int num2=0;
+ cout&lt;&lt;&quot;*************淮阴师范学院学生信息管理系统*************&quot;&lt;&lt;endl;
+ cout&lt;&lt;&quot;1-学生信息录入 2-学生信息查询 3-学生信息的删除 4-学生信息的排序&quot;&lt;&lt;endl;
+ int x;
+ cout&lt;&lt;&quot;请输入您要选择的功能:&quot;&lt;&lt;endl;
+ cin&gt;&gt;x;
+ switch(x)
+ {
+ case 1:cout&lt;&lt;&quot;请输入学生信息（学号 成绩 性别 宿舍 联系方式等信息）:&quot;&lt;&lt;endl;readfilescore(s,num1);readfile(ss,num2);break;
+ case 2:search(ss,num2);break;
+ case 3:delete1(ss,s,num1,num2);break;
+ //case 4:sort(ss,num2);break;
+ case 5:cout&lt;&lt;&quot;退出系统！！！:&quot;&lt;&lt;endl;
+ }
+}
+</code></pre></div><div class=post-footer><div>转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a target=_blank>烟花散尽13141</a></div><div></div></div></article><div class="article-nav prev-next-wrap clearfix"><a href=/zxh/20140411.html class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a> <a href=/zxh/20140109.html class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a></div><div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div><button id=rewardButton disable=enable onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}"><span>赏</span></button><div id=QR style="display: none;"><div id=wechat style="display: inline-block"><a href=/img/wechatpay.jpg class="fancybox fancybox.image" rel=group><img id=wechat_qr src=/img/wechatpay.jpg alt="颜敏 WeChat Pay"></a><p>微信打赏</p></div><div id=alipay style="display: inline-block"><a href=/img/alipay.jpg class="fancybox fancybox.image" rel=group><img id=alipay_qr src=/img/alipay.jpg alt="颜敏 Alipay"></a><p>支付宝打赏</p></div></div></div><div id=comments><div id=SOHUCS sid=/zxh/20140411.html></div><script type=text/javascript> 
+    (function(){ 
+    var appid = 'cyti5JvoU'; 
+    var conf = 'prod_a32310aad07e12c7706c8da1901ed57b'; 
+    var width = window.innerWidth || document.documentElement.clientWidth; 
+    if (width < 960) { 
+    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script></div></main><aside class="col-md-4 sidebar"><div class=widget><h3 class=title>Search</h3><div id=search-form><div id=result-mask class=hide></div><div class=search-area><input id=search-key type=search autocomplete=off placeholder=搜点什么呢?> <button type=button class=search-form-submit id=search-local>站内搜索</button></div><div id=result-wrap class=hide><div id=search-result></div></div><div class=hide><template id=search-tpl><div class=item><a href=/{path} title={title}><div class=title>{title}</div><div class=content>{content}</div></a></div></template></div></div></div><div class="widget notification"><h3 class=title>网站公告</h3><div><p><font color=red>pc、移动端目录区分设计</font></p></div></div><div class=widget><h3 class=title>Social</h3><div class="content social"><a href=//gitee.com/zxhtom rel="external nofollow" title=oschina target=_blank><i class="git fa fa-git"></i></a> <a href=mailto:870775401@qq.com rel="external nofollow" title=邮箱 target=_blank><i class="envelope-o fa fa-envelope-o"></i></a> <a href=870775401 rel="external nofollow" title=联系QQ target=_blank><i class="qq fa fa-qq"></i></a> <a href="/" rel="external nofollow" title=微博 target=_blank><i class="weibo fa fa-weibo"></i></a> <a href=376091466 rel="external nofollow" title=QQ群1 target=_blank><i class="users fa fa-users"></i></a> <a href=/atom.xml rel="external nofollow" title=RSS target=_blank><i class="feed fa fa-feed"></i></a></div></div><div class=widget><h3 class=title>Categories</h3><ul class=category-list><li class=category-list-item><a class=category-list-link href="/categories/开发工具/"><i class=fa aria-hidden=true>开发工具</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/案例/"><i class=fa aria-hidden=true>案例</i></a><span class=category-list-count>2</span></li><li class=category-list-item><a class=category-list-link href="/categories/程序人生/"><i class=fa aria-hidden=true>程序人生</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/编程/"><i class=fa aria-hidden=true>编程</i></a><span class=category-list-count>88</span></li></ul></div><div class=widget><h3 class=title>Archives</h3><ul class=archive-list><li class=archive-list-item><a class=archive-list-link href="/archives/2018/01/"><i class=fa aria-hidden=true>2018年01月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/12/"><i class=fa aria-hidden=true>2017年12月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/11/"><i class=fa aria-hidden=true>2017年11月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/10/"><i class=fa aria-hidden=true>2017年10月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/06/"><i class=fa aria-hidden=true>2017年06月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/04/"><i class=fa aria-hidden=true>2017年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/03/"><i class=fa aria-hidden=true>2017年03月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/02/"><i class=fa aria-hidden=true>2017年02月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/01/"><i class=fa aria-hidden=true>2017年01月</i></a><span class=archive-list-count>9</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/12/"><i class=fa aria-hidden=true>2016年12月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/11/"><i class=fa aria-hidden=true>2016年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/10/"><i class=fa aria-hidden=true>2016年10月</i></a><span class=archive-list-count>8</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/09/"><i class=fa aria-hidden=true>2016年09月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/08/"><i class=fa aria-hidden=true>2016年08月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/07/"><i class=fa aria-hidden=true>2016年07月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/06/"><i class=fa aria-hidden=true>2016年06月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/05/"><i class=fa aria-hidden=true>2016年05月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/04/"><i class=fa aria-hidden=true>2016年04月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/03/"><i class=fa aria-hidden=true>2016年03月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/02/"><i class=fa aria-hidden=true>2016年02月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2015/04/"><i class=fa aria-hidden=true>2015年04月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/11/"><i class=fa aria-hidden=true>2014年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/10/"><i class=fa aria-hidden=true>2014年10月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/04/"><i class=fa aria-hidden=true>2014年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/01/"><i class=fa aria-hidden=true>2014年01月</i></a><span class=archive-list-count>2</span></li></ul></div><div class=widget><h3 class=title>Tag Cloud</h3><div class="content tag-cloud"><a href="/tags/C/" style="font-size: 17.5px;">C++</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/bat语法/" style="font-size: 10px;">bat语法</a> <a href="/tags/formatter/" style="font-size: 10px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/ngrok/" style="font-size: 10px;">ngrok</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/sublime-text3/" style="font-size: 10px;">sublime text3</a> <a href="/tags/前端/" style="font-size: 12.5px;">前端</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/感慨/" style="font-size: 12.5px;">感慨</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a></div></div><div class=widget><h3 class=title>Friends</h3><div class="content friends-link"><a href=http://blog.csdn.net/u013132051 class=fa target=_blank>个人博客</a></div></div></aside></div></div></section><footer class=main-footer><div class=container><div class=row></div></div></footer><a id=back-to-top class=hide><i class="fa fa-chevron-up"></i></a><div class=copyright><div class=container><div class=row><div class=col-sm-12><span>Copyright &copy; 2017</span> | <span>Powered by <a href=//hexo.io class=copyright-links target=_blank rel=nofollow>张新华</a></span> | <span>Theme by <a href=//github.com/shenliyang/hexo-theme-snippet.git class=copyright-links target=_blank rel=nofollow>ZxhTom</a></span></div></div></div></div><script src=https://code.jquery.com/jquery-latest.js></script><script src=https://assets.changyan.sohu.com/upload/plugins/plugins.count.js></script><script src="/assets/highlight.pack.js?rev=@@hash"></script><script>
+     hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script><script src="/js/search.js?rev=@@hash"></script><script src="/js/app.js?rev=@@hash"></script><script src="/assets/prefix.js?rev=@@hash"></script><script src="/assets/my.js?rev=@@hash"></script></body></html>

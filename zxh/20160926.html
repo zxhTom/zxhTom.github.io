@@ -1,0 +1,254 @@
+<!DOCTYPE HTML><html><head><script>
+	if('' == 'true'){
+		if (prompt('请输入管理员密码') !== '025025'){
+            alert('密码错误！');
+            location.href='https://zxhtom.oschina.io';
+    	}
+	}
+</script><meta charset=UTF-8><meta name=viewport content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><meta http-equiv=X-UA-Compatible content="IE=Edge,chrome=1"><meta http-equiv=Cache-Control content=no-siteapp><meta name=renderer content=webkit|ie-comp|ie-stand><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no,email=no,adress=no"><meta name=browsermode content=application><meta name=screen-orientation content=portrait><link rel=dns-prefetch href=https://zxhtom.oschina.io><meta name=description content=张新华的个人网站><meta name=robots content=all><meta name=google content=all><meta name=googlebot content=all><meta name=verify content=all><title>JavaWeb配置详解(结合框架SpringMVC) | 烟花散尽13141</title><link rel=alternate href=/atom.xml title=烟花散尽13141 type=application/atom+xml><link rel=icon href=/favicon.ico><link rel=stylesheet href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css?rev=9.12.0"><link rel=stylesheet href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4"><link rel=stylesheet href=//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href="/css/style.css?rev=@@hash"><link rel=stylesheet href="/css/mycss.css?rev=@@hash"><div class=hide><script src="https://s4.cnzz.com/z_stat.php?id=1263868967&web_id=1263868967" language=JavaScript></script></div><script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?709c2dde1f61f5e589ff3ed31ba52411";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script></head><body><header class=main-header style=background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)><div class=main-header-box><a class=header-avatar href="/"><img src=/img/avatar.jpg alt=logo头像></a><div class=branding><h2>学如逆水行舟，不进则退！！！</h2></div></div></header><nav class=main-navigation><div class=container><div class=row><div class=col-sm-12><div class=navbar-header><span class="nav-toggle-button collapsed" data-toggle=collapse data-target=#main-menu id=mnav><span class=sr-only>Toggle navigation</span> <i class="fa fa-bars"></i></span></div><div class="collapse navbar-collapse" id=main-menu><ul class=menu><li role=presentation><a href="/"><i class="fa fa-fw"></i>首页</a></li><li role=presentation><a href="/about/"><i class="fa fa-fw"></i>关于我</a></li><li role=presentation><a href="/tags/"><i class="fa fa-fw"></i>标签</a></li><li role=presentation><a href="/categories/"><i class="fa fa-fw"></i>分类</a></li><li role=presentation><a href="/archives/"><i class="fa fa-fw"></i>归档</a></li><li role=presentation><a href="/schedule/"><i class="fa fa-fw"></i>日程表</a></li><li role=presentation><a href=/sitemap.xml><i class="fa fa-fw"></i>地图导航</a></li><li role=presentation><a href="/404/"><i class="fa fa-fw"></i>公益活动</a></li></ul></div></div></div></div></nav><section class=content-wrap><div class=container><div class=row><main class="col-md-8 main-content m-post"><div id=toc class=toc-article><div class=hamburger><div class=line></div><div class=line></div><div class=line></div></div><strong class=toc-title>文章目录</strong><div class=menu-inner><ol class=toc><li class="toc-item toc-level-1"><a class=toc-link href=#详解><span class=toc-number>1.</span> <span class=toc-text>详解</span></a><ol class=toc-child><li class="toc-item toc-level-2"><a class=toc-link href=#web-xml><span class=toc-number>1.1.</span> <span class=toc-text>web.xml</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#application-xml配置文件><span class=toc-number>1.2.</span> <span class=toc-text>application.xml配置文件</span></a></li></ol></li></ol></div><svg version=1.1 id=blob xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><path id=blob-path d=M60,500H0V0h60c0,0,20,172,20,250S60,900,60,500z></path></svg></div><p id=process></p><article class=post><div class=post-head><h1 id=JavaWeb配置详解(结合框架SpringMVC)>JavaWeb配置详解(结合框架SpringMVC)</h1><div class=post-meta><span class="categories-meta fa-wrap"><i class="fa fa-folder-open-o"></i> <span>编程</span></span> <span class=fa-wrap><i class="fa fa-tags"></i> <span class=tags-meta>java</span></span> <span class=fa-wrap><i class="fa fa-clock-o"></i> <span class=date-meta>2016/09/26</span></span> <a href=/zxh/20160926.html#comments class=comment-count><i id=changyan_count_unit data-xid=zxh/20160926.html></i>留言, <i id=changyan_parti_unit data-xid=zxh/20160926.html></i>参与</a> <span id=busuanzi_container_page_pv>view : <span id=busuanzi_value_page_pv></span>次</span></div><p class="fa fa-exclamation-triangle warning">本文于<strong>480</strong>天之前发表，文中内容可能已经过时。</p></div><div class="post-body post-content"><p>先说一说常识性的东西，我们的JavaWeb程序运行一开始走的是web.xml文件<br><a id=more></a></p><h1 id=详解><a href=#详解 class=headerlink title=详解></a> 详解</h1><p>先说一说常识性的东西，我们的JavaWeb程序运行一开始走的是web.xml文件，这是我们的核心文件，可以说没有web.xml文件我们就无法运行项目，这个文件长什么样子，读者自己新建一个web项目就行了。</p><h2 id=web-xml><a href=#web-xml class=headerlink title=web.xml></a>web.xml</h2><ul><li><p><code>&lt;display-name&gt;项目名&lt;/display-name&gt;</code></p></li><li><p>正常情况下我们会配置一些过滤器 filter，过滤器的意思就是在执行某件事件前先进行规范处理之后才能继续运行。我们常见的过滤器有编码过滤器、数据安全过滤器。下面贴一个公用的编码过滤器</p><ul><li></li></ul></li></ul><pre><code>```
+&lt;!-- 编码过滤 UTF-8 --&gt;
+&lt;filter&gt;
+    &lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;encoding&lt;/param-name&gt;
+        &lt;param-value&gt;utf-8&lt;/param-value&gt;
+    &lt;/init-param&gt;
+&lt;/filter&gt;
+
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+```
+</code></pre><ul><li><p>下面就是设置一些浏览器的读取问题，我们用浏览器打开文件的时候会发现如果是doc文件， 会用记事本打开，出现乱码， 但是如果在web.xml里面配置了类型，浏览器就会根据配置的类型自动调用相应的程序打开<br>在 WEB.XML 配置常用文件类型</p><pre><code>&lt;mime-mapping&gt;  
+&lt;extension&gt;doc&lt;/extension&gt;  
+&lt;mime-type&gt;application/vnd.ms-word&lt;/mime-type&gt;  
+&lt;/mime-mapping&gt;  
+&lt;mime-mapping&gt;  
+&lt;extension&gt;gif&lt;/extension&gt;  
+&lt;mime-type&gt;image/gif&lt;/mime-type&gt;  
+&lt;/mime-mapping&gt;  
+&lt;mime-mapping&gt;  
+&lt;extension&gt;htm&lt;/extension&gt;  
+&lt;mime-type&gt;text/html&lt;/mime-type&gt;  
+&lt;/mime-mapping&gt;  
+&lt;mime-mapping&gt;  
+&lt;extension&gt;html&lt;/extension&gt;  
+&lt;mime-type&gt;text/html&lt;/mime-type&gt;  
+&lt;/mime-mapping&gt;  
+&lt;mime-mapping&gt;  
+&lt;extension&gt;jnlp&lt;/extension&gt;  
+&lt;mime-type&gt;application/x-java-jnlp-file&lt;/mime-type&gt;  
+&lt;/mime-mapping&gt;  
+&lt;mime-mapping&gt;  
+&lt;extension&gt;jpeg&lt;/extension&gt;  
+&lt;mime-type&gt;image/jpeg&lt;/mime-type&gt;  
+&lt;/mime-mapping&gt;  
+&lt;mime-mapping&gt;  
+&lt;extension&gt;jpg&lt;/extension&gt;  
+&lt;mime-type&gt;image/jpeg&lt;/mime-type&gt;  
+&lt;/mime-mapping&gt;  
+&lt;mime-mapping&gt;  
+&lt;extension&gt;js&lt;/extension&gt;  
+&lt;mime-type&gt;application/x-javascript&lt;/mime-type&gt;  
+&lt;/mime-mapping&gt;  
+&lt;mime-mapping&gt;  
+&lt;extension&gt;pdf&lt;/extension&gt;  
+&lt;mime-type&gt;application/pdf&lt;/mime-type&gt;  
+&lt;/mime-mapping&gt;  
+&lt;mime-mapping&gt;  
+&lt;extension&gt;png&lt;/extension&gt;  
+&lt;mime-type&gt;image/png&lt;/mime-type&gt;  
+&lt;/mime-mapping&gt;  
+&lt;mime-mapping&gt;  
+&lt;extension&gt;rar&lt;/extension&gt;  
+&lt;mime-type&gt;application/x-rar-compressed&lt;/mime-type&gt;  
+&lt;/mime-mapping&gt;  
+&lt;mime-mapping&gt;  
+&lt;extension&gt;txt&lt;/extension&gt;  
+&lt;mime-type&gt;text/plain&lt;/mime-type&gt;  
+&lt;/mime-mapping&gt;  
+&lt;mime-mapping&gt;  
+&lt;extension&gt;xls&lt;/extension&gt;  
+&lt;mime-type&gt;application/vnd.ms-excel&lt;/mime-type&gt;  
+&lt;/mime-mapping&gt;  
+&lt;mime-mapping&gt;  
+&lt;extension&gt;xml&lt;/extension&gt;  
+&lt;mime-type&gt;text/xml&lt;/mime-type&gt;  
+&lt;/mime-mapping&gt;  
+&lt;mime-mapping&gt;  
+&lt;extension&gt;xul&lt;/extension&gt;  
+&lt;mime-type&gt;application/vnd.mozilla.xul-xml&lt;/mime-type&gt;  
+&lt;/mime-mapping&gt;  
+&lt;mime-mapping&gt;  
+&lt;extension&gt;zhtml&lt;/extension&gt;  
+&lt;mime-type&gt;text/html&lt;/mime-type&gt;  
+&lt;/mime-mapping&gt;  
+&lt;mime-mapping&gt;  
+&lt;extension&gt;zip&lt;/extension&gt;  
+&lt;mime-type&gt;application/x-zip&lt;/mime-type&gt;  
+&lt;/mime-mapping&gt;  
+&lt;mime-mapping&gt;  
+&lt;extension&gt;zul&lt;/extension&gt;  
+&lt;mime-type&gt;text/html&lt;/mime-type&gt;  
+&lt;/mime-mapping&gt;
+</code></pre></li></ul><ul><li>这些事辅助配置，这些配置完了，下面我们就是配置框架的事情了，框架说白了就是servlet，所以我们就需要引用servlet来进行配置框架。 我们通过<code>context-param</code> 去加载spring配置文件</li></ul><pre><code>```
+ &lt;!-- 加载spring配置文件 --&gt;
+&lt;context-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;classpath:applicationContext.xml&lt;/param-value&gt;
+&lt;/context-param&gt;
+&lt;!-- 监听器 加载spring配置文件 --&gt;
+&lt;listener&gt;
+    &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+&lt;/listener&gt;
+ ```
+</code></pre><ul><li><p>加载配置文件后我们就剩下去启动框架了</p><pre><code>&lt;servlet&gt;
+  &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+  &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+  &lt;!-- 可以自定义servlet.xml配置文件的位置和名称，默认为WEB-INF目录下，名称为[&lt;servlet-name&gt;]-servlet.xml，如spring-servlet.xml
+  &lt;init-param&gt;
+      &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+      &lt;param-value&gt;/WEB-INF/spring-servlet.xml&lt;/param-value&gt;&amp;nbsp; 默认
+  &lt;/init-param&gt;
+      也可以像下面一样进行自定义位置和名称
+      --&gt;
+  &lt;init-param&gt;
+      &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+      &lt;param-value&gt;classpath:config/springmvc.xml&lt;/param-value&gt;
+  &lt;/init-param&gt;
+  &lt;!-- 
+      &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;里面正数越低启动优先级越高，但是里面是负数或者不填的时候，表明容器在该servlet被选择是采取加载 
+   --&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;*.action&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre></li></ul><ul><li><p>整个框架就配置好了，在web.xml文件中我们在配置一些错误界面，就会让整个系统变得更加的人性化。</p><ul><li><p>根据错误编码跳转</p><pre><code>&lt;error-page&gt;  
+&lt;error-code&gt;403&lt;/error-code&gt;  
+&lt;location&gt;/change/error_go.action&lt;/location&gt;  
+&lt;/error-page&gt;
+</code></pre></li><li><p>根据错误类型跳转</p></li></ul></li></ul><pre><code>&lt;!-- 这样的配置表示如果jsp页面或者servlet发生java.lang.Exception类型（当然包含子类）的异常就会转到500.jsp页面处理。 --&gt;  
+        &lt;error-page&gt;   
+            &lt;exception-type&gt;java.lang.Exception&lt;/exception-type&gt;   
+            &lt;location&gt;/change/error_go.action&lt;/location&gt;   
+        &lt;/error-page&gt;
+</code></pre><ul><li>最后就是系统的欢迎页</li></ul><pre><code>&lt;welcome-file-list&gt;
+        &lt;welcome-file&gt;change/login_go.action&lt;/welcome-file&gt;
+    &lt;/welcome-file-list&gt;
+</code></pre><h2 id=application-xml配置文件><a href=#application-xml配置文件 class=headerlink title=application.xml配置文件></a>application.xml配置文件</h2><ul><li></li></ul><p>启动注解配置</p><pre><code>&lt;!-- 启动注解配置 --&gt;
+    &lt;context:component-scan base-package=&quot;tm.change&quot;&gt;
+        &lt;context:exclude-filter type=&quot;annotation&quot;
+            expression=&quot;org.springframework.stereotype.Controller&quot; /&gt;
+    &lt;/context:component-scan&gt;
+</code></pre><ul><li>配置数据源</li></ul><pre><code>&lt;!-- 配置C3P0数据源 --&gt;
+    &lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;
+        destroy-method=&quot;close&quot;&gt;
+        &lt;property name=&quot;driverClass&quot; value=&quot;${c3p0.driverClass}&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;jdbcUrl&quot; value=&quot;${c3p0.url}&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;user&quot; value=&quot;${c3p0.user}&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;password&quot; value=&quot;${c3p0.password}&quot;&gt;&lt;/property&gt;
+
+    &lt;/bean&gt;
+
+    &lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+        &lt;!-- 数据库连接池 --&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;
+        &lt;!-- 加载mybatis的全局配置文件 --&gt;
+        &lt;property name=&quot;configLocation&quot; value=&quot;classpath:config/mybatis-config.xml&quot; /&gt;
+    &lt;/bean&gt;
+</code></pre><p>当然用之前需要引入数据库的配置<br><br><import resource=classpath:config/jdbc.xml><br>这个说白了就是properties文件，里面放置了数据连接的信息</import></p><ul><li>然后就要处理mybatis的mapper接口(可以看成是dao层的处理)</li></ul><pre><code>&lt;!-- 配置扫描mapper接口的处理 --&gt;
+    &lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
+        &lt;property name=&quot;basePackage&quot; value=&quot;tm.change.dao&quot;/&gt;
+        &lt;property name=&quot;sqlSessionFactoryBeanName&quot; value=&quot;sqlSessionFactory&quot; /&gt;
+    &lt;/bean&gt;
+</code></pre><ul><li><p>事务处理(可以看成是service层)</p><ul><li>注册一个事务</li></ul><pre><code>&lt;!-- 配置事务操作 --&gt;
+   &lt;bean id=&quot;myTxManager&quot;
+       class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+       &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;
+   &lt;/bean&gt;
+</code></pre><ul><li>配置事务的通知(指定哪些方法会有事务管理)</li></ul></li></ul><pre><code>```
+&lt;!-- 事务的advisor --&gt;
+&lt;tx:advice id=&quot;txAdvice&quot; transaction-manager=&quot;myTxManager&quot;&gt;
+    &lt;tx:attributes&gt;
+        &lt;!-- propagation事务传播行为 --&gt;
+        &lt;tx:method name=&quot;insert*&quot; propagation=&quot;REQUIRED&quot; isolation=&quot;DEFAULT&quot; /&gt;
+        &lt;tx:method name=&quot;update*&quot; propagation=&quot;REQUIRED&quot; isolation=&quot;DEFAULT&quot; /&gt;
+        &lt;tx:method name=&quot;delete*&quot; propagation=&quot;REQUIRED&quot; isolation=&quot;DEFAULT&quot; /&gt;
+        &lt;tx:method name=&quot;*&quot; propagation=&quot;SUPPORTS&quot; read-only=&quot;true&quot; /&gt;
+    &lt;/tx:attributes&gt;
+&lt;/tx:advice&gt;
+```
+-  切入点(在哪个里面具有事务)
+
+```
+&lt;!--aop实现 业务层 --&gt;
+&lt;aop:config&gt;
+    &lt;aop:pointcut expression=&quot;execution(* tm.change.service..*(..))&quot;
+        id=&quot;txPointcut&quot; /&gt;
+    &lt;aop:advisor advice-ref=&quot;txAdvice&quot; pointcut-ref=&quot;txPointcut&quot; /&gt;
+&lt;/aop:config&gt;
+&lt;context:annotation-config /&gt;
+```
+</code></pre><p>上述的事务是在service层上insert<em>，update</em>，delete*等这些方法具有事务</p><ul><li><p>controller层(springmvc.xml文件)</p><ul><li>配置视图解析器</li></ul></li></ul><pre><code>```
+&lt;!-- 配置视图解析器 --&gt;
+&lt;bean
+    class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
+    &lt;!-- 前缀 --&gt;
+    &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/&quot; /&gt;
+    &lt;!-- 后缀 --&gt;
+    &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot; /&gt;
+&lt;/bean&gt;
+```
+</code></pre><ul><li><p>设置上传文件的视图解析器</p><pre><code>&lt;!-- 上传文件的视图解析器 --&gt;
+&lt;bean id=&quot;multipartResolver&quot;
+  class=&quot;org.springframework.web.multipart.commons.CommonsMultipartResolver&quot;&gt;
+  &lt;property name=&quot;maxUploadSize&quot; value=&quot;20971520&quot; /&gt;
+&lt;/bean&gt;
+</code></pre><ul><li>配置拦截器，可以直接定义拦截所有请求，也可以自定义拦截路径</li></ul><pre><code>&lt;mvc:interceptors&gt;
+&lt;!-- 直接定义拦截所有请求 --&gt;
+&lt;bean class=&quot;com.wxisme.ssm.interceptor.IdentityInterceptor&quot;&gt;&lt;/bean&gt;
+  &lt;!-- &lt;mvc:interceptor&gt;
+      拦截所有路径的请求   包括子路径
+      &lt;mvc:mapping path=&quot;/**&quot;/&gt;
+      &lt;bean class=&quot;com.wxisme.ssm.interceptor.IdentityInterceptor&quot;&gt;&lt;/bean&gt;
+  &lt;/mvc:interceptor&gt; --&gt;
+&lt;/mvc:interceptors&gt;
+</code></pre></li><li><p>配置一些绑定如日期邦迪</p><pre><code>&lt;!-- 自定义参数类型绑定 --&gt;
+&lt;bean id=&quot;conversionService&quot; class=&quot;org.springframework.format.support.FormattingConversionServiceFactoryBean&quot;&gt;
+&lt;property name=&quot;converters&quot;&gt;
+   &lt;list&gt;
+       &lt;!-- 日期类型绑定 --&gt;
+       &lt;bean class=&quot;com.wxisme.ssm.controller.converter.DateConverter&quot;/&gt;
+   &lt;/list&gt;
+&lt;/property&gt;
+&lt;/bean&gt;
+</code></pre></li><li><p>静态资源不加载问题的解决方法：</p><p>在web.xml文件中如何启动spring是设置拦截的url是如下的，那么只有以.action的请求会被拦截处理，一些静态资源不会被拦截，这种情况是正常的，但是有的人会设置springmvc的拦截地址是拦截任何地址，那么这个时候的静态资源也就会被拦截。这个时候我们系统就会因加载不到静态资源而无法显示界面</p><pre><code>&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;*.action&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre><p>遇到上述情况难道我们就没办法解决了吗，有的，看下代码</p><pre><code>&lt;!-- 访问静态资源文件 --&gt;
+&lt;!-- &lt;mvc:default-servlet-handler/&gt; 需要在web.xml中配置--&gt;
+&lt;mvc:resources mapping=&quot;/images/**&quot; location=&quot;/images/&quot; /&gt;
+&lt;mvc:resources mapping=&quot;/css/**&quot; location=&quot;/css/&quot; /&gt;  
+&lt;mvc:resources mapping=&quot;/js/**&quot; location=&quot;/js/&quot; /&gt;
+&lt;mvc:resources mapping=&quot;/imgdata/**&quot; location=&quot;/imgdata/&quot; /&gt;
+</code></pre></li></ul></div><div class=post-footer><div>转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a target=_blank>烟花散尽13141</a></div><div></div></div></article><div class="article-nav prev-next-wrap clearfix"><a href=/zxh/20160926.html class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a> <a href=/zxh/20160908.html class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a></div><div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div><button id=rewardButton disable=enable onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}"><span>赏</span></button><div id=QR style="display: none;"><div id=wechat style="display: inline-block"><a href=/img/wechatpay.jpg class="fancybox fancybox.image" rel=group><img id=wechat_qr src=/img/wechatpay.jpg alt="颜敏 WeChat Pay"></a><p>微信打赏</p></div><div id=alipay style="display: inline-block"><a href=/img/alipay.jpg class="fancybox fancybox.image" rel=group><img id=alipay_qr src=/img/alipay.jpg alt="颜敏 Alipay"></a><p>支付宝打赏</p></div></div></div><div id=comments><div id=SOHUCS sid=/zxh/20160926.html></div><script type=text/javascript> 
+    (function(){ 
+    var appid = 'cyti5JvoU'; 
+    var conf = 'prod_a32310aad07e12c7706c8da1901ed57b'; 
+    var width = window.innerWidth || document.documentElement.clientWidth; 
+    if (width < 960) { 
+    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script></div></main><aside class="col-md-4 sidebar"><div class=widget><h3 class=title>Search</h3><div id=search-form><div id=result-mask class=hide></div><div class=search-area><input id=search-key type=search autocomplete=off placeholder=搜点什么呢?> <button type=button class=search-form-submit id=search-local>站内搜索</button></div><div id=result-wrap class=hide><div id=search-result></div></div><div class=hide><template id=search-tpl><div class=item><a href=/{path} title={title}><div class=title>{title}</div><div class=content>{content}</div></a></div></template></div></div></div><div class="widget notification"><h3 class=title>网站公告</h3><div><p><font color=red>pc、移动端目录区分设计</font></p></div></div><div class=widget><h3 class=title>Social</h3><div class="content social"><a href=//gitee.com/zxhtom rel="external nofollow" title=oschina target=_blank><i class="git fa fa-git"></i></a> <a href=mailto:870775401@qq.com rel="external nofollow" title=邮箱 target=_blank><i class="envelope-o fa fa-envelope-o"></i></a> <a href=870775401 rel="external nofollow" title=联系QQ target=_blank><i class="qq fa fa-qq"></i></a> <a href="/" rel="external nofollow" title=微博 target=_blank><i class="weibo fa fa-weibo"></i></a> <a href=376091466 rel="external nofollow" title=QQ群1 target=_blank><i class="users fa fa-users"></i></a> <a href=/atom.xml rel="external nofollow" title=RSS target=_blank><i class="feed fa fa-feed"></i></a></div></div><div class=widget><h3 class=title>Categories</h3><ul class=category-list><li class=category-list-item><a class=category-list-link href="/categories/开发工具/"><i class=fa aria-hidden=true>开发工具</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/案例/"><i class=fa aria-hidden=true>案例</i></a><span class=category-list-count>2</span></li><li class=category-list-item><a class=category-list-link href="/categories/程序人生/"><i class=fa aria-hidden=true>程序人生</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/编程/"><i class=fa aria-hidden=true>编程</i></a><span class=category-list-count>88</span></li></ul></div><div class=widget><h3 class=title>Archives</h3><ul class=archive-list><li class=archive-list-item><a class=archive-list-link href="/archives/2018/01/"><i class=fa aria-hidden=true>2018年01月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/12/"><i class=fa aria-hidden=true>2017年12月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/11/"><i class=fa aria-hidden=true>2017年11月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/10/"><i class=fa aria-hidden=true>2017年10月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/06/"><i class=fa aria-hidden=true>2017年06月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/04/"><i class=fa aria-hidden=true>2017年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/03/"><i class=fa aria-hidden=true>2017年03月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/02/"><i class=fa aria-hidden=true>2017年02月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/01/"><i class=fa aria-hidden=true>2017年01月</i></a><span class=archive-list-count>9</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/12/"><i class=fa aria-hidden=true>2016年12月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/11/"><i class=fa aria-hidden=true>2016年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/10/"><i class=fa aria-hidden=true>2016年10月</i></a><span class=archive-list-count>8</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/09/"><i class=fa aria-hidden=true>2016年09月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/08/"><i class=fa aria-hidden=true>2016年08月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/07/"><i class=fa aria-hidden=true>2016年07月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/06/"><i class=fa aria-hidden=true>2016年06月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/05/"><i class=fa aria-hidden=true>2016年05月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/04/"><i class=fa aria-hidden=true>2016年04月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/03/"><i class=fa aria-hidden=true>2016年03月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/02/"><i class=fa aria-hidden=true>2016年02月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2015/04/"><i class=fa aria-hidden=true>2015年04月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/11/"><i class=fa aria-hidden=true>2014年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/10/"><i class=fa aria-hidden=true>2014年10月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/04/"><i class=fa aria-hidden=true>2014年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/01/"><i class=fa aria-hidden=true>2014年01月</i></a><span class=archive-list-count>2</span></li></ul></div><div class=widget><h3 class=title>Tag Cloud</h3><div class="content tag-cloud"><a href="/tags/C/" style="font-size: 17.5px;">C++</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/bat语法/" style="font-size: 10px;">bat语法</a> <a href="/tags/formatter/" style="font-size: 10px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/ngrok/" style="font-size: 10px;">ngrok</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/sublime-text3/" style="font-size: 10px;">sublime text3</a> <a href="/tags/前端/" style="font-size: 12.5px;">前端</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/感慨/" style="font-size: 12.5px;">感慨</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a></div></div><div class=widget><h3 class=title>Friends</h3><div class="content friends-link"><a href=http://blog.csdn.net/u013132051 class=fa target=_blank>个人博客</a></div></div></aside></div></div></section><footer class=main-footer><div class=container><div class=row></div></div></footer><a id=back-to-top class=hide><i class="fa fa-chevron-up"></i></a><div class=copyright><div class=container><div class=row><div class=col-sm-12><span>Copyright &copy; 2017</span> | <span>Powered by <a href=//hexo.io class=copyright-links target=_blank rel=nofollow>张新华</a></span> | <span>Theme by <a href=//github.com/shenliyang/hexo-theme-snippet.git class=copyright-links target=_blank rel=nofollow>ZxhTom</a></span></div></div></div></div><script src=https://code.jquery.com/jquery-latest.js></script><script src=https://assets.changyan.sohu.com/upload/plugins/plugins.count.js></script><script src="/assets/highlight.pack.js?rev=@@hash"></script><script>
+     hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script><script src="/js/search.js?rev=@@hash"></script><script src="/js/app.js?rev=@@hash"></script><script src="/assets/prefix.js?rev=@@hash"></script><script src="/assets/my.js?rev=@@hash"></script></body></html>

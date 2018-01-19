@@ -1,0 +1,264 @@
+<!DOCTYPE HTML><html><head><script>
+	if('' == 'true'){
+		if (prompt('请输入管理员密码') !== '025025'){
+            alert('密码错误！');
+            location.href='https://zxhtom.oschina.io';
+    	}
+	}
+</script><meta charset=UTF-8><meta name=viewport content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><meta http-equiv=X-UA-Compatible content="IE=Edge,chrome=1"><meta http-equiv=Cache-Control content=no-siteapp><meta name=renderer content=webkit|ie-comp|ie-stand><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no,email=no,adress=no"><meta name=browsermode content=application><meta name=screen-orientation content=portrait><link rel=dns-prefetch href=https://zxhtom.oschina.io><meta name=description content=张新华的个人网站><meta name=robots content=all><meta name=google content=all><meta name=googlebot content=all><meta name=verify content=all><title>jquery验证大全 | 烟花散尽13141</title><link rel=alternate href=/atom.xml title=烟花散尽13141 type=application/atom+xml><link rel=icon href=/favicon.ico><link rel=stylesheet href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css?rev=9.12.0"><link rel=stylesheet href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4"><link rel=stylesheet href=//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href="/css/style.css?rev=@@hash"><link rel=stylesheet href="/css/mycss.css?rev=@@hash"><div class=hide><script src="https://s4.cnzz.com/z_stat.php?id=1263868967&web_id=1263868967" language=JavaScript></script></div><script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?709c2dde1f61f5e589ff3ed31ba52411";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script></head><body><header class=main-header style=background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)><div class=main-header-box><a class=header-avatar href="/"><img src=/img/avatar.jpg alt=logo头像></a><div class=branding><h2>学如逆水行舟，不进则退！！！</h2></div></div></header><nav class=main-navigation><div class=container><div class=row><div class=col-sm-12><div class=navbar-header><span class="nav-toggle-button collapsed" data-toggle=collapse data-target=#main-menu id=mnav><span class=sr-only>Toggle navigation</span> <i class="fa fa-bars"></i></span></div><div class="collapse navbar-collapse" id=main-menu><ul class=menu><li role=presentation><a href="/"><i class="fa fa-fw"></i>首页</a></li><li role=presentation><a href="/about/"><i class="fa fa-fw"></i>关于我</a></li><li role=presentation><a href="/tags/"><i class="fa fa-fw"></i>标签</a></li><li role=presentation><a href="/categories/"><i class="fa fa-fw"></i>分类</a></li><li role=presentation><a href="/archives/"><i class="fa fa-fw"></i>归档</a></li><li role=presentation><a href="/schedule/"><i class="fa fa-fw"></i>日程表</a></li><li role=presentation><a href=/sitemap.xml><i class="fa fa-fw"></i>地图导航</a></li><li role=presentation><a href="/404/"><i class="fa fa-fw"></i>公益活动</a></li></ul></div></div></div></div></nav><section class=content-wrap><div class=container><div class=row><main class="col-md-8 main-content m-post"><div id=toc class=toc-article><div class=hamburger><div class=line></div><div class=line></div><div class=line></div></div><strong class=toc-title>文章目录</strong><div class=menu-inner><ol class=toc><li class="toc-item toc-level-1"><a class=toc-link href=#jQuery验证及限制><span class=toc-number>1.</span> <span class=toc-text>jQuery验证及限制</span></a><ol class=toc-child><li class="toc-item toc-level-2"><a class=toc-link href=#绑定键盘监听事件><span class=toc-number>1.1.</span> <span class=toc-text>绑定键盘监听事件</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#输入框设置><span class=toc-number>1.2.</span> <span class=toc-text>输入框设置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class=toc-link href=#jquery表单提交验证><span class=toc-number>2.</span> <span class=toc-text>jquery表单提交验证</span></a><ol class=toc-child><li class="toc-item toc-level-2"><a class=toc-link href=#引入脚本文件><span class=toc-number>2.1.</span> <span class=toc-text>引入脚本文件</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#自定义js实现表单验证-利用jQuery提供内置方法><span class=toc-number>2.2.</span> <span class=toc-text>自定义js实现表单验证(利用jQuery提供内置方法)</span></a><ol class=toc-child><li class="toc-item toc-level-3"><a class=toc-link href=#动态决定验证规则><span class=toc-number>2.2.1.</span> <span class=toc-text>动态决定验证规则</span></a></li><li class="toc-item toc-level-3"><a class=toc-link href=#通过远程进行验证><span class=toc-number>2.2.2.</span> <span class=toc-text>通过远程进行验证</span></a><ol class=toc-child><li class="toc-item toc-level-4"><a class=toc-link href=#前台><span class=toc-number>2.2.2.1.</span> <span class=toc-text>前台</span></a></li><li class="toc-item toc-level-4"><a class=toc-link href=#后台><span class=toc-number>2.2.2.2.</span> <span class=toc-text>后台</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class=toc-link href=#验证提示信息的显示位置><span class=toc-number>2.3.</span> <span class=toc-text>验证提示信息的显示位置</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#重构规则><span class=toc-number>2.4.</span> <span class=toc-text>重构规则</span></a><ol class=toc-child><li class="toc-item toc-level-3"><a class=toc-link href=#adMethod><span class=toc-number>2.4.1.</span> <span class=toc-text>adMethod</span></a></li></ol></li></ol></li></ol></div><svg version=1.1 id=blob xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><path id=blob-path d=M60,500H0V0h60c0,0,20,172,20,250S60,900,60,500z></path></svg></div><p id=process></p><article class=post><div class=post-head><h1 id=jquery验证大全>jquery验证大全</h1><div class=post-meta><span class="categories-meta fa-wrap"><i class="fa fa-folder-open-o"></i> <span>编程</span></span> <span class=fa-wrap><i class="fa fa-tags"></i> <span class=tags-meta>java</span></span> <span class=fa-wrap><i class="fa fa-clock-o"></i> <span class=date-meta>2017/03/10</span></span> <a href=/zxh/20170310.html#comments class=comment-count><i id=changyan_count_unit data-xid=zxh/20170310.html></i>留言, <i id=changyan_parti_unit data-xid=zxh/20170310.html></i>参与</a> <span id=busuanzi_container_page_pv>view : <span id=busuanzi_value_page_pv></span>次</span></div><p class="fa fa-exclamation-triangle warning">本文于<strong>315</strong>天之前发表，文中内容可能已经过时。</p></div><div class="post-body post-content"><p>jQuery验证及限制<br><a id=more></a></p><h1 id=jQuery验证及限制><a href=#jQuery验证及限制 class=headerlink title=jQuery验证及限制></a>jQuery验证及限制</h1><h2 id=绑定键盘监听事件><a href=#绑定键盘监听事件 class=headerlink title=绑定键盘监听事件></a>绑定键盘监听事件</h2><pre><code>
+    $(document).on(&quot;keypress&quot;, &quot;.txt-valid-len&quot;, function (e) 
+    {
+        return (this.value.length &lt; $(this).attr(&quot;maxlength&quot;));
+    });
+</code></pre><h2 id=输入框设置><a href=#输入框设置 class=headerlink title=输入框设置></a>输入框设置</h2><ul><li>然后我们只需要在input中添加txt-valid-len这个class属性。并且加入maxlength属性指定长度就可以了。</li></ul><pre><code>&lt;input type=&quot;text&quot; id=&quot;user_name&quot; name=&quot;name&quot; class=&quot;form-control txt-valid-len&quot; maxlength=&quot;11&quot; /&gt;
+</code></pre><ul><li>上面的代码的意思就是这个输入框长度限制在11位，超过11位就不显示了。如果想在超过11位进行提示。可以扩展上面的监听事件。</li></ul><hr><h1 id=jquery表单提交验证><a href=#jquery表单提交验证 class=headerlink title=jquery表单提交验证></a>jquery表单提交验证</h1><ul><li>在开发中我们前台经常需要在与后台交互前进行相关数据的验证。这样可以减少服务端的压力。下面我们来看看jquery给我们提供的表单验证的方法。</li></ul><h2 id=引入脚本文件><a href=#引入脚本文件 class=headerlink title=引入脚本文件></a>引入脚本文件</h2><pre><code>jquery.min.js
+jquery.validate.js
+</code></pre><ul><li><p>这两个js在官网的jQuery中都是包含的，直接下载引入就行了。</p></li><li><p>有了这两个js我们还需要页面上的form表单。表单就是我们平常的表单。</p></li></ul><pre><code>&lt;form id=&quot;myform&quot; method=&quot;post&quot; action=&quot;#&quot;&gt;
+      &lt;p&gt;
+          &lt;label for=&quot;myname&quot;&gt;用户名：&lt;/label&gt;
+          &lt;!-- id和name最好同时写上 --&gt;
+          &lt;input  id=&quot;myname&quot; name=&quot;myname&quot; /&gt;
+      &lt;/p&gt;
+      &lt;p&gt;
+          &lt;label for=&quot;age&quot;&gt;年龄：&lt;/label&gt;
+          &lt;input id=&quot;age&quot; name=&quot;age&quot; /&gt;
+      &lt;/p&gt;
+      &lt;p&gt;
+          &lt;label for=&quot;email&quot;&gt;E-Mail：&lt;/label&gt;
+          &lt;input id=&quot;email&quot; name=&quot;email&quot; /&gt;
+      &lt;/p&gt;
+      &lt;p&gt;
+          &lt;label for=&quot;password&quot;&gt;登陆密码：&lt;/label&gt;
+          &lt;input id=&quot;password&quot; name=&quot;password&quot; type=&quot;password&quot; /&gt;
+      &lt;/p&gt;
+      &lt;p&gt;
+          &lt;label for=&quot;confirm_password&quot;&gt;确认密码：&lt;/label&gt;
+          &lt;input  name=&quot;confirm_password&quot; type=&quot;password&quot; /&gt;
+      &lt;/p&gt;
+      &lt;p&gt;
+          &lt;input class=&quot;submit&quot; type=&quot;submit&quot; value=&quot;立即注册&quot; /&gt;
+      &lt;/p&gt;
+&lt;/form&gt;
+</code></pre><h2 id=自定义js实现表单验证-利用jQuery提供内置方法><a href=#自定义js实现表单验证-利用jQuery提供内置方法 class=headerlink title=自定义js实现表单验证(利用jQuery提供内置方法)></a>自定义js实现表单验证(利用jQuery提供内置方法)</h2><ul><li>首先我们通过jQuery提供的选择器找到我们需要验证的表单</li></ul><pre><code>$(&quot;#myform&quot;).validate();
+</code></pre><ul><li>就这样我们就完成了表单验证。当然啦，到这里只是架子打好了。下面我们开始在validate中填写我们的验证规则了。</li></ul><pre><code>$(&quot;#myform&quot;).validate({
+        debug: true, //调试模式取消submit的默认提交功能   
+        //errorClass: &quot;label.error&quot;, //默认为错误的样式类为：error   
+        focusInvalid: false, //当为false时，验证无效时，没有焦点响应  
+        onkeyup: false,   
+        submitHandler: function(form){   //表单提交句柄,为一回调函数，带一个参数：form   
+            alert(&quot;提交表单&quot;);   
+            form.submit();   //提交表单   
+        },   
+
+        rules:{
+            myname:{
+                required:function(element){
+                    if( $(&quot;#age&quot;).val() &lt; 13){
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+            },
+            email:{
+                required:true,
+                email:true
+            },
+            password:{
+                required:true,
+                rangelength:[3,10]
+            },
+            confirm_password:{
+                equalTo:&quot;input[name=password]&quot;
+            }                    
+        },
+        messages:{
+            myname:{
+                required:&quot;必填&quot;
+            },
+            email:{
+                required:&quot;&lt;span style=&#39;color:red;&#39;&gt;只允许输入整数。&lt;/span&gt;&quot;,
+                email:&quot;E-Mail格式不正确&quot;
+            },
+            password:{
+                required: &quot;不能为空&quot;,
+                rangelength: $.validator.format(&quot;密码最小长度:{0}, 最大长度:{1}。&quot;)
+            },
+            confirm_password:{
+                equalTo:&quot;两次密码输入不一致&quot;
+            }                                    
+        }
+
+    });
+</code></pre><ul><li>其中的rules就是我们验证规则内容。其中的myname,email…是我们form需要验证的控件的name属性值(并不是ID属性值)，还有我们的提示信息可以做的花哨一点加入样式</li></ul><pre><code>&lt;span style=&#39;color:red;&#39;&gt;只允许输入整数。&lt;/span&gt;
+</code></pre><ul><li>至于这些验证规则我们可以在jquery-validate.js中找到。里面messages属性的提示信息我们都是可以用来做验证的.</li></ul><h3 id=动态决定验证规则><a href=#动态决定验证规则 class=headerlink title=动态决定验证规则></a>动态决定验证规则</h3><ul><li>上面的myname的required的验证是根据id=age的input框的值得变化决定的，就是说你输入的年龄小于13岁myname是需要验证的。大于则反之。如果你想做的像更美化我们可以在年龄input中绑定一个失去焦点的时间(blur)，在输入完年龄我们就立马去验证myname的input框的规则，通过调用<pre><code>$(&quot;#myname&quot;).valid();
+</code></pre></li><li>就会去按照我们的规则去验证myname这个字段的input的值。</li></ul><h3 id=通过远程进行验证><a href=#通过远程进行验证 class=headerlink title=通过远程进行验证></a>通过远程进行验证</h3><h4 id=前台><a href=#前台 class=headerlink title=前台></a>前台</h4><ul><li>对上面的进行如下的修改，其中remote就是我们的远程请求，该请求返回的true,则验证通过，false反之。</li></ul><pre><code>$(&quot;#myform&quot;).validate({  
+  rules: {  
+    email: {  
+      required: true,
+      email: true,
+      remote: {
+          type:&quot;post&quot;,
+          dataType: &quot;json&quot;,
+          contentType : &quot;application/json&quot;,
+          url:&quot;/adminManage/email.bsh&quot;
+      }  
+    }  
+  }  
+});
+</code></pre><h4 id=后台><a href=#后台 class=headerlink title=后台></a>后台</h4><ul><li>这的注意的是remote这里的请求格式有些要求，这个url返回的数据必须是json格式的。但是后台只能返回string或者boolean类型的数据。如果返回的是string内容的json，那么string是true则验证通过，若果不是true则验证提示就是你返回的string内容。如果是boolean，是true则验证通过，false验证失败。</li></ul><pre><code>@RequestMapping(&quot;/email.bsh&quot;)
+    @ResponseBody
+    public Object email(HttpServletRequest request,HttpServletResponse response) 
+    {
+
+        return &quot;已经存在&quot;;
+    }
+</code></pre><ul><li>前台提示已经存在，会覆盖前台默认的提示内容</li></ul><pre><code>@RequestMapping(&quot;/email.bsh&quot;)
+@ResponseBody
+public Object email(HttpServletRequest request,HttpServletResponse response) 
+{
+
+    return &quot;true&quot;;
+}
+</code></pre><ul><li>验证通过</li></ul><pre><code>@RequestMapping(&quot;/email.bsh&quot;)
+@ResponseBody
+public Object email(HttpServletRequest request,HttpServletResponse response) 
+{
+
+    return true;
+}
+</code></pre><ul><li><p>验证通过</p><pre><code>@RequestMapping(&quot;/email.bsh&quot;)
+@ResponseBody
+public Object email(HttpServletRequest request,HttpServletResponse response) 
+{
+
+return false;
+}
+</code></pre></li><li>验证失败，前台将提示默认的信息</li></ul><hr><p><a href=http://koalaxyq.iteye.com/blog/557521 target=_blank rel=noopener>参考网址</a></p><h2 id=验证提示信息的显示位置><a href=#验证提示信息的显示位置 class=headerlink title=验证提示信息的显示位置></a>验证提示信息的显示位置</h2><ul><li>在上面一节我们详细介绍了验证的规则及提示实现。那么提示信息的位置有时候也是很重要的，我们控制的好的话界面会很美观的。</li></ul><pre><code>var validator = $(&quot;#myform&quot;).validate({  
+        debug: true,       //调试模式取消submit的默认提交功能  
+        errorClass: &quot;haha&quot;,//默认为错误的样式类为：error  
+        focusInvalid: false,  
+        onkeyup: false,  
+        submitHandler: function(form){   //表单提交句柄,为一回调函数，带一个参数：form  
+            alert(&quot;提交表单&quot;);  
+            //form.submit();   提交表单  
+        },  
+        rules: {           //定义验证规则,其中属性名为表单的name属性  
+            username: {  
+                required: true,  
+                minlength: 2,  
+                remote: &quot;uservalid.jsp&quot;  //传说当中的ajax验证  
+            },  
+            firstpwd: {  
+                required: true,  
+                //minlength: 6  
+                rangelength: [6,8]  
+            },  
+            secondpwd: {  
+                required: true,  
+                equalTo: &quot;#password&quot;  
+            },  
+            sex: {  
+                required: true  
+            },  
+            age: {  
+                required: true,  
+                range: [0,120]  
+            },  
+            email: {  
+                required: true,  
+                email: true  
+            },  
+            purl: {  
+                required: true,  
+                url: true  
+            },  
+            afile: {  
+                required: true,  
+                accept: &quot;xls,doc,rar,zip&quot;  
+            }  
+        },  
+        messages: {       //自定义验证消息  
+            username: {  
+                required: &quot;用户名是必需的！&quot;,  
+                minlength: $.format(&quot;用户名至少要{0}个字符！&quot;),  
+                remote: $.format(&quot;{0}已经被占用&quot;)  
+            },  
+            firstpwd: {  
+                required: &quot;密码是必需的！&quot;,  
+                rangelength: $.format(&quot;密码要在{0}-{1}个字符之间！&quot;)  
+            },  
+            secondpwd: {  
+                required: &quot;密码验证是必需的！&quot;,    
+                equalTo: &quot;密码验证需要与密码一致&quot;  
+            },  
+            sex: {  
+                required: &quot;性别是必需的&quot;  
+            },  
+            age: {  
+                required: &quot;年龄是必需的&quot;,  
+                range: &quot;年龄必须介于{0}-{1}之间&quot;  
+            },  
+            email: {  
+                required: &quot;邮箱是必需的！&quot;,  
+                email: &quot;请输入正确的邮箱地址（例如 myemail@163.com）&quot;  
+            },  
+            purl: {  
+                required: &quot;个人主页是必需的&quot;,  
+                url: &quot;请输入正确的url格式,如 http://www.domainname.com&quot;  
+            },  
+            afile: {  
+                required: &quot;附件是必需的！&quot;,  
+                accept: &quot;只接收xls,doc,rar,zip文件&quot;  
+            }  
+        },  
+        errorPlacement: function(error, element) {  //验证消息放置的地方  
+            error.appendTo( element.parent(&quot;td&quot;).next(&quot;td&quot;) );  
+        },  
+        highlight: function(element, errorClass) {  //针对验证的表单设置高亮  
+            $(element).addClass(errorClass);  
+        },  
+        success: function(label) {    
+                    label.addClass(&quot;valid&quot;).text(&quot;Ok!&quot;)    
+            }    
+
+        /*, 
+        errorContainer: &quot;#error_con&quot;,               //验证消息集中放置的容器 
+        errorLabelContainer: &quot;#error_con ul&quot;,       //存放消息无序列表的容器 
+        wrapper: &quot;li&quot;,                              //将验证消息用无序列表包围 
+        validClass: &quot;valid&quot;,                        //通过验证的样式类 
+        errorElement: &quot;em&quot;,                         //验证标签的名称，默认为：label 
+        success: &quot;valid&quot;                            //验证通过的样式类 
+        */  
+    });
+</code></pre><h2 id=重构规则><a href=#重构规则 class=headerlink title=重构规则></a>重构规则</h2><p>不论什么时候，当你的表单中的多个字段含有相同的验证规则及验证消息，重构规则可以减少很多重复。使用 addMethod 和 addClassRules 将非常有效果。<br>假使已经重构了如下规则：</p><pre><code>// alias required to cRequired with new message  
+$.validator.addMethod(&quot;cRequired&quot;, $.validator.methods.required,  
+  &quot;Customer name required&quot;);  
+// alias minlength, too  
+$.validator.addMethod(&quot;cMinlength&quot;, $.validator.methods.minlength,   
+  // leverage parameter replacement for minlength, {0} gets replaced with 2  
+  $.format(&quot;Customer name must have at least {0} characters&quot;));  
+// combine them both, including the parameter for minlength  
+$.validator.addClassRules(&quot;customer&quot;, { cRequired: true, cMinlength: 2 }); 
+
+&lt;input name=&quot;customer1&quot; class=&quot;customer&quot; /&gt;  
+&lt;input name=&quot;customer2&quot; class=&quot;customer&quot; /&gt;  
+&lt;input name=&quot;customer3&quot; class=&quot;customer&quot; /&gt;
+</code></pre><h3 id=adMethod><a href=#adMethod class=headerlink title=adMethod></a>adMethod</h3><p>addMethod( name, method, [message] )<br>返回：undefined</p><p>参数 name 类型：String<br>要添加的方法名，用于标识和引用，必须是一个有效的javascript标识符。</p><p>参数 method 类型：Callback 方法的实现部分，返回true如果表单元素通过验证。</p><p>参数 message(Optional) 类型：String, Function 该方法的默认验证消息。可以用 jQuery.validator.format(value) 方法创建。如果未定义该参数，则使用本地已存在的验证消息，另外，必须为指定的表单元素定义验证消息。</p><p>说明：添加一个用户自定义的验证方法。它由方法名（必须是一个合法的javascript标识符）、基于javascript的函数及默认的验证消息组成。</p><p>addClassRules( name, rules )<br>返回：undefined</p><p>参数 name 类型：String 要添加的样式规则名。</p><p>参数 rules 类型：Options 规则选项。</p><p>说明：添加一个复合的样式验证方法。对于将多个联合使用的规则重构进单个样式中非常有用。</p></div><div class=post-footer><div>转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a target=_blank>烟花散尽13141</a></div><div></div></div></article><div class="article-nav prev-next-wrap clearfix"><a href=/zxh/20170318.html class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a> <a href=/zxh/20170302.html class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a></div><div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div><button id=rewardButton disable=enable onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}"><span>赏</span></button><div id=QR style="display: none;"><div id=wechat style="display: inline-block"><a href=/img/wechatpay.jpg class="fancybox fancybox.image" rel=group><img id=wechat_qr src=/img/wechatpay.jpg alt="颜敏 WeChat Pay"></a><p>微信打赏</p></div><div id=alipay style="display: inline-block"><a href=/img/alipay.jpg class="fancybox fancybox.image" rel=group><img id=alipay_qr src=/img/alipay.jpg alt="颜敏 Alipay"></a><p>支付宝打赏</p></div></div></div><div id=comments><div id=SOHUCS sid=/zxh/20170310.html></div><script type=text/javascript> 
+    (function(){ 
+    var appid = 'cyti5JvoU'; 
+    var conf = 'prod_a32310aad07e12c7706c8da1901ed57b'; 
+    var width = window.innerWidth || document.documentElement.clientWidth; 
+    if (width < 960) { 
+    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script></div></main><aside class="col-md-4 sidebar"><div class=widget><h3 class=title>Search</h3><div id=search-form><div id=result-mask class=hide></div><div class=search-area><input id=search-key type=search autocomplete=off placeholder=搜点什么呢?> <button type=button class=search-form-submit id=search-local>站内搜索</button></div><div id=result-wrap class=hide><div id=search-result></div></div><div class=hide><template id=search-tpl><div class=item><a href=/{path} title={title}><div class=title>{title}</div><div class=content>{content}</div></a></div></template></div></div></div><div class="widget notification"><h3 class=title>网站公告</h3><div><p><font color=red>pc、移动端目录区分设计</font></p></div></div><div class=widget><h3 class=title>Social</h3><div class="content social"><a href=//gitee.com/zxhtom rel="external nofollow" title=oschina target=_blank><i class="git fa fa-git"></i></a> <a href=mailto:870775401@qq.com rel="external nofollow" title=邮箱 target=_blank><i class="envelope-o fa fa-envelope-o"></i></a> <a href=870775401 rel="external nofollow" title=联系QQ target=_blank><i class="qq fa fa-qq"></i></a> <a href="/" rel="external nofollow" title=微博 target=_blank><i class="weibo fa fa-weibo"></i></a> <a href=376091466 rel="external nofollow" title=QQ群1 target=_blank><i class="users fa fa-users"></i></a> <a href=/atom.xml rel="external nofollow" title=RSS target=_blank><i class="feed fa fa-feed"></i></a></div></div><div class=widget><h3 class=title>Categories</h3><ul class=category-list><li class=category-list-item><a class=category-list-link href="/categories/开发工具/"><i class=fa aria-hidden=true>开发工具</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/案例/"><i class=fa aria-hidden=true>案例</i></a><span class=category-list-count>2</span></li><li class=category-list-item><a class=category-list-link href="/categories/程序人生/"><i class=fa aria-hidden=true>程序人生</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/编程/"><i class=fa aria-hidden=true>编程</i></a><span class=category-list-count>88</span></li></ul></div><div class=widget><h3 class=title>Archives</h3><ul class=archive-list><li class=archive-list-item><a class=archive-list-link href="/archives/2018/01/"><i class=fa aria-hidden=true>2018年01月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/12/"><i class=fa aria-hidden=true>2017年12月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/11/"><i class=fa aria-hidden=true>2017年11月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/10/"><i class=fa aria-hidden=true>2017年10月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/06/"><i class=fa aria-hidden=true>2017年06月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/04/"><i class=fa aria-hidden=true>2017年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/03/"><i class=fa aria-hidden=true>2017年03月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/02/"><i class=fa aria-hidden=true>2017年02月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/01/"><i class=fa aria-hidden=true>2017年01月</i></a><span class=archive-list-count>9</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/12/"><i class=fa aria-hidden=true>2016年12月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/11/"><i class=fa aria-hidden=true>2016年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/10/"><i class=fa aria-hidden=true>2016年10月</i></a><span class=archive-list-count>8</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/09/"><i class=fa aria-hidden=true>2016年09月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/08/"><i class=fa aria-hidden=true>2016年08月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/07/"><i class=fa aria-hidden=true>2016年07月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/06/"><i class=fa aria-hidden=true>2016年06月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/05/"><i class=fa aria-hidden=true>2016年05月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/04/"><i class=fa aria-hidden=true>2016年04月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/03/"><i class=fa aria-hidden=true>2016年03月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/02/"><i class=fa aria-hidden=true>2016年02月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2015/04/"><i class=fa aria-hidden=true>2015年04月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/11/"><i class=fa aria-hidden=true>2014年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/10/"><i class=fa aria-hidden=true>2014年10月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/04/"><i class=fa aria-hidden=true>2014年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/01/"><i class=fa aria-hidden=true>2014年01月</i></a><span class=archive-list-count>2</span></li></ul></div><div class=widget><h3 class=title>Tag Cloud</h3><div class="content tag-cloud"><a href="/tags/C/" style="font-size: 17.5px;">C++</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/bat语法/" style="font-size: 10px;">bat语法</a> <a href="/tags/formatter/" style="font-size: 10px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/ngrok/" style="font-size: 10px;">ngrok</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/sublime-text3/" style="font-size: 10px;">sublime text3</a> <a href="/tags/前端/" style="font-size: 12.5px;">前端</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/感慨/" style="font-size: 12.5px;">感慨</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a></div></div><div class=widget><h3 class=title>Friends</h3><div class="content friends-link"><a href=http://blog.csdn.net/u013132051 class=fa target=_blank>个人博客</a></div></div></aside></div></div></section><footer class=main-footer><div class=container><div class=row></div></div></footer><a id=back-to-top class=hide><i class="fa fa-chevron-up"></i></a><div class=copyright><div class=container><div class=row><div class=col-sm-12><span>Copyright &copy; 2017</span> | <span>Powered by <a href=//hexo.io class=copyright-links target=_blank rel=nofollow>张新华</a></span> | <span>Theme by <a href=//github.com/shenliyang/hexo-theme-snippet.git class=copyright-links target=_blank rel=nofollow>ZxhTom</a></span></div></div></div></div><script src=https://code.jquery.com/jquery-latest.js></script><script src=https://assets.changyan.sohu.com/upload/plugins/plugins.count.js></script><script src="/assets/highlight.pack.js?rev=@@hash"></script><script>
+     hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script><script src="/js/search.js?rev=@@hash"></script><script src="/js/app.js?rev=@@hash"></script><script src="/assets/prefix.js?rev=@@hash"></script><script src="/assets/my.js?rev=@@hash"></script></body></html>

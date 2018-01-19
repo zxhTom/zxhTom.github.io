@@ -1,0 +1,150 @@
+<!DOCTYPE HTML><html><head><script>
+	if('' == 'true'){
+		if (prompt('请输入管理员密码') !== '025025'){
+            alert('密码错误！');
+            location.href='https://zxhtom.oschina.io';
+    	}
+	}
+</script><meta charset=UTF-8><meta name=viewport content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><meta http-equiv=X-UA-Compatible content="IE=Edge,chrome=1"><meta http-equiv=Cache-Control content=no-siteapp><meta name=renderer content=webkit|ie-comp|ie-stand><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no,email=no,adress=no"><meta name=browsermode content=application><meta name=screen-orientation content=portrait><link rel=dns-prefetch href=https://zxhtom.oschina.io><meta name=description content=张新华的个人网站><meta name=robots content=all><meta name=google content=all><meta name=googlebot content=all><meta name=verify content=all><title>设计模式(一)----工厂模式 | 烟花散尽13141</title><link rel=alternate href=/atom.xml title=烟花散尽13141 type=application/atom+xml><link rel=icon href=/favicon.ico><link rel=stylesheet href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css?rev=9.12.0"><link rel=stylesheet href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4"><link rel=stylesheet href=//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href="/css/style.css?rev=@@hash"><link rel=stylesheet href="/css/mycss.css?rev=@@hash"><div class=hide><script src="https://s4.cnzz.com/z_stat.php?id=1263868967&web_id=1263868967" language=JavaScript></script></div><script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?709c2dde1f61f5e589ff3ed31ba52411";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script></head><body><header class=main-header style=background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)><div class=main-header-box><a class=header-avatar href="/"><img src=/img/avatar.jpg alt=logo头像></a><div class=branding><h2>学如逆水行舟，不进则退！！！</h2></div></div></header><nav class=main-navigation><div class=container><div class=row><div class=col-sm-12><div class=navbar-header><span class="nav-toggle-button collapsed" data-toggle=collapse data-target=#main-menu id=mnav><span class=sr-only>Toggle navigation</span> <i class="fa fa-bars"></i></span></div><div class="collapse navbar-collapse" id=main-menu><ul class=menu><li role=presentation><a href="/"><i class="fa fa-fw"></i>首页</a></li><li role=presentation><a href="/about/"><i class="fa fa-fw"></i>关于我</a></li><li role=presentation><a href="/tags/"><i class="fa fa-fw"></i>标签</a></li><li role=presentation><a href="/categories/"><i class="fa fa-fw"></i>分类</a></li><li role=presentation><a href="/archives/"><i class="fa fa-fw"></i>归档</a></li><li role=presentation><a href="/schedule/"><i class="fa fa-fw"></i>日程表</a></li><li role=presentation><a href=/sitemap.xml><i class="fa fa-fw"></i>地图导航</a></li><li role=presentation><a href="/404/"><i class="fa fa-fw"></i>公益活动</a></li></ul></div></div></div></div></nav><section class=content-wrap><div class=container><div class=row><main class="col-md-8 main-content m-post"><div id=toc class=toc-article><div class=hamburger><div class=line></div><div class=line></div><div class=line></div></div><strong class=toc-title>文章目录</strong><div class=menu-inner><ol class=toc><li class="toc-item toc-level-2"><a class=toc-link href=#描述><span class=toc-number>1.</span> <span class=toc-text>描述</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#优点><span class=toc-number>2.</span> <span class=toc-text>优点</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#情景再现><span class=toc-number>3.</span> <span class=toc-text>情景再现</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#分类><span class=toc-number>4.</span> <span class=toc-text>分类</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#代码实现><span class=toc-number>5.</span> <span class=toc-text>代码实现</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#总结><span class=toc-number>6.</span> <span class=toc-text>总结</span></a></li></ol></div><svg version=1.1 id=blob xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><path id=blob-path d=M60,500H0V0h60c0,0,20,172,20,250S60,900,60,500z></path></svg></div><p id=process></p><article class=post><div class=post-head><h1 id=设计模式(一)----工厂模式>设计模式(一)----工厂模式</h1><div class=post-meta><span class="categories-meta fa-wrap"><i class="fa fa-folder-open-o"></i> <span>编程</span></span> <span class=fa-wrap><i class="fa fa-tags"></i> <span class=tags-meta>java</span></span> <span class=fa-wrap><i class="fa fa-clock-o"></i> <span class=date-meta>2017/06/11</span></span> <a href=/zxh/20170611.html#comments class=comment-count><i id=changyan_count_unit data-xid=zxh/20170611.html></i>留言, <i id=changyan_parti_unit data-xid=zxh/20170611.html></i>参与</a> <span id=busuanzi_container_page_pv>view : <span id=busuanzi_value_page_pv></span>次</span></div></div><div class="post-body post-content"><p>基本的业务逻辑的编写并不是难事<br><a id=more></a></p><p><strong><font face=楷体 size=4>基本的业务逻辑的编写并不是难事，作为一个合格的程序员能够编写出易扩展，可维护，高内聚，低耦合的代码才是真正的能力。所以从今天开始会陆陆续续的研究一下设计模式。设计模式并不是针对编程语言，而是考察的编程的思想。</font></strong></p><hr><ul><li><font face=楷体 size=4>设计模式中最简单的应该就是工厂模式了，在我们企业项目中工厂模式和单例模式也是应用最多的模式了。今天我们就简单的介绍一下工厂模式。都是个人总结，不喜勿喷！！！<br></font></li></ul><h2 id=描述><a href=#描述 class=headerlink title=描述></a>描述</h2><ul><li><font face=楷体 size=4>工厂模式就是简化了对象的构建。正常情况下我们在Java中是通过new来构建对象，但是有的对象可能需要设置一些默认值等等的额外操作。这个时候为了简化用户的操作我们引入了工厂模式的设计思想。工厂模式就是将构建对象的过程封装在工厂类中，我们需要具体的工厂类中的对象我们就可以通过工厂来获取了。提高了使用的灵活性。</font></li></ul><h2 id=优点><a href=#优点 class=headerlink title=优点></a>优点</h2><ul><li><font face=楷体 size=4>通过上面的描述我们能够轻松的发现工厂模式带来的好处。有了工厂模式我们构建对象不需要关注对象构建的过程，我们需要的对象只需要想工厂发出生产对象的指令就可以了。抛弃构建的复杂过程，增加代码的阅读性。</font></li></ul><h2 id=情景再现><a href=#情景再现 class=headerlink title=情景再现></a>情景再现</h2><ul><li><font face=楷体 size=4>工业时代到来之前我们的生产都是人工的，换句话说就是我们需要什么，我们需要自己动手去完成。而有了工厂之后就摆脱了自己的双手。比如说你现在是一家服装厂的老板，夏天来临你需要购进一批夏季服装。相信现在的你不可能自己动手去做衣服，都是通过跟服装厂联系，告诉服装厂你需要衣服的款式，一段时间后你就获得了这些你指定的衣服。至于这些衣服是如何实现的你根本不用关心。服装厂在这里就是我们工厂模式的工厂。</font></li></ul><h2 id=分类><a href=#分类 class=headerlink title=分类></a>分类</h2><ul><li><font face=楷体 size=4>工厂模式又细分为三种：<font face=楷体 size=4 color=red>简单工厂模式</font>+<font face=楷体 size=4 color=red>工厂方法模式</font>+<font face=楷体 size=4 color=red>抽象工厂模式</font></font></li></ul><ul><li><p><font face=楷体 size=4 color=red>简单工厂模式:</font><br>简单工厂模式是我们上面的情景再现的情况，简单工厂就是说所有的细节都是依靠一个工厂统一完成，这种模式下工厂的压力特别大。</p></li><li><p><font face=楷体 size=4 color=red>工厂方法模式:</font><br>工厂方法模式在上面情景的基础上将工厂进行了更改优化，之前工厂是一个工厂生产一年四季的衣服，现在抽象一个工厂类，在有四个工厂是该抽象工厂的具体实现类，这四个工厂具体分别负责生产春夏秋冬衣服。这样仍然是工厂模式，只不过相对简单工厂模式已经减轻了工厂的压力了。</p></li><li><p><font face=楷体 size=4 color=red>抽象工厂模式:</font><br>抽象工厂模式在抽象方法模式的基础上有进行了强化，抽象方法中是一个具体工厂的实现类负责生产一种类型的衣服，而在抽象工厂模式下一个具体的工厂的实现类可以生产多个类别的衣服。这样更加的减轻服装厂的压力了。</p></li></ul><h2 id=代码实现><a href=#代码实现 class=headerlink title=代码实现></a>代码实现</h2><font face=楷体 size=4>这里我们就实现简单工厂模式的代码，其他两种的模式知识在简单工厂模式的基础上进行工厂类的强化</font><font face=楷体 size=4 color=blue>服装抽象类(Clothes)</font><pre><code>package zhangxinhua.JavaDesignDetails.工厂模式.features;
+
+public abstract class Clothes
+{
+    //袖口的数量
+    private int wristband=2;
+    //领口的数量
+    private int neckline=1;
+    //穿衣方式
+    public void hold()
+    {
+        System.out.println(&quot;我的穿衣方式是从领口&quot;);
+    }
+    public int getWristband()
+    {
+        return wristband;
+    }
+    public void setWristband(int wristband)
+    {
+        this.wristband = wristband;
+    }
+    public int getNeckline()
+    {
+        return neckline;
+    }
+    public void setNeckline(int neckline)
+    {
+        this.neckline = neckline;
+    }
+
+
+}
+</code></pre><font face=楷体 size=4 color=blue>具体服装类一(AutumnCloth)</font><pre><code>package zhangxinhua.JavaDesignDetails.工厂模式.special;
+
+import zhangxinhua.JavaDesignDetails.工厂模式.features.Clothes;
+
+public class AutumnCloth extends Clothes
+{
+
+    @Override
+    public void hold()
+    {
+        System.out.println(&quot;我是秋装，我要倒着穿&quot;);
+    }
+
+}
+</code></pre><font face=楷体 size=4 color=blue>具体服装类二(SpringCloth)</font><pre><code>package zhangxinhua.JavaDesignDetails.工厂模式.special;
+
+import zhangxinhua.JavaDesignDetails.工厂模式.features.Clothes;
+
+public class SpringCloth extends Clothes
+{
+
+    @Override
+    public void hold()
+    {
+        System.out.println(&quot;我是春装，我要从领口穿衣&quot;);
+    }
+
+}
+</code></pre><font face=楷体 size=4 color=blue>具体服装类三(SummerCloth)</font><pre><code>package zhangxinhua.JavaDesignDetails.工厂模式.special;
+
+import zhangxinhua.JavaDesignDetails.工厂模式.features.Clothes;
+
+public class SummerCloth extends Clothes
+{
+
+    @Override
+    public void hold()
+    {
+        System.out.println(&quot;我是夏装，我要从怀口穿&quot;);
+    }
+
+}
+</code></pre><font face=楷体 size=4 color=blue>工厂类(Clothfactory)</font><pre><code>package zhangxinhua.JavaDesignDetails.工厂模式.简单工厂模式.factory;
+
+import zhangxinhua.JavaDesignDetails.工厂模式.features.Clothes;
+import zhangxinhua.JavaDesignDetails.工厂模式.special.AutumnCloth;
+import zhangxinhua.JavaDesignDetails.工厂模式.special.SpringCloth;
+import zhangxinhua.JavaDesignDetails.工厂模式.special.SummerCloth;
+
+public class ClothFactory
+{
+    public static Clothes createClothes(String type) throws Exception
+    {
+        Clothes clothes=null;
+        switch (type)
+        {
+        case &quot;spring&quot;:
+            clothes=new SpringCloth();
+            break;
+        case &quot;summer&quot;:
+            clothes=new SummerCloth();
+            break;
+        case &quot;autumn&quot;:
+            clothes=new AutumnCloth();
+            break;
+        default:
+            throw new Exception(&quot;目前不支持你指定的类型&quot;);
+        }
+        return clothes;
+    }
+}
+</code></pre><font face=楷体 size=4 color=blue>客户端调用(client)</font><pre><code>package zhangxinhua.JavaDesignDetails.工厂模式.简单工厂模式.client;
+
+import zhangxinhua.JavaDesignDetails.工厂模式.features.Clothes;
+import zhangxinhua.JavaDesignDetails.工厂模式.简单工厂模式.factory.ClothFactory;
+
+public class client
+{
+    public static void main(String[] args) throws Exception
+    {
+        System.out.println(&quot;工厂你给我一套春装&quot;);
+        Clothes spring = ClothFactory.createClothes(&quot;spring&quot;);
+        spring.hold();
+        System.out.println(&quot;********************&quot;);
+        System.out.println(&quot;工厂你给我一套秋装&quot;);
+        Clothes autum = ClothFactory.createClothes(&quot;autumn&quot;);
+        autum.hold();
+        System.out.println(&quot;********************&quot;);
+        System.out.println(&quot;工厂你给我一套夏装&quot;);
+        Clothes summer = ClothFactory.createClothes(&quot;summer&quot;);
+        summer.hold();
+        System.out.println(&quot;********************&quot;);
+    }
+}
+</code></pre><font face=楷体 size=4 color=blue>效果展示</font><p><img src="http://img.blog.csdn.net/20170611143100083?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEzMjA1MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=这里写图片描述></p><hr><h2 id=总结><a href=#总结 class=headerlink title=总结></a>总结</h2><ul><li>设计模式的学习是潜移默化，学习设计模式不要急，成长是需要时间的，今天的努力，将来的一天终会回报。</li></ul><font face=楷体 size=5 color=green>有需要源码的，或者有不理解，欢迎扫描左侧二维码，进群交流讨论。</font></div><div class=post-footer><div>转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a target=_blank>烟花散尽13141</a></div><div></div></div></article><div class="article-nav prev-next-wrap clearfix"><a href=/zxh/20171028.html class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a> <a href=/zxh/20170428.html class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a></div><div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div><button id=rewardButton disable=enable onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}"><span>赏</span></button><div id=QR style="display: none;"><div id=wechat style="display: inline-block"><a href=/img/wechatpay.jpg class="fancybox fancybox.image" rel=group><img id=wechat_qr src=/img/wechatpay.jpg alt="颜敏 WeChat Pay"></a><p>微信打赏</p></div><div id=alipay style="display: inline-block"><a href=/img/alipay.jpg class="fancybox fancybox.image" rel=group><img id=alipay_qr src=/img/alipay.jpg alt="颜敏 Alipay"></a><p>支付宝打赏</p></div></div></div><div id=comments><div id=SOHUCS sid=/zxh/20170611.html></div><script type=text/javascript> 
+    (function(){ 
+    var appid = 'cyti5JvoU'; 
+    var conf = 'prod_a32310aad07e12c7706c8da1901ed57b'; 
+    var width = window.innerWidth || document.documentElement.clientWidth; 
+    if (width < 960) { 
+    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script></div></main><aside class="col-md-4 sidebar"><div class=widget><h3 class=title>Search</h3><div id=search-form><div id=result-mask class=hide></div><div class=search-area><input id=search-key type=search autocomplete=off placeholder=搜点什么呢?> <button type=button class=search-form-submit id=search-local>站内搜索</button></div><div id=result-wrap class=hide><div id=search-result></div></div><div class=hide><template id=search-tpl><div class=item><a href=/{path} title={title}><div class=title>{title}</div><div class=content>{content}</div></a></div></template></div></div></div><div class="widget notification"><h3 class=title>网站公告</h3><div><p><font color=red>pc、移动端目录区分设计</font></p></div></div><div class=widget><h3 class=title>Social</h3><div class="content social"><a href=//gitee.com/zxhtom rel="external nofollow" title=oschina target=_blank><i class="git fa fa-git"></i></a> <a href=mailto:870775401@qq.com rel="external nofollow" title=邮箱 target=_blank><i class="envelope-o fa fa-envelope-o"></i></a> <a href=870775401 rel="external nofollow" title=联系QQ target=_blank><i class="qq fa fa-qq"></i></a> <a href="/" rel="external nofollow" title=微博 target=_blank><i class="weibo fa fa-weibo"></i></a> <a href=376091466 rel="external nofollow" title=QQ群1 target=_blank><i class="users fa fa-users"></i></a> <a href=/atom.xml rel="external nofollow" title=RSS target=_blank><i class="feed fa fa-feed"></i></a></div></div><div class=widget><h3 class=title>Categories</h3><ul class=category-list><li class=category-list-item><a class=category-list-link href="/categories/开发工具/"><i class=fa aria-hidden=true>开发工具</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/案例/"><i class=fa aria-hidden=true>案例</i></a><span class=category-list-count>2</span></li><li class=category-list-item><a class=category-list-link href="/categories/程序人生/"><i class=fa aria-hidden=true>程序人生</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/编程/"><i class=fa aria-hidden=true>编程</i></a><span class=category-list-count>88</span></li></ul></div><div class=widget><h3 class=title>Archives</h3><ul class=archive-list><li class=archive-list-item><a class=archive-list-link href="/archives/2018/01/"><i class=fa aria-hidden=true>2018年01月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/12/"><i class=fa aria-hidden=true>2017年12月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/11/"><i class=fa aria-hidden=true>2017年11月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/10/"><i class=fa aria-hidden=true>2017年10月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/06/"><i class=fa aria-hidden=true>2017年06月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/04/"><i class=fa aria-hidden=true>2017年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/03/"><i class=fa aria-hidden=true>2017年03月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/02/"><i class=fa aria-hidden=true>2017年02月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/01/"><i class=fa aria-hidden=true>2017年01月</i></a><span class=archive-list-count>9</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/12/"><i class=fa aria-hidden=true>2016年12月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/11/"><i class=fa aria-hidden=true>2016年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/10/"><i class=fa aria-hidden=true>2016年10月</i></a><span class=archive-list-count>8</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/09/"><i class=fa aria-hidden=true>2016年09月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/08/"><i class=fa aria-hidden=true>2016年08月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/07/"><i class=fa aria-hidden=true>2016年07月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/06/"><i class=fa aria-hidden=true>2016年06月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/05/"><i class=fa aria-hidden=true>2016年05月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/04/"><i class=fa aria-hidden=true>2016年04月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/03/"><i class=fa aria-hidden=true>2016年03月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/02/"><i class=fa aria-hidden=true>2016年02月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2015/04/"><i class=fa aria-hidden=true>2015年04月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/11/"><i class=fa aria-hidden=true>2014年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/10/"><i class=fa aria-hidden=true>2014年10月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/04/"><i class=fa aria-hidden=true>2014年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/01/"><i class=fa aria-hidden=true>2014年01月</i></a><span class=archive-list-count>2</span></li></ul></div><div class=widget><h3 class=title>Tag Cloud</h3><div class="content tag-cloud"><a href="/tags/C/" style="font-size: 17.5px;">C++</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/bat语法/" style="font-size: 10px;">bat语法</a> <a href="/tags/formatter/" style="font-size: 10px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/ngrok/" style="font-size: 10px;">ngrok</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/sublime-text3/" style="font-size: 10px;">sublime text3</a> <a href="/tags/前端/" style="font-size: 12.5px;">前端</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/感慨/" style="font-size: 12.5px;">感慨</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a></div></div><div class=widget><h3 class=title>Friends</h3><div class="content friends-link"><a href=http://blog.csdn.net/u013132051 class=fa target=_blank>个人博客</a></div></div></aside></div></div></section><footer class=main-footer><div class=container><div class=row></div></div></footer><a id=back-to-top class=hide><i class="fa fa-chevron-up"></i></a><div class=copyright><div class=container><div class=row><div class=col-sm-12><span>Copyright &copy; 2017</span> | <span>Powered by <a href=//hexo.io class=copyright-links target=_blank rel=nofollow>张新华</a></span> | <span>Theme by <a href=//github.com/shenliyang/hexo-theme-snippet.git class=copyright-links target=_blank rel=nofollow>ZxhTom</a></span></div></div></div></div><script src=https://code.jquery.com/jquery-latest.js></script><script src=https://assets.changyan.sohu.com/upload/plugins/plugins.count.js></script><script src="/assets/highlight.pack.js?rev=@@hash"></script><script>
+     hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script><script src="/js/search.js?rev=@@hash"></script><script src="/js/app.js?rev=@@hash"></script><script src="/assets/prefix.js?rev=@@hash"></script><script src="/assets/my.js?rev=@@hash"></script></body></html>

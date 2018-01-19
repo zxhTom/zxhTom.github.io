@@ -1,0 +1,190 @@
+<!DOCTYPE HTML><html><head><script>
+	if('' == 'true'){
+		if (prompt('请输入管理员密码') !== '025025'){
+            alert('密码错误！');
+            location.href='https://zxhtom.oschina.io';
+    	}
+	}
+</script><meta charset=UTF-8><meta name=viewport content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><meta http-equiv=X-UA-Compatible content="IE=Edge,chrome=1"><meta http-equiv=Cache-Control content=no-siteapp><meta name=renderer content=webkit|ie-comp|ie-stand><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no,email=no,adress=no"><meta name=browsermode content=application><meta name=screen-orientation content=portrait><link rel=dns-prefetch href=https://zxhtom.oschina.io><meta name=description content=张新华的个人网站><meta name=robots content=all><meta name=google content=all><meta name=googlebot content=all><meta name=verify content=all><title>mybatis关联 | 烟花散尽13141</title><link rel=alternate href=/atom.xml title=烟花散尽13141 type=application/atom+xml><link rel=icon href=/favicon.ico><link rel=stylesheet href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css?rev=9.12.0"><link rel=stylesheet href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4"><link rel=stylesheet href=//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href="/css/style.css?rev=@@hash"><link rel=stylesheet href="/css/mycss.css?rev=@@hash"><div class=hide><script src="https://s4.cnzz.com/z_stat.php?id=1263868967&web_id=1263868967" language=JavaScript></script></div><script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?709c2dde1f61f5e589ff3ed31ba52411";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script></head><body><header class=main-header style=background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)><div class=main-header-box><a class=header-avatar href="/"><img src=/img/avatar.jpg alt=logo头像></a><div class=branding><h2>学如逆水行舟，不进则退！！！</h2></div></div></header><nav class=main-navigation><div class=container><div class=row><div class=col-sm-12><div class=navbar-header><span class="nav-toggle-button collapsed" data-toggle=collapse data-target=#main-menu id=mnav><span class=sr-only>Toggle navigation</span> <i class="fa fa-bars"></i></span></div><div class="collapse navbar-collapse" id=main-menu><ul class=menu><li role=presentation><a href="/"><i class="fa fa-fw"></i>首页</a></li><li role=presentation><a href="/about/"><i class="fa fa-fw"></i>关于我</a></li><li role=presentation><a href="/tags/"><i class="fa fa-fw"></i>标签</a></li><li role=presentation><a href="/categories/"><i class="fa fa-fw"></i>分类</a></li><li role=presentation><a href="/archives/"><i class="fa fa-fw"></i>归档</a></li><li role=presentation><a href="/schedule/"><i class="fa fa-fw"></i>日程表</a></li><li role=presentation><a href=/sitemap.xml><i class="fa fa-fw"></i>地图导航</a></li><li role=presentation><a href="/404/"><i class="fa fa-fw"></i>公益活动</a></li></ul></div></div></div></div></nav><section class=content-wrap><div class=container><div class=row><main class="col-md-8 main-content m-post"><div id=toc class=toc-article><div class=hamburger><div class=line></div><div class=line></div><div class=line></div></div><strong class=toc-title>文章目录</strong><div class=menu-inner><ol class=toc><li class="toc-item toc-level-1"><a class=toc-link href=#数据准备><span class=toc-number>1.</span> <span class=toc-text>数据准备</span></a><ol class=toc-child><li class="toc-item toc-level-2"><a class=toc-link href=#数据结构><span class=toc-number>1.1.</span> <span class=toc-text>数据结构</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#实体准备><span class=toc-number>1.2.</span> <span class=toc-text>实体准备</span></a><ol class=toc-child><li class="toc-item toc-level-3"><a class=toc-link href=#基本实体-对应stage-order单表><span class=toc-number>1.2.1.</span> <span class=toc-text>基本实体(对应stage_order单表)</span></a></li><li class="toc-item toc-level-3"><a class=toc-link href=#扩展实体><span class=toc-number>1.2.2.</span> <span class=toc-text>扩展实体</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class=toc-link href=#基本映射><span class=toc-number>2.</span> <span class=toc-text>基本映射</span></a><ol class=toc-child><li class="toc-item toc-level-2"><a class=toc-link href=#一对一><span class=toc-number>2.1.</span> <span class=toc-text>一对一</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#一对多><span class=toc-number>2.2.</span> <span class=toc-text>一对多</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#查询应用><span class=toc-number>2.3.</span> <span class=toc-text>查询应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class=toc-link href=#复杂映射><span class=toc-number>3.</span> <span class=toc-text>复杂映射</span></a><ol class=toc-child><li class="toc-item toc-level-2"><a class=toc-link href=#多重映射><span class=toc-number>3.1.</span> <span class=toc-text>多重映射</span></a></li><li class="toc-item toc-level-2"><a class=toc-link href=#联合主键查询><span class=toc-number>3.2.</span> <span class=toc-text>联合主键查询</span></a></li></ol></li><li class="toc-item toc-level-1"><a class=toc-link href=#简单说明><span class=toc-number>4.</span> <span class=toc-text>简单说明</span></a><ol class=toc-child><li class="toc-item toc-level-2"><a class=toc-link href=#常用标签><span class=toc-number>4.1.</span> <span class=toc-text>常用标签</span></a></li></ol></li><li class="toc-item toc-level-1"><a class=toc-link href=#格言><span class=toc-number>5.</span> <span class=toc-text>格言</span></a></li></ol></div><svg version=1.1 id=blob xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><path id=blob-path d=M60,500H0V0h60c0,0,20,172,20,250S60,900,60,500z></path></svg></div><p id=process></p><article class=post><div class=post-head><h1 id=mybatis关联>mybatis关联</h1><div class=post-meta><span class="categories-meta fa-wrap"><i class="fa fa-folder-open-o"></i> <span>开发工具</span></span> <span class=fa-wrap><i class="fa fa-tags"></i> <span class=tags-meta>mybatis</span></span> <span class=fa-wrap><i class="fa fa-clock-o"></i> <span class=date-meta>2017/12/18</span></span> <a href=/zxh/20171218.html#comments class=comment-count><i id=changyan_count_unit data-xid=zxh/20171218.html></i>留言, <i id=changyan_parti_unit data-xid=zxh/20171218.html></i>参与</a> <span id=busuanzi_container_page_pv>view : <span id=busuanzi_value_page_pv></span>次</span></div></div><div class="post-body post-content"><p>[TOC]</p><p>web项目开发中目前很多企业都是在SSM框架基础上开发。其中的M指的的mybatis(ibatis).mybatis里指的一说的是规避了传统的jdbc等的繁琐。在mybatis中我们可以只用关注sql本身。而不用太在意之个执行过程。大大简化了我们平时的开发。mybatis深究的话会有很多要说的。今天我们只来看看mybatis中提供了映射中的关联标签。</p><a id=more></a><h1 id=数据准备><a href=#数据准备 class=headerlink title=数据准备></a>数据准备</h1><h2 id=数据结构><a href=#数据结构 class=headerlink title=数据结构></a>数据结构</h2><p>下表stage_order中的stage_list是有stage表中ID组成的一个字符串，之间由逗号相隔。比如stage_list=1,2,3表示该stage_order中关联着ID为1或2或3的stage。我们得分别取查询stageID=1或2或3的stage进行实体映射展示。下一节我们看看实体的构造</p><p><img src=http://oytmxyuek.bkt.clouddn.com/20171218_1.png alt=表结构></p><h2 id=实体准备><a href=#实体准备 class=headerlink title=实体准备></a>实体准备</h2><h3 id=基本实体-对应stage-order单表><a href=#基本实体-对应stage-order单表 class=headerlink title=基本实体(对应stage_order单表)></a>基本实体(对应stage_order单表)</h3><ul><li>在下面的实体中出现的注解我们不需要在意，这是swagger框架的注解，在本章节中不需要理解。换句话说我们可以吧注解删掉。不会影响我们的功能的。</li></ul><pre><code>
+@ApiModel(description = &quot;阶段顺序表&quot;)
+@Table(name = &quot;STAGE_ORDER&quot;)
+public class StageOrder {
+
+    @Id
+    @ApiModelProperty(&quot;阶段顺序ID&quot;)
+    @NotNull(message = &quot;阶段顺序ID不可为空(NULL)&quot;)
+    private Long stageOrderId;
+
+
+    @ApiModelProperty(&quot;路口编号&quot;)
+    @NotNull(message = &quot;路口编号不可为空(NULL)&quot;)
+    private Long intersectionId;
+
+
+    @ApiModelProperty(&quot;相序名称&quot;)
+    @NotBlank(message = &quot;相序名称不可为空白&quot;)
+    @ByteLength(max = 30, message = &quot;相序名称长度不能超过{max}&quot;)
+    private String orderName;
+
+
+    @ApiModelProperty(&quot;阶段列表&quot;)
+    @NotBlank(message = &quot;阶段列表不可为空白&quot;)
+    @ByteLength(max = 200, message = &quot;阶段列表长度不能超过{max}&quot;)
+    private String stageList;
+
+    public Long getStageOrderId() {
+        return stageOrderId;
+    }
+
+    public void setStageOrderId(Long stageOrderId) {
+        this.stageOrderId = stageOrderId;
+    }
+
+    public Long getIntersectionId() {
+        return intersectionId;
+    }
+
+    public void setIntersectionId(Long intersectionId) {
+        this.intersectionId = intersectionId;
+    }
+
+    public String getOrderName() {
+        return orderName;
+    }
+
+    public void setOrderName(String orderName) {
+        this.orderName = orderName == null ? null : orderName.trim();
+    }
+
+    public String getStageList() {
+        return stageList;
+    }
+
+    public void setStageList(String stageList) {
+        this.stageList = stageList == null ? null : stageList.trim();
+    }
+}
+</code></pre><h3 id=扩展实体><a href=#扩展实体 class=headerlink title=扩展实体></a>扩展实体</h3><pre><code>public class StageOrderDto extends StageOrder {
+
+    /**
+     * 相位列表
+     */
+    private List&lt;Stage&gt; stageInfoList;
+
+    public List&lt;Stage&gt; getStageInfoList() {
+        return stageInfoList;
+    }
+
+    public void setStageInfoList(List&lt;Stage&gt; stageInfoList) {
+        this.stageInfoList = stageInfoList;
+    }
+
+
+}
+</code></pre><h1 id=基本映射><a href=#基本映射 class=headerlink title=基本映射></a><span id=baseMapped>基本映射</span></h1><h2 id=一对一><a href=#一对一 class=headerlink title=一对一></a>一对一</h2><ul><li>有了上面的实体和对应的Table，那么我们如何在mybatis中将Table和实体关联呢。看如下在mapper.xml中的配置</li></ul><pre><code>&lt;resultMap id=&quot;BaseResultMap&quot; type=&quot;com.jsits.xk.dto.StageOrderDto&quot;&gt;
+    &lt;id column=&quot;STAGE_ORDER_ID&quot; jdbcType=&quot;NUMERIC&quot; property=&quot;stageOrderId&quot;/&gt;
+    &lt;result column=&quot;INTERSECTION_ID&quot; jdbcType=&quot;NUMERIC&quot; property=&quot;intersectionId&quot;/&gt;
+    &lt;result column=&quot;ORDER_NAME&quot; jdbcType=&quot;VARCHAR&quot; property=&quot;orderName&quot;/&gt;
+    &lt;result column=&quot;STAGE_LIST&quot; jdbcType=&quot;VARCHAR&quot; property=&quot;stageList&quot;/&gt;
+    &lt;association column=&quot;STAGE_LIST&quot; property=&quot;stageInfoList&quot; select=&quot;selectStageInfos&quot;/&gt;
+&lt;/resultMap&gt;
+</code></pre><ul><li><p>但是我们会发现resultMap中stageInfoList这个在跟数据库怎么对应呢？还有association是什么？assocaition中select又是什么？为什么assocaition中的column和上面一样？<br>我想对于刚接触的朋友来说心里一定会有这些疑问。</p></li><li><p>上面已经说了resultmap是用来衔接实体去数据库表的桥梁。resultMap中ID属性就是一个唯一性的作用。一般只需要在当前xml中唯一就行了。因为在每个xml中有<code>namespace</code>,来确定当前的mapper.xml的唯一性。</p><p><img src=http://oytmxyuek.bkt.clouddn.com/20171218_2.png alt=mapper文件的唯一性确定></p></li><li><p>resultMap字标签id 和result都是用来映射单列值到type对应的实体或者map中属性。在使用上ID是对应数据库中主键使用的。数据库中会有联合主键，在resultMap中就用两个ID标签对应就行了。还有一点ID也是用来做唯一标识的。当和其他对象进行比较的时候这个时候ID就有作用了。这里和数据库一样主键就是代表一条数据。这里也是同样的作用。在mybatis中有缓存机制。就是通过这个ID实现的。比如mybatis这个时候需要缓存这个对象。则以ID为key ，对象的json化为值存储到缓存中。</p></li></ul><h2 id=一对多><a href=#一对多 class=headerlink title=一对多></a>一对多</h2><ul><li><p>这里一对多就用到了上面的BaseResultMap这个resultMap了。上面我们的讲的ID和result就是我们平时简单单表查询中的一对一关系处理。但是association就是用来关联查询的。association中文翻译就是联想的意思。在mybatis中association的作用就是在查询到STAGE_LIST这个字段的时候默认会将STAGE_LIST的值传到selectStageInfos这个查询语句中查询。传递进去是按照上面的写法我们不能用#{stage_list}取，得通过#{id}获取。这里是默认的必须用#{id}.但是一个健全的框架不会这么死板的。下面我们在介绍如何动态传递。</p></li><li><p>association严格上来说应该是用于selectStageInfos查询获取的也是一个基本类型数据。但是在我们上面的需求描述中我们知道STAGE_LIST,对应到stage表中其实回事多条数据。所以我们在StageOrderDto中stageInfoList也是用list集合来承载的。这个时候用association不会出错。mybatis底层却不同，底层实际上是转换成了collection标签来实现的。应为collection对应的是集合的映射处理。所以追求完美的程序员在级联查询是如果级联出的是集合就用collection标签。但是两种情况用association都是可以的。</p></li></ul><h2 id=查询应用><a href=#查询应用 class=headerlink title=查询应用></a>查询应用</h2><ul><li>说了这么多，下面我们通过两个查询看看查询的实现代码</li></ul><pre><code>    &lt;select id=&quot;selectStageOrderDtoListByIntersectionId&quot; parameterType=&quot;java.lang.Long&quot; resultMap=&quot;BaseResultMap&quot;&gt;
+        select
+        &lt;include refid=&quot;Base_Column_List&quot;/&gt;
+        from stage_order
+        where INTERSECTION_ID=#{intersectionId}
+    &lt;/select&gt;
+    &lt;select id=&quot;selectStageInfos&quot; parameterType=&quot;java.lang.String&quot; resultType=&quot;com.jsits.xk.model.Stage&quot;&gt;
+        select
+        &lt;include refid=&quot;Stage_Column_List&quot;/&gt;
+        from stage
+        where stage_id in (#{id})
+    &lt;/select&gt;
+</code></pre><ul><li>当我们调用selectStageOrderDtoListByIntersectionId通过intersectionId查询到数据的时候，会在通过查询到的STAGE_LIST作为条件调用selectStageInfos这个查询语句的。在selectStageInfos中的#{id}就是selectStageOrderDtoListByIntersectionId查询到的STAGE_LIST。</li></ul><h1 id=复杂映射><a href=#复杂映射 class=headerlink title=复杂映射></a>复杂映射</h1><ul><li>但是我们平时企业开发中光这样的查询有时候并不能满足我们的需求。常见复杂的查询有： 多重级联和联合主键查询</li></ul><h2 id=多重映射><a href=#多重映射 class=headerlink title=多重映射></a>多重映射</h2><ul><li>多重查询说白了就是多用几次级联(association或collection)，对就是这个简单。这个可能有的人没有过甚至没想过。下面贴段实际的代码。因为下面代码在联合主键章节也需要用到。</li></ul><pre><code>&lt;sql id=&quot;Program_Column_List&quot;&gt;
+        PHASE_LIST,PROGRAM_ID,PROGRAM_NAME,INTERSECTION_ID,STAGE_ID,STAGE_NAME,STAGE_SEQ,GREEN,RED_YELLOW,YELLOW,ALL_RED,MIN_GREEN,MAX_GREEN
+    &lt;/sql&gt;
+    &lt;resultMap id=&quot;weekProgramResultMap&quot; type=&quot;com.jsits.xk.dto.WeekPlanProgramDto&quot;&gt;
+        &lt;result column=&quot;PLAN_ID&quot; property=&quot;planId&quot; /&gt;
+        &lt;result column=&quot;PLAN_NAME&quot; property=&quot;planName&quot; /&gt;
+        &lt;association column=&quot;{intersectionId=INTERSECTION_ID,dayPlanNo=PLAN_ID}&quot; property=&quot;dayPlanList&quot; select=&quot;selectDayPlanInfosByPlanNo&quot;/&gt;
+    &lt;/resultMap&gt;
+    &lt;resultMap id=&quot;dayPlanResultMap&quot; type=&quot;com.jsits.xk.dto.DayPlanAndProgramListDto&quot;&gt;
+        &lt;result property=&quot;timeDuration&quot; column=&quot;time_duration&quot; /&gt;
+        &lt;result property=&quot;programId&quot; column=&quot;program_id&quot; /&gt;
+        &lt;result property=&quot;stageOrderId&quot; column=&quot;stage_order_id&quot; /&gt;
+        &lt;result property=&quot;dayPlanId&quot; column=&quot;day_plan_id&quot; /&gt;
+        &lt;result property=&quot;phaseList&quot; column=&quot;phase_list&quot; /&gt;
+        &lt;result property=&quot;programName&quot; column=&quot;program_name&quot; /&gt;
+        &lt;result property=&quot;stageOrderName&quot; column=&quot;order_name&quot; /&gt;
+        &lt;result property=&quot;controlModeId&quot; column=&quot;control_mode_id&quot; /&gt;
+        &lt;result property=&quot;controlModeName&quot; column=&quot;control_mode_name&quot; /&gt;
+        &lt;result property=&quot;cycle&quot; column=&quot;cycle&quot; /&gt;
+        &lt;association column=&quot;program_id&quot; property=&quot;programList&quot; select=&quot;selectProgramInfosByProgramId&quot;/&gt;
+    &lt;/resultMap&gt;
+    &lt;select id=&quot;selectProgramInfosByProgramId&quot; parameterType=&quot;long&quot;
+        resultType=&quot;com.jsits.xk.model.Program&quot;&gt;
+        select
+        &lt;include refid=&quot;Program_Column_List&quot; /&gt;
+        from program where program_id=#{id}
+    &lt;/select&gt;
+    &lt;select id=&quot;selectDayPlanInfosByPlanNo&quot; parameterType=&quot;java.util.HashMap&quot; resultMap=&quot;dayPlanResultMap&quot; &gt;
+        select * from (select
+        dp.day_plan_id,
+        trim(REGEXP_REPLACE(to_char(dp.time_duration,&#39;0000&#39;),&#39;([[:digit:]]{2})([[:digit:]]{2})&#39;,&#39;\1:\2&#39;)) as time_duration,
+        pg.program_id,
+        pg.program_name,
+        so.order_name,
+        so.stage_order_id,
+        cm.control_mode_id,
+        cm.control_mode_name,
+        &#39;120&#39; as cycle
+        from day_plan dp
+        left join control_mode cm on dp.control_mode_id=cm.control_mode_id
+        left join program pg on dp.program_id=pg.program_id
+        left join stage_order so on dp.stage_order_id=so.stage_order_id
+        where dp.day_plan_no=#{dayPlanNo}
+        and dp.intersection_id=#{intersectionId}
+        )
+        group by (day_plan_id,time_duration,program_id,program_name,order_name,stage_order_id,control_mode_id,control_mode_name,cycle)
+        order by time_duration asc
+    &lt;/select&gt;
+    &lt;select id=&quot;selectWeekInfosByIntersectionId&quot; parameterType=&quot;long&quot;
+        resultMap=&quot;weekProgramResultMap&quot;&gt;
+        select #{intersectionId} as intersection_id,week.plan_name,week.plan_id from
+        (
+            select &#39;星期一&#39; as plan_name,intersection_id,monday as plan_id from week_plan
+            union
+            select &#39;星期二&#39; as plan_name,intersection_id,tuesday as plan_id from week_plan
+            union
+            select &#39;星期三&#39; as plan_name,intersection_id,wendesday as plan_id from week_plan
+            union
+            select &#39;星期四&#39; as plan_name,intersection_id,thursday as plan_id from week_plan
+            union
+            select &#39;星期五&#39; as plan_name,intersection_id,friday as plan_id from week_plan
+            union
+            select &#39;星期六&#39; as plan_name,intersection_id,saturday as plan_id from week_plan
+            union
+            select &#39;星期日&#39; as plan_name,intersection_id,sunday as plan_id from week_plan
+        )week
+        left join day_plan dp on dp.day_plan_no=week.plan_id
+        where week.intersection_id=#{intersectionId}
+        group by week.plan_id,week.plan_name,week.intersection_id
+        order by week.plan_id
+    &lt;/select&gt;
+</code></pre><h2 id=联合主键查询><a href=#联合主键查询 class=headerlink title=联合主键查询></a>联合主键查询</h2><ul><li>在我们很多时候数据库中的主键并不是一个字段，而是通过两个甚至多个字段组合成主键。我们习惯上称之为联合主键。在多重映射中的代码中我们可以看到<code>weekProgramResultMap</code>中级联<code>selectDayPlanInfosByPlanNo</code>这个sql查询。但是有意思的是column中并不是我们熟悉的一个字段。而是通过花括号做首尾，中间加入多个字段组成的一个字符串。这个就是我们本章节引入的概念—联合主键级联查询。column属性值我们分析一下可以看出<code>intersectionId=INTERSECTION_ID</code>和<code>dayPlanNo=PLAN_ID</code>组成的。我们可以看成是两个map，等号前是key等号后是value。key就是我们在新的select中引用的key，及#{key}方式获取。value就是原来的select查询获得的数据。也是通过value来查询新的数据的。这里就解决了我们上面<a href=#baseMapped>基本映射章节</a>说必须用#{id}的局限性。所以在上面中如何我们不想用#{id},那么需要修改column的传入风格{stageId=stage_list}就可以用#{stageId}</li></ul><h1 id=简单说明><a href=#简单说明 class=headerlink title=简单说明></a>简单说明</h1><p>工作遇到的需求，mybatis还有很多神操作。以后有机会更新。在mybatis中映射并不是仅仅字段这么简单。还有点逗风格的引用。这些以后看时间在更新。</p><h2 id=常用标签><a href=#常用标签 class=headerlink title=常用标签></a>常用标签</h2><h1 id=格言><a href=#格言 class=headerlink title=格言></a>格言</h1><font size=6 color=blue><br>人生贵知心，定交无暮早。 —— 袁中道<br></font><p><img src=http://oytmxyuek.bkt.clouddn.com/20171218_theme.jpg alt=主题图片></p></div><div class=post-footer><div>转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a target=_blank>烟花散尽13141</a></div><div></div></div></article><div class="article-nav prev-next-wrap clearfix"><a href=/zxh/20180105.html class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a> <a href=/zxh/20171111.html class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a></div><div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div><button id=rewardButton disable=enable onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}"><span>赏</span></button><div id=QR style="display: none;"><div id=wechat style="display: inline-block"><a href=/img/wechatpay.jpg class="fancybox fancybox.image" rel=group><img id=wechat_qr src=/img/wechatpay.jpg alt="颜敏 WeChat Pay"></a><p>微信打赏</p></div><div id=alipay style="display: inline-block"><a href=/img/alipay.jpg class="fancybox fancybox.image" rel=group><img id=alipay_qr src=/img/alipay.jpg alt="颜敏 Alipay"></a><p>支付宝打赏</p></div></div></div><div id=comments><div id=SOHUCS sid=/zxh/20171218.html></div><script type=text/javascript> 
+    (function(){ 
+    var appid = 'cyti5JvoU'; 
+    var conf = 'prod_a32310aad07e12c7706c8da1901ed57b'; 
+    var width = window.innerWidth || document.documentElement.clientWidth; 
+    if (width < 960) { 
+    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script></div></main><aside class="col-md-4 sidebar"><div class=widget><h3 class=title>Search</h3><div id=search-form><div id=result-mask class=hide></div><div class=search-area><input id=search-key type=search autocomplete=off placeholder=搜点什么呢?> <button type=button class=search-form-submit id=search-local>站内搜索</button></div><div id=result-wrap class=hide><div id=search-result></div></div><div class=hide><template id=search-tpl><div class=item><a href=/{path} title={title}><div class=title>{title}</div><div class=content>{content}</div></a></div></template></div></div></div><div class="widget notification"><h3 class=title>网站公告</h3><div><p><font color=red>pc、移动端目录区分设计</font></p></div></div><div class=widget><h3 class=title>Social</h3><div class="content social"><a href=//gitee.com/zxhtom rel="external nofollow" title=oschina target=_blank><i class="git fa fa-git"></i></a> <a href=mailto:870775401@qq.com rel="external nofollow" title=邮箱 target=_blank><i class="envelope-o fa fa-envelope-o"></i></a> <a href=870775401 rel="external nofollow" title=联系QQ target=_blank><i class="qq fa fa-qq"></i></a> <a href="/" rel="external nofollow" title=微博 target=_blank><i class="weibo fa fa-weibo"></i></a> <a href=376091466 rel="external nofollow" title=QQ群1 target=_blank><i class="users fa fa-users"></i></a> <a href=/atom.xml rel="external nofollow" title=RSS target=_blank><i class="feed fa fa-feed"></i></a></div></div><div class=widget><h3 class=title>Categories</h3><ul class=category-list><li class=category-list-item><a class=category-list-link href="/categories/开发工具/"><i class=fa aria-hidden=true>开发工具</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/案例/"><i class=fa aria-hidden=true>案例</i></a><span class=category-list-count>2</span></li><li class=category-list-item><a class=category-list-link href="/categories/程序人生/"><i class=fa aria-hidden=true>程序人生</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/编程/"><i class=fa aria-hidden=true>编程</i></a><span class=category-list-count>88</span></li></ul></div><div class=widget><h3 class=title>Archives</h3><ul class=archive-list><li class=archive-list-item><a class=archive-list-link href="/archives/2018/01/"><i class=fa aria-hidden=true>2018年01月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/12/"><i class=fa aria-hidden=true>2017年12月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/11/"><i class=fa aria-hidden=true>2017年11月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/10/"><i class=fa aria-hidden=true>2017年10月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/06/"><i class=fa aria-hidden=true>2017年06月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/04/"><i class=fa aria-hidden=true>2017年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/03/"><i class=fa aria-hidden=true>2017年03月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/02/"><i class=fa aria-hidden=true>2017年02月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/01/"><i class=fa aria-hidden=true>2017年01月</i></a><span class=archive-list-count>9</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/12/"><i class=fa aria-hidden=true>2016年12月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/11/"><i class=fa aria-hidden=true>2016年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/10/"><i class=fa aria-hidden=true>2016年10月</i></a><span class=archive-list-count>8</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/09/"><i class=fa aria-hidden=true>2016年09月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/08/"><i class=fa aria-hidden=true>2016年08月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/07/"><i class=fa aria-hidden=true>2016年07月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/06/"><i class=fa aria-hidden=true>2016年06月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/05/"><i class=fa aria-hidden=true>2016年05月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/04/"><i class=fa aria-hidden=true>2016年04月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/03/"><i class=fa aria-hidden=true>2016年03月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/02/"><i class=fa aria-hidden=true>2016年02月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2015/04/"><i class=fa aria-hidden=true>2015年04月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/11/"><i class=fa aria-hidden=true>2014年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/10/"><i class=fa aria-hidden=true>2014年10月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/04/"><i class=fa aria-hidden=true>2014年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/01/"><i class=fa aria-hidden=true>2014年01月</i></a><span class=archive-list-count>2</span></li></ul></div><div class=widget><h3 class=title>Tag Cloud</h3><div class="content tag-cloud"><a href="/tags/C/" style="font-size: 17.5px;">C++</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/bat语法/" style="font-size: 10px;">bat语法</a> <a href="/tags/formatter/" style="font-size: 10px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/ngrok/" style="font-size: 10px;">ngrok</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/sublime-text3/" style="font-size: 10px;">sublime text3</a> <a href="/tags/前端/" style="font-size: 12.5px;">前端</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/感慨/" style="font-size: 12.5px;">感慨</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a></div></div><div class=widget><h3 class=title>Friends</h3><div class="content friends-link"><a href=http://blog.csdn.net/u013132051 class=fa target=_blank>个人博客</a></div></div></aside></div></div></section><footer class=main-footer><div class=container><div class=row></div></div></footer><a id=back-to-top class=hide><i class="fa fa-chevron-up"></i></a><div class=copyright><div class=container><div class=row><div class=col-sm-12><span>Copyright &copy; 2017</span> | <span>Powered by <a href=//hexo.io class=copyright-links target=_blank rel=nofollow>张新华</a></span> | <span>Theme by <a href=//github.com/shenliyang/hexo-theme-snippet.git class=copyright-links target=_blank rel=nofollow>ZxhTom</a></span></div></div></div></div><script src=https://code.jquery.com/jquery-latest.js></script><script src=https://assets.changyan.sohu.com/upload/plugins/plugins.count.js></script><script src="/assets/highlight.pack.js?rev=@@hash"></script><script>
+     hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script><script src="/js/search.js?rev=@@hash"></script><script src="/js/app.js?rev=@@hash"></script><script src="/assets/prefix.js?rev=@@hash"></script><script src="/assets/my.js?rev=@@hash"></script></body></html>

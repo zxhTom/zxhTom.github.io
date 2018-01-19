@@ -1,0 +1,252 @@
+<!DOCTYPE HTML><html><head><script>
+	if('' == 'true'){
+		if (prompt('请输入管理员密码') !== '025025'){
+            alert('密码错误！');
+            location.href='https://zxhtom.oschina.io';
+    	}
+	}
+</script><meta charset=UTF-8><meta name=viewport content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><meta http-equiv=X-UA-Compatible content="IE=Edge,chrome=1"><meta http-equiv=Cache-Control content=no-siteapp><meta name=renderer content=webkit|ie-comp|ie-stand><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no,email=no,adress=no"><meta name=browsermode content=application><meta name=screen-orientation content=portrait><link rel=dns-prefetch href=https://zxhtom.oschina.io><meta name=description content=张新华的个人网站><meta name=robots content=all><meta name=google content=all><meta name=googlebot content=all><meta name=verify content=all><title>前端开发中快速掌握的技巧 | 烟花散尽13141</title><link rel=alternate href=/atom.xml title=烟花散尽13141 type=application/atom+xml><link rel=icon href=/favicon.ico><link rel=stylesheet href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css?rev=9.12.0"><link rel=stylesheet href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4"><link rel=stylesheet href=//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href="/css/style.css?rev=@@hash"><link rel=stylesheet href="/css/mycss.css?rev=@@hash"><div class=hide><script src="https://s4.cnzz.com/z_stat.php?id=1263868967&web_id=1263868967" language=JavaScript></script></div><script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?709c2dde1f61f5e589ff3ed31ba52411";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script></head><body><header class=main-header style=background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)><div class=main-header-box><a class=header-avatar href="/"><img src=/img/avatar.jpg alt=logo头像></a><div class=branding><h2>学如逆水行舟，不进则退！！！</h2></div></div></header><nav class=main-navigation><div class=container><div class=row><div class=col-sm-12><div class=navbar-header><span class="nav-toggle-button collapsed" data-toggle=collapse data-target=#main-menu id=mnav><span class=sr-only>Toggle navigation</span> <i class="fa fa-bars"></i></span></div><div class="collapse navbar-collapse" id=main-menu><ul class=menu><li role=presentation><a href="/"><i class="fa fa-fw"></i>首页</a></li><li role=presentation><a href="/about/"><i class="fa fa-fw"></i>关于我</a></li><li role=presentation><a href="/tags/"><i class="fa fa-fw"></i>标签</a></li><li role=presentation><a href="/categories/"><i class="fa fa-fw"></i>分类</a></li><li role=presentation><a href="/archives/"><i class="fa fa-fw"></i>归档</a></li><li role=presentation><a href="/schedule/"><i class="fa fa-fw"></i>日程表</a></li><li role=presentation><a href=/sitemap.xml><i class="fa fa-fw"></i>地图导航</a></li><li role=presentation><a href="/404/"><i class="fa fa-fw"></i>公益活动</a></li></ul></div></div></div></div></nav><section class=content-wrap><div class=container><div class=row><main class="col-md-8 main-content m-post"><div id=toc class=toc-article><div class=hamburger><div class=line></div><div class=line></div><div class=line></div></div><strong class=toc-title>文章目录</strong><div class=menu-inner></div><svg version=1.1 id=blob xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><path id=blob-path d=M60,500H0V0h60c0,0,20,172,20,250S60,900,60,500z></path></svg></div><p id=process></p><article class=post><div class=post-head><h1 id=前端开发中快速掌握的技巧>前端开发中快速掌握的技巧</h1><div class=post-meta><span class="categories-meta fa-wrap"><i class="fa fa-folder-open-o"></i> <span>编程</span></span> <span class=fa-wrap><i class="fa fa-tags"></i> <span class=tags-meta>java</span></span> <span class=fa-wrap><i class="fa fa-clock-o"></i> <span class=date-meta>2016/07/23</span></span> <a href=/zxh/20160723.html#comments class=comment-count><i id=changyan_count_unit data-xid=zxh/20160723.html></i>留言, <i id=changyan_parti_unit data-xid=zxh/20160723.html></i>参与</a> <span id=busuanzi_container_page_pv>view : <span id=busuanzi_value_page_pv></span>次</span></div><p class="fa fa-exclamation-triangle warning">本文于<strong>545</strong>天之前发表，文中内容可能已经过时。</p></div><div class="post-body post-content"><p>之前开发过程中没有太在意前端方法的封装，最近在项目里看到别人封装的方法了，实在太有用了，自己总结了一下，好东西就应该共享一下</p><a id=more></a><ul><li>之前开发过程中没有太在意前端方法的封装，最近在项目里看到别人封装的方法了，实在太有用了，自己总结了一下，好东西就应该共享一下</li><li>表单验证非空：<ul><li>以前我都是将需要验证的字段在js中拿到这个字段的变量，然后判断这个变量是否是空值的，相信你也是这样的，那么来看看改进之后的方法吧`/**</li></ul></li></ul><ul><li>验证表单<br>*/</li></ul><pre><code>function validForm() {
+    var b = true;
+
+    //    遍历页面中，所有符合条件的控件，eg：&lt;input type=&quot;...&quot; verify=&quot;decimal&quot; msg=&quot;用户名&quot;/&gt;
+    $(&quot;body&quot;).find(&quot;*&quot;).each(function(){
+        if (typeof ($(this).attr(&quot;verify&quot;)) != &quot;undefined&quot;) {
+            var data = $.trim($(this).val());
+            if (data.length &lt; 1) {
+                // 数据为空时，消息提示
+                var msg = $(this).attr(&quot;msg&quot;)
+                msg += &quot;，不能为空&quot;;
+                $(this).focus();
+                alert(msg);
+                b = false;
+                return b;
+            }else {
+                //    合法校验
+                b = validData(data,$(this).attr(&quot;verify&quot;),$(this).attr(&quot;msg&quot;));
+                if (!b) {
+                    return b;
+                }
+            }
+        }
+    });
+
+    return b;
+}`
+</code></pre><pre><code> - 封装了这个方法的好处在哪里，看到里面的遍历方法了，这个方法会遍历页面中所有符合条件的空间进行非空验证，你可能会说他是如何筛选这个条件的呢，看到verify了吗，我们只需要在jsp页面中在需要验证的控件上面填一个verify字段就行了，这个字段不需要附任何值，这就是告诉我，这个空间需要进行非空验证。这里我只是提了一个非空验证，如果验证一些其他规则的就可以在Verify中传值了，这个读者可以自行扩展一下，实现好了的，希望大家也可以发给我，让我瞅瞅。
+ - 下面贴个我们公司的大牛写了验``
+</code></pre><pre><code> /**
+ * 验证基本数据格式，如果本方法未提供符合要求的验证，请自行添加，格式参照如下
+ */
+function validData(value,type,msg){
+    //    验证数字：
+    if (type == &#39;number&#39;) {
+        var reg = /^[0-9]*$/
+        if (!reg.test(value)) {
+            alert(msg+&quot;，不是数字&quot;);
+            return false;
+        }
+    }
+    //    验证Email地址：
+    if (type == &#39;email&#39;) {
+        var reg = /^w+([-+.]w+)*@w+([-.]w+)*.w+([-.]w+)*$/
+        if (!reg.test(value)) {
+            alert(msg+&quot;，格式不对&quot;);
+            return false;
+        }
+    }
+
+    //    手机号码：^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$或 var regMobile=/^1[3,5,8]\d{9}$/;
+    if (type == &#39;phone&#39;) {
+        var reg = /^1[3,5,8]\d{9}$/
+        if (!reg.test(value)) {
+            alert(msg+&quot;，不是手机号码&quot;);
+            return false;
+        }
+    }
+
+    //    验证电话号码：：--正确格式为：XXXX-XXXXXXX，XXXX-XXXXXXXX，XXX-XXXXXXX，XXX-XXXXXXXX，XXXXXXX，XXXXXXXX。
+    if (type == &#39;telephone&#39;) {
+        var reg = /^((d{3,4})|d{3,4}-)?d{7,8}$/
+        if (!reg.test(value)) {
+            alert(msg+&quot;，不是电话号码&quot;);
+            return false;
+        }
+    }
+
+    //    验证身份证号（15位或18位数字）：
+    if (type == &#39;ID&#39;) {
+        var reg = /^d{15}|d{}18$/
+        if (!reg.test(value)) {
+            alert(msg+&quot;，格式不正确&quot;);
+            return false;
+        }
+    }
+
+    //    非负浮点数（正浮点数 + 0）：^\d+(\.\d+)?$ 或 ^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0$
+    if (type == &#39;decimal&#39;) {
+        var reg = /^\d+(\.\d{0,5})?$/
+        if (!reg.test(value)) {
+            alert(msg+&quot;，格式不正确（数值类型，允许保留到小数点后5位）&quot;);
+            return false;
+        }
+    }
+
+    //    验证用户密码: 正确格式为：以字母开头，长度在6-18之间，只能包含字符、数字和下划线。    
+    if (type == &#39;password&#39;) {
+        var reg = /^[a-zA-Z]w{5,17}$/
+        if (!reg.test(value)) {
+            alert(msg+&quot;，格式不正确\n正确格式为：以字母开头，长度在6-18之间，只能包含字符、数字和下划线&quot;);
+            return false;
+        }
+    }
+    return true;
+}
+</code></pre><ul><li>在前端我们除了验证可能遇到最多的就是与后台数据的传递，以前我都是借助框架的封装来传递的，还有就是我自己手动拼接的json，现在来看一种封装指定控件的工具</li></ul><pre><code>/**
+ * 获取需要保存的页面数据
+ * @returns json 
+ */
+function getFormData() {
+    var jsonArray = [], data = {};
+    //    遍历页面中，所有符合条件的input 输入类型控件，eg：&lt;input type=&quot;...&quot; column=&quot;columnA&quot;/&gt;
+    $(&quot;input&quot;).each(function(i, e) {
+        if (typeof ($(e).attr(&quot;column&quot;)) != &quot;undefined&quot;) {
+            data[&quot;&quot; + $(e).attr(&#39;column&#39;)] = $(e).val();
+        }
+    });
+    //    遍历页面中，所有符合条件的select 输入类型控件，eg：&lt;select column=&quot;columnA&quot;&gt;...&lt;/select&gt;
+    $(&quot;select&quot;).each(function(i, e) {
+        if (typeof ($(e).attr(&quot;column&quot;)) != &quot;undefined&quot;) {
+            data[&quot;&quot; + $(e).attr(&#39;column&#39;)] = $(e).val();
+        }
+    });
+
+    //    遍历页面中，所有符合条件的textarea 输入类型控件，eg：&lt;textarea column=&quot;columnA&quot;&gt;...&lt;/textarea&gt;
+    $(&quot;textarea&quot;).each(function(i, e) {
+        if (typeof ($(e).attr(&quot;column&quot;)) != &quot;undefined&quot;) {
+            data[&quot;&quot; + $(e).attr(&#39;column&#39;)] = $(e).val();
+        }
+    });
+    jsonArray.push(data);
+    //    转译为字符串 ，以“dd”标识，用于后台controller接收，eg： &quot;[{&#39;columnA&#39;:&#39;valueA&#39;,&#39;columnB&#39;:&#39;valueB&#39;}]&quot;
+    var jsondata = {
+        &quot;zxh&quot; : JSON.stringify(jsonArray)
+    };
+    return jsondata;
+}
+</code></pre><pre><code>  - 这个和验证是一样的，我将jsp中所有具有column属性的空间的值拿过来进行封装在json中，在json中的名称就是column字段属性的名称，最后将这个字符串返回出来，我们就可以在ajax中将这个字符串当做参数传递到后台，因为参数中的是zxh，所以我在后台中的接受就需要接受这个zxh,这样我们就拿到的jsp中的数据，在后台拿到数据了，作为程序员的你应该懂得
+</code></pre><ul><li>3加载jsp中的空间<ul><li>比如现在我的jsp中有一个select空间，我在页面初始化的时候需要把后台的数据拿过来，你可以自己写，如果我说这个jsp中有100select 的话，你难道要一个一个写？答案当然是NO，还是一样我在jsp中给每个select 的column 属性赋值，然后我在通用函数中将传这个column的字段，这个函数就会将column这个select框加载到指定的select的位置上去，怎么样方便吧</li></ul></li></ul><pre><code>/**
+ * 加载 下拉框
+ * @param jsonArray
+ */
+function loadSelectData(jsonArray,select) {
+    $(&quot;select[column=&#39;&quot;+select+&quot;&#39;]&quot;).empty();
+    $.each(jsonArray, function(i) {    //    遍历下拉框数据
+        var data = jsonArray[i];
+        $(&quot;select[column=&#39;&quot;+select+&quot;&#39;]&quot;).append(&#39;&lt;option value=&quot;&#39;+data.ID+&#39;&quot;&gt;&#39;+data.NAME+&#39;&lt;/option&gt;&#39;);
+    });
+}
+</code></pre><ul><li>下面的方法我就不一一介绍了，总的来说就是不要仅仅局限于孔健中给我们提供 的那些属性，我们要善于自定义属性</li><li>4js操作cookie<ul><li>你知道session和cookie吗，JavaWeb开发师最属性的两个东西，但是我们用的最多的就是在后台操作，在前台还是第一次听说吧，相信不少朋友都忘记js怎么操作cookie的了，</li><li>这里我们要用到document</li></ul></li></ul><pre><code>// 写cookie
+function _setCookie(key, value, time) {
+    var strsec = getsec(time);
+    var exp = new Date();
+    exp.setTime(exp.getTime() + strsec * 1);
+    document.cookie = key + &quot;=&quot; + escape(value) + &quot;;expires=&quot;
+            + exp.toGMTString();
+}
+</code></pre><ul><li>既然可以设定cookie的时间，必须有获取时间的方法</li></ul><pre><code>//    获取cookie时间
+function getsec(str) {
+    var str1 = str.substring(1, str.length) * 1;
+    var str2 = str.substring(0, 1);
+    if (str2 == &quot;s&quot;) {
+        return str1 * 1000;
+    } else if (str2 == &quot;h&quot;) {
+        return str1 * 60 * 60 * 1000;
+    } else if (str2 == &quot;d&quot;) {
+        return str1 * 24 * 60 * 60 * 1000;
+    }
+}
+</code></pre><ul><li>下面我们来获取cookie吧</li></ul><pre><code>//    获取cookie
+function _getCookie(key) {
+    var arr, reg = new RegExp(&quot;(^| )&quot; + key + &quot;=([^;]*)(;|$)&quot;);
+    if (arr = document.cookie.match(reg))
+        return unescape(arr[2]);
+    else
+        return null;
+}
+</code></pre><ul><li>js既然想操作cookie那必须像Java一样，所以我们还差一个删除cookie的方法</li></ul><pre><code>//    删除cookie
+function _delCookie(key) {
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval = _getCookie(key);
+    if (cval != null)
+        document.cookie = key + &quot;=&quot; + cval + &quot;;expires=&quot; + exp.toGMTString();
+}
+</code></pre><ul><li>到这里cookie基本操作就这些，没了。下面我们来谈谈ajax,上面我们也提到了，封装的json是如何传入后台的呢，ajax，对就是他，网站开发中的王者，没了他我们就要失业了</li><li>ajax同步<ul><li><code>async: false</code> 就这一个属性就可以实现了，默认是true我们有的时候需要进行同步操作，只需要将async改为false就可以了</li></ul></li><li>ajax异步<ul><li><code>async: true</code> 异步更简单写这句话，或者什么都不写就是异步</li></ul></li><li>ajax会发送吗？不会？那我就没办法了$.ajax(url,param,success,error); 这是最基本的ajax，还有好多他的变形方法，读者可以百度一下或看一下手册就好了</li><li>前端美工是不可忽视的一种行业，在条CSS的时候最怕的就是浏览器版本问题，所以我们的知道我们的浏览器的版本</li></ul><pre><code>$(document).ready(function() {
+      if (navigator.userAgent.match(/msie/i) ){
+        alert(&#39;I am an old fashioned Internet Explorer&#39;);
+      }
+});
+</code></pre><ul><li>元素固定在顶部 这个是很有用的，有时候我们的导航按钮就需要这样设计，还有我们的工具栏也是需要固定在顶部的</li></ul><pre><code>$(function(){
+    var $win = $(window)
+    var $nav = $(&#39;.mytoolbar&#39;);
+    var navTop = $(&#39;.mytoolbar&#39;).length &amp;&amp; $(&#39;.mytoolbar&#39;).offset().top;
+    var isFixed=0;
+
+    processScroll()
+    $win.on(&#39;scroll&#39;, processScroll)
+
+    function processScroll() {
+    var i, scrollTop = $win.scrollTop()
+
+    if (scrollTop &gt;= navTop &amp;&amp; !isFixed) { 
+        isFixed = 1
+        $nav.addClass(&#39;subnav-fixed&#39;)
+    } else if (scrollTop &lt;= navTop &amp;&amp; isFixed) {
+        isFixed = 0
+         $nav.removeClass(&#39;subnav-fixed&#39;)
+    }
+}
+</code></pre><ul><li>用其他内容取代html标志 jQuery使得用另外一个东西取代html标志很简单。</li></ul><pre><code>`$(&#39;li&#39;).replaceWith(function(){
+  return $(&quot;
+&quot;).append($(this).contents());
+});`
+</code></pre><ul><li>检测视窗宽度 这个也很重要，我们的用户有的喜欢小屏幕有的喜欢超大的，你的网站需要适合所有大小的屏幕这样才能赢得用户的好感<br>var responsive_viewport = $(window).width();</li><li>检测复制、粘贴和剪切的操作 你的网站如果不是那种要求高的，都是可以让用户赋值你网站上面的东西的，</li></ul><pre><code> $(&quot;#textA&quot;).bind(&#39;copy&#39;, function() {
+    $(&#39;span&#39;).text(&#39;copy behaviour detected!&#39;)
+}); 
+$(&quot;#textA&quot;).bind(&#39;paste&#39;, function() {
+    $(&#39;span&#39;).text(&#39;paste behaviour detected!&#39;)
+}); 
+$(&quot;#textA&quot;).bind(&#39;cut&#39;, function() {
+    $(&#39;span&#39;).text(&#39;cut behaviour detected!&#39;)
+});
+</code></pre><ul><li>遇到外部链接自动添加target=”blank”的属性 现在网络的发展快，很多网站希望提高自己的访问量，会到一些知名网站上发送外链(我也经常干，但我都是发别人需要的，不是那种水军)，这样我们可以防止</li></ul><pre><code> var root = location.protocol + &#39;//&#39; + location.host;
+$(&#39;a&#39;).not(&#39;:contains(root)&#39;).click(function(){
+    this.target = &quot;_blank&quot;;
+});
+</code></pre><ul><li>在文本或密码输入时禁止空格键</li></ul><pre><code>$(&#39;input.nospace&#39;).keydown(function(e) {
+    if (e.keyCode == 32) {
+        return false;
+    }
+});
+</code></pre><ul><li>页面显示也是前端的菜，显示中最常见的就是分页显示了，我们的数据可能是成千上万的数据，你想一次都展示吗，当然不，我们就炫耀用到分页，下面我简单介绍几种分页插件吧</li><li><img src=http://img.blog.csdn.net/20160723160538892 alt=这里写图片描述><br>jqPagination 是一个简单易用的轻量级 jQuery 分页插件，其使用了 HTML5 和 CSS3 技术来实现。此插件提供了几个参数设置选项，通过简单的配置即可生成分页控件。此外，它的外观样式是可自定义的，扩展性很强</li><li><img src=http://img.blog.csdn.net/20160723160711003 alt=这里写图片描述><br>这个是我用的最多的，读者可以结合我的另外一篇文章看看<br><a href=http://blog.csdn.net/u013132051/article/details/51753312 target=_blank rel=noopener>http://blog.csdn.net/u013132051/article/details/51753312</a></li><li>下面接不介绍了，分页只要懂就行，下面看看其他的分页的效果吧</li><li><img src=http://img.blog.csdn.net/20160723160849737 alt=这里写图片描述><br><img src=http://img.blog.csdn.net/20160723160953050 alt=这里写图片描述></li><li>+++++++++++++++++++++++++++++++++++++++++++</li><li>下面我在讲讲显示的框架，我用的最多的是jQuery 、bootstrap<br>里面显示数据的用的datagrid最多，最近用的是mmgrid,其实两者类似，只需要搞懂流程这些就不是事，给读者推荐这几个网址<ul><li>mmGrid：<a href=http://miemiedev.github.io/mmGrid/examples/index.html target=_blank rel=noopener>http://miemiedev.github.io/mmGrid/examples/index.html</a></li><li>datagrid:<a href=http://www.php1.cn/Article/index/id/6040 target=_blank rel=noopener>http://www.php1.cn/Article/index/id/6040</a></li><li>jQuery EasyUI:<a href=http://www.runoob.com/jeasyui/jqueryeasyui-intro.html target=_blank rel=noopener>http://www.runoob.com/jeasyui/jqueryeasyui-intro.html</a></li><li>bootstrap:<a href=http://www.runoob.com/bootstrap/bootstrap-tutorial.html target=_blank rel=noopener>http://www.runoob.com/bootstrap/bootstrap-tutorial.html</a></li></ul></li><li><strong>后续还会整理 《程序员常用网站简介》</strong><br>-一个网站为了实现友好，就得用到弹出层，下面贴几个弹出层的效果</li></ul><p><img src=http://img.blog.csdn.net/20160723161633781 alt=这里写图片描述><br><img src=http://img.blog.csdn.net/20160723161805882 alt=这里写图片描述><br><img src=http://img.blog.csdn.net/20160723161850190 alt=这里写图片描述><br>这些弹层可以自己调节样式，也可以自己定义，下面简单说怎么使用这个插件</p><ul><li>下载jar包(网址：<a href=http://sc.chinaz.com/tag_jiaoben/DanChuCeng.html target=_blank rel=noopener>http://sc.chinaz.com/tag_jiaoben/DanChuCeng.html</a>)</li><li><img src=http://img.blog.csdn.net/20160723162042209 alt=这里写图片描述></li><li>解压文件然后将里面的js、css引入自己的项目中</li></ul><pre><code>&lt;link href=&quot;&lt;%=request.getContextPath()%&gt;/resources/common/Css/dialog.css&quot; rel=&quot;stylesheet&quot;/&gt;
+&lt;link href=&quot;&lt;%=request.getContextPath()%&gt;/resources/common/Css/dialog-theme.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
+</code></pre><ul><li>使用的时候需要用到人家的样式，就必须要按照别人的风格来编写</li></ul><pre><code>&lt;div class=&quot;open btn&quot; id=&quot;btnVerify&quot;&gt;
+                &lt;span&gt;&lt;img src=&quot;&lt;%=request.getContextPath()%&gt;/resources/common/images/upload-white.png&quot;&gt;&lt;/span&gt;&lt;i&gt;审核&lt;/i&gt;
+            &lt;/div&gt;
+</code></pre><ul><li>就这样就可以使用了</li><li><strong>说到这里前端就总结了这么多，下面还会总结后台的一些注意方法，在多说一句，程序员最需要的就是心态，每天进步一点点，一年后你就不一样了</strong></li><li><a href=http://blog.csdn.net/u013132051/article/details/51743627 target=_blank rel=noopener>http://blog.csdn.net/u013132051/article/details/51743627</a></li></ul></div><div class=post-footer><div>转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a target=_blank>烟花散尽13141</a></div><div></div></div></article><div class="article-nav prev-next-wrap clearfix"><a href=/zxh/20160805.html class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a> <a href=/zxh/20160628.html class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a></div><div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div><button id=rewardButton disable=enable onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}"><span>赏</span></button><div id=QR style="display: none;"><div id=wechat style="display: inline-block"><a href=/img/wechatpay.jpg class="fancybox fancybox.image" rel=group><img id=wechat_qr src=/img/wechatpay.jpg alt="颜敏 WeChat Pay"></a><p>微信打赏</p></div><div id=alipay style="display: inline-block"><a href=/img/alipay.jpg class="fancybox fancybox.image" rel=group><img id=alipay_qr src=/img/alipay.jpg alt="颜敏 Alipay"></a><p>支付宝打赏</p></div></div></div><div id=comments><div id=SOHUCS sid=/zxh/20160723.html></div><script type=text/javascript> 
+    (function(){ 
+    var appid = 'cyti5JvoU'; 
+    var conf = 'prod_a32310aad07e12c7706c8da1901ed57b'; 
+    var width = window.innerWidth || document.documentElement.clientWidth; 
+    if (width < 960) { 
+    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script></div></main><aside class="col-md-4 sidebar"><div class=widget><h3 class=title>Search</h3><div id=search-form><div id=result-mask class=hide></div><div class=search-area><input id=search-key type=search autocomplete=off placeholder=搜点什么呢?> <button type=button class=search-form-submit id=search-local>站内搜索</button></div><div id=result-wrap class=hide><div id=search-result></div></div><div class=hide><template id=search-tpl><div class=item><a href=/{path} title={title}><div class=title>{title}</div><div class=content>{content}</div></a></div></template></div></div></div><div class="widget notification"><h3 class=title>网站公告</h3><div><p><font color=red>pc、移动端目录区分设计</font></p></div></div><div class=widget><h3 class=title>Social</h3><div class="content social"><a href=//gitee.com/zxhtom rel="external nofollow" title=oschina target=_blank><i class="git fa fa-git"></i></a> <a href=mailto:870775401@qq.com rel="external nofollow" title=邮箱 target=_blank><i class="envelope-o fa fa-envelope-o"></i></a> <a href=870775401 rel="external nofollow" title=联系QQ target=_blank><i class="qq fa fa-qq"></i></a> <a href="/" rel="external nofollow" title=微博 target=_blank><i class="weibo fa fa-weibo"></i></a> <a href=376091466 rel="external nofollow" title=QQ群1 target=_blank><i class="users fa fa-users"></i></a> <a href=/atom.xml rel="external nofollow" title=RSS target=_blank><i class="feed fa fa-feed"></i></a></div></div><div class=widget><h3 class=title>Categories</h3><ul class=category-list><li class=category-list-item><a class=category-list-link href="/categories/开发工具/"><i class=fa aria-hidden=true>开发工具</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/案例/"><i class=fa aria-hidden=true>案例</i></a><span class=category-list-count>2</span></li><li class=category-list-item><a class=category-list-link href="/categories/程序人生/"><i class=fa aria-hidden=true>程序人生</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/编程/"><i class=fa aria-hidden=true>编程</i></a><span class=category-list-count>88</span></li></ul></div><div class=widget><h3 class=title>Archives</h3><ul class=archive-list><li class=archive-list-item><a class=archive-list-link href="/archives/2018/01/"><i class=fa aria-hidden=true>2018年01月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/12/"><i class=fa aria-hidden=true>2017年12月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/11/"><i class=fa aria-hidden=true>2017年11月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/10/"><i class=fa aria-hidden=true>2017年10月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/06/"><i class=fa aria-hidden=true>2017年06月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/04/"><i class=fa aria-hidden=true>2017年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/03/"><i class=fa aria-hidden=true>2017年03月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/02/"><i class=fa aria-hidden=true>2017年02月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/01/"><i class=fa aria-hidden=true>2017年01月</i></a><span class=archive-list-count>9</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/12/"><i class=fa aria-hidden=true>2016年12月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/11/"><i class=fa aria-hidden=true>2016年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/10/"><i class=fa aria-hidden=true>2016年10月</i></a><span class=archive-list-count>8</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/09/"><i class=fa aria-hidden=true>2016年09月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/08/"><i class=fa aria-hidden=true>2016年08月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/07/"><i class=fa aria-hidden=true>2016年07月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/06/"><i class=fa aria-hidden=true>2016年06月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/05/"><i class=fa aria-hidden=true>2016年05月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/04/"><i class=fa aria-hidden=true>2016年04月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/03/"><i class=fa aria-hidden=true>2016年03月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/02/"><i class=fa aria-hidden=true>2016年02月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2015/04/"><i class=fa aria-hidden=true>2015年04月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/11/"><i class=fa aria-hidden=true>2014年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/10/"><i class=fa aria-hidden=true>2014年10月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/04/"><i class=fa aria-hidden=true>2014年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/01/"><i class=fa aria-hidden=true>2014年01月</i></a><span class=archive-list-count>2</span></li></ul></div><div class=widget><h3 class=title>Tag Cloud</h3><div class="content tag-cloud"><a href="/tags/C/" style="font-size: 17.5px;">C++</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/bat语法/" style="font-size: 10px;">bat语法</a> <a href="/tags/formatter/" style="font-size: 10px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/ngrok/" style="font-size: 10px;">ngrok</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/sublime-text3/" style="font-size: 10px;">sublime text3</a> <a href="/tags/前端/" style="font-size: 12.5px;">前端</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/感慨/" style="font-size: 12.5px;">感慨</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a></div></div><div class=widget><h3 class=title>Friends</h3><div class="content friends-link"><a href=http://blog.csdn.net/u013132051 class=fa target=_blank>个人博客</a></div></div></aside></div></div></section><footer class=main-footer><div class=container><div class=row></div></div></footer><a id=back-to-top class=hide><i class="fa fa-chevron-up"></i></a><div class=copyright><div class=container><div class=row><div class=col-sm-12><span>Copyright &copy; 2017</span> | <span>Powered by <a href=//hexo.io class=copyright-links target=_blank rel=nofollow>张新华</a></span> | <span>Theme by <a href=//github.com/shenliyang/hexo-theme-snippet.git class=copyright-links target=_blank rel=nofollow>ZxhTom</a></span></div></div></div></div><script src=https://code.jquery.com/jquery-latest.js></script><script src=https://assets.changyan.sohu.com/upload/plugins/plugins.count.js></script><script src="/assets/highlight.pack.js?rev=@@hash"></script><script>
+     hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script><script src="/js/search.js?rev=@@hash"></script><script src="/js/app.js?rev=@@hash"></script><script src="/assets/prefix.js?rev=@@hash"></script><script src="/assets/my.js?rev=@@hash"></script></body></html>

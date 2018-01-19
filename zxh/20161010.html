@@ -1,0 +1,177 @@
+<!DOCTYPE HTML><html><head><script>
+	if('' == 'true'){
+		if (prompt('请输入管理员密码') !== '025025'){
+            alert('密码错误！');
+            location.href='https://zxhtom.oschina.io';
+    	}
+	}
+</script><meta charset=UTF-8><meta name=viewport content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><meta http-equiv=X-UA-Compatible content="IE=Edge,chrome=1"><meta http-equiv=Cache-Control content=no-siteapp><meta name=renderer content=webkit|ie-comp|ie-stand><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=format-detection content="telephone=no,email=no,adress=no"><meta name=browsermode content=application><meta name=screen-orientation content=portrait><link rel=dns-prefetch href=https://zxhtom.oschina.io><meta name=description content=张新华的个人网站><meta name=robots content=all><meta name=google content=all><meta name=googlebot content=all><meta name=verify content=all><title>iText实现pdf导出 | 烟花散尽13141</title><link rel=alternate href=/atom.xml title=烟花散尽13141 type=application/atom+xml><link rel=icon href=/favicon.ico><link rel=stylesheet href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css?rev=9.12.0"><link rel=stylesheet href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4"><link rel=stylesheet href=//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href="/css/style.css?rev=@@hash"><link rel=stylesheet href="/css/mycss.css?rev=@@hash"><div class=hide><script src="https://s4.cnzz.com/z_stat.php?id=1263868967&web_id=1263868967" language=JavaScript></script></div><script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?709c2dde1f61f5e589ff3ed31ba52411";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script></head><body><header class=main-header style=background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)><div class=main-header-box><a class=header-avatar href="/"><img src=/img/avatar.jpg alt=logo头像></a><div class=branding><h2>学如逆水行舟，不进则退！！！</h2></div></div></header><nav class=main-navigation><div class=container><div class=row><div class=col-sm-12><div class=navbar-header><span class="nav-toggle-button collapsed" data-toggle=collapse data-target=#main-menu id=mnav><span class=sr-only>Toggle navigation</span> <i class="fa fa-bars"></i></span></div><div class="collapse navbar-collapse" id=main-menu><ul class=menu><li role=presentation><a href="/"><i class="fa fa-fw"></i>首页</a></li><li role=presentation><a href="/about/"><i class="fa fa-fw"></i>关于我</a></li><li role=presentation><a href="/tags/"><i class="fa fa-fw"></i>标签</a></li><li role=presentation><a href="/categories/"><i class="fa fa-fw"></i>分类</a></li><li role=presentation><a href="/archives/"><i class="fa fa-fw"></i>归档</a></li><li role=presentation><a href="/schedule/"><i class="fa fa-fw"></i>日程表</a></li><li role=presentation><a href=/sitemap.xml><i class="fa fa-fw"></i>地图导航</a></li><li role=presentation><a href="/404/"><i class="fa fa-fw"></i>公益活动</a></li></ul></div></div></div></div></nav><section class=content-wrap><div class=container><div class=row><main class="col-md-8 main-content m-post"><div id=toc class=toc-article><div class=hamburger><div class=line></div><div class=line></div><div class=line></div></div><strong class=toc-title>文章目录</strong><div class=menu-inner></div><svg version=1.1 id=blob xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><path id=blob-path d=M60,500H0V0h60c0,0,20,172,20,250S60,900,60,500z></path></svg></div><p id=process></p><article class=post><div class=post-head><h1 id=iText实现pdf导出>iText实现pdf导出</h1><div class=post-meta><span class="categories-meta fa-wrap"><i class="fa fa-folder-open-o"></i> <span>编程</span></span> <span class=fa-wrap><i class="fa fa-tags"></i> <span class=tags-meta>java</span></span> <span class=fa-wrap><i class="fa fa-clock-o"></i> <span class=date-meta>2016/10/10</span></span> <a href=/zxh/20161010.html#comments class=comment-count><i id=changyan_count_unit data-xid=zxh/20161010.html></i>留言, <i id=changyan_parti_unit data-xid=zxh/20161010.html></i>参与</a> <span id=busuanzi_container_page_pv>view : <span id=busuanzi_value_page_pv></span>次</span></div><p class="fa fa-exclamation-triangle warning">本文于<strong>466</strong>天之前发表，文中内容可能已经过时。</p></div><div class="post-body post-content"><p>直接看代码吧<br><a id=more></a></p><blockquote><p>/**</p><pre><code> * AsianTest.java 
+ */  
+
+import java.io.FileOutputStream;  
+import java.io.IOException;  
+
+import com.lowagie.text.*;  
+import com.lowagie.text.pdf.PdfWriter;  
+import com.lowagie.text.pdf.BaseFont;  
+import com.lowagie.text.Font;  
+import java.awt.Color;  
+
+public class AsianTest {  
+
+    public static void main(String[] args) {  
+
+        // 创建一个Document对象  
+        Document document = new Document();  
+
+        try {  
+
+            // 生成名为 AsianTest.pdf 的文档  
+            PdfWriter.getInstance(document, new FileOutputStream(  
+                    &quot;c://AsianTest.pdf&quot;));  
+
+            /** 
+             * 新建一个字体,iText的方法 STSongStd-Light 是字体，在iTextAsian.jar 中以property为后缀 
+             * UniGB-UCS2-H 是编码，在iTextAsian.jar 中以cmap为后缀 H 代表文字版式是 横版， 相应的 V 
+             * 代表竖版 
+             */  
+            BaseFont bfChinese = BaseFont.createFont(&quot;STSongStd-Light&quot;,  
+                    &quot;UniGB-UCS2-H&quot;, false);  
+
+            Font bold_fontChinese = new Font(bfChinese, 12, Font.BOLD,  
+                    Color.BLACK);  
+            Font italic_fontChinese = new Font(bfChinese, 12, Font.ITALIC,  
+                    Color.BLACK);  
+            Font impressFont = new Font(bfChinese, 16, Font.BOLDITALIC,  
+                    Color.BLACK);  
+            // 打开文档，将要写入内容  
+            document.open();  
+
+            // 插入一个段落  
+            // Paragraph par = new Paragraph(&quot;我们&quot;, fontChinese);  
+
+            // document.add(par);  
+            //  
+            document.add(new Paragraph(&quot; &quot;, bold_fontChinese));  
+            document.add(new Paragraph(&quot; &quot;, bold_fontChinese));  
+            document.add(new Paragraph(&quot; &quot;, bold_fontChinese));  
+            String[] Trainspotting1 = { &quot;选择生命，选择工作，选择职业，选择家庭，&quot;,  
+                    &quot;选择可恶的大彩电,选择洗衣机、汽车、雷射碟机,&quot;, &quot;选择健康、低胆固醇和牙医保险,选择楼宇按揭,&quot;,  
+                    &quot;选择你的朋友,选择套装、便服和行李,选择分期付款和三件套西装,&quot;,  
+                    &quot;选择收看无聊的游戏节目,边看边吃零食……选择你的未来,选择生命……&quot;, &quot;太多选择,你选择什么,我选择不选择。&quot; };  
+            String[] Trainspotting2 = { &quot;这是电影《猜火车》开头的旁白。&quot;, &quot;这是一个关于“选择”的故事。&quot; };  
+            String[] Benjamin1 = { &quot;有些人就在河边出生长大,&quot;, &quot;有些人被闪电击中,&quot;,  
+                    &quot;有些人对音乐有着非凡的天赋,&quot;, &quot;有些人是艺术家,&quot;, &quot;有人会游泳,&quot;, &quot;有人懂得做纽扣,&quot;,  
+                    &quot;有人会背莎士比亚,&quot;, &quot;而有些人。。。是母亲,&quot;, &quot;也有些人,可以翩翩起舞。&quot;,  
+                    &quot;Goodnight  Daisy&quot;, &quot;Goodnight  Benjamin&quot; };  
+            String[] Benjamin2 = { &quot;这是电影《本杰明传奇》结尾的旁白。&quot;, &quot;这是一个关于“错过”的故事。&quot; };  
+            String[] text1 = { &quot;我想说的是，&quot;, &quot;我们选择，同时，我们错过。&quot; };  
+            String[] text2 = { &quot;抛去无可选择的选择，抑或不选择的选择，&quot;,  
+                    &quot;很有趣的一件事：当面临(太多的)选择，人们会如何选择；&quot;, &quot;同时，人们又会如何看待错过。&quot; };  
+            String[] text3 = { &quot;在开始和结束之间，选择了什么，又会错过什么，我还不知道。&quot; };  
+            String[] text4 = { &quot;你会知道么？&quot; };  
+            //  
+            for (String s : Trainspotting1) {  
+                document.add(new Paragraph(s, italic_fontChinese));  
+                document.add(new Paragraph(&quot; &quot;, italic_fontChinese));  
+            }  
+            for (String s : Trainspotting2) {  
+                document.add(new Paragraph(s, bold_fontChinese));  
+            }  
+            document.add(new Paragraph(&quot; &quot;, bold_fontChinese));  
+            document.add(new Paragraph(&quot; &quot;, bold_fontChinese));  
+            document.add(new Paragraph(&quot; &quot;, bold_fontChinese));  
+            for (String s : Benjamin1) {  
+                document.add(new Paragraph(s, italic_fontChinese));  
+                document.add(new Paragraph(&quot; &quot;, italic_fontChinese));  
+            }  
+            for (String s : Benjamin2) {  
+                document.add(new Paragraph(s, bold_fontChinese));  
+            }  
+            document.add(new Paragraph(&quot; &quot;, bold_fontChinese));  
+            document.add(new Paragraph(&quot; &quot;, bold_fontChinese));  
+            document.add(new Paragraph(&quot; &quot;, bold_fontChinese));  
+            for (String s : text1) {  
+                document.add(new Paragraph(s, bold_fontChinese));  
+            }  
+            document.add(new Paragraph(&quot; &quot;, bold_fontChinese));  
+            for (String s : text2) {  
+                document.add(new Paragraph(s, bold_fontChinese));  
+            }  
+            document.add(new Paragraph(&quot; &quot;, bold_fontChinese));  
+            for (String s : text3) {  
+                document.add(new Paragraph(s, bold_fontChinese));  
+            }  
+            document.add(new Paragraph(&quot; &quot;, bold_fontChinese));  
+            for (String s : text4) {  
+                document.add(new Paragraph(s, bold_fontChinese));  
+            }  
+            document.add(new Paragraph(&quot; &quot;, bold_fontChinese));  
+            //  
+            String[] end = { &quot;Some people were born to sit by a river...&quot;,  
+                    &quot;Some get struck by light...&quot;,  
+                    &quot;Some have an ear for music...&quot;, &quot;Some are artists...&quot;,  
+                    &quot;Some swim...&quot;, &quot;Some know buttons...&quot;,  
+                    &quot;Some know Shakespeare...&quot;, &quot;Some are mothers...&quot;,  
+                    &quot;And some people can dance...&quot; };  
+            for (String s : end) {  
+                document.add(new Paragraph(s, bold_fontChinese));  
+            }  
+            document.add(new Paragraph(  
+                    &quot;by the way, some people can write code.你&quot;, impressFont));  
+
+            // Chapter  
+            Paragraph title1 = new Paragraph(&quot;Chapter 1&quot;, italic_fontChinese);  
+            Chapter chapter1 = new Chapter(title1, 1);  
+            chapter1.setNumberDepth(0);  
+            Paragraph title11 = new Paragraph(  
+                    &quot;This is Section 1 in Chapter 1中文&quot;, italic_fontChinese);  
+            Section section1 = chapter1.addSection(title11);  
+            Paragraph someSectionText = new Paragraph(  
+                    &quot;This text comes as part of section 1 of chapter 1.&quot;);  
+            section1.add(someSectionText);  
+            someSectionText = new Paragraph(&quot;Following is a 3 X 2 table.&quot;);  
+            section1.add(someSectionText);  
+            //  
+            document.add(chapter1);  
+            //  
+            // 定义一个图片  
+
+            Image jpeg = Image.getInstance(&quot;E:/01.jpg&quot;);  
+
+            // 图片居中  
+            jpeg.setAlignment(Image.ALIGN_CENTER);  
+            document.add(jpeg);  
+        } catch (DocumentException de) {  
+            System.err.println(de.getMessage());  
+        } catch (IOException ioe) {  
+            System.err.println(ioe.getMessage());  
+        }  
+
+        // 关闭打开的文档  
+        document.close();  
+    }  
+}
+</code></pre><p><strogn>此上的文章转载别人的，觉得挺好就借鉴过来</strogn></p></blockquote><hr><hr><p><b>原创部分</b></p><ul><li><p>建立Document对象的实例</p><p><code>Document document = new Document();</code></p></li><li><p>建立一个书写器(Writer)与document对象关联，通过书写器(Writer)可以将文档写入到磁盘中，filePath是pdf的生成路径</p></li></ul><pre><code>PdfWriter.getInstance(document, new FileOutputStream(
+                        filePath));
+</code></pre><ul><li><p>新建一个字体，iText的方法STSongStf-Ligth 是字体，在BaseFont中设置之后，我们到处的pdf就可以兼容中文了。itext还有两种输出中文字体的设置，</p><ul><li>1 使用iTextAsian.jar中的字体</li></ul></li></ul><pre><code>BaseFont bfChinese = BaseFont.createFont(&quot;STSongStd-Light&quot;,
+                        &quot;UniGB-UCS2-H&quot;, false);
+</code></pre><pre><code>    -  2 使用Windows系统字体(TrueType)         
+</code></pre><blockquote><p>BaseFont.createFont(“C:/WINDOWS/Fonts/SIMYOU.TTF”, BaseFont.IDENTITY_H,BaseFont.NOT_EMBEDDED);</p></blockquote><ul><li>使用资源地址</li></ul><blockquote><pre><code>BaseFont.createFont(&quot;/SIMYOU.TTF&quot;, BaseFont.IDENTITY_H,BaseFont.NOT_EMBEDDED);     
+</code></pre></blockquote></div><div class=post-footer><div>转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a target=_blank>烟花散尽13141</a></div><div></div></div></article><div class="article-nav prev-next-wrap clearfix"><a href=/zxh/20161014.html class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a> <a href=/zxh/20160928.html class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a></div><div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div><button id=rewardButton disable=enable onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}"><span>赏</span></button><div id=QR style="display: none;"><div id=wechat style="display: inline-block"><a href=/img/wechatpay.jpg class="fancybox fancybox.image" rel=group><img id=wechat_qr src=/img/wechatpay.jpg alt="颜敏 WeChat Pay"></a><p>微信打赏</p></div><div id=alipay style="display: inline-block"><a href=/img/alipay.jpg class="fancybox fancybox.image" rel=group><img id=alipay_qr src=/img/alipay.jpg alt="颜敏 Alipay"></a><p>支付宝打赏</p></div></div></div><div id=comments><div id=SOHUCS sid=/zxh/20161010.html></div><script type=text/javascript> 
+    (function(){ 
+    var appid = 'cyti5JvoU'; 
+    var conf = 'prod_a32310aad07e12c7706c8da1901ed57b'; 
+    var width = window.innerWidth || document.documentElement.clientWidth; 
+    if (width < 960) { 
+    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script></div></main><aside class="col-md-4 sidebar"><div class=widget><h3 class=title>Search</h3><div id=search-form><div id=result-mask class=hide></div><div class=search-area><input id=search-key type=search autocomplete=off placeholder=搜点什么呢?> <button type=button class=search-form-submit id=search-local>站内搜索</button></div><div id=result-wrap class=hide><div id=search-result></div></div><div class=hide><template id=search-tpl><div class=item><a href=/{path} title={title}><div class=title>{title}</div><div class=content>{content}</div></a></div></template></div></div></div><div class="widget notification"><h3 class=title>网站公告</h3><div><p><font color=red>pc、移动端目录区分设计</font></p></div></div><div class=widget><h3 class=title>Social</h3><div class="content social"><a href=//gitee.com/zxhtom rel="external nofollow" title=oschina target=_blank><i class="git fa fa-git"></i></a> <a href=mailto:870775401@qq.com rel="external nofollow" title=邮箱 target=_blank><i class="envelope-o fa fa-envelope-o"></i></a> <a href=870775401 rel="external nofollow" title=联系QQ target=_blank><i class="qq fa fa-qq"></i></a> <a href="/" rel="external nofollow" title=微博 target=_blank><i class="weibo fa fa-weibo"></i></a> <a href=376091466 rel="external nofollow" title=QQ群1 target=_blank><i class="users fa fa-users"></i></a> <a href=/atom.xml rel="external nofollow" title=RSS target=_blank><i class="feed fa fa-feed"></i></a></div></div><div class=widget><h3 class=title>Categories</h3><ul class=category-list><li class=category-list-item><a class=category-list-link href="/categories/开发工具/"><i class=fa aria-hidden=true>开发工具</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/案例/"><i class=fa aria-hidden=true>案例</i></a><span class=category-list-count>2</span></li><li class=category-list-item><a class=category-list-link href="/categories/程序人生/"><i class=fa aria-hidden=true>程序人生</i></a><span class=category-list-count>3</span></li><li class=category-list-item><a class=category-list-link href="/categories/编程/"><i class=fa aria-hidden=true>编程</i></a><span class=category-list-count>88</span></li></ul></div><div class=widget><h3 class=title>Archives</h3><ul class=archive-list><li class=archive-list-item><a class=archive-list-link href="/archives/2018/01/"><i class=fa aria-hidden=true>2018年01月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/12/"><i class=fa aria-hidden=true>2017年12月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/11/"><i class=fa aria-hidden=true>2017年11月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/10/"><i class=fa aria-hidden=true>2017年10月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/06/"><i class=fa aria-hidden=true>2017年06月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/04/"><i class=fa aria-hidden=true>2017年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/03/"><i class=fa aria-hidden=true>2017年03月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/02/"><i class=fa aria-hidden=true>2017年02月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2017/01/"><i class=fa aria-hidden=true>2017年01月</i></a><span class=archive-list-count>9</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/12/"><i class=fa aria-hidden=true>2016年12月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/11/"><i class=fa aria-hidden=true>2016年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/10/"><i class=fa aria-hidden=true>2016年10月</i></a><span class=archive-list-count>8</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/09/"><i class=fa aria-hidden=true>2016年09月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/08/"><i class=fa aria-hidden=true>2016年08月</i></a><span class=archive-list-count>7</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/07/"><i class=fa aria-hidden=true>2016年07月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/06/"><i class=fa aria-hidden=true>2016年06月</i></a><span class=archive-list-count>4</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/05/"><i class=fa aria-hidden=true>2016年05月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/04/"><i class=fa aria-hidden=true>2016年04月</i></a><span class=archive-list-count>2</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/03/"><i class=fa aria-hidden=true>2016年03月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2016/02/"><i class=fa aria-hidden=true>2016年02月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2015/04/"><i class=fa aria-hidden=true>2015年04月</i></a><span class=archive-list-count>1</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/11/"><i class=fa aria-hidden=true>2014年11月</i></a><span class=archive-list-count>3</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/10/"><i class=fa aria-hidden=true>2014年10月</i></a><span class=archive-list-count>6</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/04/"><i class=fa aria-hidden=true>2014年04月</i></a><span class=archive-list-count>5</span></li><li class=archive-list-item><a class=archive-list-link href="/archives/2014/01/"><i class=fa aria-hidden=true>2014年01月</i></a><span class=archive-list-count>2</span></li></ul></div><div class=widget><h3 class=title>Tag Cloud</h3><div class="content tag-cloud"><a href="/tags/C/" style="font-size: 17.5px;">C++</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/bat语法/" style="font-size: 10px;">bat语法</a> <a href="/tags/formatter/" style="font-size: 10px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/ngrok/" style="font-size: 10px;">ngrok</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/sublime-text3/" style="font-size: 10px;">sublime text3</a> <a href="/tags/前端/" style="font-size: 12.5px;">前端</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/感慨/" style="font-size: 12.5px;">感慨</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a></div></div><div class=widget><h3 class=title>Friends</h3><div class="content friends-link"><a href=http://blog.csdn.net/u013132051 class=fa target=_blank>个人博客</a></div></div></aside></div></div></section><footer class=main-footer><div class=container><div class=row></div></div></footer><a id=back-to-top class=hide><i class="fa fa-chevron-up"></i></a><div class=copyright><div class=container><div class=row><div class=col-sm-12><span>Copyright &copy; 2017</span> | <span>Powered by <a href=//hexo.io class=copyright-links target=_blank rel=nofollow>张新华</a></span> | <span>Theme by <a href=//github.com/shenliyang/hexo-theme-snippet.git class=copyright-links target=_blank rel=nofollow>ZxhTom</a></span></div></div></div></div><script src=https://code.jquery.com/jquery-latest.js></script><script src=https://assets.changyan.sohu.com/upload/plugins/plugins.count.js></script><script src="/assets/highlight.pack.js?rev=@@hash"></script><script>
+     hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script><script src="/js/search.js?rev=@@hash"></script><script src="/js/app.js?rev=@@hash"></script><script src="/assets/prefix.js?rev=@@hash"></script><script src="/assets/my.js?rev=@@hash"></script></body></html>
